@@ -1,0 +1,4 @@
+Sitemap: https://nicholas-miklaucic.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: nicholas-miklaucic.github.io

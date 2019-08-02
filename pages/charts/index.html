@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · Charts </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/pages/charts/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computers, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2019         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="post-title p-name"><a href="." class="u-url">Charts</a></h1>
+
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>If you are using reStructuredText and install pygal, Nikola has support for rather nice charts
+with little effort, and i&#8217;s even semi-interactive (hover your pointer over the&nbsp;legend!):</p>
+<pre class="code rest"><a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-1"></a><span class="p">..</span> <span class="ow">chart</span><span class="p">::</span> StackedLine
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-2"></a>   <span class="nc">:title:</span> <span class="nf">'Browser usage evolution (in %)'</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-3"></a>   <span class="nc">:fill:</span> <span class="nf">True</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-4"></a>   <span class="nc">:x_labels:</span> <span class="nf">['2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012']</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-5"></a>   <span class="nc">:width:</span> <span class="nf">600</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-6"></a>   <span class="nc">:height:</span> <span class="nf">400</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-7"></a>   <span class="nc">:explicit_size:</span> <span class="nf">True</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-8"></a>   <span class="nc">:style:</span> <span class="nf">BlueStyle</span>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-9"></a>
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-10"></a>   ('Others',  [14.2, 15.4, 15.3,  8.9,    9, 10.4,  8.9,  5.8,  6.7,  6.8,  7.5])
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-11"></a>   ('IE',      [85.8, 84.6, 84.7, 74.5,   66, 58.6, 54.7, 44.8, 36.2, 26.6, 20.1])
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-12"></a>   ('Firefox', [None, None, None, 16.6,   25,   31, 36.4, 45.5, 46.3, 42.8, 37.1])
+<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-13"></a>   ('Chrome',  [None, None, None, None, None, None,    0,  3.9, 10.8, 23.8, 35.3])
+</pre>
+<div style="text-align: center;"><div class="text-error">In order to use the Chart directive, you must install the &#8220;pygal&#8221; Python package.</div></div>
+<p>Here&#8217;s how it&nbsp;works:</p>
+<ul class="simple">
+<li>Next to the directive, use the <a class="reference external" href="http://pygal.org/chart_types/">chart type you&nbsp;want</a>
+</li>
+<li>Any option you can set in a chart? Use it like <tt class="docutils literal">:title:</tt> in this example. Syntax on
+the value is just like in the pygal&nbsp;examples.</li>
+<li>For each data series do it like the line that says <tt class="docutils literal">Firefox</tt> in this example. The first element
+is the label, then comes the&nbsp;data.</li>
+</ul>
+<p>Easy, right? Please explore <a class="reference external" href="http://pygal.org">the pygal site</a> for more information, and just
+take this example and tweak&nbsp;stuff.</p>
+</div>
+    </div>
+    
+</article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>
