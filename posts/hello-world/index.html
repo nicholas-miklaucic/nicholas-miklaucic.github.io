@@ -66,9 +66,11 @@ put, it&#8217;s my favorite algorithm: kind of an esoteric category to have a fa
 the end of this you&#8217;ll see what I&nbsp;mean.
 </p>
 
-<div id="outline-container-org7c5ce79" class="outline-2">
-<h2 id="org7c5ce79">Problem</h2>
-<div class="outline-text-2" id="text-org7c5ce79">
+<!-- TEASER_END -->
+
+<div id="outline-container-org46a7b80" class="outline-2">
+<h2 id="org46a7b80">Problem</h2>
+<div class="outline-text-2" id="text-org46a7b80">
 <p>
 I&#8217;ll be talking about using Pollard&#8217;s rho for integer factorization, probably the most famous and
 important problem underlying modern cryptography. We have a big number \(n\), and we want to find its
@@ -100,9 +102,9 @@ amount multiplicatively increases the time it takes to&nbsp;factor.
 </div>
 </div>
 
-<div id="outline-container-org384e991" class="outline-2">
-<h2 id="org384e991">Ideas</h2>
-<div class="outline-text-2" id="text-org384e991">
+<div id="outline-container-org4826959" class="outline-2">
+<h2 id="org4826959">Ideas</h2>
+<div class="outline-text-2" id="text-org4826959">
 <p>
 I think it&#8217;s helpful, when analyzing algorithms, to think about what is <i>incidental</i> and what is
 <i>germane</i>. What aspects of an algorithm can be changed without significantly affecting its asymptotic
@@ -115,9 +117,9 @@ Pollard&#8217;s rho uses two important&nbsp;insights:
 </p>
 </div>
 
-<div id="outline-container-org5bc6ed6" class="outline-3">
-<h3 id="org5bc6ed6">Insight One: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
-<div class="outline-text-3" id="text-org5bc6ed6">
+<div id="outline-container-orgaed3a9b" class="outline-3">
+<h3 id="orgaed3a9b">Insight One: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
+<div class="outline-text-3" id="text-orgaed3a9b">
 <p>
 Many algorithms in computer science rely on related, easier problems, and Pollard&#8217;s rho is no
 different. The <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a>, invented thousands of years ago (!), solves the problem of
@@ -141,9 +143,9 @@ GCD and find \(p\)). This leads us to our second&nbsp;insight:
 </p>
 </div>
 </div>
-<div id="outline-container-orge622354" class="outline-3">
-<h3 id="orge622354">Insight Two: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer distinct things to do than finding a pair with some specific&nbsp;element.</h3>
-<div class="outline-text-3" id="text-orge622354">
+<div id="outline-container-org93d8b4a" class="outline-3">
+<h3 id="org93d8b4a">Insight Two: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer distinct things to do than finding a pair with some specific&nbsp;element.</h3>
+<div class="outline-text-3" id="text-org93d8b4a">
 <p>
 The <a href="https://en.wikipedia.org/wiki/Birthday_problem">birthday paradox</a> is usually phrased like this: what&#8217;s the smallest number of people such that
 it&#8217;s more likely than not at least two share a birthday? Counterintuitively, this number is far
@@ -159,9 +161,9 @@ Now, how does John Pollard use these two&nbsp;ideas?
 </div>
 </div>
 
-<div id="outline-container-org9d55243" class="outline-2">
-<h2 id="org9d55243">The&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org9d55243">
+<div id="outline-container-org1458253" class="outline-2">
+<h2 id="org1458253">The&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org1458253">
 <ol class="org-ol">
 <li>Take your input number \(n\), and define a function \(f(x) = x^2 + 1 \pmod{n}\). The exact polynomial
 isn&#8217;t that important (one of those incidental details I mentioned earlier), but \(f(x)\) shouldn&#8217;t
@@ -179,9 +181,9 @@ Why does this work? What does it have to do with the birthday paradox? What is i
 </div>
 </div>
 
-<div id="outline-container-org2d39992" class="outline-2">
-<h2 id="org2d39992">Analysis</h2>
-<div class="outline-text-2" id="text-org2d39992">
+<div id="outline-container-orga01f5a8" class="outline-2">
+<h2 id="orga01f5a8">Analysis</h2>
+<div class="outline-text-2" id="text-orga01f5a8">
 <p>
 The reason I call step 3 cycle-finding is because we can really think of this sequence \(x_1, x_2, \dots\)
 as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 \pmod{p},&nbsp;\dots\)
@@ -222,9 +224,9 @@ smallest prime&nbsp;factor.
 </div>
 </div>
 
-<div id="outline-container-orgfb8fcea" class="outline-2">
-<h2 id="orgfb8fcea">Why is this&nbsp;cool?</h2>
-<div class="outline-text-2" id="text-orgfb8fcea">
+<div id="outline-container-orgf4e5583" class="outline-2">
+<h2 id="orgf4e5583">Why is this&nbsp;cool?</h2>
+<div class="outline-text-2" id="text-orgf4e5583">
 <p>
 There are two reasons I really like this&nbsp;algorithm:
 </p>

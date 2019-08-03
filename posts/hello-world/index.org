@@ -21,6 +21,8 @@ So, hello world![fn:1] I thought the first thing I should probably do is explain
 put, it's my favorite algorithm: kind of an esoteric category to have a favorite in, but I'm sure by
 the end of this you'll see what I mean.
 
+{{{TEASER_END}}}
+
 * Problem
 
 I'll be talking about using Pollard's rho for integer factorization, probably the most famous and
