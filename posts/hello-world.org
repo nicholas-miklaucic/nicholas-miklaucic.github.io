@@ -1,0 +1,168 @@
+#+BEGIN_COMMENT
+.. title: Hello, World!
+.. slug: hello-world
+.. date: 2019-08-02 19:35:07 UTC-04:00
+.. tags: meta, algorithms, cs
+.. category: meta
+.. link: 
+.. description: Opening into the void
+.. type: text
+.. has_math: true
+
+#+END_COMMENT
+
+This is the first public page for this blog: a place where I will record thoughts and essays on
+various topics, usually pretty close to the intersection of math, data, and computing. I'll try to
+make things generally accessible, and I'll warn you in advance if something requires background
+beyond high school math. (We'll see how well I do!)
+
+So, hello world![fn:1] I thought the first thing I should probably do is explain why I go by the tag
+~PollardsRho~ in various places and why I decided to give this blog the title "Pollard's Rho." Simply
+put, it's my favorite algorithm: kind of an esoteric category to have a favorite in, but I'm sure by
+the end of this you'll see what I mean.
+
+* Problem
+
+I'll be talking about using Pollard's rho for integer factorization, probably the most famous and
+important problem underlying modern cryptography. We have a big number $n$, and we want to find its
+prime factors. It's helpful to note that we really just need to find a single prime factor: we can
+then divide $n$ by that factor and restart the algorithm.
+
+Note that different factoring algorithms depend on different things about the input number $n$. Some
+do very well for certain kinds of $n$ and not for others: unlike, say, sorting, where most
+algorithms depend on some function solely of the input length, factoring algorithms all do different
+things. We'll call $p$ the smallest prime factor of $n$ for our analysis of the runtime of Pollard's
+rho. (This means $p < \sqrt{n}$.)
+
+Our target to beat is simple trial division: guess and check. This has an asymptotic runtime of
+$O(\sqrt{n})$. (Big-O notation, as this is called, means essentially "behaves like the inner
+expression as $n$ increases." We only care about how it grows: $200n$ or $n + 100000$ are still
+$O(n)$, because doubling the input will at most double the output.) 
+
+However, because we usually care about how an algorithm varies as a function of the /length/ of an
+input, this should really be $O(\sqrt{2^b}) = O(2^{b/2})$, where $b$ is the number of bits used to
+represent $n$. This makes trial division /exponential/: increasing the number of bits by a constant
+amount multiplicatively increases the time it takes to factor.
+
+* Ideas
+
+I think it's helpful, when analyzing algorithms, to think about what is /incidental/ and what is
+/germane/. What aspects of an algorithm can be changed without significantly affecting its asymptotic
+performance, and what aspects of an algorithm are essential? What insight or technique does this
+algorithm use to do better than the simplest approach?
+
+Pollard's rho uses two important insights:
+
+** Insight One: The Euclidean algorithm allows us to solve a related problem quickly.
+Many algorithms in computer science rely on related, easier problems, and Pollard's rho is no
+different. The [[https://en.wikipedia.org/wiki/Euclidean_algorithm][Euclidean algorithm]], invented thousands of years ago (!), solves the problem of
+finding the greatest common divisor of two numbers. This GCD, if it's not $1$ or either of the input
+numbers, is a divisor of both, which is exactly what we want. Importantly, the Euclidean algorithm
+runs in polynomial time, meaning that it's significantly faster than something like trial division
+where the input size is in the top of an exponent. Here, adding another digit to both numbers
+doesn't multiplicatively increase the running time.
+
+The problem for us is that simply computing the GCD of our input $n$ and a bunch of other numbers
+isn't really improving on trial division, because figuring out which numbers will give us a useful
+result is as hard to factoring $n$. 
+
+The right frame of mind for this problem is now to think about it like this: we're trying to find a
+pair of numbers that are /equivalent/ in a certain way (specifically, modulo $p$, so we can compute their
+GCD and find $p$). This leads us to our second insight:
+** Insight Two: The birthday paradox means that finding /any/ equivalent pair of something takes much fewer distinct things to do than finding a pair with some specific element.
+The [[https://en.wikipedia.org/wiki/Birthday_problem][birthday paradox]] is usually phrased like this: what's the smallest number of people such that
+it's more likely than not at least two share a birthday? Counterintuitively, this number is far
+smaller than the number of possibilities, 365: it's only 23! In general, the expected number grows
+with the square root of the number of possibilities. The easiest intuitive explanation is that the
+number of distinct combinations with $n$ people is $O(n^2)$, and only one of them needs to be
+equal.
+
+Now, how does John Pollard use these two ideas?
+
+* The Algorithm
+1. Take your input number $n$, and define a function $f(x) = x^2 + 1 \pmod{n}$. The exact polynomial
+   isn't that important (one of those incidental details I mentioned earlier), but $f(x)$ shouldn't
+   share factors with $x$: this is the simplest way of doing that.
+2. Use this to make a sequence, starting at $2$: $2, f(2), f(f(2))$, and so on. Call this sequence
+   $x_1, x_2, x_3$, etc.
+3. Use a cycle-finding algorithm to find some pair such that $\gcd(|x_i - x_j|, n) \neq 1$. I call
+   this /cycle-finding/ for reasons that will be apparent shortly.
+4. Once you find such a pair, if the GCD is $n$, then restart with different parameters. Otherwise,
+   you have found a factor of $n$ and the algorithm is a success.
+
+Why does this work? What does it have to do with the birthday paradox? What is its runtime?
+
+* Analysis
+The reason I call step 3 cycle-finding is because we can really think of this sequence $x_1, x_2, \dots$
+as "shadowing" the real sequence we care about: $x_1 \pmod{p}, x_2 \pmod{p}, \dots$
+
+Obviously, because we don't know $p$, we can't observe the second sequence (which I'll call $y_1, y_2$
+, etc.) directly. However, this second sequence has to repeat eventually: there are finitely many
+possible values. When it does, with arbitrary $y_i = y_j$, we'll have that $|x_i - x_j|$ is a multiple
+of $p$: thus, its GCD with $n$ will probably[fn:2] be $p$, and we'll have achieved our goal.
+
+Note how this incorporates both of our insights. We use GCDs because they're fast to compute and
+allow us to check whether a given number is a multiple of $p$ without knowing its value. The second
+insight makes this faster than just trying numbers in sequence: getting a value of $0$ modulo $p$,
+which is what we'd need if we were just trying random GCDs, is much slower than finding any two
+numbers with the same value modulo $p$. Because there are $p$ possible values, if the sequence $y_1,
+y_2, \dots$ is random-ish, which we'll assume[fn:3], by the birthday paradox we should expect a success with
+with about $O(\sqrt{p})$ different values.
+
+One detail which I'd put in the incidental category, but which I nonetheless need to mention, is the
+existence of fast algorithms for finding a cycle in a sequence like this one. The standard[fn:4] one I'll
+mention is /Floyd's algorithm:/ keep track of two numbers, $x_i$ and $x_j$, and at every step increase
+$i$ by 1 and $j$ by 2. Repeat until success. This is a huge improvement over keeping track of every
+number you've seen, with only a small cost in terms of how efficiently it finds a cycle.
+
+This allows us to find a factor in expected time $O(\sqrt{p})$, which as we mentioned earlier we can
+approximate as $O(\sqrt{\sqrt{n}}) = O(2^{b/4})$. (The Euclidean algorithm is faster, and so its
+runtime doesn't play a role here.) This is a significant improvement over trial division. It's
+especially important when $n$ has a small prime factor $p$, because the runtime only depends on the
+smallest prime factor.
+
+* Why is this cool?
+There are two reasons I really like this algorithm:
+
+Firstly, it has a cool name. It's called Pollard's rho algorithm (\rho is what rho looks like, for
+reference) because of what it looks like if you draw the sequence repeating in a certain way. From
+Wikimedia:
+
+[[https://upload.wikimedia.org/wikipedia/commons/4/47/Pollard_rho_cycle.jpg]]
+
+See the resemblance?
+
+Secondly, this algorithm was published in 1975.[fn:5] Integer factorization became important in
+cryptography from a practical perspective when the [[https://doi.org/10.1145/359340.359342][RSA cryptosystem]] was published in 1978. Nowadays,
+this problem underlies an enormous amount of modern encryption: every time you send your credit card
+info over the Internet and that info stays safe, you should probably thank the fact that this
+problem is hard.
+
+Given this, you'd think that useful algorithms for factoring integers would have not been that big
+of a deal until 1978, especially given that computers weren't really that big of a deal then either
+(or the Internet). But John Pollard, not a programmer but a mathematician, invented this anyway. I
+think it's a wonderful testament to the virtues of exploration for its own sake: it's the equivalent
+of climbing a mountain because it's there. I like to hope that a tool as strikingly simple and
+elegant as Pollard's discovery doesn't often come from merely wanting to break RSA and steal
+someone's money, or to someone working solely for a paycheck. Instead, I think that real insight
+into hard problems often only comes from the drive that accompanies a sense of beauty and wonder at
+the profound patterns that underlie mathematics, computing, data, and our world.
+
+It's an idea I aspire to, and keeping a reminder of Pollard's rho in my life helps me get there. I
+hope it helps you too.
+
+* Footnotes
+
+[fn:1] A bit optimistic!
+
+[fn:2] We can occasionally get very unlucky, so the multiple of $p$ that $|x_i - x_j|$ is just so
+happens to also be divisible by $\frac{n}{p}$. This doesn't really impact the analysis because of
+its rarity: we should just pick a different starting point and try again.
+
+[fn:3] This is a detail that significantly complicates a rigorous analysis, but it's not really
+important for an intuitive understanding of why this might work.
+
+[fn:4] This isn't the fastest algorithm, but it's space-efficient, easy to understand, and elegant.
+
+[fn:5] [[https://doi.org/10.1007/BF01933667][https://doi.org/10.1007/BF01933667]]
+
