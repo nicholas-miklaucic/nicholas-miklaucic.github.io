@@ -19,7 +19,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2019-08-02T23:28:00Z</lastmod>
+  <lastmod>2019-08-03T01:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
@@ -43,19 +43,35 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/</loc>
-  <lastmod>2019-08-02T00:06:00Z</lastmod>
+  <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/algorithms/</loc>
+  <lastmod>2019-08-03T01:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/blog/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
  </url>
  <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_meta/</loc>
+  <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_nikola/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
  </url>
  <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/cs/</loc>
+  <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://nicholas-miklaucic.github.io/categories/demo/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/meta/</loc>
+  <lastmod>2019-08-03T01:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/nikola/</loc>
@@ -83,7 +99,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/listings/hello.py.html</loc>
-  <lastmod>2019-08-02T23:28:00Z</lastmod>
+  <lastmod>2019-08-03T01:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/about-nikola/</loc>
@@ -140,6 +156,10 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/theming/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/hello-world/</loc>
+  <lastmod>2019-08-03T01:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/test-org-mode/</loc>

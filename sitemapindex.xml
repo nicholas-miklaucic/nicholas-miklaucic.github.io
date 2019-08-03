@@ -14,16 +14,32 @@
   <lastmod>2019-08-02T01:27:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/algorithms.xml</loc>
+  <lastmod>2019-08-03T01:47:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/blog.xml</loc>
   <lastmod>2019-08-02T01:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_meta.xml</loc>
+  <lastmod>2019-08-03T01:47:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_nikola.xml</loc>
   <lastmod>2019-08-02T01:27:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/cs.xml</loc>
+  <lastmod>2019-08-03T01:47:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/demo.xml</loc>
   <lastmod>2019-08-02T01:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/meta.xml</loc>
+  <lastmod>2019-08-03T01:47:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/nikola.xml</loc>
@@ -35,18 +51,18 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/galleries/demo/rss.xml</loc>
-  <lastmod>2019-08-02T23:28:00Z</lastmod>
+  <lastmod>2019-08-03T01:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/galleries/rss.xml</loc>
-  <lastmod>2019-08-02T23:28:00Z</lastmod>
+  <lastmod>2019-08-03T01:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/rss.xml</loc>
-  <lastmod>2019-08-02T23:28:00Z</lastmod>
+  <lastmod>2019-08-03T01:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/sitemap.xml</loc>
-  <lastmod>2019-08-02T23:33:00Z</lastmod>
+  <lastmod>2019-08-03T01:48:00Z</lastmod>
  </sitemap>
 </sitemapindex>

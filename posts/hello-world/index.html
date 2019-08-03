@@ -3,15 +3,15 @@
 " lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Thoughts on math, computing, and data">
+<meta name="description" content="Opening into the void">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="assets/demo.css" type="text/css">
+<title>Pollard&#8217;s Rho · Hello, World! </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
 <meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-<link rel="canonical" href="https://nicholas-miklaucic.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/hello-world/" type="text/html">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/hello-world/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
 </head>
 <body class="">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -31,9 +31,9 @@
                 <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
 
             </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="archive.html">Archive</a>
-        <a class="sidebar-nav-item" href="categories/">Tags</a>
-        <a class="sidebar-nav-item" href="rss.xml">RSS feed</a>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../rss.xml">RSS feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
@@ -46,13 +46,12 @@
     </div>
 
     <div class="content container" id="content">
-    
-<div class="post">
-    <article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/hello-world/" class="u-url">Hello,&nbsp;World!</a></h1>
-        <div class="metadata">
-            <span class="post-date dateline"><time class="published dt-published" datetime="2019-08-02T19:35:07-04:00" title="2019-08-02 19:35">2019-08-02 19:35</time></span>
-        </div>
-    </header><div class="e-content entry-content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Hello,&nbsp;World!</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2019-08-02T19:35:07-04:00" itemprop="datePublished" title="2019-08-02 19:35">2019-08-02 19:35</time></span>
+        <meta name="description" itemprop="description" content="Opening into the void">
+<div class="e-content entry-content" itemprop="articleBody text">
     <p>
 This is the first public page for this blog: a place where I will record thoughts and essays on
 various topics, usually pretty close to the intersection of math, data, and computing. I&#8217;ll try to
@@ -61,7 +60,7 @@ beyond high school math. (We&#8217;ll see how well I&nbsp;do!)
 </p>
 
 <p>
-So, hello world!<sup><a id="fnr.1" class="footref" href="posts/hello-world/#fn.1">1</a></sup> I thought the first thing I should probably do is explain why I go by the tag
+So, hello world!<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> I thought the first thing I should probably do is explain why I go by the tag
 <code>PollardsRho</code> in various places and why I decided to give this blog the title &#8220;Pollard&#8217;s Rho.&#8221; Simply
 put, it&#8217;s my favorite algorithm: kind of an esoteric category to have a favorite in, but I&#8217;m sure by
 the end of this you&#8217;ll see what I&nbsp;mean.
@@ -192,7 +191,7 @@ as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 
 Obviously, because we don&#8217;t know \(p\), we can&#8217;t observe the second sequence (which I&#8217;ll call \(y_1, y_2\)
 , etc.) directly. However, this second sequence has to repeat eventually: there are finitely many
 possible values. When it does, with arbitrary \(y_i = y_j\), we&#8217;ll have that \(|x_i - x_j|\) is a multiple
-of \(p\): thus, its GCD with \(n\) will probably<sup><a id="fnr.2" class="footref" href="posts/hello-world/#fn.2">2</a></sup> be \(p\), and we&#8217;ll have achieved our&nbsp;goal.
+of \(p\): thus, its GCD with \(n\) will probably<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> be \(p\), and we&#8217;ll have achieved our&nbsp;goal.
 </p>
 
 <p>
@@ -201,13 +200,13 @@ allow us to check whether a given number is a multiple of \(p\) without knowing 
 insight makes this faster than just trying numbers in sequence: getting a value of \(0\) modulo \(p\),
 which is what we&#8217;d need if we were just trying random GCDs, is much slower than finding any two
 numbers with the same value modulo \(p\). Because there are \(p\) possible values, if the sequence \(y_1,
-y_2, \dots\) is random-ish, which we&#8217;ll assume<sup><a id="fnr.3" class="footref" href="posts/hello-world/#fn.3">3</a></sup>, by the birthday paradox we should expect a success with
+y_2, \dots\) is random-ish, which we&#8217;ll assume<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>, by the birthday paradox we should expect a success with
 with about \(O(\sqrt{p})\) different&nbsp;values.
 </p>
 
 <p>
 One detail which I&#8217;d put in the incidental category, but which I nonetheless need to mention, is the
-existence of fast algorithms for finding a cycle in a sequence like this one. The standard<sup><a id="fnr.4" class="footref" href="posts/hello-world/#fn.4">4</a></sup> one I&#8217;ll
+existence of fast algorithms for finding a cycle in a sequence like this one. The standard<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> one I&#8217;ll
 mention is <i>Floyd&#8217;s algorithm:</i> keep track of two numbers, \(x_i\) and \(x_j\), and at every step increase
 \(i\) by 1 and \(j\) by 2. Repeat until success. This is a huge improvement over keeping track of every
 number you&#8217;ve seen, with only a small cost in terms of how efficiently it finds a&nbsp;cycle.
@@ -245,7 +244,7 @@ See the&nbsp;resemblance?
 </p>
 
 <p>
-Secondly, this algorithm was published in 1975.<sup><a id="fnr.5" class="footref" href="posts/hello-world/#fn.5">5</a></sup> Integer factorization became important in
+Secondly, this algorithm was published in 1975.<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> Integer factorization became important in
 cryptography from a practical perspective when the <a href="https://doi.org/10.1145/359340.359342">RSA cryptosystem</a> was published in 1978. Nowadays,
 this problem underlies an enormous amount of modern encryption: every time you send your credit card
 info over the Internet and that info stays safe, you should probably thank the fact that this
@@ -275,13 +274,13 @@ hope it helps you&nbsp;too.
 <div id="text-footnotes">
 
 <div class="footdef">
-<sup><a id="fn.1" class="footnum" href="posts/hello-world/#fnr.1">1</a></sup><div class="footpara"><p class="footpara">
+<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup><div class="footpara"><p class="footpara">
 A bit&nbsp;optimistic!
 </p></div>
 </div>
 
 <div class="footdef">
-<sup><a id="fn.2" class="footnum" href="posts/hello-world/#fnr.2">2</a></sup><div class="footpara"><p class="footpara">
+<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup><div class="footpara"><p class="footpara">
 We can occasionally get very unlucky, so the multiple of \(p\) that \(|x_i - x_j|\) is just so
 happens to also be divisible by \(\frac{n}{p}\). This doesn&#8217;t really impact the analysis because of
 its rarity: we should just pick a different starting point and try&nbsp;again.
@@ -289,20 +288,20 @@ its rarity: we should just pick a different starting point and try&nbsp;again.
 </div>
 
 <div class="footdef">
-<sup><a id="fn.3" class="footnum" href="posts/hello-world/#fnr.3">3</a></sup><div class="footpara"><p class="footpara">
+<sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup><div class="footpara"><p class="footpara">
 This is a detail that significantly complicates a rigorous analysis, but it&#8217;s not really
 important for an intuitive understanding of why this might&nbsp;work.
 </p></div>
 </div>
 
 <div class="footdef">
-<sup><a id="fn.4" class="footnum" href="posts/hello-world/#fnr.4">4</a></sup><div class="footpara"><p class="footpara">
+<sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup><div class="footpara"><p class="footpara">
 This isn&#8217;t the fastest algorithm, but it&#8217;s space-efficient, easy to understand, and&nbsp;elegant.
 </p></div>
 </div>
 
 <div class="footdef">
-<sup><a id="fn.5" class="footnum" href="posts/hello-world/#fnr.5">5</a></sup><div class="footpara"><p class="footpara">
+<sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup><div class="footpara"><p class="footpara">
 <a href="https://doi.org/10.1007/BF01933667">https://doi.org/10.1007/BF01933667</a>
 </p></div>
 </div>
@@ -311,16 +310,21 @@ This isn&#8217;t the fastest algorithm, but it&#8217;s space-efficient, easy to 
 </div>
 </div>
     </div>
-    </article>
-</div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/algorithms/" rel="tag">algorithms</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/meta/" rel="tag">meta</a></span>
+      </p>
 
-        
+    
+    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+                
 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script>
+        </script></article>
 </div>
-            <script src="assets/js/all-nocdn.js"></script><script>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element) {

@@ -64,7 +64,6 @@ html {
 body {
     font-family: "Swift Neue", serif;
     font-weight: light;
-    font-feature-settings: "frac";
     font-variant-numeric: tabular-nums;
     color: #515151;
     background-color: #fff;
