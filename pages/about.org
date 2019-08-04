@@ -1,0 +1,26 @@
+#+BEGIN_COMMENT
+.. title: About Me
+.. slug: about-me
+.. date: 2019-08-02 19:35:07 UTC-04:00
+.. tags: meta
+.. category: meta
+.. link: 
+.. description: About the author
+.. type: text
+
+#+END_COMMENT
+
+
+[[img-url:/images/headshot.jpg]]
+
+I'm Nicholas Miklaucic, a college student studying data science at Northeastern University. I went
+to high school at Phillips Academy Andover, where I participated and helped run a [[http://2019.pactf.com][cybersecurity
+competition for high schoolers]] among other things. I've always loved math and programming, and I
+hope to make a living out of them. When I'm not doing those things, I love being in the outdoors,
+playing and listening to music, and reading.
+
+* Contact Me
+ - [[https://github.com/nicholas-miklaucic][Github]]
+ - [[mailto:nicholas.miklaucic@gmail.com][Email]]
+ - [[https://discordapp.com][Discord]]: PollardsRho#7513
+ - [[https://www.linkedin.com/in/nicholas-miklaucic/][LinkedIn]]

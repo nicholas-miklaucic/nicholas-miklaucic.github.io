@@ -109,6 +109,8 @@ contextual information."
           (pygmentize (downcase lang) (org-html-decode-plain-text code))
         code-html))))
 
+
+
 ;; Export images with custom link type
 (defun org-custom-link-img-url-export (path desc format)
   (cond
