@@ -84,27 +84,33 @@ a:focus {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Applied Sans", sans-serif;
   margin-bottom: .5rem;
-  font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.5;
   padding-bottom: 1rem;
   color: #313131;
   text-rendering: optimizeLegibility;
 }
 h1 {
-  font-size: 2rem;
+    font-family: "Applied Sans", sans-serif;
+    font-weight: 500;
+  font-size: 2.25rem;
 }
 h2 {
-  margin-top: 1rem;
+    font-family: "Swift Neue", serif;
+    font-weight: bold;
+  margin-top: 1.5rem;
   font-size: 1.5rem;
 }
 h3 {
+    font-family: "Swift Neue", serif;
+    font-weight: bold;
   margin-top: 1.5rem;
   font-size: 1.25rem;
 }
 h4, h5, h6 {
-  margin-top: 1rem;
+    font-family: "Swift Neue", serif;
+    font-weight: bold;
+  margin-top: 1.5rem;
   font-size: 1rem;
 }
 
@@ -343,8 +349,9 @@ tbody tr:nth-child(odd) th {
 .page-title,
 .post-title,
 .post-title a {
-    font-family: "Applied Sans Extrabold", sans-serif;
-  color: #303030;
+    font-family: "Applied Sans", sans-serif;
+    font-weight: 900;
+    color: #303030;
 }
 .page-title,
 .post-title {
@@ -489,4 +496,121 @@ table.codehilitetable pre {
 td.code /* to exclude listings w/o numbers */
 pre.code.literal-block {
   margin-left: 0;
+}
+
+/* now begins many typography edits */
+span.marginnote + p, span.sidenote + p, p + p {
+    text-indent: 1.5rem;
+}
+
+span.marginnote p, span.sidenote p {
+    text-indent: 0;
+}
+
+p {
+    margin: 0 auto;
+}
+
+blockquote, p {
+  hanging-punctuation: first;
+}
+
+ul, ol {
+  padding-left: 0;
+  list-style-position: outside;
+}
+
+
+/* tufte.css */
+
+figure {
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    max-width: 55%;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    margin: 0 0 3em 0; 
+}
+
+figcaption {
+    float: right;
+    clear: right;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    max-width: 40%; 
+}
+
+figure.fullwidth figcaption {
+    margin-right: 24%; 
+}
+
+/* Links: replicate underline that clears descenders */
+a:link,
+a:visited {
+    color: inherit; 
+}
+
+.no-tufte-underline:link {
+    background: unset;
+    text-shadow: unset;
+}
+
+p > a:link, .tufte-underline, .hover-tufte-underline:hover {
+    text-decoration: none;
+    background: -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(currentColor, currentColor);
+    background: linear-gradient(#fffff8, #fffff8), linear-gradient(#fffff8, #fffff8), linear-gradient(currentColor, currentColor);
+    -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-repeat: no-repeat, no-repeat, repeat-x;
+    text-shadow: 0.03em 0 #fffff8, -0.03em 0 #fffff8, 0 0.03em #fffff8, 0 -0.03em #fffff8, 0.06em 0 #fffff8, -0.06em 0 #fffff8, 0.09em 0 #fffff8, -0.09em 0 #fffff8, 0.12em 0 #fffff8, -0.12em 0 #fffff8, 0.15em 0 #fffff8, -0.15em 0 #fffff8;
+    background-position: 0% 93%, 100% 93%, 0% 93%; 
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    a:link, .tufte-underline, .hover-tufte-underline:hover {
+        background-position-y: 87%, 87%, 87%;
+    }
+}
+
+body > a:link::selection,
+body > a:link::-moz-selection {
+    text-shadow: 0.03em 0 #b4d5fe, -0.03em 0 #b4d5fe, 0 0.03em #b4d5fe, 0 -0.03em #b4d5fe, 0.06em 0 #b4d5fe, -0.06em 0 #b4d5fe, 0.09em 0 #b4d5fe, -0.09em 0 #b4d5fe, 0.12em 0 #b4d5fe, -0.12em 0 #b4d5fe, 0.15em 0 #b4d5fe, -0.15em 0 #b4d5fe;
+    background: #b4d5fe;
+}
+
+/* Sidenotes, margin notes, figures, captions */
+img {
+    max-width: 100%; 
+}
+
+.sidenote,
+.marginnote {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    position: relative;
+    color: #919191;
+    font-size: 0.9rem;
+}
+
+.sidenote p, .marginnote p {
+    vertical-align: text-top;
+}
+
+blockquote .sidenote,
+blockquote .marginnote {
+    margin-right: -82%;
+    min-width: 59%;
+    text-align: left; 
 }

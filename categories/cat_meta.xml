@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about meta)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/cat_meta.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2019 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Sat, 03 Aug 2019 01:58:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello, World!</title><link>https://nicholas-miklaucic.github.io/posts/hello-world/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about meta)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/cat_meta.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2019 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Sun, 04 Aug 2019 19:16:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello, World!</title><link>https://nicholas-miklaucic.github.io/posts/hello-world/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 This is the first public page for this blog: a place where I will record thoughts and essays on
-various topics, usually pretty close to the intersection of math, data, and computing. I'll try to
-make things generally accessible, and I'll warn you in advance if something requires background
-beyond high school math. (We'll see how well I do!)
+various topics, usually pretty close to the intersection of math, data, and computing. There will be
+some pretty heavy mathematical topics as well as much lighter fare: my hope is that people of varied
+math and computer science backgrounds can find something useful for them.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -13,4 +13,4 @@ put, it's my favorite algorithm: kind of an esoteric category to have a favorite
 the end of this you'll see what I mean.
 &lt;/p&gt;
 
-&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/hello-world/"&gt;Read more…&lt;/a&gt; (7 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>algorithms</category><category>cs</category><category>meta</category><guid>https://nicholas-miklaucic.github.io/posts/hello-world/</guid><pubDate>Fri, 02 Aug 2019 23:35:07 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/hello-world/"&gt;Read more…&lt;/a&gt; (8 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>algorithms</category><category>cs</category><category>meta</category><guid>https://nicholas-miklaucic.github.io/posts/hello-world/</guid><pubDate>Fri, 02 Aug 2019 23:35:07 GMT</pubDate></item></channel></rss>

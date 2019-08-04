@@ -5,16 +5,16 @@
 .. tags: meta, algorithms, cs
 .. category: meta
 .. link: 
-.. description: Opening into the void
+.. description: Opening into the void and Pollard's rho algorithm
 .. type: text
 .. has_math: true
 
 #+END_COMMENT
 
 This is the first public page for this blog: a place where I will record thoughts and essays on
-various topics, usually pretty close to the intersection of math, data, and computing. I'll try to
-make things generally accessible, and I'll warn you in advance if something requires background
-beyond high school math. (We'll see how well I do!)
+various topics, usually pretty close to the intersection of math, data, and computing. There will be
+some pretty heavy mathematical topics as well as much lighter fare: my hope is that people of varied
+math and computer science backgrounds can find something useful for them.
 
 So, hello world![fn:1] I thought the first thing I should probably do is explain why I go by the tag
 ~PollardsRho~ in various places and why I decided to give this blog the title "Pollard's Rho." Simply
@@ -25,26 +25,29 @@ the end of this you'll see what I mean.
 
 * Problem
 
-I'll be talking about using Pollard's rho for integer factorization, probably the most famous and
-important problem underlying modern cryptography. We have a big number $n$, and we want to find its
-prime factors. It's helpful to note that we really just need to find a single prime factor: we can
-then divide $n$ by that factor and restart the algorithm.
+I'll be talking about using Pollard's rho for integer factorization, arguably the most famous and
+important problem underlying modern cryptography. We have a big number $n$ that isn't prime, and we
+want to find its prime factors. It's helpful to note that we really just need to find a single prime
+factor: we can then divide $n$ by that factor and restart the algorithm.
 
-Note that different factoring algorithms depend on different things about the input number $n$. Some
-do very well for certain kinds of $n$ and not for others: unlike, say, sorting, where most
-algorithms depend on some function solely of the input length, factoring algorithms all do different
-things. We'll call $p$ the smallest prime factor of $n$ for our analysis of the runtime of Pollard's
-rho. (This means $p < \sqrt{n}$.)
+One thing to keep in mind is that different factoring algorithms depend on different things about
+the input number $n$. Some do very well for certain kinds of $n$ and not for others. This is unlike,
+say, algorithms for sorting a list, where most algorithms depend on some function solely of the
+input length. Spoiler alert: Pollard's rho is one of these algorithms. It depends on the smallest
+prime factor of $n$, which we'll call $p$. Note that this means $p < \sqrt{n}$, so in the worst case
+we can always make this substitution to compare Pollard's rho to other algorithms.
 
 Our target to beat is simple trial division: guess and check. This has an asymptotic runtime of
 $O(\sqrt{n})$. (Big-O notation, as this is called, means essentially "behaves like the inner
 expression as $n$ increases." We only care about how it grows: $200n$ or $n + 100000$ are still
-$O(n)$, because doubling the input will at most double the output.) 
+$O(n)$, because doubling the input will at most double the output.) This is because there are some
+constant multiple (depending on whether we don't check numbers divisible by $2$ or $3$ or something
+like that) of all the possible numbers we have to check, and there are $\sqrt{n}$ of those numbers.
 
 However, because we usually care about how an algorithm varies as a function of the /length/ of an
 input, this should really be $O(\sqrt{2^b}) = O(2^{b/2})$, where $b$ is the number of bits used to
-represent $n$. This makes trial division /exponential/: increasing the number of bits by a constant
-amount multiplicatively increases the time it takes to factor.
+represent $n$. This makes trial division /exponential/: increasing the number of digits by a constant
+amount multiplicatively increases the time it takes to factor a number with that many digits.
 
 * Ideas
 
@@ -55,7 +58,7 @@ algorithm use to do better than the simplest approach?
 
 Pollard's rho uses two important insights:
 
-** Insight One: The Euclidean algorithm allows us to solve a related problem quickly.
+** Insight 1: The Euclidean algorithm allows us to solve a related problem quickly.
 Many algorithms in computer science rely on related, easier problems, and Pollard's rho is no
 different. The [[https://en.wikipedia.org/wiki/Euclidean_algorithm][Euclidean algorithm]], invented thousands of years ago (!), solves the problem of
 finding the greatest common divisor of two numbers. This GCD, if it's not $1$ or either of the input
@@ -71,7 +74,11 @@ result is as hard to factoring $n$.
 The right frame of mind for this problem is now to think about it like this: we're trying to find a
 pair of numbers that are /equivalent/ in a certain way (specifically, modulo $p$, so we can compute their
 GCD and find $p$). This leads us to our second insight:
-** Insight Two: The birthday paradox means that finding /any/ equivalent pair of something takes much fewer distinct things to do than finding a pair with some specific element.
+** Insight 2: The birthday paradox means that finding /any/ equivalent pair of something takes much fewer attempts to do than finding a pair with some specific element.
+{{{mn}}}
+No, I'm not counting leap years or twins or anything like that. Don't worry about it.
+{{{mn-end}}}
+
 The [[https://en.wikipedia.org/wiki/Birthday_problem][birthday paradox]] is usually phrased like this: what's the smallest number of people such that
 it's more likely than not at least two share a birthday? Counterintuitively, this number is far
 smaller than the number of possibilities, 365: it's only 23! In general, the expected number grows
@@ -111,11 +118,20 @@ numbers with the same value modulo $p$. Because there are $p$ possible values, i
 y_2, \dots$ is random-ish, which we'll assume[fn:3], by the birthday paradox we should expect a success with
 with about $O(\sqrt{p})$ different values.
 
+{{{mn}}} 
+Floyd's algorithm is not the fastest, but choosing a faster one doesn't matter all that
+much.Floyd's algorithm is also very elegant, so it's a nice pair with the elegant Pollard's rho
+algorithm. It's also a time-space tradeoff: faster algorithms like Brent's algorithm require storing
+more numbers.
+{{{mn-end}}}
+
 One detail which I'd put in the incidental category, but which I nonetheless need to mention, is the
-existence of fast algorithms for finding a cycle in a sequence like this one. The standard[fn:4] one I'll
-mention is /Floyd's algorithm:/ keep track of two numbers, $x_i$ and $x_j$, and at every step increase
-$i$ by 1 and $j$ by 2. Repeat until success. This is a huge improvement over keeping track of every
-number you've seen, with only a small cost in terms of how efficiently it finds a cycle.
+existence of fast algorithms for finding a cycle in a sequence like this one. The standard one I'll
+mention is [[https://www.wikiwand.com/en/Floyd%25E2%2580%2593Warshall_algorithm][/Floyd's algorithm/]]: keep track of two numbers, $x_i$ and $x_j$, and at every step
+increase $i$ by 1 and $j$ by 2.  Repeat until success. This is a huge improvement over keeping track
+of number you've seen, with only a small cost in terms of how efficiently it finds a cycle.  (For
+more details check the Wikipedia page linked above.)
+
 
 This allows us to find a factor in expected time $O(\sqrt{p})$, which as we mentioned earlier we can
 approximate as $O(\sqrt{\sqrt{n}}) = O(2^{b/4})$. (The Euclidean algorithm is faster, and so its
@@ -134,7 +150,7 @@ Wikimedia:
 
 See the resemblance?
 
-Secondly, this algorithm was published in 1975.[fn:5] Integer factorization became important in
+Secondly, this algorithm was published in 1975.[fn:4] Integer factorization became important in
 cryptography from a practical perspective when the [[https://doi.org/10.1145/359340.359342][RSA cryptosystem]] was published in 1978. Nowadays,
 this problem underlies an enormous amount of modern encryption: every time you send your credit card
 info over the Internet and that info stays safe, you should probably thank the fact that this
@@ -143,12 +159,10 @@ problem is hard.
 Given this, you'd think that useful algorithms for factoring integers would have not been that big
 of a deal until 1978, especially given that computers weren't really that big of a deal then either
 (or the Internet). But John Pollard, not a programmer but a mathematician, invented this anyway. I
-think it's a wonderful testament to the virtues of exploration for its own sake: it's the equivalent
-of climbing a mountain because it's there. I like to hope that a tool as strikingly simple and
-elegant as Pollard's discovery doesn't often come from merely wanting to break RSA and steal
-someone's money, or to someone working solely for a paycheck. Instead, I think that real insight
-into hard problems often only comes from the drive that accompanies a sense of beauty and wonder at
-the profound patterns that underlie mathematics, computing, data, and our world.
+like to think that Pollard didn't invent this to break RSA and become a rich hacker, or just for a
+paycheck, but instead because it was /there/ waiting for him. Pollard's rho algorithm stands out to me
+as a wonderful example of the good things that can come from a deep appreciation of the beauty and
+wonder in the world—of the power and elegance of mathematics, computing, and data.
 
 It's an idea I aspire to, and keeping a reminder of Pollard's rho in my life helps me get there. I
 hope it helps you too.
@@ -164,7 +178,5 @@ its rarity: we should just pick a different starting point and try again.
 [fn:3] This is a detail that significantly complicates a rigorous analysis, but it's not really
 important for an intuitive understanding of why this might work.
 
-[fn:4] This isn't the fastest algorithm, but it's space-efficient, easy to understand, and elegant.
-
-[fn:5] [[https://doi.org/10.1007/BF01933667][https://doi.org/10.1007/BF01933667]]
+[fn:4] [[https://doi.org/10.1007/BF01933667][https://doi.org/10.1007/BF01933667]]
 

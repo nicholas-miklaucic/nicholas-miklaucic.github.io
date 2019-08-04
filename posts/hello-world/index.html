@@ -3,7 +3,7 @@
 " lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Opening into the void">
+<meta name="description" content="Opening into the void and Pollard's rho algorithm">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pollard&#8217;s Rho · Hello, World! </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
             <div class="sidebar-about">
               <h1>
                 <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
 
         <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
     </a></h1>
@@ -31,9 +31,10 @@
                 <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
 
             </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
@@ -50,13 +51,13 @@
 
     <span class="post-date">
       <time class="published dt-published" datetime="2019-08-02T19:35:07-04:00" itemprop="datePublished" title="2019-08-02 19:35">2019-08-02 19:35</time></span>
-        <meta name="description" itemprop="description" content="Opening into the void">
+        <meta name="description" itemprop="description" content="Opening into the void and Pollard's rho algorithm">
 <div class="e-content entry-content" itemprop="articleBody text">
     <p>
 This is the first public page for this blog: a place where I will record thoughts and essays on
-various topics, usually pretty close to the intersection of math, data, and computing. I&#8217;ll try to
-make things generally accessible, and I&#8217;ll warn you in advance if something requires background
-beyond high school math. (We&#8217;ll see how well I&nbsp;do!)
+various topics, usually pretty close to the intersection of math, data, and computing. There will be
+some pretty heavy mathematical topics as well as much lighter fare: my hope is that people of varied
+math and computer science backgrounds can find something useful for&nbsp;them.
 </p>
 
 <p>
@@ -68,43 +69,46 @@ the end of this you&#8217;ll see what I&nbsp;mean.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org46a7b80" class="outline-2">
-<h2 id="org46a7b80">Problem</h2>
-<div class="outline-text-2" id="text-org46a7b80">
+<div id="outline-container-org39787c5" class="outline-2">
+<h2 id="org39787c5">Problem</h2>
+<div class="outline-text-2" id="text-org39787c5">
 <p>
-I&#8217;ll be talking about using Pollard&#8217;s rho for integer factorization, probably the most famous and
-important problem underlying modern cryptography. We have a big number \(n\), and we want to find its
-prime factors. It&#8217;s helpful to note that we really just need to find a single prime factor: we can
-then divide \(n\) by that factor and restart the&nbsp;algorithm.
+I&#8217;ll be talking about using Pollard&#8217;s rho for integer factorization, arguably the most famous and
+important problem underlying modern cryptography. We have a big number \(n\) that isn&#8217;t prime, and we
+want to find its prime factors. It&#8217;s helpful to note that we really just need to find a single prime
+factor: we can then divide \(n\) by that factor and restart the&nbsp;algorithm.
 </p>
 
 <p>
-Note that different factoring algorithms depend on different things about the input number \(n\). Some
-do very well for certain kinds of \(n\) and not for others: unlike, say, sorting, where most
-algorithms depend on some function solely of the input length, factoring algorithms all do different
-things. We&#8217;ll call \(p\) the smallest prime factor of \(n\) for our analysis of the runtime of Pollard&#8217;s
-rho. (This means \(p &lt;&nbsp;\sqrt{n}\).)
+One thing to keep in mind is that different factoring algorithms depend on different things about
+the input number \(n\). Some do very well for certain kinds of \(n\) and not for others. This is unlike,
+say, algorithms for sorting a list, where most algorithms depend on some function solely of the
+input length. Spoiler alert: Pollard&#8217;s rho is one of these algorithms. It depends on the smallest
+prime factor of \(n\), which we&#8217;ll call \(p\). Note that this means \(p &lt; \sqrt{n}\), so in the worst case
+we can always make this substitution to compare Pollard&#8217;s rho to other&nbsp;algorithms.
 </p>
 
 <p>
 Our target to beat is simple trial division: guess and check. This has an asymptotic runtime of
 \(O(\sqrt{n})\). (Big-O notation, as this is called, means essentially &#8220;behaves like the inner
 expression as \(n\) increases.&#8221; We only care about how it grows: \(200n\) or \(n + 100000\) are still
-\(O(n)\), because doubling the input will at most double the&nbsp;output.) 
+\(O(n)\), because doubling the input will at most double the output.) This is because there are some
+constant multiple (depending on whether we don&#8217;t check numbers divisible by \(2\) or \(3\) or something
+like that) of all the possible numbers we have to check, and there are \(\sqrt{n}\) of those&nbsp;numbers.
 </p>
 
 <p>
 However, because we usually care about how an algorithm varies as a function of the <i>length</i> of an
 input, this should really be \(O(\sqrt{2^b}) = O(2^{b/2})\), where \(b\) is the number of bits used to
-represent \(n\). This makes trial division <i>exponential</i>: increasing the number of bits by a constant
-amount multiplicatively increases the time it takes to&nbsp;factor.
+represent \(n\). This makes trial division <i>exponential</i>: increasing the number of digits by a constant
+amount multiplicatively increases the time it takes to factor a number with that many&nbsp;digits.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4826959" class="outline-2">
-<h2 id="org4826959">Ideas</h2>
-<div class="outline-text-2" id="text-org4826959">
+<div id="outline-container-orgb0a5804" class="outline-2">
+<h2 id="orgb0a5804">Ideas</h2>
+<div class="outline-text-2" id="text-orgb0a5804">
 <p>
 I think it&#8217;s helpful, when analyzing algorithms, to think about what is <i>incidental</i> and what is
 <i>germane</i>. What aspects of an algorithm can be changed without significantly affecting its asymptotic
@@ -117,9 +121,9 @@ Pollard&#8217;s rho uses two important&nbsp;insights:
 </p>
 </div>
 
-<div id="outline-container-orgaed3a9b" class="outline-3">
-<h3 id="orgaed3a9b">Insight One: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
-<div class="outline-text-3" id="text-orgaed3a9b">
+<div id="outline-container-org9f4d948" class="outline-3">
+<h3 id="org9f4d948">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
+<div class="outline-text-3" id="text-org9f4d948">
 <p>
 Many algorithms in computer science rely on related, easier problems, and Pollard&#8217;s rho is no
 different. The <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a>, invented thousands of years ago (!), solves the problem of
@@ -143,9 +147,16 @@ GCD and find \(p\)). This leads us to our second&nbsp;insight:
 </p>
 </div>
 </div>
-<div id="outline-container-org93d8b4a" class="outline-3">
-<h3 id="org93d8b4a">Insight Two: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer distinct things to do than finding a pair with some specific&nbsp;element.</h3>
-<div class="outline-text-3" id="text-org93d8b4a">
+<div id="outline-container-orgcea0d48" class="outline-3">
+<h3 id="orgcea0d48">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
+<div class="outline-text-3" id="text-orgcea0d48">
+<span class="marginnote"><p>
+</p>
+<p>
+No, I&#8217;m not counting leap years or twins or anything like that. Don&#8217;t worry about&nbsp;it.
+</p>
+</span>
+
 <p>
 The <a href="https://en.wikipedia.org/wiki/Birthday_problem">birthday paradox</a> is usually phrased like this: what&#8217;s the smallest number of people such that
 it&#8217;s more likely than not at least two share a birthday? Counterintuitively, this number is far
@@ -161,9 +172,9 @@ Now, how does John Pollard use these two&nbsp;ideas?
 </div>
 </div>
 
-<div id="outline-container-org1458253" class="outline-2">
-<h2 id="org1458253">The&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org1458253">
+<div id="outline-container-org2eb3298" class="outline-2">
+<h2 id="org2eb3298">The&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org2eb3298">
 <ol class="org-ol">
 <li>Take your input number \(n\), and define a function \(f(x) = x^2 + 1 \pmod{n}\). The exact polynomial
 isn&#8217;t that important (one of those incidental details I mentioned earlier), but \(f(x)\) shouldn&#8217;t
@@ -181,9 +192,9 @@ Why does this work? What does it have to do with the birthday paradox? What is i
 </div>
 </div>
 
-<div id="outline-container-orga01f5a8" class="outline-2">
-<h2 id="orga01f5a8">Analysis</h2>
-<div class="outline-text-2" id="text-orga01f5a8">
+<div id="outline-container-orgfd8d2a7" class="outline-2">
+<h2 id="orgfd8d2a7">Analysis</h2>
+<div class="outline-text-2" id="text-orgfd8d2a7">
 <p>
 The reason I call step 3 cycle-finding is because we can really think of this sequence \(x_1, x_2, \dots\)
 as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 \pmod{p},&nbsp;\dots\)
@@ -206,13 +217,25 @@ y_2, \dots\) is random-ish, which we&#8217;ll assume<sup><a id="fnr.3" class="fo
 with about \(O(\sqrt{p})\) different&nbsp;values.
 </p>
 
+<span class="marginnote"><p>
+</p>
+<p>
+Floyd&#8217;s algorithm is not the fastest, but choosing a faster one doesn&#8217;t matter all that
+much.Floyd&#8217;s algorithm is also very elegant, so it&#8217;s a nice pair with the elegant Pollard&#8217;s rho
+algorithm. It&#8217;s also a time-space tradeoff: faster algorithms like Brent&#8217;s algorithm require storing
+more&nbsp;numbers.
+</p>
+</span>
+
 <p>
 One detail which I&#8217;d put in the incidental category, but which I nonetheless need to mention, is the
-existence of fast algorithms for finding a cycle in a sequence like this one. The standard<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> one I&#8217;ll
-mention is <i>Floyd&#8217;s algorithm:</i> keep track of two numbers, \(x_i\) and \(x_j\), and at every step increase
-\(i\) by 1 and \(j\) by 2. Repeat until success. This is a huge improvement over keeping track of every
-number you&#8217;ve seen, with only a small cost in terms of how efficiently it finds a&nbsp;cycle.
+existence of fast algorithms for finding a cycle in a sequence like this one. The standard one I&#8217;ll
+mention is <a href="https://www.wikiwand.com/en/Floyd%E2%80%93Warshall_algorithm"><i>Floyd&#8217;s algorithm</i></a>: keep track of two numbers, \(x_i\) and \(x_j\), and at every step
+increase \(i\) by 1 and \(j\) by 2.  Repeat until success. This is a huge improvement over keeping track
+of number you&#8217;ve seen, with only a small cost in terms of how efficiently it finds a cycle.  (For
+more details check the Wikipedia page linked&nbsp;above.)
 </p>
+
 
 <p>
 This allows us to find a factor in expected time \(O(\sqrt{p})\), which as we mentioned earlier we can
@@ -224,9 +247,9 @@ smallest prime&nbsp;factor.
 </div>
 </div>
 
-<div id="outline-container-orgf4e5583" class="outline-2">
-<h2 id="orgf4e5583">Why is this&nbsp;cool?</h2>
-<div class="outline-text-2" id="text-orgf4e5583">
+<div id="outline-container-org23e406d" class="outline-2">
+<h2 id="org23e406d">Why is this&nbsp;cool?</h2>
+<div class="outline-text-2" id="text-org23e406d">
 <p>
 There are two reasons I really like this&nbsp;algorithm:
 </p>
@@ -246,7 +269,7 @@ See the&nbsp;resemblance?
 </p>
 
 <p>
-Secondly, this algorithm was published in 1975.<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> Integer factorization became important in
+Secondly, this algorithm was published in 1975.<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> Integer factorization became important in
 cryptography from a practical perspective when the <a href="https://doi.org/10.1145/359340.359342">RSA cryptosystem</a> was published in 1978. Nowadays,
 this problem underlies an enormous amount of modern encryption: every time you send your credit card
 info over the Internet and that info stays safe, you should probably thank the fact that this
@@ -257,12 +280,10 @@ problem is&nbsp;hard.
 Given this, you&#8217;d think that useful algorithms for factoring integers would have not been that big
 of a deal until 1978, especially given that computers weren&#8217;t really that big of a deal then either
 (or the Internet). But John Pollard, not a programmer but a mathematician, invented this anyway. I
-think it&#8217;s a wonderful testament to the virtues of exploration for its own sake: it&#8217;s the equivalent
-of climbing a mountain because it&#8217;s there. I like to hope that a tool as strikingly simple and
-elegant as Pollard&#8217;s discovery doesn&#8217;t often come from merely wanting to break RSA and steal
-someone&#8217;s money, or to someone working solely for a paycheck. Instead, I think that real insight
-into hard problems often only comes from the drive that accompanies a sense of beauty and wonder at
-the profound patterns that underlie mathematics, computing, data, and our&nbsp;world.
+like to think that Pollard didn&#8217;t invent this to break RSA and become a rich hacker, or just for a
+paycheck, but instead because it was <i>there</i> waiting for him. Pollard&#8217;s rho algorithm stands out to me
+as a wonderful example of the good things that can come from a deep appreciation of the beauty and
+wonder in the world—of the power and elegance of mathematics, computing, and&nbsp;data.
 </p>
 
 <p>
@@ -298,12 +319,6 @@ important for an intuitive understanding of why this might&nbsp;work.
 
 <div class="footdef">
 <sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup><div class="footpara"><p class="footpara">
-This isn&#8217;t the fastest algorithm, but it&#8217;s space-efficient, easy to understand, and&nbsp;elegant.
-</p></div>
-</div>
-
-<div class="footdef">
-<sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup><div class="footpara"><p class="footpara">
 <a href="https://doi.org/10.1007/BF01933667">https://doi.org/10.1007/BF01933667</a>
 </p></div>
 </div>
