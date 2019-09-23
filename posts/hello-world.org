@@ -120,7 +120,7 @@ with about $O(\sqrt{p})$ different values.
 
 {{{mn}}} 
 Floyd's algorithm is not the fastest, but choosing a faster one doesn't matter all that
-much.Floyd's algorithm is also very elegant, so it's a nice pair with the elegant Pollard's rho
+much. Floyd's algorithm is also very elegant, so it's a nice pair with the elegant Pollard's rho
 algorithm. It's also a time-space tradeoff: faster algorithms like Brent's algorithm require storing
 more numbers.
 {{{mn-end}}}
