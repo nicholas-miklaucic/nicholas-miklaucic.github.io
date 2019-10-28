@@ -65,8 +65,7 @@ the normal distribution (what we need here) /is/ a composition of elementary fun
 Now how do we tackle $P(B)$? Note that this is the same for all choices of $m$: it's essentially a
 scaling constant that makes this a legit probability. Depending on how we set $t$, we might get this
 for free: if we design $t$ to include, say, the top 1% of test takers, then $P(B)$ is obviously
-$0.01$. We can go in reverse if necessary, by doing an integral $\int_{-\infty}^{\infty} P(\mu = m)
-P(B|\mu = m)\ dm$, but this is a double-not-nice expression: it's an integral involving $\Phi$, which we
+$0.01$. 
 already don't have a closed form for. However, because it is a constant, we only have to compute it
 once per problem.
 
@@ -98,10 +97,8 @@ to our running example and compare it with what we simulated last time. We'll us
 parameter values, the same as before:
  - Our threshold $t$, will be $1460$.
  - Our mean score in total $M$ will be $1014$ as before, and our standard deviation of the test
-   takers' means $\mu$, the value $S$, will be $197$. This means that the actual test scores are the
-   tiniest bit more spread out than this, historically (because this is actually the historical
-   standard deviation of the /scores/, which is slightly different), but not enough to make a major
-   difference.
+   takers' means $\mu$, the value $S$, will be $196$. This makes the standard deviation of the test
+   scores almost exactly $197$, which is the historical value.
  - $\sigma$, the individual variance of each test-taker, is going to be $20$.
 
 Let's compute $P(B)$ first, by simply running the integral through a computer and seeing what comes
@@ -125,7 +122,7 @@ given any particular value of $\mu$, $B$ happens?
 
 This graph represents the intuition that people who are better test-takers on average are more
 likely to qualify. Note how sharp the cutoff is: this is because the standard deviation of any given
-test taker, $\sigma$, is $20$, which is tiny compared to the huge $197$ standard deviation of
+test taker, $\sigma$, is $20$, which is tiny compared to the huge $196$ standard deviation of
 $\mu$. Even a test taker $50$ points away from the cutoff on average has to have an amazing day to
 qualify.
 
@@ -193,7 +190,7 @@ these shaded areas. Note that the outside shaded area has to add up to $1$: give
 be /something/. (This is why we divided by $P(B)$ earlier: we wanted the area of this curve to be
 $1$. We actually want to learn what $P(A)$ is now, so we care about it's unscaled area.) Thus we
 really just care about integrating the inner curve. Doing that, we get a final probability of about
-$P(A|B) = 0.8525, or 85%. This matches up very well with our simulated results from last time,
+$P(A|B) = 0.8511$, or 85%. This matches up very well with our simulated results from last time,
 which gives us some confidence we didn't mess anything up along the way.
 
 * Next Time On /Bayesian Fallacies/...

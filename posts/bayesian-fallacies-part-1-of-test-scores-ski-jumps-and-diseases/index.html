@@ -72,9 +72,9 @@ what we&#8217;re doing more&nbsp;rigorous.
 Let&#8217;s start with Bayes&#8217; paradox and introduce some&nbsp;statistics!
 </p>
 
-<div id="outline-container-org7830bd7" class="outline-2">
-<h2 id="org7830bd7">Bayes&#8217;&nbsp;Paradox</h2>
-<div class="outline-text-2" id="text-org7830bd7">
+<div id="outline-container-org69d4ad6" class="outline-2">
+<h2 id="org69d4ad6">Bayes&#8217;&nbsp;Paradox</h2>
+<div class="outline-text-2" id="text-org69d4ad6">
 <p>
 Bayes&#8217; paradox is usually presented like&nbsp;this:
 </p>
@@ -143,9 +143,9 @@ So, before we connect this to regression to the mean, what <i>is</i> regression 
 </div>
 </div>
 
-<div id="outline-container-org12f6105" class="outline-2">
-<h2 id="org12f6105">Regression to the&nbsp;Mean</h2>
-<div class="outline-text-2" id="text-org12f6105">
+<div id="outline-container-org0fd2faf" class="outline-2">
+<h2 id="org0fd2faf">Regression to the&nbsp;Mean</h2>
+<div class="outline-text-2" id="text-org0fd2faf">
 <p>
 <i>Regression to the mean</i> is the idea that being really successful or unsuccessful usually requires a
 fair bit of luck, and thus outlier results are likely to be followed by less unusual results as luck
@@ -170,9 +170,9 @@ unlikely to have the same good&nbsp;fortune.
 </p>
 </div>
 </div>
-<div id="outline-container-org9da3839" class="outline-2">
-<h2 id="org9da3839">Connecting The&nbsp;Dots</h2>
-<div class="outline-text-2" id="text-org9da3839">
+<div id="outline-container-orgc7db866" class="outline-2">
+<h2 id="orgc7db866">Connecting The&nbsp;Dots</h2>
+<div class="outline-text-2" id="text-orgc7db866">
 <p>
 These two thinking errors seem pretty different, but I&#8217;m going to argue that they&#8217;re both
 manifestations of the same underlying mathematical phenomenon. To do this, I&#8217;ll use a single
@@ -185,9 +185,9 @@ There are lots of choices for this case study, but because I&#8217;m a college f
 pick a specific example: PSAT scores and National Merit Semifinalist&nbsp;qualification.
 </p>
 </div>
-<div id="outline-container-org840c7b7" class="outline-3">
-<h3 id="org840c7b7">Background</h3>
-<div class="outline-text-3" id="text-org840c7b7">
+<div id="outline-container-org5845663" class="outline-3">
+<h3 id="org5845663">Background</h3>
+<div class="outline-text-3" id="text-org5845663">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -222,9 +222,9 @@ for National Merit if they were in 11th grade. <b>What are the chances that stud
 </p>
 </div>
 </div>
-<div id="outline-container-orgbb0249b" class="outline-3">
-<h3 id="orgbb0249b">An Intuitive&nbsp;Understanding</h3>
-<div class="outline-text-3" id="text-orgbb0249b">
+<div id="outline-container-org82a51a3" class="outline-3">
+<h3 id="org82a51a3">An Intuitive&nbsp;Understanding</h3>
+<div class="outline-text-3" id="text-org82a51a3">
 <p>
 This problem feels like a classic case of regression to the mean. National Merit is a harsh cutoff:
 out of roughly 1.5 million eligible students who take it every year, only 16,000 qualify. That&#8217;s a
@@ -235,9 +235,9 @@ understanding and see how it holds&nbsp;up.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf7ee9b8" class="outline-3">
-<h3 id="orgf7ee9b8">Clarifying&nbsp;Assumptions</h3>
-<div class="outline-text-3" id="text-orgf7ee9b8">
+<div id="outline-container-org55197b5" class="outline-3">
+<h3 id="org55197b5">Clarifying&nbsp;Assumptions</h3>
+<div class="outline-text-3" id="text-org55197b5">
 <p>
 Let&#8217;s do a couple things to make this problem easier to model mathematically. Let&#8217;s assume that each
 individual test taker&#8217;s scores have two components: a <i>mean performance</i> \(\mu\) that represents what
@@ -262,6 +262,15 @@ Not bad,&nbsp;huh?
 </p>
 
 <p>
+What&#8217;s a good ballpark for the individual variability \(\sigma\)? Some really interesting math can
+happen if you allow this to vary between test takers, but this is already going to be long, so
+I&#8217;ll save that for another time and just set this as constant across test takers. The College Board,
+which administers the PSAT, gives the score range for any individual test as plus or minus 40
+points. If we assume that this is plus or minus two standard deviations, that gives us a standard
+deviation of 20 points, which is what we&#8217;ll use for&nbsp;now.
+</p>
+
+<p>
 The analysis doesn&#8217;t really depend on the exact choices of numbers, but because we&#8217;re using a case
 study from the real world let&#8217;s try and pin some ballpark figures down. The PSAT is scored on a
 scale between 320 and 1520. Although National Merit qualification uses a slightly different score,
@@ -274,24 +283,22 @@ and this standard deviation, which is the variability between different&nbsp;ind
 </p>
 
 <p>
-What&#8217;s a good ballpark for the individual variability \(\sigma\)? Some really interesting math can
-happen if you allow this to vary between test takers, but this is already going to be long, so
-I&#8217;ll save that for another time and just set this as constant across test takers. The College Board,
-which administers the PSAT, gives the score range for any individual test as plus or minus 40
-points. If we assume that this is plus or minus two standard deviations, that gives us a standard
-deviation of 20 points, which is what we&#8217;ll use for&nbsp;now.
+An astute reader might notice that combining two normal distributions, one with standard deviation
+\(20\) and one with standard deviation \(197\), will actually produce a normal distribution with a
+larger variance than just the one normal distribution with \(\sigma = 197\). The formula for this
+behavior is that the standard deviation of the combined distribution is the geometric mean of the
+two original standard deviations: the variances add. So, in order to get a test score distribution
+that&#8217;s \(197\), we need to find the \(S\) such that \(S^2 + 20^2 + 197^2\). Solving this gives us
+\(195.98\), which I&#8217;ll just approximate as \(S =&nbsp;196\).
 </p>
 
 <span class="marginnote"><p>
-
 </p>
 <p>
-Astute readers might notice that our score distribution actually more variable than the original
-normal distribution because we added a second normal distribution on top of it, and so I should
-probably reduce the \(S\) value of 197 we used. For now, I&#8217;m not going to, because we&#8217;ll be messing
-around with these parameters soon enough. It isn&#8217;t a major&nbsp;effect.
+National Merit actually multiplies your verbal score by 2 (to better represents the SAT&#8217;s split of
+reading-writing-math), adds it to your math score, and divides by 10 to get the score you use for
+qualification. This wrinkle doesn&#8217;t really make the math more interesting, so I&#8217;ll skip&nbsp;it.
 </p>
-
 </span>
 
 <p>
@@ -302,14 +309,14 @@ ideas, not anyone&#8217;s particular chances at National&nbsp;Merit.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcedc796" class="outline-3">
-<h3 id="orgcedc796">A Mathematical&nbsp;Model</h3>
-<div class="outline-text-3" id="text-orgcedc796">
+<div id="outline-container-org93a4667" class="outline-3">
+<h3 id="org93a4667">A Mathematical&nbsp;Model</h3>
+<div class="outline-text-3" id="text-org93a4667">
 <p>
 With these assumptions, we can reframe this problem mathematically. We&#8217;ll use lowercase letters for
 individuals, and uppercase letters for the global parameters. An individual test taker&#8217;s score is a
 random variable \(s \sim N(\mu, \sigma)\), where \(\mu\) itself is distributed as \(\mu \sim N(M, S)\),
-which in this case is \(N(1014, 197)\). \(\sigma\), in this example, is&nbsp;\(20\). 
+which in this case is \(N(1014, 196)\). \(\sigma\), in this example, is&nbsp;\(20\). 
 </p>
 
 <p>
@@ -320,9 +327,9 @@ threshold? This might feel more reminiscent of the Bayesian statistics we did&nb
 </p>
 </div>
 </div>
-<div id="outline-container-org435475c" class="outline-3">
-<h3 id="org435475c">First Results: Cheating with&nbsp;Computers</h3>
-<div class="outline-text-3" id="text-org435475c">
+<div id="outline-container-org15ee028" class="outline-3">
+<h3 id="org15ee028">First Results: Cheating with&nbsp;Computers</h3>
+<div class="outline-text-3" id="text-org15ee028">
 <p>
 We&#8217;re going to analyze the math for this in more detail, later. But, for now, let&#8217;s do a basic
 estimate by just simulating a bunch of different tests and test takers with a computer. We&#8217;ll
@@ -345,9 +352,9 @@ scores against the first scores, where we also see a very strong&nbsp;correlatio
 </div>
 </div>
 
-<div id="outline-container-org1ee8906" class="outline-3">
-<h3 id="org1ee8906">How Does This Effect Work (Or&nbsp;Not)?</h3>
-<div class="outline-text-3" id="text-org1ee8906">
+<div id="outline-container-org7d0aad6" class="outline-3">
+<h3 id="org7d0aad6">How Does This Effect Work (Or&nbsp;Not)?</h3>
+<div class="outline-text-3" id="text-org7d0aad6">
 <p>
 We can think of two distinct effects at play: a <i>selection effect</i> that makes the first-time
 qualifiers&#8217; \(\mu\) values higher on average, and a reverse <i>regression effect</i> that makes the random
@@ -381,9 +388,9 @@ regression to the mean is a small&nbsp;effect.
 </div>
 </div>
 
-<div id="outline-container-orgc2efa4d" class="outline-2">
-<h2 id="orgc2efa4d">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orgc2efa4d">
+<div id="outline-container-org42e188c" class="outline-2">
+<h2 id="org42e188c">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-org42e188c">
 <p>
 This is where I&#8217;ll stop for Part I: a breakdown of how regression to the mean actually functions,
 and perhaps some teasers as to how it might relate to Bayes&#8217; paradox. In the next post, I&#8217;ll break
