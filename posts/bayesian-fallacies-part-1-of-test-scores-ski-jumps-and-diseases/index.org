@@ -1,6 +1,6 @@
 #+BEGIN_COMMENT
 .. title: Bayesian Fallacies, Part 1: Of Test Scores, Ski Jumps, and Diseases
-.. slug: bayesian-fallacies-part-1
+n.. slug: bayesian-fallacies-part-1
 .. date: 2019-10-23 14:17:52 UTC-04:00
 .. tags: math, dataviz
 .. category: bayesian-fallacies
@@ -160,7 +160,7 @@ standard deviation was 197. Note the distinction between the $\sigma$ above, whi
 and this standard deviation, which is the variability between different individuals.
 
 What's a good ballpark for the individual variability $\sigma$? Some really interesting math can
-happen if you allow this to vary in between test takers, but this is already going to be long, so
+happen if you allow this to vary between test takers, but this is already going to be long, so
 I'll save that for another time and just set this as constant across test takers. The College Board,
 which administers the PSAT, gives the score range for any individual test as plus or minus 40
 points. If we assume that this is plus or minus two standard deviations, that gives us a standard

@@ -10,9 +10,8 @@
 <link rel="stylesheet" href="../../assets/demo.css" type="text/css">
 <meta content="#5670d4" name="theme-color">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
-<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-1/">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-1-of-test-scores-ski-jumps-and-diseases/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
-<link rel="prev" href="../hello-world/" title="Hello, World!" type="text/html">
 <link rel="next" href="../bayesian-fallacies-part-2-the-math-of-the-psat-math-section/" title="Bayesian Fallacies, Part 2: The Math of the PSAT Math Section" type="text/html">
 </head>
 <body class="">
@@ -73,9 +72,9 @@ what we&#8217;re doing more&nbsp;rigorous.
 Let&#8217;s start with Bayes&#8217; paradox and introduce some&nbsp;statistics!
 </p>
 
-<div id="outline-container-orgde11947" class="outline-2">
-<h2 id="orgde11947">Bayes&#8217;&nbsp;Paradox</h2>
-<div class="outline-text-2" id="text-orgde11947">
+<div id="outline-container-org7830bd7" class="outline-2">
+<h2 id="org7830bd7">Bayes&#8217;&nbsp;Paradox</h2>
+<div class="outline-text-2" id="text-org7830bd7">
 <p>
 Bayes&#8217; paradox is usually presented like&nbsp;this:
 </p>
@@ -144,9 +143,9 @@ So, before we connect this to regression to the mean, what <i>is</i> regression 
 </div>
 </div>
 
-<div id="outline-container-org3ab7efa" class="outline-2">
-<h2 id="org3ab7efa">Regression to the&nbsp;Mean</h2>
-<div class="outline-text-2" id="text-org3ab7efa">
+<div id="outline-container-org12f6105" class="outline-2">
+<h2 id="org12f6105">Regression to the&nbsp;Mean</h2>
+<div class="outline-text-2" id="text-org12f6105">
 <p>
 <i>Regression to the mean</i> is the idea that being really successful or unsuccessful usually requires a
 fair bit of luck, and thus outlier results are likely to be followed by less unusual results as luck
@@ -171,9 +170,9 @@ unlikely to have the same good&nbsp;fortune.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcec7fb8" class="outline-2">
-<h2 id="orgcec7fb8">Connecting The&nbsp;Dots</h2>
-<div class="outline-text-2" id="text-orgcec7fb8">
+<div id="outline-container-org9da3839" class="outline-2">
+<h2 id="org9da3839">Connecting The&nbsp;Dots</h2>
+<div class="outline-text-2" id="text-org9da3839">
 <p>
 These two thinking errors seem pretty different, but I&#8217;m going to argue that they&#8217;re both
 manifestations of the same underlying mathematical phenomenon. To do this, I&#8217;ll use a single
@@ -186,9 +185,9 @@ There are lots of choices for this case study, but because I&#8217;m a college f
 pick a specific example: PSAT scores and National Merit Semifinalist&nbsp;qualification.
 </p>
 </div>
-<div id="outline-container-org7083ad8" class="outline-3">
-<h3 id="org7083ad8">Background</h3>
-<div class="outline-text-3" id="text-org7083ad8">
+<div id="outline-container-org840c7b7" class="outline-3">
+<h3 id="org840c7b7">Background</h3>
+<div class="outline-text-3" id="text-org840c7b7">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -223,9 +222,9 @@ for National Merit if they were in 11th grade. <b>What are the chances that stud
 </p>
 </div>
 </div>
-<div id="outline-container-orgebf2b20" class="outline-3">
-<h3 id="orgebf2b20">An Intuitive&nbsp;Understanding</h3>
-<div class="outline-text-3" id="text-orgebf2b20">
+<div id="outline-container-orgbb0249b" class="outline-3">
+<h3 id="orgbb0249b">An Intuitive&nbsp;Understanding</h3>
+<div class="outline-text-3" id="text-orgbb0249b">
 <p>
 This problem feels like a classic case of regression to the mean. National Merit is a harsh cutoff:
 out of roughly 1.5 million eligible students who take it every year, only 16,000 qualify. That&#8217;s a
@@ -236,9 +235,9 @@ understanding and see how it holds&nbsp;up.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc008df5" class="outline-3">
-<h3 id="orgc008df5">Clarifying&nbsp;Assumptions</h3>
-<div class="outline-text-3" id="text-orgc008df5">
+<div id="outline-container-orgf7ee9b8" class="outline-3">
+<h3 id="orgf7ee9b8">Clarifying&nbsp;Assumptions</h3>
+<div class="outline-text-3" id="text-orgf7ee9b8">
 <p>
 Let&#8217;s do a couple things to make this problem easier to model mathematically. Let&#8217;s assume that each
 individual test taker&#8217;s scores have two components: a <i>mean performance</i> \(\mu\) that represents what
@@ -276,7 +275,7 @@ and this standard deviation, which is the variability between different&nbsp;ind
 
 <p>
 What&#8217;s a good ballpark for the individual variability \(\sigma\)? Some really interesting math can
-happen if you allow this to vary in between test takers, but this is already going to be long, so
+happen if you allow this to vary between test takers, but this is already going to be long, so
 I&#8217;ll save that for another time and just set this as constant across test takers. The College Board,
 which administers the PSAT, gives the score range for any individual test as plus or minus 40
 points. If we assume that this is plus or minus two standard deviations, that gives us a standard
@@ -303,9 +302,9 @@ ideas, not anyone&#8217;s particular chances at National&nbsp;Merit.
 </p>
 </div>
 </div>
-<div id="outline-container-org0e01cfe" class="outline-3">
-<h3 id="org0e01cfe">A Mathematical&nbsp;Model</h3>
-<div class="outline-text-3" id="text-org0e01cfe">
+<div id="outline-container-orgcedc796" class="outline-3">
+<h3 id="orgcedc796">A Mathematical&nbsp;Model</h3>
+<div class="outline-text-3" id="text-orgcedc796">
 <p>
 With these assumptions, we can reframe this problem mathematically. We&#8217;ll use lowercase letters for
 individuals, and uppercase letters for the global parameters. An individual test taker&#8217;s score is a
@@ -321,9 +320,9 @@ threshold? This might feel more reminiscent of the Bayesian statistics we did&nb
 </p>
 </div>
 </div>
-<div id="outline-container-org25d604b" class="outline-3">
-<h3 id="org25d604b">First Results: Cheating with&nbsp;Computers</h3>
-<div class="outline-text-3" id="text-org25d604b">
+<div id="outline-container-org435475c" class="outline-3">
+<h3 id="org435475c">First Results: Cheating with&nbsp;Computers</h3>
+<div class="outline-text-3" id="text-org435475c">
 <p>
 We&#8217;re going to analyze the math for this in more detail, later. But, for now, let&#8217;s do a basic
 estimate by just simulating a bunch of different tests and test takers with a computer. We&#8217;ll
@@ -346,9 +345,9 @@ scores against the first scores, where we also see a very strong&nbsp;correlatio
 </div>
 </div>
 
-<div id="outline-container-org4bc7a1e" class="outline-3">
-<h3 id="org4bc7a1e">How Does This Effect Work (Or&nbsp;Not)?</h3>
-<div class="outline-text-3" id="text-org4bc7a1e">
+<div id="outline-container-org1ee8906" class="outline-3">
+<h3 id="org1ee8906">How Does This Effect Work (Or&nbsp;Not)?</h3>
+<div class="outline-text-3" id="text-org1ee8906">
 <p>
 We can think of two distinct effects at play: a <i>selection effect</i> that makes the first-time
 qualifiers&#8217; \(\mu\) values higher on average, and a reverse <i>regression effect</i> that makes the random
@@ -382,9 +381,9 @@ regression to the mean is a small&nbsp;effect.
 </div>
 </div>
 
-<div id="outline-container-orgc23e230" class="outline-2">
-<h2 id="orgc23e230">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orgc23e230">
+<div id="outline-container-orgc2efa4d" class="outline-2">
+<h2 id="orgc2efa4d">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgc2efa4d">
 <p>
 This is where I&#8217;ll stop for Part I: a breakdown of how regression to the mean actually functions,
 and perhaps some teasers as to how it might relate to Bayes&#8217; paradox. In the next post, I&#8217;ll break
@@ -401,9 +400,7 @@ down the math for this example and try and show how these effects function on a 
             <div class="pager hidden-print pagination">
 
             <span class="previous pagination-item older">
-                <a href="../hello-world/" rel="prev" title="Hello, World!">
                 Previous post
-                </a>
             </span>
 
 
