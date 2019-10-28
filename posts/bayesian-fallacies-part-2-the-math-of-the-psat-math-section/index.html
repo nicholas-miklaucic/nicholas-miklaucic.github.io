@@ -63,9 +63,9 @@ why. This post will lay the mathematical groundwork for that&nbsp;explanation!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org49190a3" class="outline-2">
-<h2 id="org49190a3">Breaking Out&nbsp;Bayes&#8217;</h2>
-<div class="outline-text-2" id="text-org49190a3">
+<div id="outline-container-org2371a27" class="outline-2">
+<h2 id="org2371a27">Breaking Out&nbsp;Bayes&#8217;</h2>
+<div class="outline-text-2" id="text-org2371a27">
 <p>
 To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of PSAT test</b>
 <b>takers, what&#8217;s the chance they repeat that on a second administration?</b> We&#8217;re going to use Bayes&#8217;
@@ -103,9 +103,9 @@ product of those terms over all of the possibilities to get what we really want,
 </div>
 </div>
 
-<div id="outline-container-org129e1d9" class="outline-2">
-<h2 id="org129e1d9">A Stats&nbsp;Struggle</h2>
-<div class="outline-text-2" id="text-org129e1d9">
+<div id="outline-container-org5c7c49f" class="outline-2">
+<h2 id="org5c7c49f">A Stats&nbsp;Struggle</h2>
+<div class="outline-text-2" id="text-org5c7c49f">
 <p>
 Let&#8217;s start with \(P(A|\mu = m)\): the probability that, given a certain mean \(m\), the second test
 administration is a&nbsp;qualifier. 
@@ -144,9 +144,9 @@ once per&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-orgbd0c756" class="outline-2">
-<h2 id="orgbd0c756">Computational&nbsp;Calculus</h2>
-<div class="outline-text-2" id="text-orgbd0c756">
+<div id="outline-container-orgd2df9f7" class="outline-2">
+<h2 id="orgd2df9f7">Computational&nbsp;Calculus</h2>
+<div class="outline-text-2" id="text-orgd2df9f7">
 <p>
 So we finally have an…expression for \(P(\mu = m|B)\). It&#8217;s not nice to work with, or easy to
 compute by hand, but it is an expression, so we&#8217;ll leave it there for now. We already have \(P(A|\mu
@@ -197,9 +197,9 @@ the&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-orgea3a0d4" class="outline-2">
-<h2 id="orgea3a0d4">Pretty&nbsp;Pictures</h2>
-<div class="outline-text-2" id="text-orgea3a0d4">
+<div id="outline-container-orgb00166e" class="outline-2">
+<h2 id="orgb00166e">Pretty&nbsp;Pictures</h2>
+<div class="outline-text-2" id="text-orgb00166e">
 <p>
 I don&#8217;t want to just do this and tell you the answer, because that&#8217;s not really all that much fun on
 your end. Let&#8217;s break out some visuals&nbsp;instead! 
@@ -317,15 +317,15 @@ these shaded areas. Note that the outside shaded area has to add up to \(1\): gi
 be <i>something</i>. (This is why we divided by \(P(B)\) earlier: we wanted the area of this curve to be
 \(1\). We actually want to learn what \(P(A)\) is now, so we care about it&#8217;s unscaled area.) Thus we
 really just care about integrating the inner curve. Doing that, we get a final probability of about
-\(P(A|B) = 0.87022\), or 87%. This matches up very well with our simulated results from last time,
+$P(A|B) = 0.8525, or 85%. This matches up very well with our simulated results from last time,
 which gives us some confidence we didn&#8217;t mess anything up along the&nbsp;way.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5d330c2" class="outline-2">
-<h2 id="org5d330c2">Next Time On <i>Bayesian Fallacies</i>…</h2>
-<div class="outline-text-2" id="text-org5d330c2">
+<div id="outline-container-orge28bad9" class="outline-2">
+<h2 id="orge28bad9">Next Time On <i>Bayesian Fallacies</i>…</h2>
+<div class="outline-text-2" id="text-orge28bad9">
 <p>
 What was the point of all this again? Although we didn&#8217;t succeed in getting an exact closed form for
 \(P(A|B)\) given \(M, S, t\), and \(\sigma\), we did get an expression that a computer can easily evaluate
