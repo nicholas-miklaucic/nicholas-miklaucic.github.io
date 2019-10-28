@@ -98,8 +98,10 @@ to our running example and compare it with what we simulated last time. We'll us
 parameter values, the same as before:
  - Our threshold $t$, will be $1460$.
  - Our mean score in total $M$ will be $1014$ as before, and our standard deviation of the test
-   takers' means $\mu$ $S$ will be $197$. This means that the actual test scores are the tiniest bit
-   more spread out than this, historically, but not enough to make a major difference.
+   takers' means $\mu$, the value $S$, will be $197$. This means that the actual test scores are the
+   tiniest bit more spread out than this, historically (because this is actually the historical
+   standard deviation of the /scores/, which is slightly different), but not enough to make a major
+   difference.
  - $\sigma$, the individual variance of each test-taker, is going to be $20$.
 
 Let's compute $P(B)$ first, by simply running the integral through a computer and seeing what comes
@@ -121,18 +123,20 @@ given any particular value of $\mu$, $B$ happens?
 
 [[img-url:/images/psat-b-of-mu.png]]
 
-This is just a straight pointwise multiplication of the last two graphs: if you don't believe me,
-pick a $\mu$ value and try it yourself. This represents the intuition that people who are better
-test-takers on average are more likely to qualify. Note how sharp the cutoff is: this is because the
-standard deviation of any given test taker, $\sigma$, is $20$, which is tiny compared to the huge
-$197$ standard deviation of $\mu$. Even a test taker $50$ points away from the cutoff on average has
-to have an amazing day to qualify.
+This graph represents the intuition that people who are better test-takers on average are more
+likely to qualify. Note how sharp the cutoff is: this is because the standard deviation of any given
+test taker, $\sigma$, is $20$, which is tiny compared to the huge $197$ standard deviation of
+$\mu$. Even a test taker $50$ points away from the cutoff on average has to have an amazing day to
+qualify.
 
 To get the probability of $\mu$ being any particular value given $B$, we can use Bayes' theorem:
 multiply these together and divide by $P(B)$ so everything adds up to what it should. This is called
 the /posterior distribution/: the new distribution using our given information.
 
 [[img-url:/images/psat-posterior-mu.png]]
+
+This is just a straight pointwise multiplication of the last two graphs: if you don't believe me,
+pick a $\mu$ value and try it yourself.
 
 We can plot the prior and posterior together to show the effect of our knowledge:
 
@@ -173,13 +177,16 @@ low, but it's possible, especially given that there are more test takers with th
 than there are for higher values. However, the cutoff is applied not once, but twice: this is the
 killer. The chance that lightning strikes twice and that you qualify a second time is virtually
 nothing, and so anyone in this group is likely to be part of the population that regresses: they got
-lucky once, but they probably won't get lucky again. This is the /regression effect/ at work. At $\mu
-= 1500$, it's extremely unlikely you had that $\mu$ value to begin with, but if you are that good at
-the test you're likely to qualify the first time. (In fact, it's so much more likely that, even
-though having a $\mu$ value of 1500 is way less likely overall, the population of people that
+lucky once, but they probably won't get lucky again. This is the /regression effect/ at work, and why
+the ratio of the curve heights at that point is almost $0$. 
+
+At $\mu = 1500$, it's extremely unlikely you had that $\mu$ value to begin with, but if you are that
+good at the test you're likely to qualify the first time. (In fact, it's so much more likely that,
+even though having a $\mu$ value of 1500 is way less likely overall, the population of people that
 qualify are far more likely to have this value of $\mu$ than $1400$.) However, unlike at $1400$,
 you're also likely to qualify a second time!  This is the /selection effect/ at work. This is why the
-two curves have almost the same height: given that you got there, you're likely to go the distance.
+two curves have almost the same height at this point: given that you got there, you're likely to go
+the distance.
 
 Now, to get the final probability and compare with last time, we just have to compute the ratio of
 these shaded areas. Note that the outside shaded area has to add up to $1$: given $B$, $\mu$ has to
@@ -197,6 +204,6 @@ for us in no time flat, to a higher degree of precision than simulations can pro
 The reason I wanted to do this in the first place was so we could explore what happens when we
 change the parameters. What about the way the PSAT example is set up makes it not display a large
 regression effect? If the National Merit cutoff were harsher or more lenient, how would $P(A|B)$
-change? Next time, we'll explore how $P(A|B)$ changes as a function of $M, S, t,$ and $\sigma$, and
+change? Next time, we'll explore how $P(A|B)$ changes as a function of $M, S, t$, and $\sigma$, and
 we'll finally answer the question of how this relates to Bayes' paradox and get some powerful ways
 of visualizing the effect of regression to the mean in problems outside of standardized tests.

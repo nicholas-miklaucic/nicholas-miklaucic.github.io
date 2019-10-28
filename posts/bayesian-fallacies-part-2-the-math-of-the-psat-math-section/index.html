@@ -63,9 +63,9 @@ why. This post will lay the mathematical groundwork for that&nbsp;explanation!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org6fa3dbb" class="outline-2">
-<h2 id="org6fa3dbb">Breaking Out&nbsp;Bayes&#8217;</h2>
-<div class="outline-text-2" id="text-org6fa3dbb">
+<div id="outline-container-orge9dc6f9" class="outline-2">
+<h2 id="orge9dc6f9">Breaking Out&nbsp;Bayes&#8217;</h2>
+<div class="outline-text-2" id="text-orge9dc6f9">
 <p>
 To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of PSAT test</b>
 <b>takers, what&#8217;s the chance they repeat that on a second administration?</b> We&#8217;re going to use Bayes&#8217;
@@ -103,9 +103,9 @@ product of those terms over all of the possibilities to get what we really want,
 </div>
 </div>
 
-<div id="outline-container-orge3a1afc" class="outline-2">
-<h2 id="orge3a1afc">A Stats&nbsp;Struggle</h2>
-<div class="outline-text-2" id="text-orge3a1afc">
+<div id="outline-container-org515ef05" class="outline-2">
+<h2 id="org515ef05">A Stats&nbsp;Struggle</h2>
+<div class="outline-text-2" id="text-org515ef05">
 <p>
 Let&#8217;s start with \(P(A|\mu = m)\): the probability that, given a certain mean \(m\), the second test
 administration is a&nbsp;qualifier. 
@@ -144,9 +144,9 @@ once per&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-org9d67541" class="outline-2">
-<h2 id="org9d67541">Computational&nbsp;Calculus</h2>
-<div class="outline-text-2" id="text-org9d67541">
+<div id="outline-container-orgac9a4be" class="outline-2">
+<h2 id="orgac9a4be">Computational&nbsp;Calculus</h2>
+<div class="outline-text-2" id="text-orgac9a4be">
 <p>
 So we finally have an…expression for \(P(\mu = m|B)\). It&#8217;s not nice to work with, or easy to
 compute by hand, but it is an expression, so we&#8217;ll leave it there for now. We already have \(P(A|\mu
@@ -183,8 +183,9 @@ parameter values, the same as&nbsp;before:
 <ul class="org-ul">
 <li>Our threshold \(t\), will be&nbsp;\(1460\).</li>
 <li>Our mean score in total \(M\) will be \(1014\) as before, and our standard deviation of the test
-takers&#8217; means \(\mu\) \(S\) will be \(197\). This means that the actual test scores are the tiniest bit
-more spread out than this, historically, but not enough to make a major&nbsp;difference.</li>
+takers&#8217; means \(\mu\), the value \(S\), will be \(197\). This means that the actual test scores are the
+tiniest bit more spread out than this, historically (because this is actually the historical
+standard deviation of the <i>scores</i>, which is slightly different), but not enough to make a major&nbsp;difference.</li>
 <li>\(\sigma\), the individual variance of each test-taker, is going to be&nbsp;\(20\).</li>
 </ul>
 <p>
@@ -196,9 +197,9 @@ the&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-orgbd61323" class="outline-2">
-<h2 id="orgbd61323">Pretty&nbsp;Pictures</h2>
-<div class="outline-text-2" id="text-orgbd61323">
+<div id="outline-container-org192876e" class="outline-2">
+<h2 id="org192876e">Pretty&nbsp;Pictures</h2>
+<div class="outline-text-2" id="text-org192876e">
 <p>
 I don&#8217;t want to just do this and tell you the answer, because that&#8217;s not really all that much fun on
 your end. Let&#8217;s break out some visuals&nbsp;instead! 
@@ -220,12 +221,10 @@ given any particular value of \(\mu\), \(B\)&nbsp;happens?
 <img src="../../images/psat-b-of-mu.png" alt="nil"></p>
 
 <p>
-This is just a straight pointwise multiplication of the last two graphs: if you don&#8217;t believe me,
-pick a \(\mu\) value and try it yourself. This represents the intuition that people who are better
-test-takers on average are more likely to qualify. Note how sharp the cutoff is: this is because the
-standard deviation of any given test taker, \(\sigma\), is \(20\), which is tiny compared to the huge
-\(197\) standard deviation of \(\mu\). Even a test taker \(50\) points away from the cutoff on average has
-to have an amazing day to&nbsp;qualify.
+This graph represents the intuition that people who are better test-takers on average are more
+likely to qualify. Note how sharp the cutoff is: this is because the standard deviation of any given
+test taker, \(\sigma\), is \(20\), which is tiny compared to the huge \(197\) standard deviation of
+\(\mu\). Even a test taker \(50\) points away from the cutoff on average has to have an amazing day to&nbsp;qualify.
 </p>
 
 <p>
@@ -236,6 +235,11 @@ the <i>posterior distribution</i>: the new distribution using our given&nbsp;inf
 
 <p>
 <img src="../../images/psat-posterior-mu.png" alt="nil"></p>
+
+<p>
+This is just a straight pointwise multiplication of the last two graphs: if you don&#8217;t believe me,
+pick a \(\mu\) value and try it&nbsp;yourself.
+</p>
 
 <p>
 We can plot the prior and posterior together to show the effect of our&nbsp;knowledge:
@@ -293,13 +297,18 @@ low, but it&#8217;s possible, especially given that there are more test takers w
 than there are for higher values. However, the cutoff is applied not once, but twice: this is the
 killer. The chance that lightning strikes twice and that you qualify a second time is virtually
 nothing, and so anyone in this group is likely to be part of the population that regresses: they got
-lucky once, but they probably won&#8217;t get lucky again. This is the <i>regression effect</i> at work. At \(\mu
-= 1500\), it&#8217;s extremely unlikely you had that \(\mu\) value to begin with, but if you are that good at
-the test you&#8217;re likely to qualify the first time. (In fact, it&#8217;s so much more likely that, even
-though having a \(\mu\) value of 1500 is way less likely overall, the population of people that
+lucky once, but they probably won&#8217;t get lucky again. This is the <i>regression effect</i> at work, and why
+the ratio of the curve heights at that point is almost&nbsp;\(0\). 
+</p>
+
+<p>
+At \(\mu = 1500\), it&#8217;s extremely unlikely you had that \(\mu\) value to begin with, but if you are that
+good at the test you&#8217;re likely to qualify the first time. (In fact, it&#8217;s so much more likely that,
+even though having a \(\mu\) value of 1500 is way less likely overall, the population of people that
 qualify are far more likely to have this value of \(\mu\) than \(1400\).) However, unlike at \(1400\),
 you&#8217;re also likely to qualify a second time!  This is the <i>selection effect</i> at work. This is why the
-two curves have almost the same height: given that you got there, you&#8217;re likely to go the&nbsp;distance.
+two curves have almost the same height at this point: given that you got there, you&#8217;re likely to go
+the&nbsp;distance.
 </p>
 
 <p>
@@ -314,9 +323,9 @@ which gives us some confidence we didn&#8217;t mess anything up along the&nbsp;w
 </div>
 </div>
 
-<div id="outline-container-org1e5ed2f" class="outline-2">
-<h2 id="org1e5ed2f">Next Time On <i>Bayesian Fallacies</i>…</h2>
-<div class="outline-text-2" id="text-org1e5ed2f">
+<div id="outline-container-org7502c32" class="outline-2">
+<h2 id="org7502c32">Next Time On <i>Bayesian Fallacies</i>…</h2>
+<div class="outline-text-2" id="text-org7502c32">
 <p>
 What was the point of all this again? Although we didn&#8217;t succeed in getting an exact closed form for
 \(P(A|B)\) given \(M, S, t\), and \(\sigma\), we did get an expression that a computer can easily evaluate
@@ -327,7 +336,7 @@ for us in no time flat, to a higher degree of precision than simulations can&nbs
 The reason I wanted to do this in the first place was so we could explore what happens when we
 change the parameters. What about the way the PSAT example is set up makes it not display a large
 regression effect? If the National Merit cutoff were harsher or more lenient, how would \(P(A|B)\)
-change? Next time, we&#8217;ll explore how \(P(A|B)\) changes as a function of $M, S, t,$ and \(\sigma\), and
+change? Next time, we&#8217;ll explore how \(P(A|B)\) changes as a function of \(M, S, t\), and \(\sigma\), and
 we&#8217;ll finally answer the question of how this relates to Bayes&#8217; paradox and get some powerful ways
 of visualizing the effect of regression to the mean in problems outside of standardized&nbsp;tests.
 </p>
