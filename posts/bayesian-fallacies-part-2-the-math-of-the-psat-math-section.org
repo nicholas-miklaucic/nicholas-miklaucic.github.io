@@ -193,7 +193,7 @@ these shaded areas. Note that the outside shaded area has to add up to $1$: give
 be /something/. (This is why we divided by $P(B)$ earlier: we wanted the area of this curve to be
 $1$. We actually want to learn what $P(A)$ is now, so we care about it's unscaled area.) Thus we
 really just care about integrating the inner curve. Doing that, we get a final probability of about
-$P(A|B) = 0.87022$, or 87%. This matches up very well with our simulated results from last time,
+$P(A|B) = 0.8525, or 85%. This matches up very well with our simulated results from last time,
 which gives us some confidence we didn't mess anything up along the way.
 
 * Next Time On /Bayesian Fallacies/...
