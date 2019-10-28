@@ -73,9 +73,9 @@ what we&#8217;re doing more&nbsp;rigorous.
 Let&#8217;s start with Bayes&#8217; paradox and introduce some&nbsp;statistics!
 </p>
 
-<div id="outline-container-org9c5b35e" class="outline-2">
-<h2 id="org9c5b35e">Bayes&#8217;&nbsp;Paradox</h2>
-<div class="outline-text-2" id="text-org9c5b35e">
+<div id="outline-container-orgde11947" class="outline-2">
+<h2 id="orgde11947">Bayes&#8217;&nbsp;Paradox</h2>
+<div class="outline-text-2" id="text-orgde11947">
 <p>
 Bayes&#8217; paradox is usually presented like&nbsp;this:
 </p>
@@ -144,19 +144,23 @@ So, before we connect this to regression to the mean, what <i>is</i> regression 
 </div>
 </div>
 
-<div id="outline-container-org030f7e7" class="outline-2">
-<h2 id="org030f7e7">Regression to the&nbsp;Mean</h2>
-<div class="outline-text-2" id="text-org030f7e7">
+<div id="outline-container-org3ab7efa" class="outline-2">
+<h2 id="org3ab7efa">Regression to the&nbsp;Mean</h2>
+<div class="outline-text-2" id="text-org3ab7efa">
 <p>
 <i>Regression to the mean</i> is the idea that being really successful or unsuccessful usually requires a
 fair bit of luck, and thus outlier results are likely to be followed by less unusual results as luck
 evens out. Daniel Kahneman, in his classic work <i>Thinking Fast and Slow</i>, describes regression to the
-mean with a useful example I will steal. In Olympic ski jump, competitors get two jumps and their
-score is summed. Kahneman noticed that commentators would predict that, after good jumps,
-competitors would get &#8220;tense&#8221; and do worse, and after a bad first jump competitors would relax and
-do better. There&#8217;s a much simpler explanation: if you had a good first jump, you probably did better
-than usual for your skill level, and so it&#8217;s reasonable that next time you&#8217;d do worse. Conversely,
-if you had bad mojo on the first jump, your mojo is likely to be better next&nbsp;time.
+mean with a useful example I will&nbsp;steal. 
+</p>
+
+<p>
+In Olympic ski jump, competitors get two jumps and their score is summed. Kahneman noticed that
+commentators would predict that, after good jumps, competitors would get &#8220;tense&#8221; and do worse, and
+after a bad first jump competitors would relax and do better. The result, performances that even
+out, is real, but there&#8217;s a much simpler explanation: if you had a good first jump, you probably did
+better than usual for your skill level, and so it&#8217;s reasonable that next time you&#8217;d do
+worse. Conversely, if you had bad mojo on the first jump, your mojo is likely to be better next&nbsp;time.
 </p>
 
 <p>
@@ -167,9 +171,9 @@ unlikely to have the same good&nbsp;fortune.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf51ad78" class="outline-2">
-<h2 id="orgf51ad78">Connecting The&nbsp;Dots</h2>
-<div class="outline-text-2" id="text-orgf51ad78">
+<div id="outline-container-orgcec7fb8" class="outline-2">
+<h2 id="orgcec7fb8">Connecting The&nbsp;Dots</h2>
+<div class="outline-text-2" id="text-orgcec7fb8">
 <p>
 These two thinking errors seem pretty different, but I&#8217;m going to argue that they&#8217;re both
 manifestations of the same underlying mathematical phenomenon. To do this, I&#8217;ll use a single
@@ -182,9 +186,9 @@ There are lots of choices for this case study, but because I&#8217;m a college f
 pick a specific example: PSAT scores and National Merit Semifinalist&nbsp;qualification.
 </p>
 </div>
-<div id="outline-container-orgfa3e1bd" class="outline-3">
-<h3 id="orgfa3e1bd">Background</h3>
-<div class="outline-text-3" id="text-orgfa3e1bd">
+<div id="outline-container-org7083ad8" class="outline-3">
+<h3 id="org7083ad8">Background</h3>
+<div class="outline-text-3" id="text-org7083ad8">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -219,9 +223,9 @@ for National Merit if they were in 11th grade. <b>What are the chances that stud
 </p>
 </div>
 </div>
-<div id="outline-container-org7f62661" class="outline-3">
-<h3 id="org7f62661">An Intuitive&nbsp;Understanding</h3>
-<div class="outline-text-3" id="text-org7f62661">
+<div id="outline-container-orgebf2b20" class="outline-3">
+<h3 id="orgebf2b20">An Intuitive&nbsp;Understanding</h3>
+<div class="outline-text-3" id="text-orgebf2b20">
 <p>
 This problem feels like a classic case of regression to the mean. National Merit is a harsh cutoff:
 out of roughly 1.5 million eligible students who take it every year, only 16,000 qualify. That&#8217;s a
@@ -232,9 +236,9 @@ understanding and see how it holds&nbsp;up.
 </p>
 </div>
 </div>
-<div id="outline-container-org7ccdb2d" class="outline-3">
-<h3 id="org7ccdb2d">Clarifying&nbsp;Assumptions</h3>
-<div class="outline-text-3" id="text-org7ccdb2d">
+<div id="outline-container-orgc008df5" class="outline-3">
+<h3 id="orgc008df5">Clarifying&nbsp;Assumptions</h3>
+<div class="outline-text-3" id="text-orgc008df5">
 <p>
 Let&#8217;s do a couple things to make this problem easier to model mathematically. Let&#8217;s assume that each
 individual test taker&#8217;s scores have two components: a <i>mean performance</i> \(\mu\) that represents what
@@ -299,9 +303,9 @@ ideas, not anyone&#8217;s particular chances at National&nbsp;Merit.
 </p>
 </div>
 </div>
-<div id="outline-container-org694cd92" class="outline-3">
-<h3 id="org694cd92">A Mathematical&nbsp;Model</h3>
-<div class="outline-text-3" id="text-org694cd92">
+<div id="outline-container-org0e01cfe" class="outline-3">
+<h3 id="org0e01cfe">A Mathematical&nbsp;Model</h3>
+<div class="outline-text-3" id="text-org0e01cfe">
 <p>
 With these assumptions, we can reframe this problem mathematically. We&#8217;ll use lowercase letters for
 individuals, and uppercase letters for the global parameters. An individual test taker&#8217;s score is a
@@ -317,9 +321,9 @@ threshold? This might feel more reminiscent of the Bayesian statistics we did&nb
 </p>
 </div>
 </div>
-<div id="outline-container-orga325ee9" class="outline-3">
-<h3 id="orga325ee9">First Results: Cheating with&nbsp;Computers</h3>
-<div class="outline-text-3" id="text-orga325ee9">
+<div id="outline-container-org25d604b" class="outline-3">
+<h3 id="org25d604b">First Results: Cheating with&nbsp;Computers</h3>
+<div class="outline-text-3" id="text-org25d604b">
 <p>
 We&#8217;re going to analyze the math for this in more detail, later. But, for now, let&#8217;s do a basic
 estimate by just simulating a bunch of different tests and test takers with a computer. We&#8217;ll
@@ -342,9 +346,9 @@ scores against the first scores, where we also see a very strong&nbsp;correlatio
 </div>
 </div>
 
-<div id="outline-container-orgc792a39" class="outline-3">
-<h3 id="orgc792a39">How Does This Effect Work (Or&nbsp;Not)?</h3>
-<div class="outline-text-3" id="text-orgc792a39">
+<div id="outline-container-org4bc7a1e" class="outline-3">
+<h3 id="org4bc7a1e">How Does This Effect Work (Or&nbsp;Not)?</h3>
+<div class="outline-text-3" id="text-org4bc7a1e">
 <p>
 We can think of two distinct effects at play: a <i>selection effect</i> that makes the first-time
 qualifiers&#8217; \(\mu\) values higher on average, and a reverse <i>regression effect</i> that makes the random
@@ -378,9 +382,9 @@ regression to the mean is a small&nbsp;effect.
 </div>
 </div>
 
-<div id="outline-container-orga40163f" class="outline-2">
-<h2 id="orga40163f">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orga40163f">
+<div id="outline-container-orgc23e230" class="outline-2">
+<h2 id="orgc23e230">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgc23e230">
 <p>
 This is where I&#8217;ll stop for Part I: a breakdown of how regression to the mean actually functions,
 and perhaps some teasers as to how it might relate to Bayes&#8217; paradox. In the next post, I&#8217;ll break
