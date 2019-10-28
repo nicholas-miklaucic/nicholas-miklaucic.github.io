@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Analyzing why humans sometimes systematically fail at intuiting stats">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · Bayesian Fallacies, Part 1: Of Test Scores, Ski Jumps, and Diseases </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-1/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="prev" href="../hello-world/" title="Hello, World!" type="text/html">
+<link rel="next" href="../bayesian-fallacies-part-2-the-math-of-the-psat-math-section/" title="Bayesian Fallacies, Part 2: The Math of the PSAT Math Section" type="text/html">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2019         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Bayesian Fallacies, Part 1: Of Test Scores, Ski Jumps, and&nbsp;Diseases</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2019-10-23T14:17:52-04:00" itemprop="datePublished" title="2019-10-23 14:17">2019-10-23 14:17</time></span>
+        <meta name="description" itemprop="description" content="Analyzing why humans sometimes systematically fail at intuiting stats">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+In my intro psych class, we discussed two distinct <i>fallacies</i>: common systematic errors in how humans
+think. These are called <i>Bayes&#8217; Paradox</i> and <i>regression to the mean</i>. I will claim that both of these
+are really manifestations of the same underlying issue, and in actuality are mathematically the&nbsp;same.
+</p>
+
+<p>
+This is going to be pretty involved and pretty long, so I&#8217;ll be splitting it up into parts. The
+first part will just cover the basics of what these two fallacies are and provide a mathematical
+framework. After that I&#8217;ll be using computers to analyze the two, and then I&#8217;ll make the math behind
+what we&#8217;re doing more&nbsp;rigorous.
+</p>
+
+<!-- TEASER_END -->
+<p>
+Let&#8217;s start with Bayes&#8217; paradox and introduce some&nbsp;statistics!
+</p>
+
+<div id="outline-container-org9c5b35e" class="outline-2">
+<h2 id="org9c5b35e">Bayes&#8217;&nbsp;Paradox</h2>
+<div class="outline-text-2" id="text-org9c5b35e">
+<p>
+Bayes&#8217; paradox is usually presented like&nbsp;this:
+</p>
+
+<blockquote>
+<p>
+A rare genetic disease afflicts 1 in every 1000 people. Scientists have developed a test for the
+disease. If an individual has the disease, the test is 100% likely to return a positive
+result. However, if an individual does not have the disease, the test still has a 5% likelihood of
+returning a false positive result. You get tested and the result comes back positive. What is the
+chance of you actually having the&nbsp;disease?
+</p>
+</blockquote>
+<p>
+Most people will intuit that your chances are close to even: at the very least, you should be
+concerned. But the real result is somewhat counterintuitive. Imagine a group of 1000 people. One of
+them will have the disease on average, and that person will test positive. But, in the 999
+unafflicted people, almost 50 of them will have a false positive result. Therefore, in any group
+like this, there are around 51 people that test positive but only 1 of them has the disease. This
+makes your chance of actually having the disease, given a positive test result, at less than 2%!
+This disparity between what we&#8217;d expect and what actually happens is Bayes&#8217;&nbsp;paradox.
+</p>
+
+<p>
+It&#8217;s called Bayes&#8217; paradox because the mathematical framework for analyzing it comes from the famous
+<i>Bayes&#8217; theorem</i>. It essentially gives us a formula for solving problems like the above. Bayes&#8217;
+thfeorem states that, if you denote the chance of \(X\) being true as \(P(X)\) and the chance of \(X\)
+being true given the knowledge that \(Y\) is true as \(P(X|Y)\). Bayes&#8217; theorem gives a general formula
+for the conditional probability&nbsp;\(P(A|B)\):
+</p>
+
+<p>
+\[P(A|B) = \frac{P(B|A)&nbsp;P(A)}{P(B)}\]
+</p>
+
+<p>
+There&#8217;s a very interesting field, Bayesian statistics, built around using this formula, and I&#8217;ll be
+exploring that a little today to analyze these statistical problems. First, some more
+terminology. \(P(A)\) is the <i>prior</i> probability: how likely we think \(A\) is before we know anything
+else. \(\frac{P(B|A)}{P(B)}\) can be thought of as the strength of the link between \(B\) and \(A\). If
+\(P(B|A)\) is large compared to \(P(B)\), that means that without \(A\) being true \(B\) is much rarer, and
+so the fact that we know \(B\) is true gives strong evidence for&nbsp;\(A\).
+</p>
+
+<p>
+Just for fun, let&#8217;s compute the probability in that disease test example above. In that example, \(A\)
+is &#8220;you have the disease&#8221; and \(B\) is &#8220;you test positive&#8221;. \(P(B|A)\) is the sensitivity, which in this
+case is \(1\): the test never fails to detect a real instance of the disease. \(P(A)\) is the chance you
+have the disease without any knowledge of the test result. In this case, that&#8217;s
+\(\frac{1}{1000}\). \(P(B)\) can be decomposed into \(P(A) P(B|A) + P(\text{not } A) P(B|\text{not } A)\) using the laws of
+probability: \(P(A) P(B|A) = \frac{1}{1000}\) from earlier, but the second term is much bigger: it&#8217;s
+\(\frac{999}{1000} \times \frac{5}{100%}\). Putting everything together, we get that the final
+probability \(P(A|B)\) is \(\frac{.001}{.001 + .04995} \approx 0.0196\), or about&nbsp;2%.
+</p>
+
+<p>
+Note that, when you put it into this formula, you can see what terms cause this result to be
+small. Here, it&#8217;s that the high false positive rate is more important than the false negative rate,
+because the chance of you not having the disease is higher than you having it by a lot. If the test
+never had false positives but instead had a 5% false negative rate, that would be much more&nbsp;accurate.
+</p>
+
+<p>
+So, before we connect this to regression to the mean, what <i>is</i> regression to the&nbsp;mean?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org030f7e7" class="outline-2">
+<h2 id="org030f7e7">Regression to the&nbsp;Mean</h2>
+<div class="outline-text-2" id="text-org030f7e7">
+<p>
+<i>Regression to the mean</i> is the idea that being really successful or unsuccessful usually requires a
+fair bit of luck, and thus outlier results are likely to be followed by less unusual results as luck
+evens out. Daniel Kahneman, in his classic work <i>Thinking Fast and Slow</i>, describes regression to the
+mean with a useful example I will steal. In Olympic ski jump, competitors get two jumps and their
+score is summed. Kahneman noticed that commentators would predict that, after good jumps,
+competitors would get &#8220;tense&#8221; and do worse, and after a bad first jump competitors would relax and
+do better. There&#8217;s a much simpler explanation: if you had a good first jump, you probably did better
+than usual for your skill level, and so it&#8217;s reasonable that next time you&#8217;d do worse. Conversely,
+if you had bad mojo on the first jump, your mojo is likely to be better next&nbsp;time.
+</p>
+
+<p>
+This explains lots of sports-related phenomena. Another example is &#8220;sophomore slump&#8221;: the pattern
+that exceptional rookies often disappoint the next year. This can be explained partially by the fact
+that any truly exceptional rookie probably got a little help from Lady Luck, and so the next year is
+unlikely to have the same good&nbsp;fortune.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf51ad78" class="outline-2">
+<h2 id="orgf51ad78">Connecting The&nbsp;Dots</h2>
+<div class="outline-text-2" id="text-orgf51ad78">
+<p>
+These two thinking errors seem pretty different, but I&#8217;m going to argue that they&#8217;re both
+manifestations of the same underlying mathematical phenomenon. To do this, I&#8217;ll use a single
+detailed case study and show how we can think of the way mathematics contradicts our intuition using
+both&nbsp;ideas.
+</p>
+
+<p>
+There are lots of choices for this case study, but because I&#8217;m a college freshman in the US I&#8217;ll
+pick a specific example: PSAT scores and National Merit Semifinalist&nbsp;qualification.
+</p>
+</div>
+<div id="outline-container-orgfa3e1bd" class="outline-3">
+<h3 id="orgfa3e1bd">Background</h3>
+<div class="outline-text-3" id="text-orgfa3e1bd">
+<span class="marginnote"><p>
+</p>
+<p>
+Out of the 16,000 semifinalists, around 15,000 become finalists: you have to take a different test
+and write a short essay. I&#8217;m not going to continue making this distinction because &#8220;National Merit
+Semifinalist&#8221; is a lot more cumbersome than &#8220;National Merit&#8221;, and I&#8217;ll be saying that a lot. Plus,
+it&#8217;s my&nbsp;blog.
+</p>
+</span>
+
+<p>
+For those of you who are not recent US high school students, let me provide some background. In the
+US, the PSAT is a nationally-normed test administered every fall in most high schools across the
+country. It has two distinct purposes. Firstly, it prepares students for the SAT, the most important
+test for college admissions. Secondly, students in the top 16,000 test takers (allocated
+proportionally by state, so cutoffs differ depending on what school you go to) qualify for National
+Merit Semifinalist status (which I&#8217;ll shorten to just &#8220;National Merit&#8221;), which can lead to college
+scholarship money. We&#8217;ll be focusing on this function of the test, because it provides a natural
+example of the statistical environment that produces the phenomena discussed&nbsp;above.
+</p>
+
+<p>
+National Merit qualification has an interesting wrinkle: unlike the SAT or ACT, which most colleges
+encourage students to take as many times as they desire, a student <i>can only qualify for National</i>
+<i>Merit in the test administered their third year of high school, which is a single test date picked</i>
+<i>by their school.</i> This creates an interesting problem. For now, let&#8217;s pretend that PSAT scores don&#8217;t
+improve at all between sophomores and juniors: obviously this is false, but it&#8217;s a useful
+statistical cheat. Let&#8217;s also pretend that qualifying scores don&#8217;t change between years. Given these
+assumptions, let&#8217;s say a student takes the exam in 10th grade and gets a score that would qualify
+for National Merit if they were in 11th grade. <b>What are the chances that student, retaking the test</b>
+<b>next year, actually does qualify for National&nbsp;Merit?</b>
+</p>
+</div>
+</div>
+<div id="outline-container-org7f62661" class="outline-3">
+<h3 id="org7f62661">An Intuitive&nbsp;Understanding</h3>
+<div class="outline-text-3" id="text-org7f62661">
+<p>
+This problem feels like a classic case of regression to the mean. National Merit is a harsh cutoff:
+out of roughly 1.5 million eligible students who take it every year, only 16,000 qualify. That&#8217;s a
+little over 1%. Anyone who qualifies is likely to have had a good day and gotten lucky with what
+questions were asked. Given that, our intuition that the qualifiers on separate test administrations
+should heavily overlap is likely to be incorrect. We&#8217;ll put some hard numbers to this qualitative
+understanding and see how it holds&nbsp;up.
+</p>
+</div>
+</div>
+<div id="outline-container-org7ccdb2d" class="outline-3">
+<h3 id="org7ccdb2d">Clarifying&nbsp;Assumptions</h3>
+<div class="outline-text-3" id="text-org7ccdb2d">
+<p>
+Let&#8217;s do a couple things to make this problem easier to model mathematically. Let&#8217;s assume that each
+individual test taker&#8217;s scores have two components: a <i>mean performance</i> \(\mu\) that represents what
+their average performance would be across many different test administrations, and a
+normally-distributed <i>random variation</i> with standard deviation \(\sigma\) that accounts for all of the
+things that differ between different test administrations: different questions, how people are
+feeling,&nbsp;etc.
+</p>
+
+<p>
+You might wonder if PSAT scores really are normally distributed. Obviously this isn&#8217;t a perfect
+approximation (the actual scores have to be multiples of 10, if nothing else), but due to the way
+tests are normed and the beauty of the central limit theorem this is actually pretty good. Here&#8217;s a
+plot of a normal distribution against the actual percentiles from the past three&nbsp;years:
+</p>
+
+<p>
+<img src="../../images/psat-dist.png" alt="nil"></p>
+
+<p>
+Not bad,&nbsp;huh?
+</p>
+
+<p>
+The analysis doesn&#8217;t really depend on the exact choices of numbers, but because we&#8217;re using a case
+study from the real world let&#8217;s try and pin some ballpark figures down. The PSAT is scored on a
+scale between 320 and 1520. Although National Merit qualification uses a slightly different score,
+we&#8217;re going to stick with this one: our analysis won&#8217;t really change either way, and the raw PSAT
+score has more available data. The median score last year among juniors was 1000, which makes sense
+because 500 is the mean score that the PSAT and SAT are normed at. The mean score was 1014, and the
+standard deviation was 197. Note the distinction between the \(\sigma\) above, which is the variation
+<i>within a single individual</i> (alternatively, the error margins of the test as a measure of ability),
+and this standard deviation, which is the variability between different&nbsp;individuals.
+</p>
+
+<p>
+What&#8217;s a good ballpark for the individual variability \(\sigma\)? Some really interesting math can
+happen if you allow this to vary in between test takers, but this is already going to be long, so
+I&#8217;ll save that for another time and just set this as constant across test takers. The College Board,
+which administers the PSAT, gives the score range for any individual test as plus or minus 40
+points. If we assume that this is plus or minus two standard deviations, that gives us a standard
+deviation of 20 points, which is what we&#8217;ll use for&nbsp;now.
+</p>
+
+<span class="marginnote"><p>
+
+</p>
+<p>
+Astute readers might notice that our score distribution actually more variable than the original
+normal distribution because we added a second normal distribution on top of it, and so I should
+probably reduce the \(S\) value of 197 we used. For now, I&#8217;m not going to, because we&#8217;ll be messing
+around with these parameters soon enough. It isn&#8217;t a major&nbsp;effect.
+</p>
+
+</span>
+
+<p>
+One last thing we&#8217;ll do is use a clean nationwide 1% cutoff for National Merit: last year, this
+was 1460. This makes the math a lot easier, and it&#8217;s still the same underlying problem: the only
+thing that would change is the parameter values we set above. We&#8217;re interested in the abstract
+ideas, not anyone&#8217;s particular chances at National&nbsp;Merit.
+</p>
+</div>
+</div>
+<div id="outline-container-org694cd92" class="outline-3">
+<h3 id="org694cd92">A Mathematical&nbsp;Model</h3>
+<div class="outline-text-3" id="text-org694cd92">
+<p>
+With these assumptions, we can reframe this problem mathematically. We&#8217;ll use lowercase letters for
+individuals, and uppercase letters for the global parameters. An individual test taker&#8217;s score is a
+random variable \(s \sim N(\mu, \sigma)\), where \(\mu\) itself is distributed as \(\mu \sim N(M, S)\),
+which in this case is \(N(1014, 197)\). \(\sigma\), in this example, is&nbsp;\(20\). 
+</p>
+
+<p>
+We&#8217;re interested in a conditional probability question: <i>given</i> that a single score drawn with some
+fixed \(\mu\) is above \(1460\), what is the probability that a second score drawn with the same \(\mu\)
+is also above \(1460\), and how does that compare with the base 1% chance that any score hits the
+threshold? This might feel more reminiscent of the Bayesian statistics we did&nbsp;earlier.
+</p>
+</div>
+</div>
+<div id="outline-container-orga325ee9" class="outline-3">
+<h3 id="orga325ee9">First Results: Cheating with&nbsp;Computers</h3>
+<div class="outline-text-3" id="text-orga325ee9">
+<p>
+We&#8217;re going to analyze the math for this in more detail, later. But, for now, let&#8217;s do a basic
+estimate by just simulating a bunch of different tests and test takers with a computer. We&#8217;ll
+simulate 1.5 million different test takers, have each of them take two tests, and compare the
+distribution of the second scores from those who qualified the first time and the general&nbsp;population:
+</p>
+
+<p>
+<img src="../../images/psat-sim-1.png" alt="nil"></p>
+
+<p>
+86% of the simulated test takers who qualified the first time qualified the second, compared to
+about 1% of the general population. That&#8217;s a big difference! Why is this effect not as strong as
+other stories of regression to the mean? Another way of looking at the data is plotting the second
+scores against the first scores, where we also see a very strong&nbsp;correlation:
+</p>
+
+<p>
+<img src="../../images/psat-joint.png" alt="nil"></p>
+</div>
+</div>
+
+<div id="outline-container-orgc792a39" class="outline-3">
+<h3 id="orgc792a39">How Does This Effect Work (Or&nbsp;Not)?</h3>
+<div class="outline-text-3" id="text-orgc792a39">
+<p>
+We can think of two distinct effects at play: a <i>selection effect</i> that makes the first-time
+qualifiers&#8217; \(\mu\) values higher on average, and a reverse <i>regression effect</i> that makes the random
+variation on a second test administration unlikely to be as high as the first one. We can look at
+the \(\mu\) and random variations for both simulated test administrations to see this in
+action. First, the difference in \(\mu\) values showing the selection&nbsp;effect: 
+</p>
+
+<p>
+<img src="../../images/psat-mu.png" alt="nil"></p>
+
+<p>
+This effect is enormous, because it&#8217;s virtually impossible to get a 1460 without a mean score far
+above average, regardless of how lucky you&nbsp;get.
+</p>
+
+<p>
+<img src="../../images/psat-sigma-1.png" alt="nil"></p>
+
+<p>
+This graph shows the random variations from the qualifiers in the first test versus the general
+population. We can see a small difference, which is the regression effect: basically, the random
+variations for the first-time qualifiers on the second test administration should look like the
+lower graph instead of the higher one, and so there&#8217;s a slight decrease from the first scores. In
+our sample, this meant that the people who qualified on the first test had a 57% chance of scoring
+lower the second time: in this sense, regression to the mean is occurring. However, this effect
+clearly pales in comparison to the selection effect above, and so in this example we see that
+regression to the mean is a small&nbsp;effect.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga40163f" class="outline-2">
+<h2 id="orga40163f">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orga40163f">
+<p>
+This is where I&#8217;ll stop for Part I: a breakdown of how regression to the mean actually functions,
+and perhaps some teasers as to how it might relate to Bayes&#8217; paradox. In the next post, I&#8217;ll break
+down the math for this example and try and show how these effects function on a statistical&nbsp;level.
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
+      </p>
+
+            <div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                <a href="../hello-world/" rel="prev" title="Hello, World!">
+                Previous post
+                </a>
+            </span>
+
+
+            <span class="next pagination-item newer">
+                <a href="../bayesian-fallacies-part-2-the-math-of-the-psat-math-section/" rel="next" title="Bayesian Fallacies, Part 2: The Math of the PSAT Math Section">
+Next post
+              </a>
+            </span>
+
+        </div>
+
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>

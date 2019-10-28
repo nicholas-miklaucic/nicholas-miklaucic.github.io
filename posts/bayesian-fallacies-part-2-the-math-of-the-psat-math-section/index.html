@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Looking at the mathematics of Bayesian fallacies">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · Bayesian Fallacies, Part 2: The Math of the PSAT Math Section </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="prev" href="../bayesian-fallacies-part-1/" title="Bayesian Fallacies, Part 1: Of Test Scores, Ski Jumps, and Diseases" type="text/html">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2019         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Bayesian Fallacies, Part 2: The Math of the PSAT Math&nbsp;Section</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2019-10-27T20:18:00-04:00" itemprop="datePublished" title="2019-10-27 20:18">2019-10-27 20:18</time></span>
+        <meta name="description" itemprop="description" content="Looking at the mathematics of Bayesian fallacies">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+In the last episode, we introduced two thinking errors that often come up in statistics: Bayes&#8217;
+paradox and regression to the mean. I proposed that these errors are really two different
+manifestations of the same underlying phenomenon, but I haven&#8217;t done much to actually explain
+that. Let&#8217;s fix that&nbsp;now!
+</p>
+
+<!-- TEASER_END -->
+
+<div id="outline-container-org7956044" class="outline-2">
+<h2 id="org7956044">Breaking Out&nbsp;Bayes&#8217;</h2>
+<div class="outline-text-2" id="text-org7956044">
+<p>
+To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of PSAT test</b>
+<b>takers, what&#8217;s the chance they repeat that on a second administration?</b> We&#8217;re going to use Bayes&#8217;
+theorem to look at this mathematically. We&#8217;re also going to keep things abstract, so that we can plug
+this in for any scenario in which regression to the mean occurs. This will allow us to generalize
+later&nbsp;on.
+</p>
+
+<p>
+Using our mathematical terminology from last time: given that a first draw from a normal
+distribution \(N(\mu, \sigma)\), where \(\mu\) is itself drawn from a normal distribution \(N(M, S)\), is
+above a given threshold \(t\), what is the chance that a second draw does the&nbsp;same?
+</p>
+
+<p>
+When we have a <i>hidden variable</i> (the test-taker&#8217;s mean score \(\mu\)), in order to use Bayes&#8217; theorem
+effectively we essentially need to treat it as having an infinite number of discrete possibilities,
+consider the probability of our result given each possibility, and then sum them together: this is
+the same idea as saying that \(P(A) = P(A|B) + P(A|\text{not } B)\), just with an infinite number of&nbsp;possiblities. 
+</p>
+
+<p>
+So, let&#8217;s call the event &#8220;the second test is above the threshold&#8221; \(A\), and the event &#8220;the first test
+is above the threshold&#8221; \(B\). We want to find \(P(A|B)\). In order to do this, we&#8217;ll first solve this
+for a specific \(\mu\), and then sum up over all of the possibilities of \(\mu\) using calculus. (One
+note is that we&#8217;ll need to multiply each of these terms by the probability that \(\mu =&nbsp;m\).)
+</p>
+
+<p>
+To do this problem we&#8217;ll need to break it down a bit. Let&#8217;s call the given value of \(\mu\) \(m\). We
+start with \(B\): this means that the probability that \(\mu = m\) for any \(m\) is given by \(P(\mu =
+m|B)\), which we&#8217;ll need to compute. We can then multiply that by \(P(A|\mu = m)\) and sum up the
+product of those terms over all of the possibilities to get what we really want,&nbsp;\(P(A|B)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org47a35db" class="outline-2">
+<h2 id="org47a35db">A Stats&nbsp;Struggle</h2>
+<div class="outline-text-2" id="text-org47a35db">
+<p>
+Let&#8217;s start with \(P(A|\mu = m)\): the probability that, given a certain mean \(m\), the second test
+administration is a&nbsp;qualifier. 
+</p>
+
+<p>
+Unfortunately, this problem has no exact closed-form solution with elementary functions. It&#8217;s
+basically the CDF of the normal distribution that we need, which isn&#8217;t elementary. We&#8217;ll call this
+\(\Phi(x)\) so we can keep moving and worry about its calculation later. From this, we have \(P(A|\mu =
+m) = 1 - \Phi(\frac{t - m}{\sigma})\), where \(\Phi\) is the standard normal&nbsp;CDF.
+</p>
+
+<p>
+\(P(\mu = m|B)\) is a bit tougher to decompose. Here, we&#8217;re gonna use our old friend Bayes&#8217; Theorem,
+because the reverse of this is actually much easier to compute: we just did it! \(A\) and \(B\) are
+functionally the same if they&#8217;re not being conditioned on each other, so \(P(B|\mu = m) = 1 -
+\Phi(\frac{t - m}{\sigma})\) just like&nbsp;before. 
+</p>
+
+<p>
+Using Bayes&#8217; Theorem, we have \(P(\mu = m|B) = \frac{P(B|\mu = m) P(B)}{P(\mu = m)}\). We just did one
+of those terms, so now let&#8217;s tackle \(P(\mu = m)\). This problem is a bit simpler, because the PDF of
+the normal distribution (what we need here) <i>is</i> a composition of elementary functions: \(P(\mu = m) =
+\psi(m) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{M -&nbsp;m}{S}\right)^2}\).
+</p>
+
+<p>
+Now how do we tackle \(P(B)\)? Note that this is the same for all choices of \(m\): it&#8217;s essentially a
+scaling constant that makes this a legit probability. Depending on how we set \(t\), we might get this
+for free: if we design \(t\) to include, say, the top 1% of test takers, then \(P(B)\) is obviously
+\(0.01\). We can go in reverse if necessary, by doing an integral \(\int_{-\infty}^{\infty} P(\mu = m)
+P(B|\mu = m)\ dm\), but this is a double-not-nice expression: it&#8217;s an integral involving \(\Phi\), which we
+already don&#8217;t have a closed form for. However, because it is a constant, we only have to compute it
+once per&nbsp;problem.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdfe7fd4" class="outline-2">
+<h2 id="orgdfe7fd4">Computational&nbsp;Calculus</h2>
+<div class="outline-text-2" id="text-orgdfe7fd4">
+<p>
+So we finally have an…expression for \(P(\mu = m|B)\). It&#8217;s not nice to work with, or easy to
+compute by hand, but it is an expression, so we&#8217;ll leave it there for now. We already have \(P(A|\mu
+= m)\), so we can get one big giant expression for the probability we&#8217;re interested&nbsp;in.
+</p>
+
+<p>
+\[
+P(A|B) = \int_{m=-\infty}^{\infty} P(A|\mu = m) P(\mu = m|B) \ dm
+\]
+Decomposing the second term using Bayes&#8217; Theorem, we get
+\[
+P(A|B) = \int_{m=-\infty}^{\infty} P(A|\mu = m) \frac{P(B|\mu = m) P(\mu=m)}{P(B)} \ dm&nbsp;\]
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+<span class="dquo">&#8220;</span>Elementary function&#8221; is a little arbitrary of a standard, so don&#8217;t get too dismayed that we didn&#8217;t
+solve this problem in that way. A computer would use a numerical approximation technique to compute
+\(\sqrt{2}\), and it&#8217;ll use a numerical approximation technique to compute this function as
+well. Convention is the only reason why \(\log\) is elementary but \(\Phi\) isn&#8217;t: both aren&#8217;t going to
+be something you can do by&nbsp;hand. 
+</p>
+</span>
+<p>
+We know how to compute each of theses pieces, so we can now theoretically compute this probability
+directly (without sampling like we did earlier), using a computer to handle the tricky integrals. We
+can&#8217;t get a closed form, but this is good enough for our purposes. This is a great time to take a
+step back and try and do something a bit more concrete after all of this math, so let&#8217;s apply this
+to our running example and compare it with what we simulated last time. We&#8217;ll use the following
+parameter values, the same as&nbsp;before:
+</p>
+<ul class="org-ul">
+<li>Our threshold \(t\), will be&nbsp;\(1460\).</li>
+<li>Our mean score in total \(M\) will be \(1014\) as before, and our standard deviation of the test
+takers&#8217; means \(\mu\) \(S\) will be \(197\). This means that the actual test scores are the tiniest bit
+more spread out than this, historically, but not enough to make a major&nbsp;difference.</li>
+<li>\(\sigma\), the individual variance of each test-taker, is going to be&nbsp;\(20\).</li>
+</ul>
+<p>
+Let&#8217;s compute \(P(B)\) first, by simply running the integral through a computer and seeing what comes
+outlier. In this case, we get \(0.0119\): decently close to the actual percentage of National Merit
+winners. Now that we can treat this as a constant, we can compute the remaining integral and solve
+the&nbsp;problem.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7ff58da" class="outline-2">
+<h2 id="org7ff58da">Pretty&nbsp;Pictures</h2>
+<div class="outline-text-2" id="text-org7ff58da">
+<p>
+I don&#8217;t want to just do this and tell you the answer, because that&#8217;s not really all that much fun on
+your end. Let&#8217;s break out some visuals&nbsp;instead! 
+</p>
+
+<p>
+This is the <i>prior distribution</i> of \(\mu\), before we actually learn anything: just a nice bell&nbsp;curve:
+</p>
+
+<p>
+<img src="../../images/psat-prior-mu.png" alt="nil"></p>
+
+<p>
+Then, we are given that \(B\) happens: the individual gets above the threshold. How likely is it that,
+given any particular value of \(\mu\), \(B\)&nbsp;happens?
+</p>
+
+<p>
+<img src="../../images/psat-b-of-mu.png" alt="nil"></p>
+
+<p>
+This is just a straight pointwise multiplication of the last two graphs: if you don&#8217;t believe me,
+pick a \(\mu\) value and try it yourself. This represents the intuition that people who are better
+test-takers on average are more likely to qualify. Note how sharp the cutoff is: this is because the
+standard deviation of any given test taker, \(\sigma\), is \(20\), which is tiny compared to the huge
+\(197\) standard deviation of \(\mu\). Even a test taker \(50\) points away from the cutoff on average has
+to have an amazing day to&nbsp;qualify.
+</p>
+
+<p>
+To get the probability of \(\mu\) being any particular value given \(B\), we can use Bayes&#8217; theorem:
+multiply these together and divide by \(P(B)\) so everything adds up to what it should. This is called
+the <i>posterior distribution</i>: the new distribution using our given&nbsp;information.
+</p>
+
+<p>
+<img src="../../images/psat-posterior-mu.png" alt="nil"></p>
+
+<p>
+We can plot the prior and posterior together to show the effect of our&nbsp;knowledge:
+</p>
+
+<p>
+<img src="../../images/psat-prior-and-posterior.png" alt="nil"></p>
+
+<p>
+This is pretty cool when you think about it: by using Bayesian statistics, we can quantify something
+that you really don&#8217;t think of in the same way in standard high school stats—the effect of learning
+something new. By getting the knowledge that a test taker qualified, we can model the <i>selection
+effect</i> I described last time and we now know more about how good at the PSAT they&#8217;re likely to&nbsp;be.
+</p>
+
+<p>
+We&#8217;re almost there! Now, the probability of \(A\) given some \(\mu\) is the same as the sharp
+distribution we graphed earlier for&nbsp;\(B\). 
+</p>
+
+<p>
+<img src="../../images/psat-a-of-mu.png" alt="nil"></p>
+
+<p>
+But now, instead of using the prior distribution of \(\mu\), we&#8217;re going to multiply this by the
+<i>posterior</i> distribution of \(mu\). This, in essence, allows us to factor in our prior knowledge about
+\(B\) to make better guesses about&nbsp;\(A\).
+</p>
+
+<p>
+<img src="../../images/psat-a-given-b-of-mu.png" alt="nil"></p>
+
+<p>
+Let&#8217;s compare this with the posterior probability of \(\mu\) and change the axes to give us a little
+more breathing&nbsp;room:
+</p>
+
+<p>
+<img src="../../images/psat-a-and-b-plus-posterior.png" alt="nil"></p>
+
+<p>
+This chart is really important: let&#8217;s pause a second and go over it. The lighter shade of purple is
+the <i>posterior</i> distribution of \(\mu\), given \(B\). It&#8217;s the probability that \(\mu\) is any specific
+value, given that the first test administration qualified for National Merit. The darker purple
+inside of that region adds one more qualifier: what&#8217;s the probability the test-taker has that value
+of \(\mu\) <i>and that they qualified a second time?</i> The ratio at any given value of \(\mu\) on the
+x-axis of the heights of the two curves gives the probability that a test-taker with that \(\mu\)
+value qualifies on the second&nbsp;administration.
+</p>
+
+<p>
+Let&#8217;s look at two values to make this more concrete. At \(\mu = 1400\), there&#8217;s the tiniest chance
+that you got extraordinarily lucky and qualified the first time: the chance you got that lucky was
+low, but it&#8217;s possible, especially given that there are more test takers with this value for \(\mu\)
+than there are for higher values. However, the cutoff is applied not once, but twice: this is the
+killer. The chance that lightning strikes twice and that you qualify a second time is virtually
+nothing, and so anyone in this group is likely to be part of the population that regresses: they got
+lucky once, but they probably won&#8217;t get lucky again. This is the <i>regression effect</i> at work. At \(\mu
+= 1500\), it&#8217;s extremely unlikely you had that \(\mu\) value to begin with, but if you are that good at
+the test you&#8217;re likely to qualify the first time. (In fact, it&#8217;s so much more likely that, even
+though having a \(\mu\) value of 1500 is way less likely overall, the population of people that
+qualify are far more likely to have this value of \(\mu\) than \(1400\).) However, unlike at \(1400\),
+you&#8217;re also likely to qualify a second time!  This is the <i>selection effect</i> at work. This is why the
+two curves have almost the same height: given that you got there, you&#8217;re likely to go the&nbsp;distance.
+</p>
+
+<p>
+Now, to get the final probability and compare with last time, we just have to compute the ratio of
+these shaded areas. Note that the outside shaded area has to add up to \(1\): given \(B\), \(\mu\) has to
+be <i>something</i>. (This is why we divided by \(P(B)\) earlier: we wanted the area of this curve to be
+\(1\). We actually want to learn what \(P(A)\) is now, so we care about it&#8217;s unscaled area.) Thus we
+really just care about integrating the inner curve. Doing that, we get a final probability of about
+\(P(A|B) = 0.87022\), or 87%. This matches up very well with our simulated results from last time,
+which gives us some confidence we didn&#8217;t mess anything up along the&nbsp;way.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2a18cd8" class="outline-2">
+<h2 id="org2a18cd8">Next Time On <i>Bayesian Fallacies</i>…</h2>
+<div class="outline-text-2" id="text-org2a18cd8">
+<p>
+What was the point of all this again? Although we didn&#8217;t succeed in getting an exact closed form for
+\(P(A|B)\) given \(M, S, t\), and \(\sigma\), we did get an expression that a computer can easily evaluate
+for us in no time flat, to a higher degree of precision than simulations can&nbsp;provide.
+</p>
+
+<p>
+The reason I wanted to do this in the first place was so we could explore what happens when we
+change the parameters. What about the way the PSAT example is set up makes it not display a large
+regression effect? If the National Merit cutoff were harsher or more lenient, how would \(P(A|B)\)
+change? Next time, we&#8217;ll explore how \(P(A|B)\) changes as a function of $M, S, t,$ and \(\sigma\), and
+we&#8217;ll finally answer the question of how this relates to Bayes&#8217; paradox and get some powerful ways
+of visualizing the effect of regression to the mean in problems outside of standardized&nbsp;tests.
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                <a href="../bayesian-fallacies-part-1/" rel="prev" title="Bayesian Fallacies, Part 1: Of Test Scores, Ski Jumps, and Diseases">
+                Previous post
+                </a>
+            </span>
+
+
+            <span class="next pagination-item newer">
+Next post
+            </span>
+
+        </div>
+
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>

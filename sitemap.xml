@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2019-09-23T23:47:00Z</lastmod>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
@@ -27,11 +27,15 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/</loc>
-  <lastmod>2019-08-03T01:50:00Z</lastmod>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/algorithms/</loc>
   <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_math/</loc>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_meta/</loc>
@@ -40,6 +44,14 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cs/</loc>
   <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/dataviz/</loc>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/math/</loc>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/meta/</loc>
@@ -124,6 +136,18 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/theming/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-1-of-test-scores-ski-jumps-and-diseases/</loc>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-1/</loc>
+  <lastmod>2019-10-23T18:22:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/</loc>
+  <lastmod>2019-10-28T01:08:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/hello-world/</loc>
