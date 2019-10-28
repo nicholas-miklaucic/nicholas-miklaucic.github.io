@@ -63,9 +63,9 @@ why. This post will lay the mathematical groundwork for that&nbsp;explanation!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-orgc397019" class="outline-2">
-<h2 id="orgc397019">Breaking Out&nbsp;Bayes&#8217;</h2>
-<div class="outline-text-2" id="text-orgc397019">
+<div id="outline-container-orgbd1179e" class="outline-2">
+<h2 id="orgbd1179e">Breaking Out&nbsp;Bayes&#8217;</h2>
+<div class="outline-text-2" id="text-orgbd1179e">
 <p>
 To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of PSAT test</b>
 <b>takers, what&#8217;s the chance they repeat that on a second administration?</b> We&#8217;re going to use Bayes&#8217;
@@ -103,9 +103,9 @@ product of those terms over all of the possibilities to get what we really want,
 </div>
 </div>
 
-<div id="outline-container-orgcad4d69" class="outline-2">
-<h2 id="orgcad4d69">A Stats&nbsp;Struggle</h2>
-<div class="outline-text-2" id="text-orgcad4d69">
+<div id="outline-container-org62538e2" class="outline-2">
+<h2 id="org62538e2">A Stats&nbsp;Struggle</h2>
+<div class="outline-text-2" id="text-org62538e2">
 <p>
 Let&#8217;s start with \(P(A|\mu = m)\): the probability that, given a certain mean \(m\), the second test
 administration is a&nbsp;qualifier. 
@@ -136,16 +136,18 @@ the normal distribution (what we need here) <i>is</i> a composition of elementar
 Now how do we tackle \(P(B)\)? Note that this is the same for all choices of \(m\): it&#8217;s essentially a
 scaling constant that makes this a legit probability. Depending on how we set \(t\), we might get this
 for free: if we design \(t\) to include, say, the top 1% of test takers, then \(P(B)\) is obviously
-\(0.01\). 
-already don&#8217;t have a closed form for. However, because it is a constant, we only have to compute it
-once per&nbsp;problem.
+\(0.01\). Because the sum of two normal distributions (i.e., the final distribution of test scores in
+our model) is itself normal, this probability is also an application of \(\Phi\): \(P(B) = 1 -
+\Phi(\frac{t - M}{\sqrt{S^2 + \sigma^2}})\). We already don&#8217;t have a nice closed form for expressions
+like these, so we can&#8217;t do anything more than this. However, because it is a constant, we only have
+to compute it once per&nbsp;problem.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1ac323a" class="outline-2">
-<h2 id="org1ac323a">Computational&nbsp;Calculus</h2>
-<div class="outline-text-2" id="text-org1ac323a">
+<div id="outline-container-org97dc103" class="outline-2">
+<h2 id="org97dc103">Computational&nbsp;Calculus</h2>
+<div class="outline-text-2" id="text-org97dc103">
 <p>
 So we finally have an…expression for \(P(\mu = m|B)\). It&#8217;s not nice to work with, or easy to
 compute by hand, but it is an expression, so we&#8217;ll leave it there for now. We already have \(P(A|\mu
@@ -187,17 +189,17 @@ scores almost exactly \(197\), which is the historical&nbsp;value.</li>
 <li>\(\sigma\), the individual variance of each test-taker, is going to be&nbsp;\(20\).</li>
 </ul>
 <p>
-Let&#8217;s compute \(P(B)\) first, by simply running the integral through a computer and seeing what comes
-outlier. In this case, we get \(0.0119\): decently close to the actual percentage of National Merit
-winners. Now that we can treat this as a constant, we can compute the remaining integral and solve
-the&nbsp;problem.
+Let&#8217;s compute \(P(B)\) first: in this case, we get \(0.0117\). This is decently close to the actual
+percentage of National Merit winners, which indicates that my abstractions haven&#8217;t completely
+severed this example from reality. Now that we can treat this as a constant, we can compute the
+remaining integral and solve the&nbsp;problem.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8518190" class="outline-2">
-<h2 id="org8518190">Pretty&nbsp;Pictures</h2>
-<div class="outline-text-2" id="text-org8518190">
+<div id="outline-container-orgfdc5c5e" class="outline-2">
+<h2 id="orgfdc5c5e">Pretty&nbsp;Pictures</h2>
+<div class="outline-text-2" id="text-orgfdc5c5e">
 <p>
 I don&#8217;t want to just do this and tell you the answer, because that&#8217;s not really all that much fun on
 your end. Let&#8217;s break out some visuals&nbsp;instead! 
@@ -320,10 +322,9 @@ which gives us some confidence we didn&#8217;t mess anything up along the&nbsp;w
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgbd36346" class="outline-2">
-<h2 id="orgbd36346">Next Time On <i>Bayesian Fallacies</i>…</h2>
-<div class="outline-text-2" id="text-orgbd36346">
+<div id="outline-container-org970f83d" class="outline-2">
+<h2 id="org970f83d">Next Time On <i>Bayesian Fallacies</i>…</h2>
+<div class="outline-text-2" id="text-org970f83d">
 <p>
 What was the point of all this again? Although we didn&#8217;t succeed in getting an exact closed form for
 \(P(A|B)\) given \(M, S, t\), and \(\sigma\), we did get an expression that a computer can easily evaluate
