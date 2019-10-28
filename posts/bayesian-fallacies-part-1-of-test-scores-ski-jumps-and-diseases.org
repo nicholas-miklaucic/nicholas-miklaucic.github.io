@@ -149,6 +149,13 @@ plot of a normal distribution against the actual percentiles from the past three
 
 Not bad, huh?
 
+What's a good ballpark for the individual variability $\sigma$? Some really interesting math can
+happen if you allow this to vary between test takers, but this is already going to be long, so
+I'll save that for another time and just set this as constant across test takers. The College Board,
+which administers the PSAT, gives the score range for any individual test as plus or minus 40
+points. If we assume that this is plus or minus two standard deviations, that gives us a standard
+deviation of 20 points, which is what we'll use for now.
+
 The analysis doesn't really depend on the exact choices of numbers, but because we're using a case
 study from the real world let's try and pin some ballpark figures down. The PSAT is scored on a
 scale between 320 and 1520. Although National Merit qualification uses a slightly different score,
@@ -159,20 +166,18 @@ standard deviation was 197. Note the distinction between the $\sigma$ above, whi
 /within a single individual/ (alternatively, the error margins of the test as a measure of ability),
 and this standard deviation, which is the variability between different individuals.
 
-What's a good ballpark for the individual variability $\sigma$? Some really interesting math can
-happen if you allow this to vary between test takers, but this is already going to be long, so
-I'll save that for another time and just set this as constant across test takers. The College Board,
-which administers the PSAT, gives the score range for any individual test as plus or minus 40
-points. If we assume that this is plus or minus two standard deviations, that gives us a standard
-deviation of 20 points, which is what we'll use for now.
+An astute reader might notice that combining two normal distributions, one with standard deviation
+$20$ and one with standard deviation $197$, will actually produce a normal distribution with a
+larger variance than just the one normal distribution with $\sigma = 197$. The formula for this
+behavior is that the standard deviation of the combined distribution is the geometric mean of the
+two original standard deviations: the variances add. So, in order to get a test score distribution
+that's $197$, we need to find the $S$ such that $S^2 + 20^2 + 197^2$. Solving this gives us
+$195.98$, which I'll just approximate as $S = 196$.
 
 {{{mn}}}
-
-Astute readers might notice that our score distribution actually more variable than the original
-normal distribution because we added a second normal distribution on top of it, and so I should
-probably reduce the $S$ value of 197 we used. For now, I'm not going to, because we'll be messing
-around with these parameters soon enough. It isn't a major effect.
-
+National Merit actually multiplies your verbal score by 2 (to better represents the SAT's split of
+reading-writing-math), adds it to your math score, and divides by 10 to get the score you use for
+qualification. This wrinkle doesn't really make the math more interesting, so I'll skip it.
 {{{mn-end}}}
 
 One last thing we'll do is use a clean nationwide 1% cutoff for National Merit: last year, this
@@ -183,7 +188,7 @@ ideas, not anyone's particular chances at National Merit.
 With these assumptions, we can reframe this problem mathematically. We'll use lowercase letters for
 individuals, and uppercase letters for the global parameters. An individual test taker's score is a
 random variable $s \sim N(\mu, \sigma)$, where $\mu$ itself is distributed as $\mu \sim N(M, S)$,
-which in this case is $N(1014, 197)$. $\sigma$, in this example, is $20$. 
+which in this case is $N(1014, 196)$. $\sigma$, in this example, is $20$. 
 
 We're interested in a conditional probability question: /given/ that a single score drawn with some
 fixed $\mu$ is above $1460$, what is the probability that a second score drawn with the same $\mu$
