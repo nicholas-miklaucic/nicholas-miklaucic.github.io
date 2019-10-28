@@ -2,6 +2,31 @@
 
 import time
 
+# Filters to apply to the output.
+# A directory where the keys are either: a file extensions, or
+# a tuple of file extensions.
+#
+# And the value is a list of commands to be applied in order.
+#
+# Each command must be either:
+#
+# A string containing a '%s' which will
+# be replaced with a filename. The command *must* produce output
+# in place.
+#
+# Or:
+#
+# A python callable, which will be called with the filename as
+# argument.
+#
+# By default, only .php files uses filters to inject PHP into
+# Nikola’s templates. All other filters must be enabled through FILTERS.
+#
+# Many filters are shipped with Nikola. A list is available in the manual:
+# <https://getnikola.com/handbook.html#post-processing-filters>
+#
+from nikola import filters
+
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
 
@@ -653,32 +678,11 @@ GITHUB_COMMIT_SOURCE = True
 # default: 'cache'
 # CACHE_FOLDER = 'cache'
 
-# Filters to apply to the output.
-# A directory where the keys are either: a file extensions, or
-# a tuple of file extensions.
-#
-# And the value is a list of commands to be applied in order.
-#
-# Each command must be either:
-#
-# A string containing a '%s' which will
-# be replaced with a filename. The command *must* produce output
-# in place.
-#
-# Or:
-#
-# A python callable, which will be called with the filename as
-# argument.
-#
-# By default, only .php files uses filters to inject PHP into
-# Nikola’s templates. All other filters must be enabled through FILTERS.
-#
-# Many filters are shipped with Nikola. A list is available in the manual:
-# <https://getnikola.com/handbook.html#post-processing-filters>
-#
-from nikola import filters
 FILTERS = {
    ".html": [filters.typogrify],
+    ".css": [filters.yui_compressor],
+    ".js": [filters.yui_compressor],
+    ".png": [filters.optipng],
 }
 
 # Executable for the "yui_compressor" filter (defaults to 'yui-compressor').
