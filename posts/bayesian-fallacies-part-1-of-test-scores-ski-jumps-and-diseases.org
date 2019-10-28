@@ -3,7 +3,7 @@
 .. slug: bayesian-fallacies-part-1
 .. date: 2019-10-23 14:17:52 UTC-04:00
 .. tags: math, dataviz
-.. category: math
+.. category: bayesian-fallacies
 .. link: 
 .. description: Analyzing why humans sometimes systematically fail at intuiting stats
 .. type: text
@@ -76,12 +76,15 @@ So, before we connect this to regression to the mean, what /is/ regression to th
 /Regression to the mean/ is the idea that being really successful or unsuccessful usually requires a
 fair bit of luck, and thus outlier results are likely to be followed by less unusual results as luck
 evens out. Daniel Kahneman, in his classic work /Thinking Fast and Slow/, describes regression to the
-mean with a useful example I will steal. In Olympic ski jump, competitors get two jumps and their
-score is summed. Kahneman noticed that commentators would predict that, after good jumps,
-competitors would get "tense" and do worse, and after a bad first jump competitors would relax and
-do better. There's a much simpler explanation: if you had a good first jump, you probably did better
-than usual for your skill level, and so it's reasonable that next time you'd do worse. Conversely,
-if you had bad mojo on the first jump, your mojo is likely to be better next time.
+mean with a useful example I will steal. 
+
+In Olympic ski jump, competitors get two jumps and their score is summed. Kahneman noticed that
+commentators would predict that, after good jumps, competitors would get "tense" and do worse, and
+after a bad first jump competitors would relax and do better. The result, performances that even
+out, is real, but there's a much simpler explanation: if you had a good first jump, you probably did
+better than usual for your skill level, and so it's reasonable that next time you'd do
+worse. Conversely, if you had bad mojo on the first jump, your mojo is likely to be better next
+time.
 
 This explains lots of sports-related phenomena. Another example is "sophomore slump": the pattern
 that exceptional rookies often disappoint the next year. This can be explained partially by the fact

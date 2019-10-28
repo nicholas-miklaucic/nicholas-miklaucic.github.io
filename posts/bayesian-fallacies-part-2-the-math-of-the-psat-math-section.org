@@ -3,7 +3,7 @@
 .. slug: bayesian-fallacies-part-2-the-math-of-the-psat-math-section
 .. date: 2019-10-27 20:18:00 UTC-04:00
 .. tags: math, dataviz
-.. category: math
+.. category: bayesian-fallacies
 .. link: 
 .. description: Looking at the mathematics of Bayesian fallacies
 .. type: text
