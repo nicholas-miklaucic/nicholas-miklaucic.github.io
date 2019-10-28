@@ -65,9 +65,11 @@ the normal distribution (what we need here) /is/ a composition of elementary fun
 Now how do we tackle $P(B)$? Note that this is the same for all choices of $m$: it's essentially a
 scaling constant that makes this a legit probability. Depending on how we set $t$, we might get this
 for free: if we design $t$ to include, say, the top 1% of test takers, then $P(B)$ is obviously
-$0.01$. 
-already don't have a closed form for. However, because it is a constant, we only have to compute it
-once per problem.
+$0.01$. Because the sum of two normal distributions (i.e., the final distribution of test scores in
+our model) is itself normal, this probability is also an application of $\Phi$: $P(B) = 1 -
+\Phi(\frac{t - M}{\sqrt{S^2 + \sigma^2}})$. We already don't have a nice closed form for expressions
+like these, so we can't do anything more than this. However, because it is a constant, we only have
+to compute it once per problem.
 
 * Computational Calculus
 So we finally have an...expression for $P(\mu = m|B)$. It's not nice to work with, or easy to
@@ -101,10 +103,10 @@ parameter values, the same as before:
    scores almost exactly $197$, which is the historical value.
  - $\sigma$, the individual variance of each test-taker, is going to be $20$.
 
-Let's compute $P(B)$ first, by simply running the integral through a computer and seeing what comes
-outlier. In this case, we get $0.0119$: decently close to the actual percentage of National Merit
-winners. Now that we can treat this as a constant, we can compute the remaining integral and solve
-the problem.
+Let's compute $P(B)$ first: in this case, we get $0.0117$. This is decently close to the actual
+percentage of National Merit winners, which indicates that my abstractions haven't completely
+severed this example from reality. Now that we can treat this as a constant, we can compute the
+remaining integral and solve the problem.
 
 * Pretty Pictures
 
@@ -192,7 +194,6 @@ $1$. We actually want to learn what $P(A)$ is now, so we care about it's unscale
 really just care about integrating the inner curve. Doing that, we get a final probability of about
 $P(A|B) = 0.8511$, or 85%. This matches up very well with our simulated results from last time,
 which gives us some confidence we didn't mess anything up along the way.
-
 * Next Time On /Bayesian Fallacies/...
 What was the point of all this again? Although we didn't succeed in getting an exact closed form for
 $P(A|B)$ given $M, S, t$, and $\sigma$, we did get an expression that a computer can easily evaluate
