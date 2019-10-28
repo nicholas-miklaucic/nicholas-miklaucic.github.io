@@ -12,7 +12,7 @@ n.. tags: math, dataviz
 In the last episode, we introduced two thinking errors that often come up in statistics: Bayes'
 paradox and regression to the mean. I proposed that these errors are really two different
 manifestations of the same underlying phenomenon, but I haven't done much to actually explain
-that. Let's fix that now!
+why. This post will lay the mathematical groundwork for that explanation!
 
 {{{TEASER_END}}}
 

@@ -58,14 +58,14 @@
 In the last episode, we introduced two thinking errors that often come up in statistics: Bayes&#8217;
 paradox and regression to the mean. I proposed that these errors are really two different
 manifestations of the same underlying phenomenon, but I haven&#8217;t done much to actually explain
-that. Let&#8217;s fix that&nbsp;now!
+why. This post will lay the mathematical groundwork for that&nbsp;explanation!
 </p>
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org7956044" class="outline-2">
-<h2 id="org7956044">Breaking Out&nbsp;Bayes&#8217;</h2>
-<div class="outline-text-2" id="text-org7956044">
+<div id="outline-container-org6fa3dbb" class="outline-2">
+<h2 id="org6fa3dbb">Breaking Out&nbsp;Bayes&#8217;</h2>
+<div class="outline-text-2" id="text-org6fa3dbb">
 <p>
 To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of PSAT test</b>
 <b>takers, what&#8217;s the chance they repeat that on a second administration?</b> We&#8217;re going to use Bayes&#8217;
@@ -103,9 +103,9 @@ product of those terms over all of the possibilities to get what we really want,
 </div>
 </div>
 
-<div id="outline-container-org47a35db" class="outline-2">
-<h2 id="org47a35db">A Stats&nbsp;Struggle</h2>
-<div class="outline-text-2" id="text-org47a35db">
+<div id="outline-container-orge3a1afc" class="outline-2">
+<h2 id="orge3a1afc">A Stats&nbsp;Struggle</h2>
+<div class="outline-text-2" id="text-orge3a1afc">
 <p>
 Let&#8217;s start with \(P(A|\mu = m)\): the probability that, given a certain mean \(m\), the second test
 administration is a&nbsp;qualifier. 
@@ -144,9 +144,9 @@ once per&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-orgdfe7fd4" class="outline-2">
-<h2 id="orgdfe7fd4">Computational&nbsp;Calculus</h2>
-<div class="outline-text-2" id="text-orgdfe7fd4">
+<div id="outline-container-org9d67541" class="outline-2">
+<h2 id="org9d67541">Computational&nbsp;Calculus</h2>
+<div class="outline-text-2" id="text-org9d67541">
 <p>
 So we finally have an…expression for \(P(\mu = m|B)\). It&#8217;s not nice to work with, or easy to
 compute by hand, but it is an expression, so we&#8217;ll leave it there for now. We already have \(P(A|\mu
@@ -196,9 +196,9 @@ the&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-org7ff58da" class="outline-2">
-<h2 id="org7ff58da">Pretty&nbsp;Pictures</h2>
-<div class="outline-text-2" id="text-org7ff58da">
+<div id="outline-container-orgbd61323" class="outline-2">
+<h2 id="orgbd61323">Pretty&nbsp;Pictures</h2>
+<div class="outline-text-2" id="text-orgbd61323">
 <p>
 I don&#8217;t want to just do this and tell you the answer, because that&#8217;s not really all that much fun on
 your end. Let&#8217;s break out some visuals&nbsp;instead! 
@@ -314,9 +314,9 @@ which gives us some confidence we didn&#8217;t mess anything up along the&nbsp;w
 </div>
 </div>
 
-<div id="outline-container-org2a18cd8" class="outline-2">
-<h2 id="org2a18cd8">Next Time On <i>Bayesian Fallacies</i>…</h2>
-<div class="outline-text-2" id="text-org2a18cd8">
+<div id="outline-container-org1e5ed2f" class="outline-2">
+<h2 id="org1e5ed2f">Next Time On <i>Bayesian Fallacies</i>…</h2>
+<div class="outline-text-2" id="text-org1e5ed2f">
 <p>
 What was the point of all this again? Although we didn&#8217;t succeed in getting an exact closed form for
 \(P(A|B)\) given \(M, S, t\), and \(\sigma\), we did get an expression that a computer can easily evaluate
