@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Putting the Bayesian stats all together">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · Bayesian Fallacies, Part 3: Putting It All Together </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-3-putting-it-all-together/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<meta name="robots" content="noindex">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2019         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Bayesian Fallacies, Part 3: Putting It All&nbsp;Together</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2019-10-28T13:15:10-04:00" itemprop="datePublished" title="2019-10-28 13:15">2019-10-28 13:15</time></span>
+        <meta name="description" itemprop="description" content="Putting the Bayesian stats all together">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+Last time, we did a thorough mathematical analysis of our running PSAT test score problem, and got
+some sense of why it doesn&#8217;t exhibit a strong regression to the mean effect. This time, we&#8217;ll
+generalize the problem completely and examine it in other contexts. We&#8217;ll bookend it by connecting
+it to Bayes&#8217; paradox, something I promised in the first post but haven&#8217;t done&nbsp;yet.
+</p>
+
+<!-- TEASER_END -->
+
+<div id="outline-container-org50b1277" class="outline-2">
+<h2 id="org50b1277">Dimensional Analysis and&nbsp;Reframing</h2>
+<div class="outline-text-2" id="text-org50b1277">
+<p>
+Let&#8217;s zoom out. How can we frame this problem in a way that lets us apply this math to any example
+of the effect? In particular, consider \(P(A|B)\) as a function of \(M, S, \sigma\), and \(t\). What can
+we say about this complicated&nbsp;function? 
+</p>
+
+<p>
+What if I told you that a powerful technique to attack problems like was introduced to me in a fluid
+mechanics class, not in math or statistics? We&#8217;re going to steal an elegant approach from physics:
+<i>dimensional analysis</i>, a way of reasoning about systems or models in a way that can be&nbsp;generalized.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+This is a large subject, and my rudimentary fluid mechanics background is not enough for me to delve
+too much deeper into this rabbit-hole. Basically, it&#8217;s a cool idea. The application we&#8217;re going to
+be dealing with is a particularly easy version, so it won&#8217;t be nearly as difficult as working with
+the Reynolds number or the Buckingham \(\pi\) theorem or something&nbsp;crazy.
+</p>
+</span>
+
+<p>
+Basically, any property of a model or system that&#8217;s dimensionless must therefore be comparable
+across different realizations of that model or system. Thus, combining parameters with a dimension
+into a dimensionless form is a powerful way of abstracting problems. A classic example is the period
+of oscillation of a mass attached to a spring: given the mass \(M\), the restoring force constant \(k\),
+the period \(T\), and gravity acceleration \(g\), there is only one combination of these that give a
+dimensionless constant, \(T^2 km^-1\). Note that \(g\) doesn&#8217;t appear here. This means that, without
+knowing any laws of physics besides the units of all of these parameters, we can conclude that the
+period of a spring doesn&#8217;t depend on the gravity of its&nbsp;environment!
+</p>
+
+<p>
+This is an incredibly powerful technique, and fantastically useful for making models. If you want to
+simulate the water around a cruise ship in your bathub, matching the dimensionless quantities
+involved will make sure your liquid behaves the exact same way, even though all of the dimensional
+quantities may be completely&nbsp;different.
+</p>
+
+<p>
+You might object that we haven&#8217;t been <i>using</i> any dimensions. How can we cancel dimensions that don&#8217;t&nbsp;exist? 
+</p>
+
+<p>
+My answer is that they&#8217;ve been there the whole time: I just haven&#8217;t been talking about them! PSAT
+points <i>is</i> a dimension of this problem, with all of the rules that mass or length have: we&#8217;ll use \(p\)
+as a shorthand to mirror \(m\) or \(s\) or \(^\circ C\) in physics. The reason I haven&#8217;t needed to talk
+about it is because all of these parameters have the same dimension: \(p\). This means that we can
+combined them and never need to worry about creating formulas that don&#8217;t work
+dimensionally. However, it will guide us in abstracting this problem now. How can we mess around
+with our <i>parameter space</i> to make the problem easier to generalize outside of PSAT&nbsp;points?
+</p>
+
+<p>
+First things first: \(M\) doesn&#8217;t really count as a parameter because it doesn&#8217;t affect
+\(P(A|B)\). We&#8217;ll just assume it&#8217;s \(0\) in the future: we can always just subtract it from every piece
+of data to make that&nbsp;true.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+You might wonder how I know that we need \(3 - 1 = 2\) dimensionless quantities. This is actually the
+celebrated Buckingham π theorem at work: check the link to learn more about it. Those of you with
+some abstract algebra or linear algebra might see the deeper connections to those&nbsp;fields.
+</p>
+</span>
+
+<p>
+There are many ways we could combine the remaining quantities to make dimensionless expressions. We
+have three parameters, which will give us two expressions because we have one type of
+dimension. First things first: how can we modify \(t\) so it&#8217;s more comparable across problems?
+Similar to how we defined \(t\) as a 1% cutoff instead of a particular score early on, we can use a
+similar idea here: let \(t&#8217;\) be the <i>number of standard deviations</i> the threshold is away from
+\(M\). Here, the standard deviation we&#8217;re using is the standard deviation of the test scores or their
+equivalents, which is \(\sqrt{S^2 + \sigma^2}\). This has units \(p\), so if we let \(t&#8217; =
+\frac{t}{\sqrt{S^2 + \sigma^2}}\) we&#8217;ll have a dimensionless quantity. Let&#8217;s call this the
+<i>z-threshold</i>, because it&#8217;s a z-score of the threshold. We&#8217;ll change the name from \(t&#8217;\) to \(z\) to
+reflect&nbsp;this.
+</p>
+
+<p>
+What does this quantity represent in the system, qualitatively? It&#8217;s pretty simple: higher values
+indicate that \(P(B)\) is smaller and thus that fewer people pass the initial cutoff or the second
+cutoff. (Note that \(P(B)\) is a simple function of \(z\): dimensional analysis makes it easy to reason
+about what parameters a function will use, because \(P(B)\) is itself dimensionless so it needs to
+only take dimensionless&nbsp;arguments.)
+</p>
+
+<p>
+Now we want one more constant. We&#8217;ve already captured the information \(t\) had to offer, so we&#8217;ll
+limit ourselves to \(\sigma\) and \(S\). Now, there&#8217;s really nothing to do but simply create a ratio:
+the quantity \(\frac{\sigma}{S}\) is a dimensionless constant. This one&#8217;s really important, so we&#8217;re
+going to name this quantity as well. We&#8217;ll call it the <i>regression-selection ratio</i>, which I&#8217;ll denote&nbsp;\(\rho\). 
+</p>
+
+<p>
+What does this ratio represent? The name gives it away: it&#8217;s a ratio that characterizes the strength
+of the regression effect with the strength of the selection effect. Higher values of \(\rho\) indicate
+that the variability <i>within</i> individuals is high compared to the variation <i>across</i> individuals. This
+creates a stronger <i>regression effect</i>: intuitively, luck matters more, so the inherent tendency of
+luck to even outlier hurts you more. The reverse scenario, a low \(\rho\), creates a scenario with a
+strong selection effect: luck has little to do with passing the cutoff, so even if it abandons you
+things are still looking&nbsp;good.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+You might be worried that the math we did last time didn&#8217;t explicitly use these variables, so we
+can&#8217;t really reuse the same code. It actually works out because we can easily reverse this process,
+going from two dimensionless parameters to four dimensional parameters, as long as we fix \(M = 0\)
+and \(S = 1\): then \(\sigma = \rho\) and \(t = z(\sqrt{\sigma^2 + 1^2})\). We can then just use the same
+formulas we were using&nbsp;earlier.
+</p>
+</span>
+
+<p>
+To recap: by the principles of dimensional analysis, \(P(A|B)\) varies <i>only</i> as a function of \(z\) and
+\(\rho\): nothing else matters. This means we can compare problems with our PSAT example without
+redoing any math: just plug the new values in and we&#8217;re good to&nbsp;go!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7693617" class="outline-2">
+<h2 id="org7693617">\(z\) and \(\rho\) In&nbsp;Context</h2>
+<div class="outline-text-2" id="text-org7693617">
+<p>
+We want to get an intuitive sense of how \(z\) and \(\rho\) affect \(P(A|B)\) so we can intuit how
+different systems exhibit regression to the mean. First things first: what are the values of \(z\) and
+\(\rho\) for our PSAT running&nbsp;example?
+</p>
+
+<p>
+The math is pretty easy: \(z = \frac{1460 - 1014}{197} \approx 2.25\), and \(\rho = \frac{20}{197}
+\approx 0.1015\). The value of \(P(A|B)\) for this iteration of the problem is about 85%, and so it&#8217;s
+around that for any version of the problem with these&nbsp;parameters.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+Note that the actual function \(P(A|B)\) of \(z\) and \(\rho\), if you wrote it out, would be a horrific
+mess of integrals and the normal CDF. This is normal for dimensional analysis: it&#8217;s nice when the
+value you care about is a nice function of your dimensionless quantities, but that isn&#8217;t always
+so. The importance of this technique is that, so long as we <i>can</i> compute \(P(A|B)\), we can still
+reason about different forms of the&nbsp;problem.
+</p>
+</span>
+
+<p>
+Now I&#8217;ll take us quickly through a whirlwind of different examples from different real-world
+problems. For each one, I&#8217;ll explain how I estimated the values of \(z\) and \(\rho\), and I&#8217;ll compare
+the computed value of \(P(A|B)\) with what common sense might&nbsp;conclude.
+</p>
+
+<p>
+One thing about the interpretation of this phenomenon: remember when, in the first post, we
+simulated that any test-taker who qualifies for National Merit has a 57% chance of doing worse the
+next time? That effect—comparing people to their prior selves—is a more general version of
+regression to the mean. To borrow the Olympic ski jump example again, if the Norway skiier had a
+good first jump they&#8217;re still likely to have a good second jump, because Norwary Olympic skiiers
+tend to be really good, but it&#8217;s likely to be worse than their first. We&#8217;re going to focus on
+\(P(A|B)\) because it&#8217;s the one we care about for the PSAT example, but note that in the real world we
+often are actually talking about this quantity. (The two values correlate with each other in
+reverse, so in comparing different scenarios it doesn&#8217;t matter which one we use: if \(P(A|B)\) is
+lower in one scenario than in another, the probability of doing worse the second time will be higher
+and vice&nbsp;versa.)
+</p>
+</div>
+
+<div id="outline-container-org4db02d1" class="outline-3">
+<h3 id="org4db02d1"><span class="dquo">&#8220;</span>Sophomore Slump&#8221;: NBA Rookie&nbsp;Seasons</h3>
+</div>
+</div>
+<div id="outline-container-orgd0df9da" class="outline-2">
+<h2 id="orgd0df9da">Medical Testing: Bringing It&nbsp;Home</h2>
+<div class="outline-text-2" id="text-orgd0df9da">
+<p>
+Wait…does medical testing? It should: it&#8217;s finally time to connect this to Bayes&#8217; paradox and how
+I started this series. To refresh your memory, this was the example I used to introduce this&nbsp;phenomenon.
+</p>
+
+<blockquote>
+<p>
+A rare genetic disease afflicts 1 in every 1000 people. Scientists have developed a test for the
+disease. If an individual has the disease, the test is 100% likely to return a positive
+result. However, if an individual does not have the disease, the test still has a 5% likelihood of
+returning a false positive result. You get tested and the result comes back positive. What is the
+chance of you actually having the&nbsp;disease?
+</p>
+</blockquote>
+
+<p>
+The answer is less than 2%, which conflicts with the intuition most people&nbsp;have. 
+</p>
+
+<p>
+I want to transform this a bit until it matches the form of the problem we&#8217;ve been exploring for all
+this time. Let&#8217;s start by replacing &#8220;actually have the disease&#8221; with &#8220;test positive a second time&#8221;
+(assuming each test is independent.) This problem is a little different: now there&#8217;s a possibility
+you get unlucky twice and get two false positives. However, crucially, note that the qualitative
+aspects of the problem are unchanged: the new probability is higher than the old one, but it&#8217;s still
+smaller than we&#8217;d&nbsp;expect.
+</p>
+
+<p>
+Now this is very close to matching our PSAT problem, and there&#8217;s only one more difference: in this
+example, our hidden variable (whether you have the disease) is <i>discrete</i>, and in our PSAT problem the
+hidden variable \(\mu\) is <i>continuous</i>. Let&#8217;s fix&nbsp;this:
+</p>
+
+<blockquote>
+<p>
+A rare genetic disease afflicts 1 in every 1000 people. It causes elevated levels of a certain
+chemical in the blood. Scientists have developed a test for the disease: the test measures the level
+of this chemical, with a standard error \(\sigma\), returning a positive result if the test is above
+some threshold \(t\). Given how rare the disease is, the levels of this chemical in the blood is
+normally distributed, with mean \(M\) and standard deviation \(S\). Given you test positive for the
+disease once, what is the probability you test positive&nbsp;again?
+</p>
+</blockquote>
+
+<p>
+This should seem <i>very</i> familiar: it is exactly the same as the PSAT example. I&#8217;ll follow this up with
+what I&#8217;d call the conjugate of this problem: the PSAT problem reframed as a discrete&nbsp;problem.
+</p>
+
+<p>
+#+BEGIN<sub>QUOTE</sub>$
+A rare disease called &#8220;Super Effective PSAT Studying&#8221; (SEPS) is afflicting the youth of America. It
+has a 1% prevalence in the general population. It causes an increase in the average score of PSAT
+tests of the afflicted by two standard deviations. A test has been developed that administers the
+PSAT and tests for the National Merit cutoff. What is the chance that someone who tests positive the
+first time tests positive a second time?
+#+END<sub>QUOTE</sub></p>
+
+<p>
+This should help in connecting the dots. Now that we&#8217;ve seen how mathematically similar these
+problems are, can we apply the sort of analysis we conducted above for the medical testing&nbsp;problem?
+</p>
+
+<p>
+All of the math we did last time works the same way whether we&#8217;re integrating over values of \(m\) or
+summing over all of the possible values of a discrete variable. Let&#8217;s call the hidden variable \(d\)
+for disease: \(1\) means the individual has it and \(0\) means they don&#8217;t. \(A\) is whether they test
+positive a second time and \(B\) is whether they test positive the first&nbsp;time.
+</p>
+
+<p>
+\[P(A|B) = \sum_{i=0}^{1} P(A|d=i)&nbsp;\frac{P(B|d=i)P(d=i)}{\sum_{j=0}^{1}P(B|d=j)P(d=j)}\]
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+I&#8217;ve taken the liberty of expanding the summation formula for&nbsp;\(P(B)\).
+</p>
+</span>
+
+<p>
+For reference, here&#8217;s the formula for the continuous version we&#8217;ve been using. Note how the only
+difference is that \(\mu\) can be any value in \(\mathbb{R}\) and varies continuously, so we have
+integrals instead of&nbsp;sums.
+</p>
+
+<p>
+\[P(A|B) = \int_{m=-\infty}^{\infty} P(A|\mu=m)&nbsp;\frac{P(B|\mu=m)P(\mu=m)}{\int_{n=-\infty}^{\infty}P(B|\mu=n)P(\mu=n)}\]
+</p>
+
+<p>
+Don&#8217;t these look pretty similar? We could even imagine discretizing the continuous \(\mu\) variable to
+make them match even more, say splitting into cases \(\mu &gt; t\) and \(\mu &lt; t\). There&#8217;s an interesting
+parallel here: the idea of \(\mu &lt; t\) is essentially a &#8220;generalized false positive&#8221; (the test says
+you qualified, but on average you wouldn&#8217;t) and the alternative is basically a generalized true
+positive. I say generalized because \(\mu\) can be closer or farther from \(t\): you can imagine that
+the lower \(\mu\) is, the &#8220;more false&#8221; the positive&nbsp;is.
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
+      </p>
+
+    
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-SDRP1VVYu+tgAGKhddBSl5+ezofHKZeI+OzxakbIe/Y=" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>

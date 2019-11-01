@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about dataviz)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/dataviz.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2019 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Mon, 28 Oct 2019 17:13:45 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Bayesian Fallacies, Part 2: The Math of the PSAT Math Section</title><link>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about dataviz)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/dataviz.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2019 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Fri, 01 Nov 2019 15:30:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Painless Introduction to Python Data Analysis and Visualization</title><link>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Data visualization and data science is a hot topic right now, and there's lots of people I know who
+want to develop this skill set. A common hurdle, in my experience, is that a lot of tutorials are
+either incredibly specific (here's how to change the y-axis title) or very abstract (this is what a
+violin plot is, good luck making one!) The goal of this tutorial is to make the kind of resource I
+would have really benefited from when I was starting out: an introduction that can give you the
+background you need to actually benefit from internal documentation and give you an idea of what's
+possible so you aren't reinventing the wheel (an extraordinarily common problem). This post is
+written for:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;People who aren't completely new to computer programming, but not necessarily programmers or software developers
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;You need to know basic Python syntax to follow along, but you don't need to actually know much about Python&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Anyone who is tired of the limitations of programs like Tableau and wants to be able to make
+bespoke visualizations that meet their specific needs&lt;/li&gt;
+&lt;li&gt;Those who are interested in using Python for statistics or machine learning who want some
+wider background before they start&lt;/li&gt;
+&lt;li&gt;Students or presenters of any kind who want to make beautiful graphs without fighting Excel for
+an hour&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+If any of these describe you, you've come to the right place!
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/"&gt;Read more…&lt;/a&gt; (42 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>dataviz</category><guid>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</guid><pubDate>Tue, 29 Oct 2019 19:07:24 GMT</pubDate></item><item><title>Bayesian Fallacies, Part 2: The Math of the PSAT Math Section</title><link>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 In the last episode, we introduced two thinking errors that often come up in statistics: Bayes'
 paradox and regression to the mean. I proposed that these errors are really two different
 manifestations of the same underlying phenomenon, but I haven't done much to actually explain
