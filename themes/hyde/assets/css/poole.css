@@ -163,12 +163,12 @@ abbr[title] {
 /* Code */
 code,
 pre {
-  font-family: "BlexMono Nerd Font Mono", Menlo, Monaco, "Courier New", monospace;
+  font-family: "IBM Plex Mono", "BlexMono Nerd Font Mono", Menlo, Monaco, "Courier New", monospace;
 }
 code {
-  padding: .25em .5em;
+  padding: 0 .25em;
   font-size: 85%;
-  color: #bf616a;
+  color: #f92672;
   background-color: #f9f9f9;
   border-radius: 3px;
 }
@@ -182,7 +182,6 @@ pre {
   white-space: pre;
   word-break: break-all;
   word-wrap: break-word;
-  background-color: #f9f9f9;
 }
 pre code {
   padding: 0;
@@ -539,7 +538,19 @@ figcaption {
     float: right;
     clear: right;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    max-width: 40%; 
+}
+
+figcaption {
+    float: right;
+    clear: right;
+    margin-top: 0;
+    margin-bottom: 1rem;
     font-size: 1.1rem;
     line-height: 1.6;
     vertical-align: baseline;
@@ -614,3 +625,24 @@ blockquote .marginnote {
     min-width: 59%;
     text-align: left; 
 }
+
+div.figure p img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.3rem;
+}
+
+
+/* this is how captions are exported */
+div.figure p + p {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-size: 15px;
+}
+
+div.figure p span.figure-number {
+    display: none;
+}
+
+

@@ -1,0 +1,219 @@
+#+BEGIN_COMMENT
+.. title: Bayesian Fallacies, Part 3: Putting It All Together
+.. slug: bayesian-fallacies-part-3-putting-it-all-together
+.. date: 2019-10-28 13:15:10 UTC-04:00
+.. tags: math, dataviz
+.. category: bayesian-fallacies
+.. link: 
+.. description: Putting the Bayesian stats all together
+.. type: text
+.. has_math: true
+.. status: draft
+#+END_COMMENT
+Last time, we did a thorough mathematical analysis of our running PSAT test score problem, and got
+some sense of why it doesn't exhibit a strong regression to the mean effect. This time, we'll
+generalize the problem completely and examine it in other contexts. We'll bookend it by connecting
+it to Bayes' paradox, something I promised in the first post but haven't done yet.
+
+{{{TEASER_END}}}
+
+* Dimensional Analysis and Reframing
+Let's zoom out. How can we frame this problem in a way that lets us apply this math to any example
+of the effect? In particular, consider $P(A|B)$ as a function of $M, S, \sigma$, and $t$. What can
+we say about this complicated function? 
+
+What if I told you that a powerful technique to attack problems like was introduced to me in a fluid
+mechanics class, not in math or statistics? We're going to steal an elegant approach from physics:
+/dimensional analysis/, a way of reasoning about systems or models in a way that can be generalized.
+
+{{{mn}}}
+This is a large subject, and my rudimentary fluid mechanics background is not enough for me to delve
+too much deeper into this rabbit-hole. Basically, it's a cool idea. The application we're going to
+be dealing with is a particularly easy version, so it won't be nearly as difficult as working with
+the Reynolds number or the Buckingham $\pi$ theorem or something crazy.
+{{{mn-end}}}
+
+Basically, any property of a model or system that's dimensionless must therefore be comparable
+across different realizations of that model or system. Thus, combining parameters with a dimension
+into a dimensionless form is a powerful way of abstracting problems. A classic example is the period
+of oscillation of a mass attached to a spring: given the mass $M$, the restoring force constant $k$,
+the period $T$, and gravity acceleration $g$, there is only one combination of these that give a
+dimensionless constant, $T^2 km^-1$. Note that $g$ doesn't appear here. This means that, without
+knowing any laws of physics besides the units of all of these parameters, we can conclude that the
+period of a spring doesn't depend on the gravity of its environment!
+
+This is an incredibly powerful technique, and fantastically useful for making models. If you want to
+simulate the water around a cruise ship in your bathub, matching the dimensionless quantities
+involved will make sure your liquid behaves the exact same way, even though all of the dimensional
+quantities may be completely different.
+
+You might object that we haven't been /using/ any dimensions. How can we cancel dimensions that don't
+exist? 
+
+My answer is that they've been there the whole time: I just haven't been talking about them! PSAT
+points /is/ a dimension of this problem, with all of the rules that mass or length have: we'll use $p$
+as a shorthand to mirror $m$ or $s$ or $^\circ C$ in physics. The reason I haven't needed to talk
+about it is because all of these parameters have the same dimension: $p$. This means that we can
+combined them and never need to worry about creating formulas that don't work
+dimensionally. However, it will guide us in abstracting this problem now. How can we mess around
+with our /parameter space/ to make the problem easier to generalize outside of PSAT points?
+
+First things first: $M$ doesn't really count as a parameter because it doesn't affect
+$P(A|B)$. We'll just assume it's $0$ in the future: we can always just subtract it from every piece
+of data to make that true.
+
+{{{mn}}}
+You might wonder how I know that we need $3 - 1 = 2$ dimensionless quantities. This is actually the
+celebrated Buckingham \pi theorem at work: check the link to learn more about it. Those of you with
+some abstract algebra or linear algebra might see the deeper connections to those fields.
+{{{mn-end}}}
+
+There are many ways we could combine the remaining quantities to make dimensionless expressions. We
+have three parameters, which will give us two expressions because we have one type of
+dimension. First things first: how can we modify $t$ so it's more comparable across problems?
+Similar to how we defined $t$ as a 1% cutoff instead of a particular score early on, we can use a
+similar idea here: let $t'$ be the /number of standard deviations/ the threshold is away from
+$M$. Here, the standard deviation we're using is the standard deviation of the test scores or their
+equivalents, which is $\sqrt{S^2 + \sigma^2}$. This has units $p$, so if we let $t' =
+\frac{t}{\sqrt{S^2 + \sigma^2}}$ we'll have a dimensionless quantity. Let's call this the
+/z-threshold/, because it's a z-score of the threshold. We'll change the name from $t'$ to $z$ to
+reflect this.
+
+What does this quantity represent in the system, qualitatively? It's pretty simple: higher values
+indicate that $P(B)$ is smaller and thus that fewer people pass the initial cutoff or the second
+cutoff. (Note that $P(B)$ is a simple function of $z$: dimensional analysis makes it easy to reason
+about what parameters a function will use, because $P(B)$ is itself dimensionless so it needs to
+only take dimensionless arguments.)
+
+Now we want one more constant. We've already captured the information $t$ had to offer, so we'll
+limit ourselves to $\sigma$ and $S$. Now, there's really nothing to do but simply create a ratio:
+the quantity $\frac{\sigma}{S}$ is a dimensionless constant. This one's really important, so we're
+going to name this quantity as well. We'll call it the /regression-selection ratio/, which I'll denote
+$\rho$. 
+
+What does this ratio represent? The name gives it away: it's a ratio that characterizes the strength
+of the regression effect with the strength of the selection effect. Higher values of $\rho$ indicate
+that the variability /within/ individuals is high compared to the variation /across/ individuals. This
+creates a stronger /regression effect/: intuitively, luck matters more, so the inherent tendency of
+luck to even outlier hurts you more. The reverse scenario, a low $\rho$, creates a scenario with a
+strong selection effect: luck has little to do with passing the cutoff, so even if it abandons you
+things are still looking good.
+
+{{{mn}}}
+You might be worried that the math we did last time didn't explicitly use these variables, so we
+can't really reuse the same code. It actually works out because we can easily reverse this process,
+going from two dimensionless parameters to four dimensional parameters, as long as we fix $M = 0$
+and $S = 1$: then $\sigma = \rho$ and $t = z(\sqrt{\sigma^2 + 1^2})$. We can then just use the same
+formulas we were using earlier.
+{{{mn-end}}}
+
+To recap: by the principles of dimensional analysis, $P(A|B)$ varies /only/ as a function of $z$ and
+$\rho$: nothing else matters. This means we can compare problems with our PSAT example without
+redoing any math: just plug the new values in and we're good to go!
+
+* $z$ and $\rho$ In Context
+We want to get an intuitive sense of how $z$ and $\rho$ affect $P(A|B)$ so we can intuit how
+different systems exhibit regression to the mean. First things first: what are the values of $z$ and
+$\rho$ for our PSAT running example?
+
+The math is pretty easy: $z = \frac{1460 - 1014}{197} \approx 2.25$, and $\rho = \frac{20}{197}
+\approx 0.1015$. The value of $P(A|B)$ for this iteration of the problem is about 85%, and so it's
+around that for any version of the problem with these parameters.
+
+{{{mn}}}
+Note that the actual function $P(A|B)$ of $z$ and $\rho$, if you wrote it out, would be a horrific
+mess of integrals and the normal CDF. This is normal for dimensional analysis: it's nice when the
+value you care about is a nice function of your dimensionless quantities, but that isn't always
+so. The importance of this technique is that, so long as we /can/ compute $P(A|B)$, we can still
+reason about different forms of the problem.
+{{{mn-end}}}
+
+Now I'll take us quickly through a whirlwind of different examples from different real-world
+problems. For each one, I'll explain how I estimated the values of $z$ and $\rho$, and I'll compare
+the computed value of $P(A|B)$ with what common sense might conclude.
+
+One thing about the interpretation of this phenomenon: remember when, in the first post, we
+simulated that any test-taker who qualifies for National Merit has a 57% chance of doing worse the
+next time? That effect—comparing people to their prior selves—is a more general version of
+regression to the mean. To borrow the Olympic ski jump example again, if the Norway skiier had a
+good first jump they're still likely to have a good second jump, because Norwary Olympic skiiers
+tend to be really good, but it's likely to be worse than their first. We're going to focus on
+$P(A|B)$ because it's the one we care about for the PSAT example, but note that in the real world we
+often are actually talking about this quantity. (The two values correlate with each other in
+reverse, so in comparing different scenarios it doesn't matter which one we use: if $P(A|B)$ is
+lower in one scenario than in another, the probability of doing worse the second time will be higher
+and vice versa.)
+
+** "Sophomore Slump": NBA Rookie Seasons
+* Medical Testing: Bringing It Home
+Wait...does medical testing? It should: it's finally time to connect this to Bayes' paradox and how
+I started this series. To refresh your memory, this was the example I used to introduce this
+phenomenon.
+
+#+BEGIN_QUOTE
+A rare genetic disease afflicts 1 in every 1000 people. Scientists have developed a test for the
+disease. If an individual has the disease, the test is 100% likely to return a positive
+result. However, if an individual does not have the disease, the test still has a 5% likelihood of
+returning a false positive result. You get tested and the result comes back positive. What is the
+chance of you actually having the disease?
+#+END_QUOTE
+
+The answer is less than 2%, which conflicts with the intuition most people have. 
+
+I want to transform this a bit until it matches the form of the problem we've been exploring for all
+this time. Let's start by replacing "actually have the disease" with "test positive a second time"
+(assuming each test is independent.) This problem is a little different: now there's a possibility
+you get unlucky twice and get two false positives. However, crucially, note that the qualitative
+aspects of the problem are unchanged: the new probability is higher than the old one, but it's still
+smaller than we'd expect.
+
+Now this is very close to matching our PSAT problem, and there's only one more difference: in this
+example, our hidden variable (whether you have the disease) is /discrete/, and in our PSAT problem the
+hidden variable $\mu$ is /continuous/. Let's fix this:
+
+#+BEGIN_QUOTE
+A rare genetic disease afflicts 1 in every 1000 people. It causes elevated levels of a certain
+chemical in the blood. Scientists have developed a test for the disease: the test measures the level
+of this chemical, with a standard error $\sigma$, returning a positive result if the test is above
+some threshold $t$. Given how rare the disease is, the levels of this chemical in the blood is
+normally distributed, with mean $M$ and standard deviation $S$. Given you test positive for the
+disease once, what is the probability you test positive again?
+#+END_QUOTE
+
+This should seem /very/ familiar: it is exactly the same as the PSAT example. I'll follow this up with
+what I'd call the conjugate of this problem: the PSAT problem reframed as a discrete problem.
+
+#+BEGIN_QUOTE$
+A rare disease called "Super Effective PSAT Studying" (SEPS) is afflicting the youth of America. It
+has a 1% prevalence in the general population. It causes an increase in the average score of PSAT
+tests of the afflicted by two standard deviations. A test has been developed that administers the
+PSAT and tests for the National Merit cutoff. What is the chance that someone who tests positive the
+first time tests positive a second time?
+#+END_QUOTE
+
+This should help in connecting the dots. Now that we've seen how mathematically similar these
+problems are, can we apply the sort of analysis we conducted above for the medical testing problem?
+
+All of the math we did last time works the same way whether we're integrating over values of $m$ or
+summing over all of the possible values of a discrete variable. Let's call the hidden variable $d$
+for disease: $1$ means the individual has it and $0$ means they don't. $A$ is whether they test
+positive a second time and $B$ is whether they test positive the first time.
+
+$$P(A|B) = \sum_{i=0}^{1} P(A|d=i) \frac{P(B|d=i)P(d=i)}{\sum_{j=0}^{1}P(B|d=j)P(d=j)}$$
+
+{{{mn}}}
+I've taken the liberty of expanding the summation formula for $P(B)$.
+{{{mn-end}}}
+
+For reference, here's the formula for the continuous version we've been using. Note how the only
+difference is that $\mu$ can be any value in $\mathbb{R}$ and varies continuously, so we have
+integrals instead of sums.
+
+$$P(A|B) = \int_{m=-\infty}^{\infty} P(A|\mu=m) \frac{P(B|\mu=m)P(\mu=m)}{\int_{n=-\infty}^{\infty}P(B|\mu=n)P(\mu=n)}$$
+
+Don't these look pretty similar? We could even imagine discretizing the continuous $\mu$ variable to
+make them match even more, say splitting into cases $\mu > t$ and $\mu < t$. There's an interesting
+parallel here: the idea of $\mu < t$ is essentially a "generalized false positive" (the test says
+you qualified, but on average you wouldn't) and the alternative is basically a generalized true
+positive. I say generalized because $\mu$ can be closer or farther from $t$: you can imagine that
+the lower $\mu$ is, the "more false" the positive is.
