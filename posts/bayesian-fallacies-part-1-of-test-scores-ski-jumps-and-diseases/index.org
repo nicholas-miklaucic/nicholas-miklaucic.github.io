@@ -42,7 +42,7 @@ This disparity between what we'd expect and what actually happens is Bayes' para
 
 It's called Bayes' paradox because the mathematical framework for analyzing it comes from the famous
 /Bayes' theorem/. It essentially gives us a formula for solving problems like the above. Bayes'
-thfeorem states that, if you denote the chance of $X$ being true as $P(X)$ and the chance of $X$
+theorem states that, if you denote the chance of $X$ being true as $P(X)$ and the chance of $X$
 being true given the knowledge that $Y$ is true as $P(X|Y)$. Bayes' theorem gives a general formula
 for the conditional probability $P(A|B)$:
 

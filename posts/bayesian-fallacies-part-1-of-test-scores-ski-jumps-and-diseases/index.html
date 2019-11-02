@@ -72,9 +72,9 @@ what we&#8217;re doing more&nbsp;rigorous.
 Let&#8217;s start with Bayes&#8217; paradox and introduce some&nbsp;statistics!
 </p>
 
-<div id="outline-container-org69d4ad6" class="outline-2">
-<h2 id="org69d4ad6">Bayes&#8217;&nbsp;Paradox</h2>
-<div class="outline-text-2" id="text-org69d4ad6">
+<div id="outline-container-org90a07a8" class="outline-2">
+<h2 id="org90a07a8">Bayes&#8217;&nbsp;Paradox</h2>
+<div class="outline-text-2" id="text-org90a07a8">
 <p>
 Bayes&#8217; paradox is usually presented like&nbsp;this:
 </p>
@@ -101,7 +101,7 @@ This disparity between what we&#8217;d expect and what actually happens is Bayes
 <p>
 It&#8217;s called Bayes&#8217; paradox because the mathematical framework for analyzing it comes from the famous
 <i>Bayes&#8217; theorem</i>. It essentially gives us a formula for solving problems like the above. Bayes&#8217;
-thfeorem states that, if you denote the chance of \(X\) being true as \(P(X)\) and the chance of \(X\)
+theorem states that, if you denote the chance of \(X\) being true as \(P(X)\) and the chance of \(X\)
 being true given the knowledge that \(Y\) is true as \(P(X|Y)\). Bayes&#8217; theorem gives a general formula
 for the conditional probability&nbsp;\(P(A|B)\):
 </p>
@@ -143,9 +143,9 @@ So, before we connect this to regression to the mean, what <i>is</i> regression 
 </div>
 </div>
 
-<div id="outline-container-org0fd2faf" class="outline-2">
-<h2 id="org0fd2faf">Regression to the&nbsp;Mean</h2>
-<div class="outline-text-2" id="text-org0fd2faf">
+<div id="outline-container-org8719c37" class="outline-2">
+<h2 id="org8719c37">Regression to the&nbsp;Mean</h2>
+<div class="outline-text-2" id="text-org8719c37">
 <p>
 <i>Regression to the mean</i> is the idea that being really successful or unsuccessful usually requires a
 fair bit of luck, and thus outlier results are likely to be followed by less unusual results as luck
@@ -170,9 +170,9 @@ unlikely to have the same good&nbsp;fortune.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7db866" class="outline-2">
-<h2 id="orgc7db866">Connecting The&nbsp;Dots</h2>
-<div class="outline-text-2" id="text-orgc7db866">
+<div id="outline-container-org963b28d" class="outline-2">
+<h2 id="org963b28d">Connecting The&nbsp;Dots</h2>
+<div class="outline-text-2" id="text-org963b28d">
 <p>
 These two thinking errors seem pretty different, but I&#8217;m going to argue that they&#8217;re both
 manifestations of the same underlying mathematical phenomenon. To do this, I&#8217;ll use a single
@@ -185,9 +185,9 @@ There are lots of choices for this case study, but because I&#8217;m a college f
 pick a specific example: PSAT scores and National Merit Semifinalist&nbsp;qualification.
 </p>
 </div>
-<div id="outline-container-org5845663" class="outline-3">
-<h3 id="org5845663">Background</h3>
-<div class="outline-text-3" id="text-org5845663">
+<div id="outline-container-org52c792c" class="outline-3">
+<h3 id="org52c792c">Background</h3>
+<div class="outline-text-3" id="text-org52c792c">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -222,9 +222,9 @@ for National Merit if they were in 11th grade. <b>What are the chances that stud
 </p>
 </div>
 </div>
-<div id="outline-container-org82a51a3" class="outline-3">
-<h3 id="org82a51a3">An Intuitive&nbsp;Understanding</h3>
-<div class="outline-text-3" id="text-org82a51a3">
+<div id="outline-container-org8c5188b" class="outline-3">
+<h3 id="org8c5188b">An Intuitive&nbsp;Understanding</h3>
+<div class="outline-text-3" id="text-org8c5188b">
 <p>
 This problem feels like a classic case of regression to the mean. National Merit is a harsh cutoff:
 out of roughly 1.5 million eligible students who take it every year, only 16,000 qualify. That&#8217;s a
@@ -235,9 +235,9 @@ understanding and see how it holds&nbsp;up.
 </p>
 </div>
 </div>
-<div id="outline-container-org55197b5" class="outline-3">
-<h3 id="org55197b5">Clarifying&nbsp;Assumptions</h3>
-<div class="outline-text-3" id="text-org55197b5">
+<div id="outline-container-org216edef" class="outline-3">
+<h3 id="org216edef">Clarifying&nbsp;Assumptions</h3>
+<div class="outline-text-3" id="text-org216edef">
 <p>
 Let&#8217;s do a couple things to make this problem easier to model mathematically. Let&#8217;s assume that each
 individual test taker&#8217;s scores have two components: a <i>mean performance</i> \(\mu\) that represents what
@@ -309,9 +309,9 @@ ideas, not anyone&#8217;s particular chances at National&nbsp;Merit.
 </p>
 </div>
 </div>
-<div id="outline-container-org93a4667" class="outline-3">
-<h3 id="org93a4667">A Mathematical&nbsp;Model</h3>
-<div class="outline-text-3" id="text-org93a4667">
+<div id="outline-container-org6adb3e0" class="outline-3">
+<h3 id="org6adb3e0">A Mathematical&nbsp;Model</h3>
+<div class="outline-text-3" id="text-org6adb3e0">
 <p>
 With these assumptions, we can reframe this problem mathematically. We&#8217;ll use lowercase letters for
 individuals, and uppercase letters for the global parameters. An individual test taker&#8217;s score is a
@@ -327,9 +327,9 @@ threshold? This might feel more reminiscent of the Bayesian statistics we did&nb
 </p>
 </div>
 </div>
-<div id="outline-container-org15ee028" class="outline-3">
-<h3 id="org15ee028">First Results: Cheating with&nbsp;Computers</h3>
-<div class="outline-text-3" id="text-org15ee028">
+<div id="outline-container-org939d1f3" class="outline-3">
+<h3 id="org939d1f3">First Results: Cheating with&nbsp;Computers</h3>
+<div class="outline-text-3" id="text-org939d1f3">
 <p>
 We&#8217;re going to analyze the math for this in more detail, later. But, for now, let&#8217;s do a basic
 estimate by just simulating a bunch of different tests and test takers with a computer. We&#8217;ll
@@ -352,9 +352,9 @@ scores against the first scores, where we also see a very strong&nbsp;correlatio
 </div>
 </div>
 
-<div id="outline-container-org7d0aad6" class="outline-3">
-<h3 id="org7d0aad6">How Does This Effect Work (Or&nbsp;Not)?</h3>
-<div class="outline-text-3" id="text-org7d0aad6">
+<div id="outline-container-org442e496" class="outline-3">
+<h3 id="org442e496">How Does This Effect Work (Or&nbsp;Not)?</h3>
+<div class="outline-text-3" id="text-org442e496">
 <p>
 We can think of two distinct effects at play: a <i>selection effect</i> that makes the first-time
 qualifiers&#8217; \(\mu\) values higher on average, and a reverse <i>regression effect</i> that makes the random
@@ -388,9 +388,9 @@ regression to the mean is a small&nbsp;effect.
 </div>
 </div>
 
-<div id="outline-container-org42e188c" class="outline-2">
-<h2 id="org42e188c">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org42e188c">
+<div id="outline-container-orgcc83638" class="outline-2">
+<h2 id="orgcc83638">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgcc83638">
 <p>
 This is where I&#8217;ll stop for Part I: a breakdown of how regression to the mean actually functions,
 and perhaps some teasers as to how it might relate to Bayes&#8217; paradox. In the next post, I&#8217;ll break
