@@ -221,6 +221,12 @@ Name: Country Name, dtype: object
 
 Series keep the name and the index. Also note this ~dtype~ field. What's its deal?
 
+{{{mn}}}
+Those well-versed in Python will know that this isn't technically true: it's closer to "~numpy~ will
+actively throw an error if there's a mismatch and vanilla Python won't", but it doesn't really have
+much bearing on what we're doing today.
+{{{mn-end}}}
+
 In ~numpy~ and by extension ~pandas~, unlike "vanilla" Python, there's /static typing/: internally, all of
 your data has some type. ~object~ is the most general type, which is used for things like text. Other
 types include integers, decimals, dates, and lists themselves.
@@ -374,6 +380,17 @@ dtype: int64
 (~axis=1~ means "sum across the rows", and ~axis=0~ would sum across the columns. With no arguments, it
 sums by both, and returns a single thing.)
 
+{{{mn}}}
+There's one big exception: Boolean algebra operations like ~and~ and ~not~. To do those, you use the
+Python operations that are normally used for the /bitwise/ version of these operations. ~&~ is ~and~, ~~~ is
+~not~, and ~|~ is ~or~. However, because these have different order-of-operations rules than you're used
+to with standard Python ~and~, ~not~, etc., you'll need parentheses in most cases: it's
+
+~(data > 2) | (data < 1)~, not 
+
+~data > 2 | data < 1~, because the second will try to compute ~2 | data~.
+{{{mn-end}}}
+
 One very cool thing about ~numpy~ and ~pandas~ is that many operations can be done elementwise by just
 operating on the series itself. For example, we can do an elementwise comparison:
 
@@ -412,19 +429,44 @@ Vanilla Python sequences, like ~[1, 2, 3]~ or ~"hello"~, can be indexed using /s
 use up to three arguments, separated by ~:~ and in square brackets, to do this. Like in ~pandas~,
 everything is /0-indexed/: ~0~ is the first element. 
 
-Slices are of the form ~[start:stop:step]~. This takes the elements starting at ~start~ and going up to
-~stop~ (but not including it!), taking every ~step~ element. If there are only two arguments, it's
-instead ~[start:stop]~ and step is assumed to be 1. Additionally, slices of the form ~[:stop]~ and
-~[start:]~ are perfectly fine: the former assumes ~start~ is ~0~ and the latter assumes that ~stop~ is the
-length of the list. (This means ~[:stop]~, because it doesn't include the value at ~stop~ but starts at
-~0~, is the first ~stop~ elements. This is very useful to keep in mind.) The last thing to know is that
-you can use negative indices: in this case, it'll count backwards from the end of the list. ~-1~ means
-"the last element", and ~-3~ means "the third-to-last element". (You can think of these as equivalent
-to ~len(list) - 1~ and ~len(list) - 3~.)
+Let's start with the simplest case: a single number. If ~l~ is our list, then ~l[2]~ returns the third
+element of the list (remember it's 0-indexed!) We can add colons on either side of this number to
+change how it slices: effectively, the colon means "keep going until you hit the end of the list."
+For example, ~l[2:]~ is "every element from the third one to the end as a new list", and ~l[:2]~ is
+"every element up to /but not including/ the third one." This is a common sticking point: slices work
+like ~range~ or other Python functions in that it's inclusive on the left side and exclusive on the
+right: you don't include the last element. A good way to keep this in mind is that ~l[:2]~ returns 2
+elements. 
+
+We can add a second number to get a range that doesn't stop or start at the ends of the list. ~l[1:3]~
+means "start at the second element and keep going until before you hit the fourth element." This
+will have two elements: you can just subtract the end index from the start index to see how long a
+slice is.
+
+{{{mn}}}
+You can even use negative steps: ~l[::-1]~ is the reverse of the original list, and ~l[-2:1:-1]~ means
+"start from the element second to the back, count backwards by 1s until you hit before the second
+element, and return that as a list."
+{{{mn-end}}}
+
+There are two ways you can extend this slightly that aren't as often used but are still good to
+know. Negative numbers essentially "wrap" and start counting from the /back/ of the list. ~l[-1]~ is the
+last element, whatever number that is. ~l[:-1]~ is "everything but the last element." The other
+extension is a second colon and a /step/, that takes every nth element. So, for example, ~l[1:5:2]~
+means "start at the second element, and take every other element in the list until before you hit
+the sixth element."
 
 This is a lot to take in at once: let's show some examples which should clear things up.
 
 #+BEGIN_SRC python
+"python"[1]
+# returns 'y'
+
+[4, 15, 2][-1]
+# returns 2
+
+[4, 15, 2][-1:]
+# returns [2]
 
 "python"[1:4:2]
 # returns "yh"
@@ -437,12 +479,6 @@ This is a lot to take in at once: let's show some examples which should clear th
 
 [1, 2, 3][4:]
 # returns []
-
-[1, 2, 3][2]
-# returns 3
-
-[1, 2, 3][2:]
-# returns [3]
 
 [1, 2, 3][:2]
 # returns [1, 2]
@@ -592,7 +628,7 @@ the analysis you're doing. A couple distinct approaches exist:
  - Estimate or guess what the missing values should be.
  - Give up and go get ice cream.
 
-Option number four is tempting, but we're going to take the first options: the problematic rows have
+Option number four is tempting, but we're going to take the first option: the problematic rows have
 little actual data, and we have plenty to work with even if we remove a bit. (My apologies to
 my Andorran readership.)
 

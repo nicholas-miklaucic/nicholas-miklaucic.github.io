@@ -85,9 +85,9 @@ If any of these describe you, you&#8217;ve come to the right&nbsp;place!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org05cd303" class="outline-2">
-<h2 id="org05cd303">Structure</h2>
-<div class="outline-text-2" id="text-org05cd303">
+<div id="outline-container-org7aa18d2" class="outline-2">
+<h2 id="org7aa18d2">Structure</h2>
+<div class="outline-text-2" id="text-org7aa18d2">
 <p>
 We&#8217;re going to be using data from the World Bank: specifically, data with birth rates by year for
 each country. The data I&#8217;m using is <a href="https://gist.github.com/nicholas-miklaucic/af822d547b8796753b8d160ca76e0172">here.</a> Our goal will be <b>to learn something interesting from this</b>
@@ -125,9 +125,9 @@ Sound good? Let&#8217;s do&nbsp;this!
 </div>
 </div>
 
-<div id="outline-container-orgc71a166" class="outline-2">
-<h2 id="orgc71a166">Tools of the&nbsp;Trade</h2>
-<div class="outline-text-2" id="text-orgc71a166">
+<div id="outline-container-orge979940" class="outline-2">
+<h2 id="orge979940">Tools of the&nbsp;Trade</h2>
+<div class="outline-text-2" id="text-orge979940">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -160,9 +160,9 @@ Jupyter. (Just don&#8217;t be worried if you get slightly different results betw
 </p>
 </div>
 </div>
-<div id="outline-container-org1d1236a" class="outline-2">
-<h2 id="org1d1236a">Getting&nbsp;Started</h2>
-<div class="outline-text-2" id="text-org1d1236a">
+<div id="outline-container-orgb4ce515" class="outline-2">
+<h2 id="orgb4ce515">Getting&nbsp;Started</h2>
+<div class="outline-text-2" id="text-orgb4ce515">
 <p>
 First things first: we need to import the libraries we&#8217;ll be using to work with the data. There are
 four we&#8217;re using: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, and <code>seaborn</code>. This can more or less be copy-pasted at
@@ -287,9 +287,9 @@ information&nbsp;in.
 </div>
 </div>
 
-<div id="outline-container-org2a13f6b" class="outline-2">
-<h2 id="org2a13f6b">What Are We Looking&nbsp;At?</h2>
-<div class="outline-text-2" id="text-org2a13f6b">
+<div id="outline-container-org29abb02" class="outline-2">
+<h2 id="org29abb02">What Are We Looking&nbsp;At?</h2>
+<div class="outline-text-2" id="text-org29abb02">
 <p>
 OK, so what <i>is</i> a DataFrame? Let&#8217;s look at this sneak preview of <code>data</code> and talk about the general&nbsp;structure.
 </p>
@@ -333,6 +333,15 @@ This is what a Series looks like if you print it out, and so its what the above 
 Series keep the name and the index. Also note this <code>dtype</code> field. What&#8217;s its&nbsp;deal?
 </p>
 
+<span class="marginnote"><p>
+</p>
+<p>
+Those well-versed in Python will know that this isn&#8217;t technically true: it&#8217;s closer to &#8220;<code>numpy</code> will
+actively throw an error if there&#8217;s a mismatch and vanilla Python won&#8217;t&#8221;, but it doesn&#8217;t really have
+much bearing on what we&#8217;re doing&nbsp;today.
+</p>
+</span>
+
 <p>
 In <code>numpy</code> and by extension <code>pandas</code>, unlike &#8220;vanilla&#8221; Python, there&#8217;s <i>static typing</i>: internally, all of
 your data has some type. <code>object</code> is the most general type, which is used for things like text. Other
@@ -341,9 +350,9 @@ types include integers, decimals, dates, and lists&nbsp;themselves.
 </div>
 </div>
 
-<div id="outline-container-org8073ff1" class="outline-2">
-<h2 id="org8073ff1">Tidying&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org8073ff1">
+<div id="outline-container-orgda8fe37" class="outline-2">
+<h2 id="orgda8fe37">Tidying&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgda8fe37">
 <p>
 There are some columns that we don&#8217;t really need, and a lot of the names are a bit long-winded. I
 also want the column names that are years to be typed as numbers so we can do things like compare
@@ -402,9 +411,9 @@ This outputs the&nbsp;following:
 </div>
 </div>
 
-<div id="outline-container-org719f04b" class="outline-2">
-<h2 id="org719f04b">..&nbsp;Problems</h2>
-<div class="outline-text-2" id="text-org719f04b">
+<div id="outline-container-orgf2e99fb" class="outline-2">
+<h2 id="orgf2e99fb">..&nbsp;Problems</h2>
+<div class="outline-text-2" id="text-orgf2e99fb">
 <p>
 Let me reprint some of the&nbsp;data:
 </p>
@@ -511,6 +520,24 @@ can sum the individual rows to figure out which countries are&nbsp;problematic:
 sums by both, and returns a single&nbsp;thing.)
 </p>
 
+<span class="marginnote"><p>
+</p>
+<p>
+There&#8217;s one big exception: Boolean algebra operations like <code>and</code> and <code>not</code>. To do those, you use the
+Python operations that are normally used for the <i>bitwise</i> version of these operations. <code>&amp;</code> is <code>and</code>, <code>~</code> is
+<code>not</code>, and <code>|</code> is <code>or</code>. However, because these have different order-of-operations rules than you&#8217;re used
+to with standard Python <code>and</code>, <code>not</code>, etc., you&#8217;ll need parentheses in most cases:&nbsp;it&#8217;s
+</p>
+
+<p>
+<code>(data &gt; 2) | (data &lt; 1)</code>,&nbsp;not 
+</p>
+
+<p>
+<code>data &gt; 2 | data &lt; 1</code>, because the second will try to compute <code>2 | data</code>.
+</p>
+</span>
+
 <p>
 One very cool thing about <code>numpy</code> and <code>pandas</code> is that many operations can be done elementwise by just
 operating on the series itself. For example, we can do an elementwise&nbsp;comparison:
@@ -540,9 +567,9 @@ detour to look at one of the most important parts of understanding <code>pandas<
 </div>
 </div>
 
-<div id="outline-container-org877753a" class="outline-2">
-<h2 id="org877753a">Indexing Like a&nbsp;Boss</h2>
-<div class="outline-text-2" id="text-org877753a">
+<div id="outline-container-orgadc99e8" class="outline-2">
+<h2 id="orgadc99e8">Indexing Like a&nbsp;Boss</h2>
+<div class="outline-text-2" id="text-orgadc99e8">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -564,22 +591,54 @@ everything is <i>0-indexed</i>: <code>0</code> is the first&nbsp;element.
 </p>
 
 <p>
-Slices are of the form <code>[start:stop:step]</code>. This takes the elements starting at <code>start</code> and going up to
-<code>stop</code> (but not including it!), taking every <code>step</code> element. If there are only two arguments, it&#8217;s
-instead <code>[start:stop]</code> and step is assumed to be 1. Additionally, slices of the form <code>[:stop]</code> and
-<code>[start:]</code> are perfectly fine: the former assumes <code>start</code> is <code>0</code> and the latter assumes that <code>stop</code> is the
-length of the list. (This means <code>[:stop]</code>, because it doesn&#8217;t include the value at <code>stop</code> but starts at
-<code>0</code>, is the first <code>stop</code> elements. This is very useful to keep in mind.) The last thing to know is that
-you can use negative indices: in this case, it&#8217;ll count backwards from the end of the list. <code>-1</code> means
-&#8220;the last element&#8221;, and <code>-3</code> means &#8220;the third-to-last element&#8221;. (You can think of these as equivalent
-to <code>len(list) - 1</code> and <code>len(list) - 3</code>.)
+Let&#8217;s start with the simplest case: a single number. If <code>l</code> is our list, then <code>l[2]</code> returns the third
+element of the list (remember it&#8217;s 0-indexed!) We can add colons on either side of this number to
+change how it slices: effectively, the colon means &#8220;keep going until you hit the end of the list.&#8221;
+For example, <code>l[2:]</code> is &#8220;every element from the third one to the end as a new list&#8221;, and <code>l[:2]</code> is
+&#8220;every element up to <i>but not including</i> the third one.&#8221; This is a common sticking point: slices work
+like <code>range</code> or other Python functions in that it&#8217;s inclusive on the left side and exclusive on the
+right: you don&#8217;t include the last element. A good way to keep this in mind is that <code>l[:2]</code> returns 2&nbsp;elements. 
+</p>
+
+<p>
+We can add a second number to get a range that doesn&#8217;t stop or start at the ends of the list. <code>l[1:3]</code>
+means &#8220;start at the second element and keep going until before you hit the fourth element.&#8221; This
+will have two elements: you can just subtract the end index from the start index to see how long a
+slice&nbsp;is.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+You can even use negative steps: <code>l[::-1]</code> is the reverse of the original list, and <code>l[-2:1:-1]</code> means
+&#8220;start from the element second to the back, count backwards by 1s until you hit before the second
+element, and return that as a&nbsp;list.&#8221;
+</p>
+</span>
+
+<p>
+There are two ways you can extend this slightly that aren&#8217;t as often used but are still good to
+know. Negative numbers essentially &#8220;wrap&#8221; and start counting from the <i>back</i> of the list. <code>l[-1]</code> is the
+last element, whatever number that is. <code>l[:-1]</code> is &#8220;everything but the last element.&#8221; The other
+extension is a second colon and a <i>step</i>, that takes every nth element. So, for example, <code>l[1:5:2]</code>
+means &#8220;start at the second element, and take every other element in the list until before you hit
+the sixth&nbsp;element.&#8221;
 </p>
 
 <p>
 This is a lot to take in at once: let&#8217;s show some examples which should clear things&nbsp;up.
 </p>
 
-<div class="highlight"><pre><span></span><span class="s2">"python"</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="s2">"python"</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># returns 'y'</span>
+
+<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># returns 2</span>
+
+<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
+<span class="c1"># returns [2]</span>
+
+<span class="s2">"python"</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 <span class="c1"># returns "yh"</span>
 
 <span class="s2">"hello"</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
@@ -590,12 +649,6 @@ This is a lot to take in at once: let&#8217;s show some examples which should cl
 
 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">:]</span>
 <span class="c1"># returns []</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># returns 3</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">:]</span>
-<span class="c1"># returns [3]</span>
 
 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span>
 <span class="c1"># returns [1, 2]</span>
@@ -755,9 +808,9 @@ missing&nbsp;data.
 </div>
 </div>
 
-<div id="outline-container-orgdf9b03b" class="outline-2">
-<h2 id="orgdf9b03b">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
-<div class="outline-text-2" id="text-orgdf9b03b">
+<div id="outline-container-org738cc25" class="outline-2">
+<h2 id="org738cc25">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
+<div class="outline-text-2" id="text-org738cc25">
 <p>
 What should we do with these problematic rows? This question can be very complicated depending on
 the analysis you&#8217;re doing. A couple distinct approaches&nbsp;exist:
@@ -771,7 +824,7 @@ mess anything&nbsp;up.</li>
 <li>Give up and go get ice&nbsp;cream.</li>
 </ul>
 <p>
-Option number four is tempting, but we&#8217;re going to take the first options: the problematic rows have
+Option number four is tempting, but we&#8217;re going to take the first option: the problematic rows have
 little actual data, and we have plenty to work with even if we remove a bit. (My apologies to
 my Andorran&nbsp;readership.)
 </p>
@@ -800,9 +853,9 @@ Now <code>data</code> has no null values. Let&#8217;s move&nbsp;on!
 </div>
 </div>
 
-<div id="outline-container-org513d277" class="outline-2">
-<h2 id="org513d277">Reshaping&nbsp;Data</h2>
-<div class="outline-text-2" id="text-org513d277">
+<div id="outline-container-org71b2591" class="outline-2">
+<h2 id="org71b2591">Reshaping&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org71b2591">
 <p>
 Most libraries Python uses for data analysis don&#8217;t like data in <i>wide form</i> like we have here, where
 each row is a grouping of measurements and each column is a measurement type. Instead, they prefer
@@ -933,9 +986,9 @@ does what you want for&nbsp;you.
 </div>
 </div>
 
-<div id="outline-container-org49b4cde" class="outline-2">
-<h2 id="org49b4cde">Revenge of the&nbsp;Types</h2>
-<div class="outline-text-2" id="text-org49b4cde">
+<div id="outline-container-org3b26222" class="outline-2">
+<h2 id="org3b26222">Revenge of the&nbsp;Types</h2>
+<div class="outline-text-2" id="text-org3b26222">
 <p>
 One last&nbsp;thing:
 </p>
@@ -951,9 +1004,9 @@ later, so we can fix that&nbsp;now:
 </div>
 </div>
 
-<div id="outline-container-orgefb7c32" class="outline-2">
-<h2 id="orgefb7c32">Intermission</h2>
-<div class="outline-text-2" id="text-orgefb7c32">
+<div id="outline-container-org6bd19cd" class="outline-2">
+<h2 id="org6bd19cd">Intermission</h2>
+<div class="outline-text-2" id="text-org6bd19cd">
 <p>
 OK, we&#8217;ve done a lot so far! We&#8217;ve taken in data off of the Internet, dealt with messy null values,
 and reshaped it so it&#8217;s exactly how we want it. Along the way we learned a lot of stuff about how
@@ -967,9 +1020,9 @@ whatever you need to clear your head and focus on the fun part coming next. Read
 </div>
 </div>
 
-<div id="outline-container-org2fee675" class="outline-2">
-<h2 id="org2fee675">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
-<div class="outline-text-2" id="text-org2fee675">
+<div id="outline-container-org8b3199e" class="outline-2">
+<h2 id="org8b3199e">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
+<div class="outline-text-2" id="text-org8b3199e">
 <p>
 A very common task in data analysis and visualization is to look at <i>categorical data</i>: data that
 comes in a set of limited options. Things like race, gender, class, age group, clinical trial group,
@@ -1021,9 +1074,9 @@ specifically for each of these, so <code>kind='bar'</code> is the same as using 
 </p>
 </div>
 
-<div id="outline-container-org8ee554e" class="outline-3">
-<h3 id="org8ee554e">Summary&nbsp;Plots</h3>
-<div class="outline-text-3" id="text-org8ee554e">
+<div id="outline-container-org80aa8ed" class="outline-3">
+<h3 id="org80aa8ed">Summary&nbsp;Plots</h3>
+<div class="outline-text-3" id="text-org80aa8ed">
 <p>
 Speaking of bar plots, some types of graphs are useful for summarizing data: they don&#8217;t show
 individual elements. An example of this is the bar plot we mentioned&nbsp;above:
@@ -1244,9 +1297,9 @@ an art&nbsp;project.
 </div>
 </div>
 
-<div id="outline-container-org114ee3d" class="outline-2">
-<h2 id="org114ee3d">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
-<div class="outline-text-2" id="text-org114ee3d">
+<div id="outline-container-org17dc967" class="outline-2">
+<h2 id="org17dc967">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
+<div class="outline-text-2" id="text-org17dc967">
 <p>
 OK, now we&#8217;re moving on from categorical plots. Let&#8217;s remove the <code>decade</code> field because we won&#8217;t need
 it any&nbsp;more:
@@ -1528,9 +1581,9 @@ What&#8217;s the story here? Which countries and years have such anomalous data?
 </div>
 </div>
 
-<div id="outline-container-org37ae985" class="outline-2">
-<h2 id="org37ae985">Selecting Countries With Outlier&nbsp;Data</h2>
-<div class="outline-text-2" id="text-org37ae985">
+<div id="outline-container-org650275c" class="outline-2">
+<h2 id="org650275c">Selecting Countries With Outlier&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org650275c">
 <p>
 In many programs, doing something like this—selecting rows that match a fairly complicated
 criterion—would be a fairly difficult task. Not so in Python: the tools we already have can combine
@@ -1631,9 +1684,9 @@ Pretty neat,&nbsp;huh?
 </div>
 </div>
 
-<div id="outline-container-org2de7247" class="outline-2">
-<h2 id="org2de7247">Bringing the&nbsp;Heat</h2>
-<div class="outline-text-2" id="text-org2de7247">
+<div id="outline-container-orgddd6119" class="outline-2">
+<h2 id="orgddd6119">Bringing the&nbsp;Heat</h2>
+<div class="outline-text-2" id="text-orgddd6119">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -1681,9 +1734,9 @@ for visualization: <i>facet&nbsp;grids.</i>
 </p>
 </div>
 </div>
-<div id="outline-container-orgddf032f" class="outline-2">
-<h2 id="orgddf032f">Looking Like Andy&nbsp;Warhol</h2>
-<div class="outline-text-2" id="text-orgddf032f">
+<div id="outline-container-org166d7b1" class="outline-2">
+<h2 id="org166d7b1">Looking Like Andy&nbsp;Warhol</h2>
+<div class="outline-text-2" id="text-org166d7b1">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -1804,9 +1857,9 @@ probably be even more unreadable than it is&nbsp;now.
 </div>
 </div>
 
-<div id="outline-container-orgc309062" class="outline-2">
-<h2 id="orgc309062">The&nbsp;Finale</h2>
-<div class="outline-text-2" id="text-orgc309062">
+<div id="outline-container-org0859fec" class="outline-2">
+<h2 id="org0859fec">The&nbsp;Finale</h2>
+<div class="outline-text-2" id="text-org0859fec">
 <p>
 OK, now we&#8217;re <i>finally</i> ready to do the last plot. We&#8217;re going to be graphing a continuous variable
 against a continuous variable, so instead of <code>catplot</code> we&#8217;re using <code>relplot</code>. There are fewer kinds of
@@ -1881,9 +1934,9 @@ With that said: what <i>can</i> we actually learn from this&nbsp;plot?
 </div>
 </div>
 
-<div id="outline-container-orgd3b36ef" class="outline-2">
-<h2 id="orgd3b36ef">Epilogue: What Have We&nbsp;Learned?</h2>
-<div class="outline-text-2" id="text-orgd3b36ef">
+<div id="outline-container-org4cd359d" class="outline-2">
+<h2 id="org4cd359d">Epilogue: What Have We&nbsp;Learned?</h2>
+<div class="outline-text-2" id="text-org4cd359d">
 <p>
 <img src="../../images/sns-relplots/finale.png" alt="nil"></p>
 
@@ -1966,9 +2019,9 @@ abortions that lasted until the year was&nbsp;over.</li>
 </div>
 </div>
 
-<div id="outline-container-org7e96245" class="outline-2">
-<h2 id="org7e96245">Thanks for&nbsp;Reading!</h2>
-<div class="outline-text-2" id="text-org7e96245">
+<div id="outline-container-orgcdeee74" class="outline-2">
+<h2 id="orgcdeee74">Thanks for&nbsp;Reading!</h2>
+<div class="outline-text-2" id="text-orgcdeee74">
 <p>
 That was a lot: if you made it here, you&#8217;re officially introduced to Python data analysis! If you
 want to see more examples of Python data science in action, feel free to browse the rest of this
