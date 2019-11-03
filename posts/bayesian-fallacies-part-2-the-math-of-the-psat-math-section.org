@@ -113,7 +113,7 @@ remaining integral and solve the problem.
 I don't want to just do this and tell you the answer, because that's not really all that much fun on
 your end. Let's break out some visuals instead! 
 
-This is the /prior distribution/ of $\mu$, before we actually learn anything: just a nice bell curve:
+This is the /prior distribution/ of $\mu$, before we actually learn anything. It's just a nice bell curve:
 
 [[img-url:/images/psat-prior-mu.png]]
 

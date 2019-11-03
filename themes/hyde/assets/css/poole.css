@@ -168,8 +168,8 @@ pre {
 code {
   padding: 0 .25em;
   font-size: 85%;
-  color: #f92672;
-  background-color: #f9f9f9;
+  color: #383a42;
+  background-color: #fafafa;
   border-radius: 3px;
 }
 pre {
@@ -241,7 +241,8 @@ blockquote p:last-child {
 img {
   display: block;
   max-width: 100%;
-  margin: 0 0 1rem;
+  margin: 1rem auto;
+  text-align: center;
   border-radius: 5px;
 }
 
@@ -260,6 +261,19 @@ th {
 tbody tr:nth-child(odd) td,
 tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
+}
+
+table.dataframe th {
+    font-family: "Applied Sans", sans-serif;
+    font-weight: 400;
+    font-size: 85%;
+}
+
+table.dataframe td {
+    font-family: "Swift Neue", serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 85%;
+    text-align: right;
 }
 
 
@@ -563,10 +577,10 @@ figure.fullwidth figcaption {
 }
 
 /* Links: replicate underline that clears descenders */
-a:link,
-a:visited {
-    color: inherit; 
-}
+/* a:link, */
+/* a:visited { */
+/*     color: inherit;  */
+/* } */
 
 .no-tufte-underline:link {
     background: unset;
