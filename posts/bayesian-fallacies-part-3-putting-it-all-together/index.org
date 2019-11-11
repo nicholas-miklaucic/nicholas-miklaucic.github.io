@@ -28,15 +28,15 @@ mechanics class, not in math or statistics? We're going to steal an elegant appr
 
 {{{mn}}}
 This is a large subject, and my rudimentary fluid mechanics background is not enough for me to delve
-too much deeper into this rabbit-hole. Basically, it's a cool idea. The application we're going to
+too much deeper into this rabbit hole. Basically, it's a cool idea. The application we're going to
 be dealing with is a particularly easy version, so it won't be nearly as difficult as working with
 the Reynolds number or the Buckingham $\pi$ theorem or something crazy.
 {{{mn-end}}}
 
-Basically, any property of a model or system that's dimensionless must therefore be comparable
-across different realizations of that model or system. Thus, combining parameters with a dimension
-into a dimensionless form is a powerful way of abstracting problems. A classic example is the period
-of oscillation of a mass attached to a spring: given the mass $M$, the restoring force constant $k$,
+Basically, any property of a model or system that's dimensionless must be comparable across
+different realizations of that model or system. Thus, combining parameters with a dimension into a
+dimensionless form is a powerful way of abstracting problems. A classic example is the period of
+oscillation of a mass attached to a spring: given the mass $M$, the restoring force constant $k$,
 the period $T$, and gravity acceleration $g$, there is only one combination of these that give a
 dimensionless constant, $T^2 km^-1$. Note that $g$ doesn't appear here. This means that, without
 knowing any laws of physics besides the units of all of these parameters, we can conclude that the

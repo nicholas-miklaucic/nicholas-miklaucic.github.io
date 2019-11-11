@@ -11,15 +11,19 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_bayesian-fallacies.xml</loc>
-  <lastmod>2019-10-30T00:15:00Z</lastmod>
+  <lastmod>2019-11-03T00:29:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_dataviz.xml</loc>
-  <lastmod>2019-10-30T00:16:00Z</lastmod>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_meta.xml</loc>
   <lastmod>2019-10-28T04:14:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_stats.xml</loc>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cs.xml</loc>
@@ -27,11 +31,15 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/dataviz.xml</loc>
-  <lastmod>2019-10-30T00:16:00Z</lastmod>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/guide.xml</loc>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/math.xml</loc>
-  <lastmod>2019-10-30T00:15:00Z</lastmod>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/meta.xml</loc>
@@ -47,10 +55,10 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/rss.xml</loc>
-  <lastmod>2019-10-30T00:16:00Z</lastmod>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/sitemap.xml</loc>
-  <lastmod>2019-10-30T00:16:00Z</lastmod>
+  <lastmod>2019-11-07T20:03:00Z</lastmod>
  </sitemap>
 </sitemapindex>

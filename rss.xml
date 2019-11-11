@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho</title><link>https://nicholas-miklaucic.github.io/</link><description>Thoughts on math, computing, and data</description><atom:link href="https://nicholas-miklaucic.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2019 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Sun, 03 Nov 2019 00:45:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Painless Introduction to Python Data Analysis and Visualization</title><link>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho</title><link>https://nicholas-miklaucic.github.io/</link><description>Thoughts on math, computing, and data</description><atom:link href="https://nicholas-miklaucic.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2019 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Mon, 11 Nov 2019 22:26:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Whirlwind Tour of Statistical Tests</title><link>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Hello again! 
+&lt;/p&gt;
+
+&lt;p&gt;
+Let's say you've been working on your dataviz skills, and you think you've found an interesting
+pattern or correlation in a dataset. How can you tell that whatever you're seeing is significant?
+How can you distinguish between random variation and legitimate, meaningful results? As it happens,
+the mathematical branch of statistics is almost entirely devoted to questions like these. I think
+aspiring data scientists need not be full-fledged statisticians, but everyone should be familiar
+with the basic statistical tests, when to apply them, and how to interpret their results.
+&lt;/p&gt;
+
+&lt;p&gt;
+Today we'll be sojourning through the land of statistical tests in Python, showing how they might be
+used and interpreted. The goal is not that you'll be able to apply this all immediately when you
+need it; instead, the goal is that you can recognize when statistical tests might be useful and be
+able to find the ones you need. (In an age of the Internet, I find recognition to be much more
+important than memorizing everything: if you know what to Google, you can figure out how to code it,
+but you can't Google something you can't put into words or something you can't recognize.)
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/"&gt;Read more…&lt;/a&gt; (20 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>guide</category><category>math</category><guid>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/</guid><pubDate>Thu, 07 Nov 2019 17:08:21 GMT</pubDate></item><item><title>A Painless Introduction to Python Data Analysis and Visualization</title><link>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Data visualization and data science is a hot topic right now, and there's lots of people I know who
 want to develop this skill set. A common hurdle, in my experience, is that a lot of tutorials are
 either incredibly specific (here's how to change the y-axis title) or very abstract (this is what a
@@ -27,7 +49,7 @@ an hour&lt;/li&gt;
 If any of these describe you, you've come to the right place!
 &lt;/p&gt;
 
-&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/"&gt;Read more…&lt;/a&gt; (44 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>dataviz</category><guid>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</guid><pubDate>Tue, 29 Oct 2019 19:07:24 GMT</pubDate></item><item><title>Bayesian Fallacies, Part 2: The Math of the PSAT Math Section</title><link>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/"&gt;Read more…&lt;/a&gt; (44 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>dataviz</category><category>guide</category><guid>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</guid><pubDate>Tue, 29 Oct 2019 19:07:24 GMT</pubDate></item><item><title>Bayesian Fallacies, Part 2: The Math of the PSAT Math Section</title><link>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 In the last episode, we introduced two thinking errors that often come up in statistics: Bayes'
 paradox and regression to the mean. I proposed that these errors are really two different
 manifestations of the same underlying phenomenon, but I haven't done much to actually explain
