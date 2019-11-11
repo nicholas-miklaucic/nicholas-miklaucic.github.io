@@ -2,7 +2,7 @@
 .. title: A Painless Introduction to Python Data Analysis and Visualization
 .. slug: a-painless-introduction-to-python-data-analysis-and-visualization
 .. date: 2019-10-29 15:07:24 UTC-04:00
-.. tags: dataviz
+.. tags: dataviz, guide
 .. category: dataviz
 .. link: 
 .. description: 
@@ -1581,7 +1581,7 @@ missing. We can reflect about how different visualizations would allow for diffe
 understanding the data. This type of plot allows us to see some small details (like Japan's spike,
 which would be invisible if all of the lines were on the same chart) and also the bigger picture (if
 you had stopped with the list of years with the biggest differences, you'd miss that most of those
-/aren't actually outliers/: they're part of a larger, very predictable trend. Not many approaches
+/aren't actually outliers/: they're part of a larger, very predictable trend.) Not many approaches
 combine the forest and the trees as effectively.
 
 To close out, I'll provide some context for the patterns we just pointed out and drive home just how
