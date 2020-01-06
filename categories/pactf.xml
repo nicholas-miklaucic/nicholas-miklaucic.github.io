@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about pactf)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/pactf.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Mon, 06 Jan 2020 02:48:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PACTF 2019 Writeup: Denial of Service Attack</title><link>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Last year, I led the team behind &lt;a href="https://2019.pactf.com/"&gt;PACTF 2019&lt;/a&gt;, a CTF competition where people, mostly high schoolers,
+solved problems based on computers and computer security. It was a really fun and rewarding
+experience, and I think a lot of people hopefullly had fun solving the problems. If that sounds like
+something you might like, I'd recommend trying it out: make an account and see what you can do! I
+wrote about a dozen problems for this contest, and so you'll see some overlapping themes with what I
+talk about on this blog.
+&lt;/p&gt;
+
+&lt;p&gt;
+Someone recently asked me to write up my explanation for one of the problems I wrote: "Denial of
+Service Attack", one of the harder problems in the second week.  You're welcome to try the problem
+on the PACTF website in full before we begin. I will be spoiling the whole thing here: you've been
+warned! I'll start with a brief overview, give some background, and go over the main trick.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/"&gt;Read more…&lt;/a&gt; (6 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>pactf</category><category>programming</category><guid>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/</guid><pubDate>Mon, 06 Jan 2020 02:39:25 GMT</pubDate></item></channel></rss>

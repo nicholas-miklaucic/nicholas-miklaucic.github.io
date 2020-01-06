@@ -37,7 +37,7 @@
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2019         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -53,29 +53,28 @@
     <div>
 <p>If you are using reStructuredText and install pygal, Nikola has support for rather nice charts
 with little effort, and i&#8217;s even semi-interactive (hover your pointer over the&nbsp;legend!):</p>
-<pre class="code rest"><a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-1"></a><span class="p">..</span> <span class="ow">chart</span><span class="p">::</span> StackedLine
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-2"></a>   <span class="nc">:title:</span> <span class="nf">'Browser usage evolution (in %)'</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-3"></a>   <span class="nc">:fill:</span> <span class="nf">True</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-4"></a>   <span class="nc">:x_labels:</span> <span class="nf">['2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012']</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-5"></a>   <span class="nc">:width:</span> <span class="nf">600</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-6"></a>   <span class="nc">:height:</span> <span class="nf">400</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-7"></a>   <span class="nc">:explicit_size:</span> <span class="nf">True</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-8"></a>   <span class="nc">:style:</span> <span class="nf">BlueStyle</span>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-9"></a>
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-10"></a>   ('Others',  [14.2, 15.4, 15.3,  8.9,    9, 10.4,  8.9,  5.8,  6.7,  6.8,  7.5])
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-11"></a>   ('IE',      [85.8, 84.6, 84.7, 74.5,   66, 58.6, 54.7, 44.8, 36.2, 26.6, 20.1])
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-12"></a>   ('Firefox', [None, None, None, 16.6,   25,   31, 36.4, 45.5, 46.3, 42.8, 37.1])
-<a name="rest_code_dfc437baa9f445978b4e9fe0579c0d7a-13"></a>   ('Chrome',  [None, None, None, None, None, None,    0,  3.9, 10.8, 23.8, 35.3])
+<pre class="code rest"><a name="rest_code_c10c5a9a20a74f40a04f75608838446a-1"></a><span class="p">..</span> <span class="ow">chart</span><span class="p">::</span> StackedLine
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-2"></a>   <span class="nc">:title:</span> <span class="nf">'Browser usage evolution (in %)'</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-3"></a>   <span class="nc">:fill:</span> <span class="nf">True</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-4"></a>   <span class="nc">:x_labels:</span> <span class="nf">['2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012']</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-5"></a>   <span class="nc">:width:</span> <span class="nf">600</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-6"></a>   <span class="nc">:height:</span> <span class="nf">400</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-7"></a>   <span class="nc">:explicit_size:</span> <span class="nf">True</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-8"></a>   <span class="nc">:style:</span> <span class="nf">BlueStyle</span>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-9"></a>
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-10"></a>   ('Others',  [14.2, 15.4, 15.3,  8.9,    9, 10.4,  8.9,  5.8,  6.7,  6.8,  7.5])
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-11"></a>   ('IE',      [85.8, 84.6, 84.7, 74.5,   66, 58.6, 54.7, 44.8, 36.2, 26.6, 20.1])
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-12"></a>   ('Firefox', [None, None, None, 16.6,   25,   31, 36.4, 45.5, 46.3, 42.8, 37.1])
+<a name="rest_code_c10c5a9a20a74f40a04f75608838446a-13"></a>   ('Chrome',  [None, None, None, None, None, None,    0,  3.9, 10.8, 23.8, 35.3])
 </pre>
 <div style="text-align: center;"><div class="text-error">In order to use the Chart directive, you must install the &#8220;pygal&#8221; Python package.</div></div>
 <p>Here&#8217;s how it&nbsp;works:</p>
 <ul class="simple">
-<li>Next to the directive, use the <a class="reference external" href="http://pygal.org/chart_types/">chart type you&nbsp;want</a>
-</li>
-<li>Any option you can set in a chart? Use it like <tt class="docutils literal">:title:</tt> in this example. Syntax on
-the value is just like in the pygal&nbsp;examples.</li>
-<li>For each data series do it like the line that says <tt class="docutils literal">Firefox</tt> in this example. The first element
-is the label, then comes the&nbsp;data.</li>
+<li><p>Next to the directive, use the <a class="reference external" href="http://pygal.org/chart_types/">chart type you&nbsp;want</a></p></li>
+<li><p>Any option you can set in a chart? Use it like <code class="docutils literal">:title:</code> in this example. Syntax on
+the value is just like in the pygal&nbsp;examples.</p></li>
+<li><p>For each data series do it like the line that says <code class="docutils literal">Firefox</code> in this example. The first element
+is the label, then comes the&nbsp;data.</p></li>
 </ul>
 <p>Easy, right? Please explore <a class="reference external" href="http://pygal.org">the pygal site</a> for more information, and just
 take this example and tweak&nbsp;stuff.</p>

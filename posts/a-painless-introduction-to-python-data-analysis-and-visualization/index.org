@@ -33,7 +33,7 @@ If any of these describe you, you've come to the right place!
 * Structure
 We're going to be using data from the World Bank: specifically, data with birth rates by year for
 each country. The data I'm using is [[https://gist.github.com/nicholas-miklaucic/af822d547b8796753b8d160ca76e0172][here.]] Our goal will be *to learn something interesting from this*
-*data that we couldn't have easily learned without the tools we'll be learning.* This is pretty broad:
+*data that we couldn't have easily learned without the tools we'll be using.* This is pretty broad:
 I don't want to make this tutorial about data analysis /for/ anything in particular, so we're going to
 assume that we have absolutely no idea what the data might have to say.
 
@@ -68,7 +68,7 @@ Projects like the posts on this blog—multimedia, interdisciplinary documents t
 visuals, and code—are pretty common nowadays, and there's a great tool for dealing with this
 particular mix of information: Jupyter notebooks. Jupyter notebooks are similar to notebooks in
 software like Mathematica or MATLAB: they are a collection of /cells/, where each cell is text or code
-(usually Python, but other languages have support as well) and you can view them together.
+(usually Python) and you can view them together.
 
 I mention this because this post has a companion Jupyter notebook! Even if you don't have Python and
 company installed on your computer, you still have a chance to play around with what I'm doing and
@@ -199,7 +199,7 @@ DataFrames always have an /index/: a big list of data, one for each row, such th
 the same index. Indexes can be basically anything, and the default choice is usually just the
 natural numbers, like we have here.
 
-DataFrames also have some number of /columns/: named lists of data with a value for each row. we have
+DataFrames also have some number of /columns/: named lists of data with a value for each row. We have
 three columns here. We can get a specific column and it'll return a 1D list (called a /series/) for
 us:
 
@@ -345,7 +345,7 @@ get a table back. This is what this code outputs:
 </table>
 #+END_EXPORT
 
-As you can see, we have an issue: obviously the list of countries has changed a lot since 1960 and
+As you can see, we have an issue—obviously the list of countries has changed a lot since 1960 and
 data collection has never been perfect, and so a lot of countries who have rows in this dataset
 don't have a full set of years. The World Bank has just inserted ~..~ where this happens.
 

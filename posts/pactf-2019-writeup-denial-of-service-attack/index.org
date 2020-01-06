@@ -1,0 +1,138 @@
+#+BEGIN_COMMENT
+.. title: PACTF 2019 Writeup: Denial of Service Attack
+.. slug: pactf-2019-writeup-denial-of-service-attack
+.. date: 2020-01-05 21:39:25 UTC-05:00
+.. tags: pactf, programming
+.. category: pactf-writeups
+.. link: 
+.. description: Explaining the solution to Denial of Service Attack
+.. type: text
+.. has_math: true
+#+END_COMMENT
+Last year, I led the team behind [[https://2019.pactf.com/][PACTF 2019]], a CTF competition where people, mostly high schoolers,
+solved problems based on computers and computer security. It was a really fun and rewarding
+experience, and I think a lot of people hopefullly had fun solving the problems. If that sounds like
+something you might like, I'd recommend trying it out: make an account and see what you can do! I
+wrote about a dozen problems for this contest, and so you'll see some overlapping themes with what I
+talk about on this blog.
+
+Someone recently asked me to write up my explanation for one of the problems I wrote: "Denial of
+Service Attack", one of the harder problems in the second week.  You're welcome to try the problem
+on the PACTF website in full before we begin. I will be spoiling the whole thing here: you've been
+warned! I'll start with a brief overview, give some background, and go over the main trick.
+
+{{{TEASER_END}}}
+
+Once you strip away the veneer of the problem, the basic gist is trying to find a pathological regex
+in a giant list of them. The problem's corpus isn't mine: it's a public document that I don't have
+control over. The question is how to find the regular expression in an enormous list of expressions
+that takes exponential time to match against the target. Most regular expressions are very fast, so
+it's not common knowledge that regular expression matching is actually exponential time in the worst
+case as a function of the length of the target string.
+
+
+Note that the easiest way to solve the problem is just to run each of the regular expressions and
+figure out which one takes the longest. This is how I imagine most teams solved it. The writeup I'm
+doing will instead try to analyze how regular expressions could fail and go from there.
+
+{{{mn}}}
+For the interested, [[https://regexr.com/][RegExr]] provides an interactive regular expression sandbox and a fuller reference
+on how regular expressions work. The Holy Grail of regular expression references is /Mastering/
+/Regular Expressions/ by Jeffrey E. F. Friedl, which can be purchased [[https://www.amazon.com/dp/B007I8S1X0/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1][on Amazon]]. If you really want to
+know everything there is to know about regular expressions, this book is my recommendation.
+{{{mn-end}}}
+
+I'll briefly introduce regular expressions so people can follow along: we'll be using a fairly small
+subset of the whole idea, so it'll be quick to introduce.
+
+* What Are Regular Expressions? What's So Regular About Them?
+Regular expressions (/regexes/ from here on out) are a way of representing /regular languages/, a
+theoretical computer science construct that I'm going to criminally oversimplify to "clearly defined
+sets of strings using some alphabet with only singletons, alternation, concatenation, and the Kleene
+star." Let me define those terms. I'll use the syntax ~/.../~ to denote a regular expression.
+ - A /singleton/ is a single character, like ~/a/~. They only match one thing, in this case ~a~.
+ - /Alternation/ means "either regex A or regex B", and they're written like ~/A|B/~. For example, the
+   regular expression ~/a|b/~ accepts two strings: ~a~ and ~b~.
+ - /Concatenation/ means "regex A followed by regex B." For example, the regular expression ~/ab/~
+   matches a single thing: ~a~ followed by ~b~.
+ - The /Kleene star/ means "zero or any number of repeats of regex A concatenated together," so
+   essentially ~/|A|AA|AAA|AAAA|.../~ going on forever as well as the empty sting. This is represented
+   using an asterisk like ~/A*/~. For example, ~/a*/~ will match the empty string or any string that
+   just has the letter ~a~. 
+
+Regular expressions (think regular as in "following rules", not "normal") are a really useful way of
+selecting strings that match some requirement. For example, if you wanted to search a document for
+phone numbers in several different formats, you could construct a simple regular expression that
+matched different types of phone numbers. They're generally very fast, but as I said earlier they
+aren't always that way. How can a regular expression match slowly? Let's find outlawed.
+* Castastrophic Backtracking
+I'm going to add a little new syntax: ~/A+/~ means "one or more of ~A~ concatenated together," which is
+just a shorthand for ~/AA+/~. Similarly, we use parentheses to group things together: ~/ab+/~ means "~a~
+followed by one or more ~b~" but ~/(ab)+/~ means "one or more copies of ~ab.~"
+
+Let's say we're matching against the target string ~aaaaaaaaaaaaaaaaaaaa~. We're trying to see if it
+matches the regular expression /(~a+)+b/~. We know that this can't possibly match: the regular expression
+we're matching against requires the string to end in ~b~ but our target doesn't. The problem is that
+the computer doesn't know this. This is how most regex engines will try and do this:
+
+ - The first ~+~ matches on the first ~a~. These are usually /greedy/, meaning they take as many as
+   possible, so we match the entire string with the first ~a+~.
+ - The outer ~+~ also matches, because we have one copy of our previous string.
+ - The ~b~ then fails to match, because the string doesn't end in ~b~.
+ - Now, we /backtrack/: we try to see if matching less with the first ~+~ works. Now we match every ~a~
+   but the last one.
+ - The second ~+~ still matches.
+ - We fail again, and so we'll again try to backtrack and match one less ~a~.
+
+Do you see how this is going to spiral out of control? We'll try to match the inner ~+~ with every
+number of ~a~ from 1 to 20, and we'll try the second ~+~ as many times as we can for each one. We can
+think of each attempted match as a pair $(p, q)$ where $p$ is the number of $a$ in the first $+$ and
+$q$ is the number of combined groups of $a$ in the second $+$. For each $p$, there are
+$\frac{20}{p}$ floored attempted matches for that value of $p$. As the number of ~a~ in our target
+string, which we'll call ~n~, approaches infinity, the total amount of matches we're trying here,
+$\sum_{i=1}^n \frac{n}{i}$ approaches $O(n \log n)$ (it's $n$ times the harmonic series, which asymptotically
+grows like $\log n$.) 
+
+{{{mn}}}
+Trying to figure out exactly how many times this will try to match something, given an input of $n$
+copies of ~a~, is nontrivial and left as an exercise for the edification of the reader. 
+{{{mn-end}}}
+
+Let's go deeper. What about ~/(a+)+(a+)+b/~? This will match a /lot/ of things before giving up. We can
+continue this indefinitely to create more and more pathological regular expressions.
+
+This general phenomenon is called /catastrophic backtracking/. It's a good thing to watch out for in
+regular expressions: these simple examples are easy to work out, but it isn't so easy in the real
+world. The things to watch out for:
+
+ - Nested ~+~ or ~*~ that can fail.
+ - Any use of ~+~ or ~*~ with concatenation where the input to ~+~ or ~*~ matches a large part of the target.
+
+The regex that solves the problem is basically the same idea as above, but with a couple
+modifications:
+ - Instead of a single character like ~a~, it matches any A-Z character in the first ~+~ section.
+ - Instead of using the same thing in both ~/(A+)/~ sections, it uses newlines for the second ~+~.
+ - Instead of ensuring failure by adding a character at the end (which smart regex engines will
+   short-circuit and not fail on), it fails because the file doesn't end with a newline: otherwise,
+   it would match. (This is where some people ran into trouble, I think.)
+
+{{{mn}}}
+If you're confused about the extra syntax, consult [[https://regexr.com/][RegExr]].
+{{{mn-end}}}
+
+The actual pathological regex is this: ~^(([k-za-j)E|]+)+([\nv88]+)+)+$~. It has some obfuscation and red
+herrings thrown in, but it has this characteristic behavior I described above: it tries to match
+every possible combination of values for each of the five ~+~ operators, which ends up being a lot,
+but none of these attempts will ever match and stop the search. 
+
+* Takeaways
+Regular expressions can be crazy! If you want to try to match regular expressions that you can't
+easily verify will actually stop, make sure you implement some sort of timeout. Otherwise, you're
+susceptible to malicious actors conducting a denial of service attack abusing this sort of
+behavior. 
+
+For more info on this as a security vulnerability, check out the [[https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS][OWASP wiki page on the
+vulnerability.]] 
+
+I hope this was enjoyable and you learned something! I might post more PACTF writeups in the future
+or thoughts on future contests, so stay tuned for those.

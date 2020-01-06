@@ -7,15 +7,19 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://nicholas-miklaucic.github.io/</loc>
-  <lastmod>2019-08-04T19:17:00Z</lastmod>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/2019/</loc>
   <lastmod>2019-08-02T00:07:00Z</lastmod>
  </url>
  <url>
+  <loc>https://nicholas-miklaucic.github.io/2020/</loc>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2019-11-07T20:03:00Z</lastmod>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
@@ -27,7 +31,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/</loc>
-  <lastmod>2019-11-07T20:03:00Z</lastmod>
+  <lastmod>2020-01-06T02:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/algorithms/</loc>
@@ -44,6 +48,10 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_meta/</loc>
   <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_pactf-writeups/</loc>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_stats/</loc>
@@ -70,6 +78,14 @@
   <lastmod>2019-08-03T01:03:00Z</lastmod>
  </url>
  <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/pactf/</loc>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/programming/</loc>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://nicholas-miklaucic.github.io/galleries/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
  </url>
@@ -87,7 +103,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/listings/hello.py.html</loc>
-  <lastmod>2019-10-28T04:13:00Z</lastmod>
+  <lastmod>2020-01-06T02:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/about-me/</loc>
@@ -154,10 +170,6 @@
   <lastmod>2019-10-30T00:15:00Z</lastmod>
  </url>
  <url>
-  <loc>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests-for-programmers/</loc>
-  <lastmod>2019-11-07T20:03:00Z</lastmod>
- </url>
- <url>
   <loc>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/</loc>
   <lastmod>2019-11-07T20:03:00Z</lastmod>
  </url>
@@ -172,5 +184,9 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/hello-world/</loc>
   <lastmod>2019-08-03T01:03:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/</loc>
+  <lastmod>2020-01-06T02:43:00Z</lastmod>
  </url>
 </urlset>
