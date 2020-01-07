@@ -1,0 +1,283 @@
+#+BEGIN_COMMENT
+.. title: Problem-Solving Techniques: Invariants
+.. slug: problem-solving-techniques-invariants
+.. date: 2020-01-07 12:26:06 UTC-05:00
+.. tags: math, cs
+.. category: problem-solving-techniques
+.. link: 
+.. description: Using invariants for clever solutions to problems
+.. type: text
+.. has_math: true
+#+END_COMMENT
+There are a lot of clever proofs in mathematics and computer science. I've already talked about some
+of them, and I hope to do a lot more of it on this blog. There's often a certain separation that I
+feel when I read something particularly creative or beautiful: this is amazing, but how could I ever
+hope to produce something like it? Is real aesthetic achievement in these fields limited to those
+with a natural talent I lack? 
+
+I'm still not sure about that last question, but I do know that, like anything, it is possible to
+improve at creative problem-solving through practice. The people I've known who have been best at
+doing creative math—the kind that makes perfect sense when you see it but seems impossible to find
+if you don't already know it—have built up vast toolboxes of concepts and ideas that are useful in
+many different ways across mathematics and computer science. These aren't solutions for a single
+problem: they're meta-solutions that serve as an archetype for solutions to a diverse array of
+problems. In my experience, the size of that toolbox is what, more than anything else, determines
+how effectively one can find creative, novel ways of approaching problems. I'll be talking about one
+such tool today: invariants.
+
+{{{TEASER_END}}}
+
+* What is an Invariant?
+
+{{{mn}}}
+Angle, length, and volume are also all invariant under translation, reflection, and rotation. In
+fact, we might define /geometry/, at least the kind taught in high school, as the study of properties
+invariant under these operations.
+{{{mn-end}}}
+
+An /invariant/ is a property of something—any mathematical object or system you can think of—that
+doesn't change under some type of transformation. A really simple example is that the area of a
+shape is invariant under translation, rotation, or reflection. 
+
+* Why Do We Care?
+The idea that area is invariant under these types of transformations is probably something you
+already knew. Thinking about it like this, though, lets us easily use it in ways that aren't
+entirely obvious otherwise.
+
+Take, for example, the problem of determining if two triangles are congruent: that is, if one can be
+mapped onto the other through transformation, rotation, and reflection. In high school geometry you
+learn that three sides determine a triangle, called /SSS congruence/, and also that two sides and the
+angle between then does the same thing, called /SAS congruence/. If the three side lengths or two side
+lengths and the angle between them match between two triangles, then we know that they can be mapped
+to one another. You also might learn that two sides and an angle not between both of them does not
+establish congruence. This isn't intuitively obvious to many, and spurious "SSA congruence" is the
+source of a lot of confusion in geometry classes.
+
+One way you might intuit that this doesn't work is that SSS and SAS come with associated formulae
+for the area of their corresponding triangle: because area is invariant under any transformation
+between congruent triangles, we know that congruence implies equal area. [[https://en.wikipedia.org/wiki/Heron%2527s_formula][Heron's formula]] gives you
+the area of a triangle given its side lengths, and given two side lengths $a$ and $b$ and the angle
+$\theta$ between them the area of the resulting triangle is $\frac{1}{2} ab \sin \theta$. No such formula
+exists for another angle in the triangle, because two triangles with that configuration may have
+different areas. 
+
+I'm interested in the fact that *knowing these formulae can suggest a completely different*
+*conjecture about congruence.* Knowing that SSS and SAS define a triangle's /area/ can suggest a
+completely different result about transforming triangles into one another.
+
+You might reasonably think that this sort of idea isn't really that noteworthy or interesting, and
+you hardly need to think about area as an invariant to come up with SSS or SAS congruence. I would
+argue, however, that this jump is only underwhelming because the results it gives us are familiar
+already. Let's see how this sort of thinking can be applied to problems with less clear solutions.
+
+* General Terminology
+
+{{{mn}}} 
+Note that math has a lot of names for congruence, because we often want to talk about
+several kinds of transformations for the same object, and so it's a bit of a pain to keep track
+of. Graphs are /isomorphic/, triangles and integers are /congruent/, other objects are /equivalent/,
+etc. This concept is incredibly general, and disciplines like category theory provide a really
+abstract foundation for these types of relations, but I'm not going there for this post.
+{{{mn-end}}}
+
+Because we're going to step outside the realm of synthetic geometry, I want to introduce some
+terminology that's not tied to triangles. Let's call any sequence of transformations that fit our
+criteria (above, that was any sequence of translation, reflection, and rotation) a /map/. We say two
+objects are /congruent/ if they have the same value for an invariant. Note that congruence behaves
+like equality (it's reflexive, commutative, and transitive). Thus, we call a class of objects that
+all have some specific value for an invariant an /equivalence class/. 
+
+* A Cooler Example
+Imagine we have a grid and we can place 1x2 dominoes in that grid. There are all sorts of shapes we
+can make by placing these dominoes in different ways: we could make a 2x2 square, a 1x4 line, most
+of the Tetris pieces, you get the idea. There are also some shapes we can't make: a 1x1 square, for
+example, obviously can't be made by placing dominoes like this.
+
+Imagine the shape created by an 8x8 square where two diagonally-opposite corners are removed. I'll
+call it the /mutilated square./ Here's the problem: can we make this shape by tiling dominoes?
+
+I highly encourage you to try doing this yourself. You might find it easier to start with smaller
+shapes: a 4x4 square with the same removed corners, a 3x4 rectangle, you name it. 
+
+You should (hopefully!) find that tiling the 8x8 mutilated square isn't easy. You might conjecture
+that it's impossible once you've tried it. The question is: how could we go about proving that this
+tiling is truly impossible and not just difficult to find?
+
+I have no doubt there exists a laborious, tedious proof of this that basically starts with smaller
+shapes and grows up from there, with lots of casework about how you place your starting domino and
+the resulting shape. This is about creative, cool proofs, however, and you might infer from the
+fact that I'm talking about this that we can use an invariant to solve this elegantly.
+
+Why might we think to try using an invariant (the problems you have elsewhere probably won't have
+"Invariants" in the website title!) when there are so many possible options for a proof, some of
+which are probably successful if inelegant? Knowing how to recognize problems that invariants might
+be fruitfully applied to is as important as knowing how to use invariants.
+
+In this case, we're trying to show that a certain kind of map—repeatedly adding or removing a 1x2
+domino adjoining the current shape—can't transform one object, the empty shape with no dominoes
+placed, into another, the 8x8 mutilated square. Showing that no such map exists is not an easy task,
+because there are a lot of possible sequences and it's hard to reason about the whole space of every
+possible attempt to tile the mutilated square.
+
+Enter invariants: problems about objects under transformations are usually an extremely good fit for
+this tool. Now we know to try this method. The question is, how do we apply this technique?
+
+* The Handy-Dandy Pollard's Rho Guide to Using Invariants
+I'm going to break this up into a couple of distinct steps.
+
+1. Clearly define the underlying transformation and mathematical objects that the problem uses. The
+   problem should be of the form "does there exist a map that maps X to Y?" (That is, are X and Y
+   equivalent?)
+2. Identify possible invariants under this transformation.
+3. Check your invariants to see if any of them differ between the start and target objects.
+4. If any invariants differ, then simply showing that combined with proving the invariance of the
+   property you're using completes the proof that no such transformation sequence exists.
+5. If none of the invariants differ but you're convinced the transformation really is impossible,
+   then go back to step 2.
+6. If none of the invariants differ and you're not convinced the transformation is impossible, try
+   to find such a transformation. Your invariants can still be helpful: think of simple base cases
+   that match the invariants and try to find a way to map an arbitrary object to that base
+   case. Because most of these transformations are reversible, this allows you to interconvert
+   between any two arbitrary objects X and Y: transform X into the base, and transform the base into
+   Y.
+
+We've already done the first step: our object is "shapes made through tiling dominoes on a grid",
+and our transformation is "adding or removing dominoes." Let's move on to step 2. What properties
+does this transformation preserve? If you're following along, try to do this yourself. Here's the
+first one I thought of: the parity ("evenness") of the shape's area. The dominoes have even area,
+and so adding them can't make a shape with odd area have even area or vice versa. Parity is the most
+common form of invariant in lots of discrete problems, and so it's a good starting choice.
+
+On to step 3. Can area parity solve our problem? Sadly, the answer is no: the 8x8 mutilated square
+has area 62, and the empty shape has area 0, both of which have the same area parity. (This would
+work if our starting shape was a single 1x1 square, for example, but that's not this problem.)
+
+You might continue trying to tile the mutilated square: perhaps there really is a way to do
+it. (These decisions are what separates a meta-solution from a solution: this is an archetype for
+solutions, but it's not completely formulaic to apply.) It really isn't possible, though, so you're
+probably not going to get very far.
+
+I liked the parity idea, though: is there some way of using parity in a different way? As it turns
+out, there is!
+
+{{{mn}}}
+If you want a more rigorous definition of parity, something like this will do. /Parity/ is some way of
+assigning "even" and "odd" to objects that can be combined in some way such that combining two even
+objects results in an even object, combining two odd objects results in an even object, and
+combining an even and odd object results in an odd object.
+{{{mn-end}}}
+
+I have some fessing up to do. I've been a little coy with my terminology: this problem is usually
+framed as the /mutilated/ /chessboard problem./ Chessboards have an interesting variant of parity:
+they're alternately colored black and white. It may seem like a stretch to call this parity, but it
+really isn't. We could imagine assigning each square a coordinate, where $(0, 0)$ is the bottom left
+and $(1, 0)$ is the square to the right of that. A normal chessboard is colored so that any square
+at coordinate $(x, y)$ is black if $x + y$ is even and white if $x + y$ is odd: a square's color
+reflects its parity.
+
+Note that a domino always covers one even square and one odd square. Thus, the difference between
+the number of even and odd squares in a shape is an invariant under our transformation! I'm going to
+call this difference the /parity balance./ Parity balance works perfectly for our problem: the normal
+8x8 chessboard had the same number of white and black squares, but on a chessboard the opposing
+diagonal corners are the same color. We removed two of them, so the resulting shape has a net
+imbalance: it has two more black squares than white squares. Our starting empty shape has no such
+imbalance, and so there's no way to create the mutilated chessboard under our invariant.
+
+Note that formalizing this into a proof isn't quite done, but we have the essential creative insight
+that's needed to solve the problem. The rest is just formally proving that our domino tiling can't
+change the balance of black and white squares and showing that the invariant really is different
+between the shapes.
+
+* Generalization
+Using invariance is especially fruitful because it suggests a number of other very interesting
+questions. Specifically, we know that our two invariants are /necessary/ for a map to exist between
+two shapes X and Y. In math, once you've shown that something is necessary, it's often fruitful to
+then ask if it's /sufficient/: that any object X can be mapped to any object Y in its equivalence
+class. 
+
+Sadly, the answer to this question is no: a counterexample is that a T-shape like the one in Tetris
+satisfies both of our invariants but can't be tiled with dominoes.
+
+You might reasonably ask if there is some invariant that is both necessary and sufficient for this
+transformation. This is an excellent question! The answer is yes, but it's substantially more
+complicated than what I could reasonably introduce here.[[https://www.jstor.org/stable/2324578][ This paper]] (cited in the margin)
+establishes such an invariant and shows an approach that can work for other types of tiling. 
+
+{{{mn}}}
+Thurston, W. (1990). Conway's Tiling Groups. The American Mathematical Monthly, 97(8), 757-773. doi:10.2307/2324578
+{{{mn-end}}}
+
+* Gallery
+Now that we've developed one example in full, I want to quickly run through a bunch of other
+problems where invariants are useful as a way to aid the reader in recognizing possible invariants
+in other problems. I'm not going to go in-depth on any of them, but I'll provide links for the
+interested reader to learn more.
+
+** The 15 puzzle
+There's a famous sliding block [[https://en.wikipedia.org/wiki/15_puzzle][puzzle]] that starts with a 4x4 grid tiled with numbers, with the last
+16 tile missing. The task is to switch the 14 and 15 tiles. There's a parity invariant, a bit too
+complicated to get into here, that shows that this puzzle is impossible in its standard form: this
+didn't stop Sam Loyd, famed puzzle author, from offering $1,000 for doing just that!
+** Rubik's Cube
+There's another parity invariant here that applies to the standard Rubik's cube: it's impossible to
+switch two adjacent edge pieces without doing anything else. (If you have any friends who solve
+Rubik's cubes, this is good for a laugh: dissassemble two edges and switch them, then shuffle the
+whole thing and see how long it takes them to figure it out.) As it happens, this parity combined
+with the orientation of the corners is sufficient for two cubes to be congruent: there are 12 such
+equivalence classes, and so a cube randomly disassembled and put back together has only a 1 in 12
+chance of being soluble.
+** Polygon Dissection
+Given two polygons, can you cut one into pieces and reassemble them to get the other? The invariant
+that is most useful here is area. Satisfyingly, unlike our dominoes, this time area is both
+necessary and sufficient for two shapes to be "scissors-congruent" (to distinguish it from normal
+congruence of shapes), a fact proved by the [[https://en.wikipedia.org/wiki/Wallace%25E2%2580%2593Bolyai%25E2%2580%2593Gerwien_theorem][Wallace-Bolyai-Gerwien theorem]]. 
+** Polyhedra Dissection
+Extending the Wallace-Bolyai-Gerwien theorem to polyhedra was a famous problem, included on David
+Hilbert's seminal list of problems presented in 1900 as important directions for future
+mathematics. Can any two polyhedra with equal volume be transformed into each other by cutting and
+rearranging pieces? This problem, the third on Hilbert's list, was solved by Max Dehn that very same
+year: no, it isn't always possible. There's a second invariant, called the /Dehn invariant/, that
+involves the angles of different edges. Volume and the Dehn invariant together are sufficient to
+show that two polyhedra can be dissected into each other.
+** Physical Systems
+All sorts of invariants occur in physics problems, depending on the exact transformations being
+used: momentum, energy, the speed of light, etc. These are usually called /conservation laws/. Taking
+your standard high-school mechanics and reformulating it in terms of invariants can produce some
+very important theory, like [[https://en.wikipedia.org/wiki/Lagrangian_mechanics][Lagrangian mechanics]]. There's a very beautiful and deep result that
+connects invariants to symmetries called [[https://en.wikipedia.org/wiki/Noether%2527s_theorem][Noether's theorem]].
+** Topology
+I earlier mentioned that you can think of geometry as the study of invariants under translation,
+rotation, and reflection. What if we generalized this list to include any type of continuous
+deformation, like stretching or twisting? This question results in a new discipline:
+topology. Things like area and angle are no longer preserved, but the weaker invariants that still
+hold are incredibly useful. 
+
+For example, the number of holes in an object (playing /very/ fast and loose) is invariant under these
+deformations: you can turn a sphere into a cube because they're both completely solid, but you can't
+transform either into a torus (a donut shape) without tearing them because the torus has a /genus/
+(the formal term for this number of holes) of 1 whereas the sphere and cube have genus 0.
+** Theorema Egregium
+The [[https://en.wikipedia.org/wiki/Gaussian_curvature?oldformat=true][theorema egregium]] ("remarkable theorem"), proved by Gauss, loosely states that the curvature of
+a 2D surface doesn't change depending on how you bend it in 3D space. For example, you can't bend an
+orange peel until it's perfectly flat without breaking it somewhere because the sphere has curvature.
+
+This is one of my favorite results from this field because it's so accessible and intuitive in its
+practical applications. Imagine a piece of pizza. It's easy to bend if you lay it flat, because
+there are two degrees of freedom: the tip can curve down and the slice can remain flat (under the
+definition of curvature that we're using) because one of the axes (the one parallel to the crust) is
+still flat. If we restrict this by curving the slice along the axis parallel to the crust, it
+reduces the ability of the shape to curve in the other direction because it still has to be
+flat. Or, put another way, folding pizza makes it more stable!
+
+* Wrapping Up
+I have two hopes at this point: that you, the reader, are now a little better at solving math
+problems creatively, and that you've seen how powerful invariants are in mathematics and for
+understanding the world. There's really no limit to how deep the rabbit hole goes.
+
+The interested reader might be thinking about how you might reason about invariants and
+transformations more generally than I have. That abstraction results in group theory, a fascinating
+branch of math that I think more than repays some study for anyone interested in math, physics, or
+computer science. The [[https://en.wikipedia.org/wiki/Group_(mathematics)?oldformat=true][Wikipedia article on what a group is]] might be a good place to start if the
+stuff I've talked about is new to you and you'd like to learn more.
+
+Thanks for reading! Stay tuned for more.
