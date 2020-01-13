@@ -19,7 +19,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2020-01-07T22:19:00Z</lastmod>
+  <lastmod>2020-01-13T05:55:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
@@ -192,6 +192,10 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/</loc>
   <lastmod>2020-01-06T02:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-howd-i-get-hacked/</loc>
+  <lastmod>2020-01-13T05:55:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/</loc>

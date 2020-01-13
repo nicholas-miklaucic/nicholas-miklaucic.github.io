@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho</title><link>https://nicholas-miklaucic.github.io/</link><description>Thoughts on math, computing, and data</description><atom:link href="https://nicholas-miklaucic.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Tue, 07 Jan 2020 22:27:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Problem-Solving Techniques: Invariants</title><link>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho</title><link>https://nicholas-miklaucic.github.io/</link><description>Thoughts on math, computing, and data</description><atom:link href="https://nicholas-miklaucic.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Mon, 13 Jan 2020 17:24:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PACTF 2019 Writeup: How'd I Get Hacked?</title><link>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-howd-i-get-hacked/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+As I mentioned &lt;a href="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/"&gt;in this post&lt;/a&gt;, I wrote several problems for PACTF 2019, a cybersecurity and
+programming competition held for high schoolers. I've been asked to do writeups for each of the
+problems I did, and so I'll be trying to do that—at least, where I think there's something
+interesting to talk about for the people reading this who didn't compete and don't care about the
+contest. 
+&lt;/p&gt;
+
+&lt;p&gt;
+Today, we'll be going over "How'd I Get Hacked?", which gives me an opportunity to talk about one of
+my favorite niche programming topics: the utter insanity and brilliance of Unicode.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-howd-i-get-hacked/"&gt;Read more…&lt;/a&gt; (8 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>pactf</category><category>programming</category><guid>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-howd-i-get-hacked/</guid><pubDate>Mon, 13 Jan 2020 04:44:37 GMT</pubDate></item><item><title>Problem-Solving Techniques: Invariants</title><link>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 There are a lot of clever proofs in mathematics and computer science. I've already talked about some
 of them, and I hope to do a lot more of it on this blog. There's often a certain separation that I
 feel when I read something particularly creative or beautiful: this is amazing, but how could I ever
