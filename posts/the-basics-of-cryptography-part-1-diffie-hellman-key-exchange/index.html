@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="How to send secure messages through insecure channels">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 1: Diffie-Hellman Key&nbsp;Exchange</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2020-01-14T11:09:56-05:00" itemprop="datePublished" title="2020-01-14 11:09">2020-01-14 11:09</time></span>
+        <meta name="description" itemprop="description" content="How to send secure messages through insecure channels">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+How can we send secure messages through insecure&nbsp;channels?
+</p>
+
+<p>
+A quick note before we begin: this summarizes a talk I gave at my high school&#8217;s computer science
+club. It&#8217;s written to be accessible to anyone with a basic math background, though, and it doesn&#8217;t
+require any programming knowledge. This is the start of a series that will try to explain the basics
+of cryptography: given that all of us use cryptography every day, it&#8217;s important to have a basic
+understanding of how it works. It&#8217;s also pretty&nbsp;cool!
+</p>
+
+<!-- TEASER_END -->
+
+<p>
+Let&#8217;s imagine a scenario that more clearly describes what I mean by sending secure messages through
+insecure&nbsp;channels:
+</p>
+
+<blockquote>
+<p>
+Alice and Bob live in different cities and want to agree on a meeting place. Their only form of
+communication is a telephone line, and they had no communication prior to deciding to meet. However,
+Alice discovers that their adversary, Eve, has tapped her phone, and so Eve can listen to any
+conversation Alice and Bob have. How can Alice and Bob agree on a place to meet <i>securely</i>, such that
+Eve, despite listening to the entire conversation, still can&#8217;t find out where Alice and Bob are
+going to&nbsp;meet?
+</p>
+</blockquote>
+
+<p>
+I&#8217;d like to emphasize something: at least to me, this seems completely impossible. Despite the
+seeming impossibility, however, a similar process happens so often in the modern world it&#8217;s
+positively mundane! Think of this problem as essentially the analog to wanting to buy something
+online and give a credit card number, such that someone watching your Internet connection can&#8217;t
+steal it. We do this all the&nbsp;time! 
+</p>
+
+<p>
+This ability to send secure messages through an insecure channel is criminally underappreciated–the
+vast majority of what the Internet does today would be impossible without it. The discovery of these
+techniques should, in my view, be considered equally important to the modern world as the
+iPhone. (Would the iPhone be very useful if you couldn&#8217;t be sure you were downloading the app you
+wanted or visiting the website you wanted to&nbsp;visit?)
+</p>
+
+<p>
+So how does this work? The complete picture will take several posts to develop. We&#8217;re going to start
+with historical developments and use that framework to see what computers bring to the table. Then,
+in this post, we&#8217;ll cover how the secret sauce that computers bring actually&nbsp;works.
+</p>
+
+<div id="outline-container-org68117b6" class="outline-2">
+<h2 id="org68117b6">Terminology</h2>
+<div class="outline-text-2" id="text-org68117b6">
+<p>
+I want to briefly introduce some terminology which will make the rest of this easier to explain. A
+prior secret way of sending information, of the kind that you might expect Alice and Bob to need, is
+called a <i>prior channel</i>. The type channel Alice and Bob are stuck with, one with eavesdroppers, is
+called a <i>public channel.</i> Secret information that a code, or <i>cipher</i>, uses is called a <i>key</i>. With a key
+and a cipher, we can take <i>plaintext</i>, the unencrypted information, and turn it into <i>ciphertext</i>,
+encrypted&nbsp;information.
+</p>
+
+<p>
+With that out of the way, let&#8217;s get started! So how did people send secret messages in the&nbsp;past?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org98b276a" class="outline-2">
+<h2 id="org98b276a">History</h2>
+<div class="outline-text-2" id="text-org98b276a">
+<p>
+Pre-modern efforts in cryptography were based around a different situation than the one I just
+described: there <i>is</i> a prior channel, but it&#8217;s temporary, and you want to send messages on an
+public channel&nbsp;afterwards.
+</p>
+
+<p>
+Classic efforts to do this are based in what we now call <i>security through obscurity</i>: &#8220;tricks&#8221; that
+rely on a secret method that Alice and Bob share but Eve doesn&#8217;t. For example, the <i>Caesar cipher</i>
+rotates letters through the alphabet, so A might go to C, B to D, C to E, and so on, wrapping&nbsp;around. 
+</p>
+
+<p>
+The most famous example of this type of code in the 20th century is the <i>Enigma machine</i>, a mechanized
+way of sending messages that used a complicated series of transpositions and such based on
+configurations that were given in pre-distributed books with keys. The knowledge of how to operate
+the machines and those configurations needed to be distributed secretly, but then any message could
+be sent in the field over public&nbsp;channels.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+Credit to the Museo Scienza E Tecnologia Milano. Creative Commons&nbsp;license.
+</p>
+</span>
+
+
+<div class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg" alt="Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg"></p>
+<p><span class="figure-number">Figure 1: </span>A model of the Enigma&nbsp;machine.</p>
+</div>
+
+<p>
+As you might know, these methods don&#8217;t perform as advertised. It is possible for an adversary, after
+seeing enough messages, to decode future messages without codebooks or any other secret
+information. Famously, the Enigma machine was broken using early computers and the work of
+mathematicians and scientists at Bletchley Park, which significantly benefitted the Allied war
+effort. Caesar ciphers (and transposition ciphers more generally, where symbols are replaced in some
+uniform pattern) can also be broken through <i>frequency analysis</i>: the most common letters in English
+text are, roughly in order, ETAOINSHRDLCU, and comparing the most frequent symbols in the <i>ciphertext</i>
+(the coded message) to these letters and trying to find common words is usually enough to break&nbsp;them.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc032ed8" class="outline-2">
+<h2 id="orgc032ed8">Doing&nbsp;Better</h2>
+<div class="outline-text-2" id="text-orgc032ed8">
+<p>
+To get from these codes—methods that require a <i>prior channel</i> and are still insecure—to methods that
+are (to our knowledge!) secure and don&#8217;t require this prior channel will require computers. Modern
+cryptography (at least, sending secret messages) is broken down into two steps: agreeing on a shared
+cryptographic key, and using a cipher to send information using that key. We&#8217;ll be focusing on the
+first step, because doing that key sharing through a public channel is what lets modern cryptography
+depart from the old, Enigma-style way of doing things. This problem is called <i>key exchange</i>. (The
+ciphers that you can use once you have a secret key, the digital versions of the Enigma machine, are
+called <i>symmetric-key ciphers</i>. They&#8217;re not actually that interesting from a mathematical perspective:
+they&#8217;re usually not built around simple mathematical problems like key exchange, and they&#8217;re often
+just basically a really souped-up version of something like the Enigma machine rather than a
+completely different approach to the&nbsp;problem.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org09adb17" class="outline-2">
+<h2 id="org09adb17">Peter and&nbsp;Natasha</h2>
+<div class="outline-text-2" id="text-org09adb17">
+<p>
+Secure key exchange over a public channel seems…really hard, if not impossible. Surely if someone
+can listen to everything you say, you can&#8217;t tell someone a secret without them hearing it? I find it
+helpful to have analog analogies for these concepts, so let&#8217;s start with a story much like the one
+about Alice and&nbsp;Bob:
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+The way this was told to me was with a stock Russian accent: feel free to add that to your own&nbsp;narration.
+</p>
+</span>
+
+<blockquote>
+<p>
+Peter and Natasha live in the Soviet Union: Peter lives in Moscow, and Natasha lives in
+Leningrad. They are lovers, and Peter wants to send Natasha a necklace to demonstrate his
+love. Unfortunately, the Postal Service is corrupt: the workers at the Service will readily steal
+anything of value in the parcels they send, including a necklace like Peter&#8217;s. Peter and Natasha
+both own secure padlocks, but the Postal Service workers are extraordinarily crafty: even if you
+send a key and a lock in separate parcels, they will keep the key and use it to open the locked
+parcel. How can Peter send his necklace to Natasha, in such a way that the Postal Service can&#8217;t ever
+take the&nbsp;necklace?
+</p>
+</blockquote>
+
+<p>
+This is a fun puzzle to think about, and if you&#8217;re so inclined I&#8217;d recommend thinking about it for a
+while and coming back. I&#8217;ll&nbsp;wait!
+</p>
+
+<p>
+OK, so how do Peter and Natasha fix this problem? There&#8217;s a particularly clever&nbsp;solution:
+</p>
+<ol class="org-ol">
+<li>Peter puts the necklace in a box, locks it with his padlock, and sends it to&nbsp;Natasha.</li>
+<li>Natasha puts her own lock on the box and sends it back to&nbsp;Peter.</li>
+<li>Peter unlocks his lock and sends it back to Natasha: it still has Natasha&#8217;s lock, so the Postal
+Service can&#8217;t open&nbsp;it.</li>
+<li>Natasha unlocks her lock and can then open the&nbsp;parcel.</li>
+</ol>
+<p>
+This is pretty much exactly what we need! The one difference is that, instead of physical padlocks,
+we need some digital version of this idea: something you can do to a number that only you can
+undo. That&#8217;s what we&#8217;ll need to figure out now, before we can apply this technique. (Even though we
+often think of data as text or images, to computers it&#8217;s really just numbers: all we&#8217;re going to
+look at is sending numerical&nbsp;information.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6c5e21e" class="outline-2">
+<h2 id="org6c5e21e">One-Way&nbsp;Functions</h2>
+<div class="outline-text-2" id="text-org6c5e21e">
+<p>
+What we&#8217;re describing is called a <i>one-way function</i>: some function \(f\) such that computing \(f(x)\) is
+easy, but finding the \(x\) for some \(y\) such that \(f(x) = y\) is hard. I&#8217;m not really going to worry
+about what easy and hard mean in this context for now, but we&#8217;ll assume that our eavesdropper has
+much better computers than we do. Because of that, we&#8217;d really like a solution to this where we can
+create arbitrarily large <i>work factors</i>: the ratio between the computing power needed to encode
+something and the computing power needed to crack&nbsp;it. 
+</p>
+
+<p>
+A quick disclaimer: it&#8217;s actually unknown whether one-way functions really exist in the sense I&#8217;m
+talking about them! (If you&#8217;re familiar with \(P = NP\), a famous unsolved problem in computer
+science, the answer hinges on that problem.) So, whenever I say &#8220;one-way function&#8221;, just mentally
+substitute &#8220;functions that people have spent fifty years trying to undo easily and haven&#8217;t found any
+success in doing&#8221; and we&#8217;ll be&nbsp;good.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga8d8e64" class="outline-2">
+<h2 id="orga8d8e64">The Discrete Logarithm&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-orga8d8e64">
+<p>
+The one-way function we&#8217;ll be looking at, because it&#8217;s commonly used and easy to understand compared
+to others, is the <i>discrete logarithm problem</i>, specifically the one about <i>modular exponentiation.</i>
+Let&#8217;s dive&nbsp;in!
+</p>
+
+<p>
+Modular arithmetic, as you might know, is math where you only look at integers in terms of their
+remainder when divided by some number. For example, modulo 3, 6 and 9 are both congruent to 0, and 7
+is congruent to&nbsp;1. 
+</p>
+
+<p>
+Modular multiplication seems like a good candidate for a one-way function: computing that \(5 \times 7
+\equiv 2 \pmod{11}\) (because 35 has a remainder of 2 when divided by 11) and figuring out &#8220;what number,
+when multiplied by 7, gives 2 modulo 11?&#8221; don&#8217;t seem equally hard. Unfortunately, this isn&#8217;t really
+true. Specifically, finding the <i>modular multiplicative inverse</i> of a number (its reciprocal, or the
+number that when multiplied by it gives 1) is pretty quick using something called the <i>extended</i>
+<i>Euclidean algorithm.</i> I&#8217;m not going to go into it here, but suffice it to say that this doesn&#8217;t
+really&nbsp;work.
+</p>
+
+<p>
+You might next try <i>modular exponentiation</i>: this <i>does</i> work as a one-way function. First, let&#8217;s think
+about how the powers of a number look when we do them modulo some other number. (Due to the way
+modular arithmetic works, we don&#8217;t need to keep track of what the powers would be normally: we
+can just multiply the last number in the sequence by our base and take the&nbsp;remainder.) 
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+If it ever got to \(0\), it would just stay there forever. Luckily, this won&#8217;t ever happen,
+because that would mean \(7\) evenly divides a power of \(3\). But \(7\) is prime, so it doesn&#8217;t divide
+any numbers besides itself and \(1\): no power of \(3\) will ever have a \(7\) in its prime&nbsp;factorization.
+</p>
+</span>
+
+<p>
+For example, the powers of \(2\) modulo \(7\) are \(2, 4, 1, 2, \dots\): they repeat. This is actually a
+problem for us, because it kinda limits our options. Let&#8217;s look at the powers of \(3\) modulo \(7\),
+though: we get \(3, 2, 6, 4, 5, 1, 3, \dots\), which covers every number there is modulo \(7\) except&nbsp;\(0\). 
+</p>
+
+<p>
+We call these numbers, like \(3\) modulo \(7\), <i>primitive roots</i>: their powers go through all of the
+possible values. Generating primitive roots is a bit outside the scope of this post, but it suffices
+to say that they exist and we can find them for any prime modulus like&nbsp;\(7\).
+</p>
+
+<p>
+Right now, there&#8217;s nothing different between the way we&#8217;re doing modular exponentiation, with lots
+of multiplications, and how we&#8217;d do the inverse (called the <i>discrete logarithm</i>): we&#8217;re just doing
+lots of multiplying by 3. Anyone could just do lots of divisions by \(3\) (or just straight-up
+generate this sequence of powers the same way we&#8217;re doing it) and invert our answer roughly as fast
+as we made&nbsp;it.
+</p>
+
+<p>
+Luckily, there&#8217;s a trick that makes modular exponentation faster than this. Let&#8217;s scale up a bit and
+pretend we&#8217;re doing math modulo \(61\) (a prime: that&#8217;s important). We can use \(2\) as our base because
+it&#8217;s a primitive root for&nbsp;\(61\).
+</p>
+
+<p>
+What&#8217;s a fast way to compute, say, \(2^{16}\) modulo \(61\)? (Pretend these exponents and moduli are
+<i>enormous</i>, like 200 digits long, and we don&#8217;t want to do that many multiplications.) Instead of the
+normal \(16\) multiplications we&#8217;d have to do, we can cheat and save some steps. Take our base, \(2\),
+and square it to get \(2^2 \equiv 4\), doing everything modulo \(61\). Square that to get \((2^2)^2 = 2^4
+\equiv 16\). Square that to get \(2^8 \equiv 16 \times 16 \equiv 12\), and finally square that to get \(2^{16}
+\equiv 12 \times 12 \equiv 22\). Each squaring is a single multiplication, and so we only have to square four
+times. Essentially, we have to do \(\log_2 e\) multiplications to raise a base to power \(e\), because
+each squaring doubles the&nbsp;exponent.
+</p>
+
+<p>
+Note that it&#8217;s most efficient when the exponent is very close to a power of \(2\), and so figuring out
+how efficient it is in general is a little more complicated, but it&#8217;s always significantly faster
+than the naive method of&nbsp;exponentiation.
+</p>
+
+<p>
+Could someone given the opposite problem—&#8221;\(2\) to what exponent modulo \(61\) gives \(22\)?&#8221;—also use
+this strategy? The answer is no: if you don&#8217;t know that the answer is above \(16\), you won&#8217;t know
+that you didn&#8217;t miss the answer by squaring \(4\) times. Essentially, someone trying to invert this
+can only use the table of exponents we had before&nbsp;this. 
+</p>
+
+<p>
+This problem is called the <i>discrete logarithm problem</i>, and it&#8217;s the digital version of a key that we
+need for this problem. With this in mind, let&#8217;s see a version of the Peter and Natasha solution that
+uses this method. One thing we can cut out is the part where Peter and Natasha unlock their locks:
+all we care about is that we share <i>some</i> secret, not any particular&nbsp;one.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaa7b5d3" class="outline-2">
+<h2 id="orgaa7b5d3">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-orgaa7b5d3">
+<p>
+This algorithm is usually just called <i>Diffie-Hellman key exchange</i>, but Ralph Merkle should really
+get more of the credit. Our setup is that Alice and Bob want to agree on a secret number over a
+public channel without an eavesdropper, Eve, being able to see&nbsp;it.
+</p>
+
+<ol class="org-ol">
+<li>Alice and Bob publicly agree on a modulus \(p\), some prime number like \(61\), and a primitive root
+\(e\), like&nbsp;\(2\).</li>
+<li>Alice and Bob individually pick a random number modulo \(p\). They keep this to themselves. Let&#8217;s
+call Alice&#8217;s number \(a\) and Bob&#8217;s number&nbsp;\(b\).</li>
+<li>Alice computes \(e^a \pmod p\) and sends it to Bob. Because the discrete logarithm problem is hard to
+solve, Eve can&#8217;t figure out what \(a\) is, although she knows what \(e\) and \(p\) are. Neither can
+Bob, but he won&#8217;t need&nbsp;to.</li>
+<li>Bob does the same thing, sending \(e^b \pmod p\) to Alice. Eve also can&#8217;t figure out what Bob&#8217;s
+secret&nbsp;is.</li>
+<li>Bob takes the number \(e^a\) that Alice sent him and raises that number by his secret number \(b\) to
+get \((e^a)^b \pmod p = e^{ab} \pmod&nbsp;p\).</li>
+<li>Alice does the same thing, raising Bob&#8217;s number \(e^b\) to her secret number \(a\) to get \((e^b)^a \pmod
+   p = e^{ab} \pmod&nbsp;p\).</li>
+<li>Because exponentiation is commutative like this, now Alice and Bob both know a secret: \(e^{ab} \pmod
+   p\). This secret number is something Eve can&#8217;t know, even if she&#8217;s listened to all of their&nbsp;communications!</li>
+</ol>
+<p>
+There&#8217;s something wonderfully brazen about this strategy: you can very loudly proclaim how you&#8217;re
+going to share your secret, and no one can stop you, even if they know exactly how you&#8217;re doing
+it. This is why open-source code, where you can freely download it, is often <i>preferred</i> for
+cryptography: these methods don&#8217;t rely on security through obscurity, and so even if you reveal the
+trick no one can stop&nbsp;you.
+</p>
+
+<p>
+Note that the numbers used are really big: computers can still easily solve the problem with numbers
+like \(61\). Note that the base of the exponent doesn&#8217;t actually need to be large, and numbers like
+\(2\) and \(3\) are fine for the most part in practice. (Of course, if you don&#8217;t do enough
+exponentiation to wrap over the modulus at least once, you can easily break it by just doing normal
+logarithms.) The prime number used as the modulus, \(p\), is in modern applications often \(1024\) or
+\(2048\) bits: the number itself, written out in base 10, can be hundreds of digits. At these scales,
+even with supercomputers trying to break it, this encryption method is&nbsp;secure.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org093534e" class="outline-2">
+<h2 id="org093534e">Conclusion</h2>
+<div class="outline-text-2" id="text-org093534e">
+<p>
+Let&#8217;s zoom out for a second. Until around 1970, any encryption method was reliant on the secrecy of
+the method itself or some prior secret key, and most of those methods were breakable (and,
+eventually, broken). There has been a massive paradigm shift in the past fifty years: now, securely
+sending messages is possible even when the method you use is completely public and you have no prior
+communication with the person you want to communicate to. The modern Internet is reliant on
+techniques like this to&nbsp;operate. 
+</p>
+
+<p>
+If nothing else, I hope this increases your appreciation for the usefulness of some branches of math
+that aren&#8217;t often discussed as having practical applications. Cryptography is in an odd spot in the
+world of applied math: for millennia, number theory and prime numbers were considered the purest of
+pure math, studied for their beauty and elegance rather than real-world applications, but all of a
+sudden in the past fifty years research in number theory has developed very important national
+security applications. I have a very firm ethos that predicting what knowledge will be useful in the
+future is nigh-impossible, and so learning for its own sake and seeing where that takes you is often
+just as important as following set courses of study. The namesake algorithm of this blog, <a href="https://nicholas-miklaucic.github.io/posts/hello-world/">explained
+in my first post</a>, is another example of pure math finding applications in&nbsp;cryptography.
+</p>
+
+
+<p>
+One last caveat before you&#8217;re finally done reading this: <i>if you&#8217;re a programmer, and you ever write</i>
+<i>code that does any of this yourself for any real-world application, stop.</i> Actually implementing
+these ideas and making sure that there aren&#8217;t any ways of circumventing the math is really, really
+hard, and the people who are qualified to write this code are few and far between. Using a library
+someone else wrote is basically always more secure than doing it&nbsp;yourself.
+</p>
+
+<p>
+Next time, I&#8217;ll look at another absolutely essential algorithm to the operation of the modern world:
+the <i>RSA cryptosystem.</i> This set of algorithms allows you to verify your identity, securely sign a
+message, and provide another way of achieving the type of encryption that we discussed here, by
+letting anyone encrypt messages that only a single person can decrypt. See you&nbsp;then!
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
+      </p>
+
+    
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>

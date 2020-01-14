@@ -18,12 +18,16 @@
   <lastmod>2020-01-06T02:43:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_intro-to-crypto.xml</loc>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_meta.xml</loc>
   <lastmod>2020-01-06T02:43:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_pactf-writeups.xml</loc>
-  <lastmod>2020-01-13T05:55:00Z</lastmod>
+  <lastmod>2020-01-13T17:24:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_problem-solving-techniques.xml</loc>
@@ -35,7 +39,7 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/cs.xml</loc>
-  <lastmod>2020-01-07T22:27:00Z</lastmod>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/dataviz.xml</loc>
@@ -47,7 +51,7 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/math.xml</loc>
-  <lastmod>2020-01-07T22:27:00Z</lastmod>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/meta.xml</loc>
@@ -55,11 +59,11 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/pactf.xml</loc>
-  <lastmod>2020-01-13T05:55:00Z</lastmod>
+  <lastmod>2020-01-13T17:24:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/categories/programming.xml</loc>
-  <lastmod>2020-01-13T05:55:00Z</lastmod>
+  <lastmod>2020-01-13T17:24:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/galleries/demo/rss.xml</loc>
@@ -71,10 +75,10 @@
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/rss.xml</loc>
-  <lastmod>2020-01-13T05:55:00Z</lastmod>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicholas-miklaucic.github.io/sitemap.xml</loc>
-  <lastmod>2020-01-13T05:55:00Z</lastmod>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </sitemap>
 </sitemapindex>

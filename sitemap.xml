@@ -19,7 +19,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2020-01-13T05:55:00Z</lastmod>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
@@ -31,7 +31,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/</loc>
-  <lastmod>2020-01-07T22:19:00Z</lastmod>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/algorithms/</loc>
@@ -44,6 +44,10 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_dataviz/</loc>
   <lastmod>2019-10-30T00:16:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/categories/cat_intro-to-crypto/</loc>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_meta/</loc>
@@ -200,5 +204,9 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/</loc>
   <lastmod>2020-01-07T22:19:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/</loc>
+  <lastmod>2020-01-14T18:25:00Z</lastmod>
  </url>
 </urlset>
