@@ -1,0 +1,294 @@
+#+BEGIN_COMMENT
+.. title: The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange
+.. slug: the-basics-of-cryptography-part-1-diffie-hellman-key-exchange
+.. date: 2020-01-14 11:09:56 UTC-05:00
+.. tags: math, cs
+.. category: intro-to-crypto
+.. link: 
+.. description: How to send secure messages through insecure channels
+.. type: text
+.. has_math: true
+#+END_COMMENT
+
+How can we send secure messages through insecure channels?
+
+A quick note before we begin: this summarizes a talk I gave at my high school's computer science
+club. It's written to be accessible to anyone with a basic math background, though, and it doesn't
+require any programming knowledge. This is the start of a series that will try to explain the basics
+of cryptography: given that all of us use cryptography every day, it's important to have a basic
+understanding of how it works. It's also pretty cool!
+
+{{{TEASER_END}}}
+
+Let's imagine a scenario that more clearly describes what I mean by sending secure messages through
+insecure channels:
+
+#+BEGIN_QUOTE
+Alice and Bob live in different cities and want to agree on a meeting place. Their only form of
+communication is a telephone line, and they had no communication prior to deciding to meet. However,
+Alice discovers that their adversary, Eve, has tapped her phone, and so Eve can listen to any
+conversation Alice and Bob have. How can Alice and Bob agree on a place to meet /securely/, such that
+Eve, despite listening to the entire conversation, still can't find out where Alice and Bob are
+going to meet?
+#+END_QUOTE
+
+I'd like to emphasize something: at least to me, this seems completely impossible. Despite the
+seeming impossibility, however, a similar process happens so often in the modern world it's
+positively mundane! Think of this problem as essentially the analog to wanting to buy something
+online and give a credit card number, such that someone watching your Internet connection can't
+steal it. We do this all the time! 
+
+This ability to send secure messages through an insecure channel is criminally underappreciated–the
+vast majority of what the Internet does today would be impossible without it. The discovery of these
+techniques should, in my view, be considered equally important to the modern world as the
+iPhone. (Would the iPhone be very useful if you couldn't be sure you were downloading the app you
+wanted or visiting the website you wanted to visit?)
+
+So how does this work? The complete picture will take several posts to develop. We're going to start
+with historical developments and use that framework to see what computers bring to the table. Then,
+in this post, we'll cover how the secret sauce that computers bring actually works.
+
+* Terminology
+I want to briefly introduce some terminology which will make the rest of this easier to explain. A
+prior secret way of sending information, of the kind that you might expect Alice and Bob to need, is
+called a /prior channel/. The type channel Alice and Bob are stuck with, one with eavesdroppers, is
+called a /public channel./ Secret information that a code, or /cipher/, uses is called a /key/. With a key
+and a cipher, we can take /plaintext/, the unencrypted information, and turn it into /ciphertext/,
+encrypted information.
+
+With that out of the way, let's get started! So how did people send secret messages in the past?
+
+* History
+Pre-modern efforts in cryptography were based around a different situation than the one I just
+described: there /is/ a prior channel, but it's temporary, and you want to send messages on an
+public channel afterwards.
+
+Classic efforts to do this are based in what we now call /security through obscurity/: "tricks" that
+rely on a secret method that Alice and Bob share but Eve doesn't. For example, the /Caesar cipher/
+rotates letters through the alphabet, so A might go to C, B to D, C to E, and so on, wrapping
+around. 
+
+The most famous example of this type of code in the 20th century is the /Enigma machine/, a mechanized
+way of sending messages that used a complicated series of transpositions and such based on
+configurations that were given in pre-distributed books with keys. The knowledge of how to operate
+the machines and those configurations needed to be distributed secretly, but then any message could
+be sent in the field over public channels.
+
+{{{mn}}}
+Credit to the Museo Scienza E Tecnologia Milano. Creative Commons license.
+{{{mn-end}}}
+
+#+CAPTION: A model of the Enigma machine.
+[[https://upload.wikimedia.org/wikipedia/commons/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg]]
+
+As you might know, these methods don't perform as advertised. It is possible for an adversary, after
+seeing enough messages, to decode future messages without codebooks or any other secret
+information. Famously, the Enigma machine was broken using early computers and the work of
+mathematicians and scientists at Bletchley Park, which significantly benefitted the Allied war
+effort. Caesar ciphers (and transposition ciphers more generally, where symbols are replaced in some
+uniform pattern) can also be broken through /frequency analysis/: the most common letters in English
+text are, roughly in order, ETAOINSHRDLCU, and comparing the most frequent symbols in the /ciphertext/
+(the coded message) to these letters and trying to find common words is usually enough to break them.
+
+* Doing Better
+To get from these codes—methods that require a /prior channel/ and are still insecure—to methods that
+are (to our knowledge!) secure and don't require this prior channel will require computers. Modern
+cryptography (at least, sending secret messages) is broken down into two steps: agreeing on a shared
+cryptographic key, and using a cipher to send information using that key. We'll be focusing on the
+first step, because doing that key sharing through a public channel is what lets modern cryptography
+depart from the old, Enigma-style way of doing things. This problem is called /key exchange/. (The
+ciphers that you can use once you have a secret key, the digital versions of the Enigma machine, are
+called /symmetric-key ciphers/. They're not actually that interesting from a mathematical perspective:
+they're usually not built around simple mathematical problems like key exchange, and they're often
+just basically a really souped-up version of something like the Enigma machine rather than a
+completely different approach to the problem.
+
+* Peter and Natasha
+Secure key exchange over a public channel seems...really hard, if not impossible. Surely if someone
+can listen to everything you say, you can't tell someone a secret without them hearing it? I find it
+helpful to have analog analogies for these concepts, so let's start with a story much like the one
+about Alice and Bob:
+
+{{{mn}}}
+The way this was told to me was with a stock Russian accent: feel free to add that to your own
+narration.
+{{{mn-end}}}
+
+#+BEGIN_QUOTE
+Peter and Natasha live in the Soviet Union: Peter lives in Moscow, and Natasha lives in
+Leningrad. They are lovers, and Peter wants to send Natasha a necklace to demonstrate his
+love. Unfortunately, the Postal Service is corrupt: the workers at the Service will readily steal
+anything of value in the parcels they send, including a necklace like Peter's. Peter and Natasha
+both own secure padlocks, but the Postal Service workers are extraordinarily crafty: even if you
+send a key and a lock in separate parcels, they will keep the key and use it to open the locked
+parcel. How can Peter send his necklace to Natasha, in such a way that the Postal Service can't ever
+take the necklace?
+#+END_QUOTE
+
+This is a fun puzzle to think about, and if you're so inclined I'd recommend thinking about it for a
+while and coming back. I'll wait!
+
+OK, so how do Peter and Natasha fix this problem? There's a particularly clever solution:
+1. Peter puts the necklace in a box, locks it with his padlock, and sends it to Natasha.
+2. Natasha puts her own lock on the box and sends it back to Peter.
+3. Peter unlocks his lock and sends it back to Natasha: it still has Natasha's lock, so the Postal
+   Service can't open it.
+4. Natasha unlocks her lock and can then open the parcel.
+
+This is pretty much exactly what we need! The one difference is that, instead of physical padlocks,
+we need some digital version of this idea: something you can do to a number that only you can
+undo. That's what we'll need to figure out now, before we can apply this technique. (Even though we
+often think of data as text or images, to computers it's really just numbers: all we're going to
+look at is sending numerical information.)
+
+* One-Way Functions
+What we're describing is called a /one-way function/: some function $f$ such that computing $f(x)$ is
+easy, but finding the $x$ for some $y$ such that $f(x) = y$ is hard. I'm not really going to worry
+about what easy and hard mean in this context for now, but we'll assume that our eavesdropper has
+much better computers than we do. Because of that, we'd really like a solution to this where we can
+create arbitrarily large /work factors/: the ratio between the computing power needed to encode
+something and the computing power needed to crack it. 
+
+A quick disclaimer: it's actually unknown whether one-way functions really exist in the sense I'm
+talking about them! (If you're familiar with $P = NP$, a famous unsolved problem in computer
+science, the answer hinges on that problem.) So, whenever I say "one-way function", just mentally
+substitute "functions that people have spent fifty years trying to undo easily and haven't found any
+success in doing" and we'll be good.
+
+* The Discrete Logarithm Problem
+The one-way function we'll be looking at, because it's commonly used and easy to understand compared
+to others, is the /discrete logarithm problem/, specifically the one about /modular exponentiation./
+Let's dive in!
+
+Modular arithmetic, as you might know, is math where you only look at integers in terms of their
+remainder when divided by some number. For example, modulo 3, 6 and 9 are both congruent to 0, and 7
+is congruent to 1. 
+
+Modular multiplication seems like a good candidate for a one-way function: computing that $5 \times 7
+\equiv 2 \pmod{11}$ (because 35 has a remainder of 2 when divided by 11) and figuring out "what number,
+when multiplied by 7, gives 2 modulo 11?" don't seem equally hard. Unfortunately, this isn't really
+true. Specifically, finding the /modular multiplicative inverse/ of a number (its reciprocal, or the
+number that when multiplied by it gives 1) is pretty quick using something called the /extended/
+/Euclidean algorithm./ I'm not going to go into it here, but suffice it to say that this doesn't
+really work.
+
+You might next try /modular exponentiation/: this /does/ work as a one-way function. First, let's think
+about how the powers of a number look when we do them modulo some other number. (Due to the way
+modular arithmetic works, we don't need to keep track of what the powers would be normally: we
+can just multiply the last number in the sequence by our base and take the remainder.) 
+
+{{{mn}}}
+If it ever got to $0$, it would just stay there forever. Luckily, this won't ever happen,
+because that would mean $7$ evenly divides a power of $3$. But $7$ is prime, so it doesn't divide
+any numbers besides itself and $1$: no power of $3$ will ever have a $7$ in its prime
+factorization.
+{{{mn-end}}}
+
+For example, the powers of $2$ modulo $7$ are $2, 4, 1, 2, \dots$: they repeat. This is actually a
+problem for us, because it kinda limits our options. Let's look at the powers of $3$ modulo $7$,
+though: we get $3, 2, 6, 4, 5, 1, 3, \dots$, which covers every number there is modulo $7$ except
+$0$. 
+
+We call these numbers, like $3$ modulo $7$, /primitive roots/: their powers go through all of the
+possible values. Generating primitive roots is a bit outside the scope of this post, but it suffices
+to say that they exist and we can find them for any prime modulus like $7$.
+
+Right now, there's nothing different between the way we're doing modular exponentiation, with lots
+of multiplications, and how we'd do the inverse (called the /discrete logarithm/): we're just doing
+lots of multiplying by 3. Anyone could just do lots of divisions by $3$ (or just straight-up
+generate this sequence of powers the same way we're doing it) and invert our answer roughly as fast
+as we made it.
+
+Luckily, there's a trick that makes modular exponentation faster than this. Let's scale up a bit and
+pretend we're doing math modulo $61$ (a prime: that's important). We can use $2$ as our base because
+it's a primitive root for $61$.
+
+What's a fast way to compute, say, $2^{16}$ modulo $61$? (Pretend these exponents and moduli are
+/enormous/, like 200 digits long, and we don't want to do that many multiplications.) Instead of the
+normal $16$ multiplications we'd have to do, we can cheat and save some steps. Take our base, $2$,
+and square it to get $2^2 \equiv 4$, doing everything modulo $61$. Square that to get $(2^2)^2 = 2^4
+\equiv 16$. Square that to get $2^8 \equiv 16 \times 16 \equiv 12$, and finally square that to get $2^{16}
+\equiv 12 \times 12 \equiv 22$. Each squaring is a single multiplication, and so we only have to square four
+times. Essentially, we have to do $\log_2 e$ multiplications to raise a base to power $e$, because
+each squaring doubles the exponent.
+
+Note that it's most efficient when the exponent is very close to a power of $2$, and so figuring out
+how efficient it is in general is a little more complicated, but it's always significantly faster
+than the naive method of exponentiation.
+
+Could someone given the opposite problem—"$2$ to what exponent modulo $61$ gives $22$?"—also use
+this strategy? The answer is no: if you don't know that the answer is above $16$, you won't know
+that you didn't miss the answer by squaring $4$ times. Essentially, someone trying to invert this
+can only use the table of exponents we had before this. 
+
+This problem is called the /discrete logarithm problem/, and it's the digital version of a key that we
+need for this problem. With this in mind, let's see a version of the Peter and Natasha solution that
+uses this method. One thing we can cut out is the part where Peter and Natasha unlock their locks:
+all we care about is that we share /some/ secret, not any particular one.
+
+* The Diffie-Hellman-Merkle Key Exchange Algorithm
+This algorithm is usually just called /Diffie-Hellman key exchange/, but Ralph Merkle should really
+get more of the credit. Our setup is that Alice and Bob want to agree on a secret number over a
+public channel without an eavesdropper, Eve, being able to see it.
+
+1. Alice and Bob publicly agree on a modulus $p$, some prime number like $61$, and a primitive root
+   $e$, like $2$.
+2. Alice and Bob individually pick a random number modulo $p$. They keep this to themselves. Let's
+   call Alice's number $a$ and Bob's number $b$.
+3. Alice computes $e^a \pmod p$ and sends it to Bob. Because the discrete logarithm problem is hard to
+   solve, Eve can't figure out what $a$ is, although she knows what $e$ and $p$ are. Neither can
+   Bob, but he won't need to.
+4. Bob does the same thing, sending $e^b \pmod p$ to Alice. Eve also can't figure out what Bob's
+   secret is.
+5. Bob takes the number $e^a$ that Alice sent him and raises that number by his secret number $b$ to
+   get $(e^a)^b \pmod p = e^{ab} \pmod p$.
+6. Alice does the same thing, raising Bob's number $e^b$ to her secret number $a$ to get $(e^b)^a \pmod
+   p = e^{ab} \pmod p$.
+7. Because exponentiation is commutative like this, now Alice and Bob both know a secret: $e^{ab} \pmod
+   p$. This secret number is something Eve can't know, even if she's listened to all of their
+   communications!
+
+There's something wonderfully brazen about this strategy: you can very loudly proclaim how you're
+going to share your secret, and no one can stop you, even if they know exactly how you're doing
+it. This is why open-source code, where you can freely download it, is often /preferred/ for
+cryptography: these methods don't rely on security through obscurity, and so even if you reveal the
+trick no one can stop you.
+
+Note that the numbers used are really big: computers can still easily solve the problem with numbers
+like $61$. Note that the base of the exponent doesn't actually need to be large, and numbers like
+$2$ and $3$ are fine for the most part in practice. (Of course, if you don't do enough
+exponentiation to wrap over the modulus at least once, you can easily break it by just doing normal
+logarithms.) The prime number used as the modulus, $p$, is in modern applications often $1024$ or
+$2048$ bits: the number itself, written out in base 10, can be hundreds of digits. At these scales,
+even with supercomputers trying to break it, this encryption method is secure.
+
+* Conclusion
+Let's zoom out for a second. Until around 1970, any encryption method was reliant on the secrecy of
+the method itself or some prior secret key, and most of those methods were breakable (and,
+eventually, broken). There has been a massive paradigm shift in the past fifty years: now, securely
+sending messages is possible even when the method you use is completely public and you have no prior
+communication with the person you want to communicate to. The modern Internet is reliant on
+techniques like this to operate. 
+
+If nothing else, I hope this increases your appreciation for the usefulness of some branches of math
+that aren't often discussed as having practical applications. Cryptography is in an odd spot in the
+world of applied math: for millennia, number theory and prime numbers were considered the purest of
+pure math, studied for their beauty and elegance rather than real-world applications, but all of a
+sudden in the past fifty years research in number theory has developed very important national
+security applications. I have a very firm ethos that predicting what knowledge will be useful in the
+future is nigh-impossible, and so learning for its own sake and seeing where that takes you is often
+just as important as following set courses of study. The namesake algorithm of this blog, [[https://nicholas-miklaucic.github.io/posts/hello-world/][explained
+in my first post]], is another example of pure math finding applications in cryptography.
+
+
+One last caveat before you're finally done reading this: /if you're a programmer, and you ever write/
+/code that does any of this yourself for any real-world application, stop./ Actually implementing
+these ideas and making sure that there aren't any ways of circumventing the math is really, really
+hard, and the people who are qualified to write this code are few and far between. Using a library
+someone else wrote is basically always more secure than doing it yourself.
+
+Next time, I'll look at another absolutely essential algorithm to the operation of the modern world:
+the /RSA cryptosystem./ This set of algorithms allows you to verify your identity, securely sign a
+message, and provide another way of achieving the type of encryption that we discussed here, by
+letting anyone encrypt messages that only a single person can decrypt. See you then!
+
