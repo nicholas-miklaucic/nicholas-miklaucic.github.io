@@ -1,0 +1,271 @@
+#+BEGIN_COMMENT
+.. title: Problem Solving Techniques: Induction
+.. slug: problem-solving-techniques-induction
+.. date: 2020-01-16 13:53:20 UTC-05:00
+.. tags: math, cs
+.. category: problem-solving-techniques
+.. link: 
+.. description: Solving problems by induction from smaller examples
+.. type: text
+.. has_math: true
+#+END_COMMENT
+/This is the second in my series on problem-solving techniques: for the first, see [[https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/][this post on invariants.]]/
+
+As I've previously discussed, I'm fascinated by the ability to create proofs or solutions for
+problems that are easy to understand but difficult to synthesize. In this series, I'm trying to shed
+some limited insight on how we mere mortals can arrive at these beautiful and creative insights.
+
+{{{TEASER_END}}}
+
+Take the case of the structure of benzene. Chemists had been struggling to come up with a viable
+structure for $C_6H_6$: the experimental results for the compound seemed to contradict their available
+theories. The scientist Friedrich August Kekulé finally theorized the correct solution problem by
+realizing that benzene was a ring structure, with the hydrogens on the outside and the carbons in a
+hexagonal configuration on the inside. (The actual work of proving this was done by Kathleen
+Londsdale in 1929.)
+
+{{{mn}}}
+This story is a little dubious, and it certainly obscures the important study of resonance that
+actually makes the benzene structure work. (I'm not including an image of the actual structure
+because it isn't quite what Kekulé thought it was, for example.) But it's a really nice story,
+wouldn't you agree?
+{{{mn-end}}}
+
+Kekulé described the process by which he first realized benzene's structure 25 years later. As the
+story goes, he fell asleep while thinking on the problem and had a vivid dream of the /ouroboros/: a
+snake eating its own tail. After waking, he realized that this /ouroboros/ described the structure of
+benzene: a cycle. This structure, once you think to theorize it, instantly explains most of the
+issues that had confounded prior attempts to find the solution to the benzene problem.
+
+The reason I'm talking about Kekulé is that our goal is to arrive at these kinds of solutions
+without metaphorical epiphanies from our subconscious. So, with this very long prologue out of the
+way, how does induction help us solve problems?
+
+Let's introduce the concept with an example problem.
+
+* The Blue-Eyed Islanders
+
+Here's our example logic problem:
+
+#+BEGIN_QUOTE
+200 people live on an island. All of them are perfect logicians: they instantly make any logically
+valid deduction the instant it is possible to do so. None of them know their own eye color: there
+are no mirrors or reflective surfaces, and it is forbidden to talk about eye color. They do know
+that only two eye colors exist on the island: blue, and green. In actuality, there are 100 blue-eyed
+and 100 green-eyed people on the island. Every islander sees the eye color of everyone else on the
+island. Each islander thus sees 99 people with their eye color and 100 people with the other eye
+color, but they can't use this information to determine their own eye color because they don't know
+the total numbers. Each day, a bus passes through the island, and anyone who knows their own eye
+color leaves. The residents of the island know exactly who leaves and when. They also know all of
+these rules.
+
+One day, as part of an ancient ritual, a wise man comes onto the island and is allowed to say one
+thing to the islanders. He pauses, and then says the following: "I see someone with blue eyes."
+
+What can the islanders deduce from this? Who figures out their eye color and leaves, and when?
+#+END_QUOTE
+
+I'd encourage you to try and solve it on your own, of course. There's no trickery: if you're unsure
+of something, assume whatever makes the problem more interesting. (And the solution is not that
+nothing happens!)
+
+This problem, at least to me, seems really hard. We'll see, however, that there is a structured way
+of approaching this problem that doesn't require anything of your subconscious!
+
+* The Principle of Mathematical Induction
+This is one of the fancier sounding concepts in math, but it's very simple. It's essentially the
+following logical deduction:
+
+Let's say we have some statement $X$ that's dependent on a natural number $n$. If:
+ - $X$ is true for $0$ (or sometimes $1$)
+ - If $X$ holds for $n - 1$, it holds for $n$
+
+Then $X$ holds for all natural numbers.
+
+The analogy I am legally required to make involves a domino chain. Induction is basically saying
+that if we knock over the first domino, and each domino knocks over the next one, then all of the
+dominos get knocked over.
+
+There are some more complicated forms of induction, but this version is more than enough to solve
+a large amount of problems. I've presented it as a proof technique, but we can essentially think of
+it in a problem-solving context as well: /when a problem depends on some large natural number $N$,/
+/find the smallest number $N$ could be that doesn't completely trivialize the problem, think about
+that case, and then try to work upwards from there./
+
+* Solving the Blue-Eyed Islander Problem
+OK, so how can we apply this to solve our problem? It's really hard to reason about 200 people at
+once: let's start with the smallest cases we can, try to establish a pattern, and go from there.
+
+The problem requires at least one person to have blue eyes. So the absolute simplest case is a
+single islander with blue eyes. This is pretty boring: the wise man says that they see someone with
+blue eyes, and then the islander knows they have blue eyes and boards the next bus off the island.
+
+Let's try the next case: 2 people. Now we have two options: either both have blue eyes, or only one
+does. The case with 1 blue and 1 green is closer to our original problem, so we'll try it
+first. Now, when they hear the wise man, the islander with blue eyes knows that they have blue eyes
+because they see the other person has green eyes. Thus, nothing changes: they still board the first
+bus home.
+
+But now, we have a new complexity from 2 people that didn't exist with one. On day 2, once the
+blue-eyed islander leaves, the green-eyed islander realizes that they must have green eyes. After
+all, if they had blue eyes, there's no way the other islander would have known they had blue
+eyes. Thus, on day 2, the green-eyed islander leaves.
+
+One of the best things about induction is that it lets you reduce problems to previously solved
+instances when you're working through new versions of it, which greatly speeds up the process of
+deduction. We can see that with the case where there are 2 blue-eyed islanders. Each of them can't
+leave the first day because they don't know their own eye color. *However*, they make the same logical
+deductions we just made: both of them, on the second day, realize that if they had green eyes the
+other person would have already left the island. Thus, on the second day, /both/ of them leave the
+island. 
+
+You might already see how this will play out, but let's try the case for $n = 3$. First, imagine the
+case with 1 blue-eyed person and 2 green-eyed people. Here, on day 1, the blue-eyed islander will
+deduce their eye color and leave, and on day 2 both of the green-eyed islanders leave: they know
+that the blue-eyed person could only have left if they saw only green eyes. If there are 2 blue-eyed
+people, then nothing will happen on day 1. On day 2, both of the blue-eyed islanders will know that
+they have blue eyes because otherwise the other blue-eyed person would have left on day 1, and so
+both of them will leave on day 2. The green-eyed islander, after seeing this, will leave on
+day 3. If all of them have blue eyes, then 2 days pass before anything happens. Then, because
+nothing happened on day 2, all of them can infer that they have blue eyes, and so they all leave on
+day 3.
+
+This logic continues to hold up until $n = 200$. In our version of the problem, the solution goes
+like this: for 99 days, nothing will happen, and then on day 100 all of the blue-eyed people will
+leave. Seeing this, all of the green-eyed islanders will know that there were 100 blue-eyed people
+in total, and so all of them will leave the next day.
+
+There's quite the elegance to this problem: figuring out what happens is very hard in the case
+that's far removed from what we can easily deduce, but there's a clear pattern that lets us build up
+our deductions until we get where we need to be. I hope it gives some indication of the usefulness
+of induction as a technique.
+
+* The Handy-Dandy Pollard's Rho Guide to Using Induction
+Just like the post on invariants, I want to give a "meta-solution" archetype for problems that can
+be applied when it's useful to do so. This isn't completely automatic, because of its generality,
+but it's useful enough to guide you in a direction that's likely to provide insights instead of
+waiting for a dream.
+
+The first thing to know is when induction should be considered. Induction, in the form we've shown,
+requires some natural number $n$ in the problem, such that $n$ itself doesn't qualitatively change
+the problem. (In the islander problem, each extra person with blue eyes simply adds another day that
+they all wait.) This can sometimes be pretty sneaky, as we'll see. Secondly, the problem needs to
+have some sort of /recursive/ structure: when we think of writing down a solution, we usually approach
+this by trying to solve the subsequent problem in terms of the one we just solved, but when we're
+trying to figure out whether this is even worth trying we usually approach it by thinking "can this
+problem be decomposed into sub-problems?" Sometimes you need more than the immediately-preceding
+problem's solution to get to the next one: that's fine for induction! (It's perfectly fine if you
+need the preceding three cases to get to the next one, for example.)
+
+Once you're convinced it's worth trying, here's my advice for doing so:
+
+1. Isolate the natural number $n$ at the heart of the problem. Sometimes you have more than one
+   choice: often all of them will work, but try whichever one seems easiest to break the problem
+   down using.
+2. Work on the simplest meaningful case. For most problems this is $n = 0$ or $n = 1$.
+3. Once you've done the first case, increase $n$ by one and keep going.
+4. Search for some way of reducing the problem to the one you just solved.
+5. Repeat steps 3 and 4 until you either find a pattern or give up.
+
+* A Harder Example
+There's a bit of a problem for me as I write this. Induction is far more straightforward to apply to
+problems than the concept of invariance: it's pretty paint-by-numbers. That means that harder
+examples tend to really mean "way more tedious" and not "interesting to explain." Things like
+[[https://www.wikiwand.com/en/Planar_graph#/Euler's_formula][Euler's formula for graphs]] or [[https://www.wikiwand.com/en/Pick%2527s_theorem][Pick's theorem]] are possible applications of induction proofs, but they
+aren't really /fun/, just long to do properly and with mathematical rigor. 
+
+Basically, any time there are ways to prove something with induction and without it, the way without
+tends to be cooler. (This is definitely true for Euler's formula: I may show a neat proof of that
+some other time.) It's only for problems like our islander one where induction is the only method of
+showing the solution that it tends to feel elegant to use.
+
+The other problem that I often see when induction is taught in math classes is that it's used to
+prove completely nonobvious results! A lot of common summations, like the sum of the first $n$
+natural numbers being $\frac{n(n+1)}{2}$, aren't obvious when you don't know them but can easily be
+proved through induction if you do. For example, the closed-form solution for the $n$^{th} Fibonacci
+number $F_n$, /Binet's formula/, looks like this:
+
+$$F_n = \frac{1}{\sqrt{5}}\left(\left(\frac{1 + \sqrt{5}}{2}\right)^n - \left(\frac{1 - \sqrt{5}}{2}
+\right)^n \right)$$
+
+Telling someone to prove this with induction is just sad and demoralizing: it reduces the math
+student to a mere assistant who helps clean up the elegant work that other people did. The method by
+which you can solve general recurrences like the Fibonacci sequence is very interesting, but
+verifying the formula in a way that gives you absolutely no insight into /why/ it's true isn't what
+math is about, in my book.
+
+I'm going to instead present a more complicated example of induction where it's used to solve a
+problem, not merely to write a proof. 
+
+{{{mn}}}
+For examples of induction in proofs, check out a helpful list of problems by Alexandersson [[https://www.math.upenn.edu/~peal/files/Proof.by.Induction%5B2018%5D%5BEng%5D-ALEXANDERSSON.pdf][here.]]
+Most of these are pretty rote (you'll see Binet's formula, for example), but there are some clever
+ones, including the problem I'll be showing about tiling with L-shapes.
+{{{mn-end}}}
+
+The example I'm going to use should be a little familiar to anyone who read my previous post on
+invariants. /Is it possible to tile a $2^n \times 2^n$ square with any one square removed using L-shaped
+pieces?/ (For the very elegant proof that this cannot be done with any 2 squares removed, see that
+post. You'll notice that the argument I present there doesn't generalize to this case, so you'll
+have to figure it out on your own.)
+
+I would highly encourage you to do this on your own if you're trying to get better at solving
+problems with induction. This is a little more challenging than our last problem, because our
+natural number $n$ is an exponent: every problem has four times as many squares as the previous
+iteration! I'll go over the solution under the next header.
+
+* A Tiling Problem That Can Be Done?
+
+OK, so let's apply our little recipe of induction to this problem.
+The base case we're going to use is $n = 1$: $n = 0$ sorta makes sense, but not really. A 2x2 square
+with one square removed is just one of the L-shapes we're tiling with, so it's a very simple base
+case.
+ 
+For 4x4 squares, we could try and find a tiling on our own for every possible choice of the square
+to take away. But, instead, we're going to try and base this on the previous case so we can save
+some time. This is where the magic happens.
+
+Imagine cutting the grid by halves both ways, to split it into 4 copies of the previous iteration: 4
+2x2 squares. Note that only one of these will have a square removed for now: we know by our previous
+case that whichever quadrant has that missing square can be tiled. Now we need to figure out how to
+deal with the other copies, all of which don't have a missing square—yet. We can add a single
+L-shape in the very center such that it has one square in each of these three remaining
+quadrants. This removes one square from each of them, and so because the previous iteration was
+solved we know that each of the remaining quadrants can be tiled. Thus, the 4x4 square with one
+removed can be tiled with L-shaped pieces. 
+
+Of course, there's nothing about this logic that doesn't hold for the 8x8 case, the 16x16 case, and
+so on. Thus, by induction, we've shown that any $2^n \times 2^n$ square can be tiled with L-shaped pieces.
+
+Note that there's something wonderfully constructive about this approach: we don't just show that a
+tiling is possible, we show exactly how to do it. This is a strength of induction as a method: it
+tends to really show the relationships between subproblems, which often is very useful for
+constructing solutions.
+
+* Other Examples of Induction
+Just like last time, I'll try and very quickly go through some other common uses of induction in
+as many diverse fields as I can. This won't be nearly as varied as the previous version of this for
+invariants, because that concept is far more general, but it'll still, I hope, provide a good sense
+of when induction might be applicable to a problem.
+
+** Series and Sums
+Any series with some closed-form sum over the natural numbers or some closed-form solution for a
+recursive function can usually be proven with induction, although as I griped earlier it's not so
+easy to use induction to solve these series. However, if you notice a pattern, you can often use
+induction to prove it rigorously. Some common examples are the sums of squares, $\sum_{i=1}^n i^2 =
+\frac{n(n+1)(2n+1)}{6}$, Binet's formula which I showed above, and various combinatorics problems.
+** Graph Theory
+[[https://www.wikiwand.com/en/Graph_theory][Graph theory]] is a natural fit for induction: the number of vertices in a graph, the number of edges,
+and lots of other properties are all natural numbers. Induction on any one of these can be used to
+prove all sorts of theorems about graphs: you show that it holds for the base case and that it
+doesn't change when you add a vertex or an edge. Examples are Euler's formula, which I discussed
+earlier, or coloring theorems.
+** Number Theory
+Number theory is usually slightly harder to make work with induction, because things like prime
+factorization change in incredibly complex ways when you add 1. But /strong induction/, where you
+don't go back by 1 every step, is very useful. For example, proving that any number has a unique
+prime factorization can be done using induction.
+
+That's it for this post: I hope this helps any of you solving problems creatively using this
+technique. Stay tuned for more!
+
