@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://nicholas-miklaucic.github.io/</loc>
-  <lastmod>2020-01-06T02:42:00Z</lastmod>
+  <lastmod>2020-01-21T21:57:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/2019/</loc>
@@ -19,7 +19,7 @@
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2020-01-14T18:25:00Z</lastmod>
+  <lastmod>2020-01-21T21:57:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
@@ -100,6 +100,10 @@
  <url>
   <loc>https://nicholas-miklaucic.github.io/galleries/demo/</loc>
   <lastmod>2019-08-02T00:06:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/index-1.html</loc>
+  <lastmod>2020-01-21T21:57:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/listings/</loc>
@@ -202,11 +206,27 @@
   <lastmod>2020-01-13T05:55:00Z</lastmod>
  </url>
  <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/</loc>
+  <lastmod>2020-01-21T21:57:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/</loc>
   <lastmod>2020-01-07T22:19:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/</loc>
   <lastmod>2020-01-14T18:25:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/</loc>
+  <lastmod>2020-01-21T22:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-torsa/</loc>
+  <lastmod>2020-01-21T22:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-rsa/</loc>
+  <lastmod>2020-01-21T21:57:00Z</lastmod>
  </url>
 </urlset>

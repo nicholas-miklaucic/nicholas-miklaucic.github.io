@@ -1,0 +1,279 @@
+#+BEGIN_COMMENT
+.. title: The Basics of Cryptography, Part 2: Intro To RSA
+.. slug: the-basics-of-cryptography-part-2-intro-to-rsa
+.. date: 2020-01-21 15:14:55 UTC-05:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+.. has_math: true
+#+END_COMMENT
+This is part 2 of a series: to see the first post, go [[https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/][here.]] If you're not familiar with things like
+modular arithmetic, read that before reading this.
+
+Today we're going to continue to look behind the curtain at the algorithms that power the Internet
+we know and love. In this post, I'll cover the RSA cryptosystem: what it is, what it does, how it
+works, etc. RSA is such a useful algorithm because it sidesteps a lot of the problems with sending
+secure messages we talked about last time. You can think of it as a clever way of improving on the
+encryption model we used last time, not by simply improving it as it exists, but by completely
+sidestepping the security problems it had.
+
+This post will introduce a pristine version of RSA, without the real-world complications, and apply
+it to the same problem we looked at last time: securely sending a message to someone else over an
+insecure channel, without prior communication. In the future, I'll look at how this textbook RSA
+fails in the real world, and additionally how you can use the idea behind RSA to do things besides
+sending secure messages.
+
+{{{TEASER_END}}}
+
+* A Brief Historical Prelude
+RSA was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
+after Diffie-Hellman key exchange: we can essentially think of RSA as an answer to the question that
+key exchange posed: "are there one-way functions that can be used to encrypt messages?" The goal was
+to have some mathematical guarantee of security backed by the difficulty of solving some sort of
+problem algorithmically. 
+
+RSA encryption is still widely used today, despite lots of alternatives popping up over the past
+several decades. I think there are a couple reasons for this: it's decently fast, it was first, and
+it's fairly easy for non-mathematicians to understand. RSA being first is incredibly important:
+before its publication, it was unclear if such a method of encryption even existed, and having a
+fairly simple mathematical justification for the claim that breaking RSA would require billions of
+years to break was enormously appealing.
+
+So, with that out of the way, what does RSA do and how does it do it?
+
+* Public-Key Encryption
+RSA is a /public-key/ cryptosystem. This means that, instead of a single password or code that can be
+used to encrypt and decrypt a message, like the Enigma machine we talked about last time, it's
+fundamentally /asymmetric/. You get two keys instead of one:
+ - Your /public key/ is, as the name suggests, something that you share with people you want to
+   communicate with. It allows anyone to encrypt messages.
+ - Your /private key/ is the opposite: it allows you, and only you, to decrypt any message encrypted
+   with your public key. This is always kept secret.
+
+This concept can be expanded on and used in more interesting ways, but for now we're going to focus
+on the simplest example: I want to send Alice a message that only she can read. How can we do this?
+
+* What's the Trick?
+I think a very useful way of thinking about an algorithm is to try and deconstruct it into the
+essential component or "trick" that makes it work and the components that simply let the essential
+insight of the algorithm work.
+
+Here, we can decompose RSA into two parts: finding a one-way function that can be used for
+public-key encryption, and making sure that you have to actually solve that problem in order to
+break the cipher. I don't want to make it sound like the last part isn't really hard or crucially
+important: a bare-bones RSA implementation will have all sorts of flaws that allow an attacker to
+completely bypass the actual math problem, and fixing these issues is an essential and interesting
+task. /However/, those parts aren't nearly as elegant as the math, and so I'm not really going to be
+going into much detail about how RSA is implemented in practice.
+
+So, what one-way function does RSA use? (My caveat from last time still holds: it's an open question
+whether one-way functions as I describe them exist, and so I'm using the term to mean "a function
+that, as of writing, is one-way and likely to remain so.")
+
+* A Note on Presentation
+RSA is often presented dryly starting with exactly how you generate keys, decrypt messages, and
+encrypt them. I think this approach is a little confusing, because it doesn't at all explain how
+someone would think to do any of this in the first place. Instead, I'm going to start with the idea
+behind RSA, and only then explain how you actually use that kernel of an idea to actually send
+messages. That means that I'm only going to explain how to actually generate keys at the very end,
+so there will be a little magic going on in the next couple sections. Just stick with me: all will
+be explained at the end!
+
+* The RSA Problem
+Public-key cryptography is basically advertising a set of problems that only you know the solution
+to: anyone with your public key can encrypt a message using a problem in your set, and ideally only
+you can solve the problem and then use that to decrypt the message. In that vein, I'll present RSA's
+essential trick as a question:
+
+#+BEGIN_QUOTE
+Given some number $n = pq$ where $p$ and $q$ are prime, a number $m$, and an exponent $e$, what
+number $d$ has the property that $(m^e)^d \equiv m \pmod n$, assuming such a number exists?
+#+END_QUOTE
+
+In RSA, the public key includes $n$ and $e$ but not $m$: this means that you can send any number
+between $0$ and $n-1$ through RSA, and you can do so as many times as you need to. The solution
+doesn't change with different values of $m$, only for different values of $e$ and $n$.
+
+* An Example
+You might very well ask, "Nicholas, how would we generate $n, e$, and $d$ to make this work? Why is
+$n$ a /semiprime/ (the product of two primes)?" I'll get there later. For now, we're just going to
+look at how, assuming this problem can't be solved easily, it lets us implement a public-key system
+and lets me send a message to Alice like I wanted to at the start of this post.
+
+Let's start with a very, very small example, and then work up slightly. Let's say I want to send the
+number $12$ (called $m$ for /message/) to Alice.
+
+1. First, I ask Alice for her public key, which is the pair $(n, e)$. She sends me $(55, 3)$
+   back. I don't need to worry about how this is generated for now.
+2. I take my message $m$ and compute $m^e \pmod n$. In this case, that's $12^3 \equiv 1728 \equiv 23
+   \pmod{55}$. This is our /ciphertext/: the encrypted version of my message.
+3. Alice knows the solution of the problem I posed above. In this case, she knows that the /private/
+   /key/ $d$ is $7$, for any message, raising it to the third power and then raising that to the
+   seventh power modulo $n$ results in the original message. So, to decrypt my message, she computes
+   $23^7 \pmod{55} \equiv 12$, which was my original message!
+
+* (Trying to) Break RSA
+How might an attacker, who we'll call Eve, try to decrypt the message I sent for Alice without
+knowing $d$? 
+
+One approach would be to simply solve the discrete logarithm problem I talked about last time: pick
+her own number, say $5$, encrypt it by computing $5^3 \mod 55 \equiv 15$, and then trying to find some
+exponent $d$ such that $15^d \equiv 5 \pmod{55}$. (Because anyone can encrypt messages, she can do
+this for any number that's convenient for her!) As we discussed last time, this problem is thought
+to be fundamentally intractable for large moduli, so this method is a bust: to do this requires
+exponentially more computing power than the people sending messages, at least with current knowledge.
+
+Another approach is to factor $n$. It might be unclear how this would help: we'll get to that in a
+second. This approach is the most direct: if you need a one-sentence version of why breaking RSA is
+hard, you should probably go with "integer factorization is hard".
+
+The last approach would be some other trick that avoids having to solve the integer factorization
+problem or the discrete logarithm problem. This is a very important thing to keep in mind! The RSA
+problem, as much as people often mix this up, is /not/ proven to be equivalent to integer
+factorization or computing discrete logarithms. In fact, it's very reasonable to think that solving
+either of those, which allows you to decrypt any message, should be harder than decrypting a single
+message. As of yet no efficient way of breaking RSA like this is known, but it's not impossible
+either. 
+
+OK, so why does factoring $n$ help? To see that, let's go over how $e$ and $d$ are generated.
+
+* Generating Keys
+So how did Alice find $d$, if doing it seems so difficult? $n$, $e$ and $d$ have to be generated
+together: the whole point is that finding $d$ if you only know $n$ and $e$ is really hard. We can
+think of this as two sub-problems:
+ - First, we find a number $x$ such that $a^x \equiv 1 \pmod n$ for all $a$ coprime to $n$, for
+   whichever $n$ we end up picking.
+ - Then, we find two numbers $e$ and $d$ such that $ed \equiv 1 \pmod x$. 
+
+If we can do this, then we have, for any message $m$,
+
+$$(m^e)^d \equiv m^{ed} \equiv m^{kx + 1} \equiv (m^x)^k \times m \equiv 1^k \times m \equiv m \pmod n$$
+
+which is the solution to the RSA problem that we're looking for. Note that $k$ is any positive
+integer, and we know that we can find a $k$ such that $ed = kx + 1$ because $ed \equiv 1 \pmod x$.
+
+So how can we find some number $x$ such that $a^x \equiv 1 \pmod n$ for any $a$ coprime to $n$? 
+
+* The Carmichael Function
+The function that takes in $n$ and finds us the smallest $x$ this works for is called the /Carmichael/
+/function/. It's usually written as $\lambda(n)$.
+
+Remember how last time we talked about /primitive roots/, numbers that generated every possible
+exponent in their table of powers modulo some number $n$? Imagine $n$ is prime for a second. In this
+case, for any primitive root $r$, we'll first have $r^x \equiv 1 \pmod n$ when $x = n - 1$: it'll go
+through every number except $0$, and then loop around. This means that the last number in the series
+has to be $1$, which is what we're looking for. Thus, for any prime $p$, $\lambda(p) = p - 1$.
+
+Now let's think about some $n = pq$ that's a semiprime. Let's say we have a number $x$ such that,
+for a primitive root $r$ of $n$ (i.e., a number that takes the longest possible time to loop back
+around to $1$ without completely skipping it), $r^x \equiv 1 \pmod n$. Because $n = pq$, this means
+that $r^x \equiv 1 \pmod p$ and $r^x \equiv 1 \pmod q$. (Think about why this is true!) We just solved
+this problem for prime numbers: the first equation means $x \equiv 0 \pmod{\lambda(p)}$ (that's the definition
+of $\lambda$, after all), and the second means $x \equiv 0 \pmod{\lambda(q)}$. $\lambda(p) = p - 1$ and $\lambda(q) = q -
+1$. We're looking for the first number that both $p - 1$ and $q - 1$ evenly divide. This is called
+the /least common multiple/, or $lcm$. Thus, for any semiprime $n = pq$, $\lambda(n) = lcm(p - 1, q - 1)$.
+
+{{{mn}}}
+The language of group theory provides a very beautiful way of expressing what the Carmichael
+function does, but I'm trying to keep this accessible for people without a lot of mathematical
+background so I'll skip talking about that for now.
+{{{mn-end}}}
+
+That was a fair bit of math! It's important to know /why/ this last expression lets us generate keys,
+and some introductions to RSA skip going over why the Carmichael function works out to this value
+for semiprimes. That leaves a bad taste in my mouth: I hate explanations of anything that require
+magic. Go get coffee or something and come back and look over this again if it helps: getting a feel
+for why this works is vital to understanding how RSA actually uses integer factorization to make
+hard problems. Hopefully, you now understand why computing $lcm(p - 1, q - 1)$ is useful: it's the
+number that will let us generate $e$ and $d$.
+
+Note that this process only works if we know $p$ and $q$! This is why factoring $n$ is one way of
+breaking RSA: if we know $p$ and $q$, we can easily generate $d$.
+
+* Finding $e$ and $d$
+So now we have some number $\lambda(n)$ such that, for any positive integer $k$, raising a number to the
+power $k\lambda(n) + 1$ modulo $n$ gets you your original number back. Now we just need to find two
+numbers $e$ and $d$ that multiply to one of these numbers. This is essentially solving $ed \equiv 1 \pmod
+\lambda(n)$. For any specific $e$, we can quickly find $d$ using the /extended Euclidean algorithm/. I'm not
+going to go into that too deeply right now, because this will already be a long post: check the
+[[https://www.wikiwand.com/en/Modular_multiplicative_inverse#/Extended_Euclidean_algorithm][Wikipedia link]] explaining it if you're interested. I'm just going to keep going forward assuming
+this algorithm works and is fast.
+
+
+{{{mn}}}
+The optimal way to do modular exponentation is actually based in the binary representation of the
+exponent. Imagine we're trying to raise a number $n$ to some power $e$ where $e_2 = 10011$ in
+binary. We can do this repeated squaring trick to find $n^1, n^2, n^4$, and so on. We can essentially
+think of the binary representation of $e$ as saying that $e = 2^4 + 2^1 + 2^0$, and so $n^e = n^4 \times
+n^1 \times n^0$. This means we have to do $\log_2 e$ multiplications to generate all of the base
+numbers, and then we need to do one multiplcation for every $1$ in the binary representation of
+$e$. The number of $1$s in the binary representation of a number is called its /Hamming weight/: this
+is a long-winded way of saying that the easiest numbers to exponentiate by are those with a small
+Hamming weight.
+{{{mn-end}}}
+
+This gives us a lot of choices: we can actually pick $e$ or $d$ to be whatever we want! In practice,
+because you're going to be encrypting messages by raising them to power $e$, we want $e$ to amenable
+to the squaring trick we did earlier: finding $m^{17}$ can be done with five multiplcations by repeated
+squaring by doing $((((m^2)^2)^2)^2) \times m$, but computing $m^{15}$ isn't as easy. The encryption is usually
+about as secure regardless of the $e$ you pick, and so it's common to pick $e = 2^{16} + 1 = 65537$ or
+$e = 3$ or whatever else. (Alternatively, to make decryption easier, you could pick $d$ specially to
+make decryption faster: this has the unfortunate side effect that it's easier to guess $d$,
+however.)
+
+* Bringing It All Together: A More Complex Example
+Let's do another example, with slightly bigger numbers. The twist is that now I'm the one generating
+a private key and Alice is the one sending a message. This will require all of the insight we've
+gained so far!
+
+1. First, I'll generate two prime numbers: they should be roughly the same size and randomly
+   generated, so factoring their product is as hard as possible. I'll pick $p = 241$ and $q =
+   193$. Their product is $n = pq = 46513$. In binary, this number is 16 digits long, so I have a
+   /16-bit key/. (In the real world, I'd use a 1024-bit or 2048-bit number, which is quite a bit
+   bigger!)
+2. Because I know $p$ and $q$, I can efficiently compute $\lambda(n) = lcm(p - 1, q - 1) = 960$.
+3. Now I can pick $e$. I'll use $e = 17$, which is easy for other people to encrypt with.
+4. To find $d$, I use the extended Euclidean algorithm to learn that $17 \times 113 \equiv 1921 \equiv 1
+   \pmod{960}$, so $d = 113$. I keep this secret.
+5. Now I send my public key to Alice: this is the pair $(n, e)$, so I send her $(46513, 17)$.
+6. Let's say Alice wants to send the number $314$ to me. She computes $314^{17} \pmod{46513} \equiv 15319$
+   and sends that number to me.
+7. Now, only I know $d$, and so only I can compute $15319^{113} \equiv 314 \pmod{46513}$. Thus, only
+   Alice and I know what message she sent, and even someone who has listened to all of our
+   communications would be unable to figure this out.
+
+I encourage you to check the math on this yourself: if you enjoy a little programming, try writing a
+basic version of RSA!
+
+* A Warning
+Just like last time, I want to stress something: /if you are writing this yourself to use in any
+real-world/ /application, stop!/ (Doing it yourself is a great way to learn, however.) Getting the gist
+of it and implementing a version that's actually secure are worlds apart in difficulty, and there
+are lots of ways this textbook version of RSA isn't very secure. Leave it to the experts.
+
+* Wrapping Up
+So now we have another way of sending secure messages over insecure channels: something the world at
+large couldn't do until 1977 at the very least. Again, this is a criminally underappreciated
+discovery, as important to the modern world as wireless Internet. The modern world simply could not
+function without the service RSA provides.
+
+Cryptography is about more than just sending secure messages, and there are other types of attackers
+than simple eavesdroppers. Next time, we'll look at a solution to different problems, like /identity
+verification/:
+
+#+BEGIN_QUOTE
+Alice and Bob are organizing anti-government activism in a country that represses political
+freedoms. Alice wants to tell Bob to meet her in a certain place, but they can only communicate over
+the Internet: Bob worries that the government, which controls their Internet provider, will forge a
+message from Alice and set him up. They have shared RSA public keys with each other, but because
+anyone can encrypt a message in RSA Bob can't be sure that the messages he receives aren't being
+forged. How can Bob verify that he's communicating with the real Alice?
+#+END_QUOTE
+
+This pops up in a much more mundane context as well: /password verification/. How can you show that
+you are who you say you are, but without letting anyone else forge your identity? (Note that just
+telling someone your password doesn't work, because then they could impersonate you in the future.)
+The solution to this problem, as it appears in the modern world, requires a new tool in our toolbox:
+/cryptographic hash functions/. That'll be next time. See you then!

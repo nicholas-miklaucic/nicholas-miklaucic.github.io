@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Solving problems by induction from smaller examples">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · Problem Solving Techniques: Induction </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="prev" href="../problem-solving-techniques-invariants/" title="Problem-Solving Techniques: Invariants" type="text/html">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Problem Solving Techniques:&nbsp;Induction</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2020-01-16T13:53:20-05:00" itemprop="datePublished" title="2020-01-16 13:53">2020-01-16 13:53</time></span>
+        <meta name="description" itemprop="description" content="Solving problems by induction from smaller examples">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+<i>This is the second in my series on problem-solving techniques: for the first, see <a href="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/">this post on&nbsp;invariants.</a></i>
+</p>
+
+<p>
+As I&#8217;ve previously discussed, I&#8217;m fascinated by the ability to create proofs or solutions for
+problems that are easy to understand but difficult to synthesize. In this series, I&#8217;m trying to shed
+some limited insight on how we mere mortals can arrive at these beautiful and creative&nbsp;insights.
+</p>
+
+<!-- TEASER_END -->
+
+<p>
+Take the case of the structure of benzene. Chemists had been struggling to come up with a viable
+structure for \(C_6H_6\): the experimental results for the compound seemed to contradict their available
+theories. The scientist Friedrich August Kekulé finally theorized the correct solution problem by
+realizing that benzene was a ring structure, with the hydrogens on the outside and the carbons in a
+hexagonal configuration on the inside. (The actual work of proving this was done by Kathleen
+Londsdale in&nbsp;1929.)
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+This story is a little dubious, and it certainly obscures the important study of resonance that
+actually makes the benzene structure work. (I&#8217;m not including an image of the actual structure
+because it isn&#8217;t quite what Kekulé thought it was, for example.) But it&#8217;s a really nice story,
+wouldn&#8217;t you&nbsp;agree?
+</p>
+</span>
+
+<p>
+Kekulé described the process by which he first realized benzene&#8217;s structure 25 years later. As the
+story goes, he fell asleep while thinking on the problem and had a vivid dream of the <i>ouroboros</i>: a
+snake eating its own tail. After waking, he realized that this <i>ouroboros</i> described the structure of
+benzene: a cycle. This structure, once you think to theorize it, instantly explains most of the
+issues that had confounded prior attempts to find the solution to the benzene&nbsp;problem.
+</p>
+
+<p>
+The reason I&#8217;m talking about Kekulé is that our goal is to arrive at these kinds of solutions
+without metaphorical epiphanies from our subconscious. So, with this very long prologue out of the
+way, how does induction help us solve&nbsp;problems?
+</p>
+
+<p>
+Let&#8217;s introduce the concept with an example&nbsp;problem.
+</p>
+
+<div id="outline-container-orgfafbd73" class="outline-2">
+<h2 id="orgfafbd73">The Blue-Eyed&nbsp;Islanders</h2>
+<div class="outline-text-2" id="text-orgfafbd73">
+<p>
+Here&#8217;s our example logic&nbsp;problem:
+</p>
+
+<blockquote>
+<p>
+200 people live on an island. All of them are perfect logicians: they instantly make any logically
+valid deduction the instant it is possible to do so. None of them know their own eye color: there
+are no mirrors or reflective surfaces, and it is forbidden to talk about eye color. They do know
+that only two eye colors exist on the island: blue, and green. In actuality, there are 100 blue-eyed
+and 100 green-eyed people on the island. Every islander sees the eye color of everyone else on the
+island. Each islander thus sees 99 people with their eye color and 100 people with the other eye
+color, but they can&#8217;t use this information to determine their own eye color because they don&#8217;t know
+the total numbers. Each day, a bus passes through the island, and anyone who knows their own eye
+color leaves. The residents of the island know exactly who leaves and when. They also know all of
+these&nbsp;rules.
+</p>
+
+<p>
+One day, as part of an ancient ritual, a wise man comes onto the island and is allowed to say one
+thing to the islanders. He pauses, and then says the following: &#8220;I see someone with blue&nbsp;eyes.&#8221;
+</p>
+
+<p>
+What can the islanders deduce from this? Who figures out their eye color and leaves, and&nbsp;when?
+</p>
+</blockquote>
+
+<p>
+I&#8217;d encourage you to try and solve it on your own, of course. There&#8217;s no trickery: if you&#8217;re unsure
+of something, assume whatever makes the problem more interesting. (And the solution is not that
+nothing&nbsp;happens!)
+</p>
+
+<p>
+This problem, at least to me, seems really hard. We&#8217;ll see, however, that there is a structured way
+of approaching this problem that doesn&#8217;t require anything of your&nbsp;subconscious!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org851f3d7" class="outline-2">
+<h2 id="org851f3d7">The Principle of Mathematical&nbsp;Induction</h2>
+<div class="outline-text-2" id="text-org851f3d7">
+<p>
+This is one of the fancier sounding concepts in math, but it&#8217;s very simple. It&#8217;s essentially the
+following logical&nbsp;deduction:
+</p>
+
+<p>
+Let&#8217;s say we have some statement \(X\) that&#8217;s dependent on a natural number \(n\).&nbsp;If:
+</p>
+<ul class="org-ul">
+<li>\(X\) is true for \(0\) (or sometimes&nbsp;\(1\))</li>
+<li>If \(X\) holds for \(n - 1\), it holds for&nbsp;\(n\)</li>
+</ul>
+<p>
+Then \(X\) holds for all natural&nbsp;numbers.
+</p>
+
+<p>
+The analogy I am legally required to make involves a domino chain. Induction is basically saying
+that if we knock over the first domino, and each domino knocks over the next one, then all of the
+dominos get knocked&nbsp;over.
+</p>
+
+<p>
+There are some more complicated forms of induction, but this version is more than enough to solve
+a large amount of problems. I&#8217;ve presented it as a proof technique, but we can essentially think of
+it in a problem-solving context as well: <i>when a problem depends on some large natural number \(N\),</i>
+<i>find the smallest number \(N\) could be that doesn&#8217;t completely trivialize the problem, think about
+that case, and then try to work upwards from&nbsp;there.</i>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org35f23bc" class="outline-2">
+<h2 id="org35f23bc">Solving the Blue-Eyed Islander&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org35f23bc">
+<p>
+OK, so how can we apply this to solve our problem? It&#8217;s really hard to reason about 200 people at
+once: let&#8217;s start with the smallest cases we can, try to establish a pattern, and go from&nbsp;there.
+</p>
+
+<p>
+The problem requires at least one person to have blue eyes. So the absolute simplest case is a
+single islander with blue eyes. This is pretty boring: the wise man says that they see someone with
+blue eyes, and then the islander knows they have blue eyes and boards the next bus off the&nbsp;island.
+</p>
+
+<p>
+Let&#8217;s try the next case: 2 people. Now we have two options: either both have blue eyes, or only one
+does. The case with 1 blue and 1 green is closer to our original problem, so we&#8217;ll try it
+first. Now, when they hear the wise man, the islander with blue eyes knows that they have blue eyes
+because they see the other person has green eyes. Thus, nothing changes: they still board the first
+bus&nbsp;home.
+</p>
+
+<p>
+But now, we have a new complexity from 2 people that didn&#8217;t exist with one. On day 2, once the
+blue-eyed islander leaves, the green-eyed islander realizes that they must have green eyes. After
+all, if they had blue eyes, there&#8217;s no way the other islander would have known they had blue
+eyes. Thus, on day 2, the green-eyed islander&nbsp;leaves.
+</p>
+
+<p>
+One of the best things about induction is that it lets you reduce problems to previously solved
+instances when you&#8217;re working through new versions of it, which greatly speeds up the process of
+deduction. We can see that with the case where there are 2 blue-eyed islanders. Each of them can&#8217;t
+leave the first day because they don&#8217;t know their own eye color. <b>However</b>, they make the same logical
+deductions we just made: both of them, on the second day, realize that if they had green eyes the
+other person would have already left the island. Thus, on the second day, <i>both</i> of them leave the&nbsp;island. 
+</p>
+
+<p>
+You might already see how this will play out, but let&#8217;s try the case for \(n = 3\). First, imagine the
+case with 1 blue-eyed person and 2 green-eyed people. Here, on day 1, the blue-eyed islander will
+deduce their eye color and leave, and on day 2 both of the green-eyed islanders leave: they know
+that the blue-eyed person could only have left if they saw only green eyes. If there are 2 blue-eyed
+people, then nothing will happen on day 1. On day 2, both of the blue-eyed islanders will know that
+they have blue eyes because otherwise the other blue-eyed person would have left on day 1, and so
+both of them will leave on day 2. The green-eyed islander, after seeing this, will leave on
+day 3. If all of them have blue eyes, then 2 days pass before anything happens. Then, because
+nothing happened on day 2, all of them can infer that they have blue eyes, and so they all leave on
+day&nbsp;3.
+</p>
+
+<p>
+This logic continues to hold up until \(n = 200\). In our version of the problem, the solution goes
+like this: for 99 days, nothing will happen, and then on day 100 all of the blue-eyed people will
+leave. Seeing this, all of the green-eyed islanders will know that there were 100 blue-eyed people
+in total, and so all of them will leave the next&nbsp;day.
+</p>
+
+<p>
+There&#8217;s quite the elegance to this problem: figuring out what happens is very hard in the case
+that&#8217;s far removed from what we can easily deduce, but there&#8217;s a clear pattern that lets us build up
+our deductions until we get where we need to be. I hope it gives some indication of the usefulness
+of induction as a&nbsp;technique.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5ce404f" class="outline-2">
+<h2 id="org5ce404f">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Induction</h2>
+<div class="outline-text-2" id="text-org5ce404f">
+<p>
+Just like the post on invariants, I want to give a &#8220;meta-solution&#8221; archetype for problems that can
+be applied when it&#8217;s useful to do so. This isn&#8217;t completely automatic, because of its generality,
+but it&#8217;s useful enough to guide you in a direction that&#8217;s likely to provide insights instead of
+waiting for a&nbsp;dream.
+</p>
+
+<p>
+The first thing to know is when induction should be considered. Induction, in the form we&#8217;ve shown,
+requires some natural number \(n\) in the problem, such that \(n\) itself doesn&#8217;t qualitatively change
+the problem. (In the islander problem, each extra person with blue eyes simply adds another day that
+they all wait.) This can sometimes be pretty sneaky, as we&#8217;ll see. Secondly, the problem needs to
+have some sort of <i>recursive</i> structure: when we think of writing down a solution, we usually approach
+this by trying to solve the subsequent problem in terms of the one we just solved, but when we&#8217;re
+trying to figure out whether this is even worth trying we usually approach it by thinking &#8220;can this
+problem be decomposed into sub-problems?&#8221; Sometimes you need more than the immediately-preceding
+problem&#8217;s solution to get to the next one: that&#8217;s fine for induction! (It&#8217;s perfectly fine if you
+need the preceding three cases to get to the next one, for&nbsp;example.)
+</p>
+
+<p>
+Once you&#8217;re convinced it&#8217;s worth trying, here&#8217;s my advice for doing&nbsp;so:
+</p>
+
+<ol class="org-ol">
+<li>Isolate the natural number \(n\) at the heart of the problem. Sometimes you have more than one
+choice: often all of them will work, but try whichever one seems easiest to break the problem
+down&nbsp;using.</li>
+<li>Work on the simplest meaningful case. For most problems this is \(n = 0\) or \(n =&nbsp;1\).</li>
+<li>Once you&#8217;ve done the first case, increase \(n\) by one and keep&nbsp;going.</li>
+<li>Search for some way of reducing the problem to the one you just&nbsp;solved.</li>
+<li>Repeat steps 3 and 4 until you either find a pattern or give&nbsp;up.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orga9af476" class="outline-2">
+<h2 id="orga9af476">A Harder&nbsp;Example</h2>
+<div class="outline-text-2" id="text-orga9af476">
+<p>
+There&#8217;s a bit of a problem for me as I write this. Induction is far more straightforward to apply to
+problems than the concept of invariance: it&#8217;s pretty paint-by-numbers. That means that harder
+examples tend to really mean &#8220;way more tedious&#8221; and not &#8220;interesting to explain.&#8221; Things like
+<a href="https://www.wikiwand.com/en/Planar_graph#/Euler's_formula">Euler&#8217;s formula for graphs</a> or <a href="https://www.wikiwand.com/en/Pick%27s_theorem">Pick&#8217;s theorem</a> are possible applications of induction proofs, but they
+aren&#8217;t really <i>fun</i>, just long to do properly and with mathematical&nbsp;rigor. 
+</p>
+
+<p>
+Basically, any time there are ways to prove something with induction and without it, the way without
+tends to be cooler. (This is definitely true for Euler&#8217;s formula: I may show a neat proof of that
+some other time.) It&#8217;s only for problems like our islander one where induction is the only method of
+showing the solution that it tends to feel elegant to&nbsp;use.
+</p>
+
+<p>
+The other problem that I often see when induction is taught in math classes is that it&#8217;s used to
+prove completely nonobvious results! A lot of common summations, like the sum of the first \(n\)
+natural numbers being \(\frac{n(n+1)}{2}\), aren&#8217;t obvious when you don&#8217;t know them but can easily be
+proved through induction if you do. For example, the closed-form solution for the \(n\)<sup>th</sup> Fibonacci
+number \(F_n\), <i>Binet&#8217;s formula</i>, looks like&nbsp;this:
+</p>
+
+<p>
+\[F_n = \frac{1}{\sqrt{5}}\left(\left(\frac{1 + \sqrt{5}}{2}\right)^n - \left(\frac{1 - \sqrt{5}}{2}
+\right)^n&nbsp;\right)\]
+</p>
+
+<p>
+Telling someone to prove this with induction is just sad and demoralizing: it reduces the math
+student to a mere assistant who helps clean up the elegant work that other people did. The method by
+which you can solve general recurrences like the Fibonacci sequence is very interesting, but
+verifying the formula in a way that gives you absolutely no insight into <i>why</i> it&#8217;s true isn&#8217;t what
+math is about, in my&nbsp;book.
+</p>
+
+<p>
+I&#8217;m going to instead present a more complicated example of induction where it&#8217;s used to solve a
+problem, not merely to write a&nbsp;proof. 
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+For examples of induction in proofs, check out a helpful list of problems by Alexandersson <a href="https://www.math.upenn.edu/~peal/files/Proof.by.Induction%5B2018%5D%5BEng%5D-ALEXANDERSSON.pdf">here.</a>
+Most of these are pretty rote (you&#8217;ll see Binet&#8217;s formula, for example), but there are some clever
+ones, including the problem I&#8217;ll be showing about tiling with&nbsp;L-shapes.
+</p>
+</span>
+
+<p>
+The example I&#8217;m going to use should be a little familiar to anyone who read my previous post on
+invariants. <i>Is it possible to tile a \(2^n \times 2^n\) square with any one square removed using L-shaped
+pieces?</i> (For the very elegant proof that this cannot be done with any 2 squares removed, see that
+post. You&#8217;ll notice that the argument I present there doesn&#8217;t generalize to this case, so you&#8217;ll
+have to figure it out on your&nbsp;own.)
+</p>
+
+<p>
+I would highly encourage you to do this on your own if you&#8217;re trying to get better at solving
+problems with induction. This is a little more challenging than our last problem, because our
+natural number \(n\) is an exponent: every problem has four times as many squares as the previous
+iteration! I&#8217;ll go over the solution under the next&nbsp;header.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb3498b2" class="outline-2">
+<h2 id="orgb3498b2">A Tiling Problem That Can Be&nbsp;Done?</h2>
+<div class="outline-text-2" id="text-orgb3498b2">
+<p>
+OK, so let&#8217;s apply our little recipe of induction to this problem.
+The base case we&#8217;re going to use is \(n = 1\): \(n = 0\) sorta makes sense, but not really. A 2x2 square
+with one square removed is just one of the L-shapes we&#8217;re tiling with, so it&#8217;s a very simple base&nbsp;case.
+</p>
+
+<p>
+For 4x4 squares, we could try and find a tiling on our own for every possible choice of the square
+to take away. But, instead, we&#8217;re going to try and base this on the previous case so we can save
+some time. This is where the magic&nbsp;happens.
+</p>
+
+<p>
+Imagine cutting the grid by halves both ways, to split it into 4 copies of the previous iteration: 4
+2x2 squares. Note that only one of these will have a square removed for now: we know by our previous
+case that whichever quadrant has that missing square can be tiled. Now we need to figure out how to
+deal with the other copies, all of which don&#8217;t have a missing square—yet. We can add a single
+L-shape in the very center such that it has one square in each of these three remaining
+quadrants. This removes one square from each of them, and so because the previous iteration was
+solved we know that each of the remaining quadrants can be tiled. Thus, the 4x4 square with one
+removed can be tiled with L-shaped&nbsp;pieces. 
+</p>
+
+<p>
+Of course, there&#8217;s nothing about this logic that doesn&#8217;t hold for the 8x8 case, the 16x16 case, and
+so on. Thus, by induction, we&#8217;ve shown that any \(2^n \times 2^n\) square can be tiled with L-shaped&nbsp;pieces.
+</p>
+
+<p>
+Note that there&#8217;s something wonderfully constructive about this approach: we don&#8217;t just show that a
+tiling is possible, we show exactly how to do it. This is a strength of induction as a method: it
+tends to really show the relationships between subproblems, which often is very useful for
+constructing&nbsp;solutions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org55603bc" class="outline-2">
+<h2 id="org55603bc">Other Examples of&nbsp;Induction</h2>
+<div class="outline-text-2" id="text-org55603bc">
+<p>
+Just like last time, I&#8217;ll try and very quickly go through some other common uses of induction in
+as many diverse fields as I can. This won&#8217;t be nearly as varied as the previous version of this for
+invariants, because that concept is far more general, but it&#8217;ll still, I hope, provide a good sense
+of when induction might be applicable to a&nbsp;problem.
+</p>
+</div>
+
+<div id="outline-container-orged5f5f9" class="outline-3">
+<h3 id="orged5f5f9">Series and&nbsp;Sums</h3>
+<div class="outline-text-3" id="text-orged5f5f9">
+<p>
+Any series with some closed-form sum over the natural numbers or some closed-form solution for a
+recursive function can usually be proven with induction, although as I griped earlier it&#8217;s not so
+easy to use induction to solve these series. However, if you notice a pattern, you can often use
+induction to prove it rigorously. Some common examples are the sums of squares, \(\sum_{i=1}^n i^2 =
+\frac{n(n+1)(2n+1)}{6}\), Binet&#8217;s formula which I showed above, and various combinatorics&nbsp;problems.
+</p>
+</div>
+</div>
+<div id="outline-container-org8b61d49" class="outline-3">
+<h3 id="org8b61d49">Graph&nbsp;Theory</h3>
+<div class="outline-text-3" id="text-org8b61d49">
+<p>
+<a href="https://www.wikiwand.com/en/Graph_theory">Graph theory</a> is a natural fit for induction: the number of vertices in a graph, the number of edges,
+and lots of other properties are all natural numbers. Induction on any one of these can be used to
+prove all sorts of theorems about graphs: you show that it holds for the base case and that it
+doesn&#8217;t change when you add a vertex or an edge. Examples are Euler&#8217;s formula, which I discussed
+earlier, or coloring&nbsp;theorems.
+</p>
+</div>
+</div>
+<div id="outline-container-org75ca86c" class="outline-3">
+<h3 id="org75ca86c">Number&nbsp;Theory</h3>
+<div class="outline-text-3" id="text-org75ca86c">
+<p>
+Number theory is usually slightly harder to make work with induction, because things like prime
+factorization change in incredibly complex ways when you add 1. But <i>strong induction</i>, where you
+don&#8217;t go back by 1 every step, is very useful. For example, proving that any number has a unique
+prime factorization can be done using&nbsp;induction.
+</p>
+
+<p>
+That&#8217;s it for this post: I hope this helps any of you solving problems creatively using this
+technique. Stay tuned for&nbsp;more!
+</p>
+</div>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
+      </p>
+
+            <div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                <a href="../problem-solving-techniques-invariants/" rel="prev" title="Problem-Solving Techniques: Invariants">
+                Previous post
+                </a>
+            </span>
+
+
+            <span class="next pagination-item newer">
+Next post
+            </span>
+
+        </div>
+
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>

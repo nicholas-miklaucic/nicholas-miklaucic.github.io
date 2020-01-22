@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · The Basics of Cryptography, Part 2: Intro To RSA </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="prev" href="../problem-solving-techniques-induction/" title="Problem Solving Techniques: Induction" type="text/html">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 2: Intro To&nbsp;RSA</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2020-01-21T15:14:55-05:00" itemprop="datePublished" title="2020-01-21 15:14">2020-01-21 15:14</time></span>
+
+    
+    
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+This is part 2 of a series: to see the first post, go <a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">here.</a> If you&#8217;re not familiar with things like
+modular arithmetic, read that before reading&nbsp;this.
+</p>
+
+<p>
+Today we&#8217;re going to continue to look behind the curtain at the algorithms that power the Internet
+we know and love. In this post, I&#8217;ll cover the RSA cryptosystem: what it is, what it does, how it
+works, etc. RSA is such a useful algorithm because it sidesteps a lot of the problems with sending
+secure messages we talked about last time. You can think of it as a clever way of improving on the
+encryption model we used last time, not by simply improving it as it exists, but by completely
+sidestepping the security problems it&nbsp;had.
+</p>
+
+<p>
+This post will introduce a pristine version of RSA, without the real-world complications, and apply
+it to the same problem we looked at last time: securely sending a message to someone else over an
+insecure channel, without prior communication. In the future, I&#8217;ll look at how this textbook RSA
+fails in the real world, and additionally how you can use the idea behind RSA to do things besides
+sending secure&nbsp;messages.
+</p>
+
+<!-- TEASER_END -->
+
+<div id="outline-container-orge1d2bc9" class="outline-2">
+<h2 id="orge1d2bc9">A Brief Historical&nbsp;Prelude</h2>
+<div class="outline-text-2" id="text-orge1d2bc9">
+<p>
+RSA was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
+after Diffie-Hellman key exchange: we can essentially think of RSA as an answer to the question that
+key exchange posed: &#8220;are there one-way functions that can be used to encrypt messages?&#8221; The goal was
+to have some mathematical guarantee of security backed by the difficulty of solving some sort of
+problem&nbsp;algorithmically. 
+</p>
+
+<p>
+RSA encryption is still widely used today, despite lots of alternatives popping up over the past
+several decades. I think there are a couple reasons for this: it&#8217;s decently fast, it was first, and
+it&#8217;s fairly easy for non-mathematicians to understand. RSA being first is incredibly important:
+before its publication, it was unclear if such a method of encryption even existed, and having a
+fairly simple mathematical justification for the claim that breaking RSA would require billions of
+years to break was enormously&nbsp;appealing.
+</p>
+
+<p>
+So, with that out of the way, what does RSA do and how does it do&nbsp;it?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2071aba" class="outline-2">
+<h2 id="org2071aba">Public-Key&nbsp;Encryption</h2>
+<div class="outline-text-2" id="text-org2071aba">
+<p>
+RSA is a <i>public-key</i> cryptosystem. This means that, instead of a single password or code that can be
+used to encrypt and decrypt a message, like the Enigma machine we talked about last time, it&#8217;s
+fundamentally <i>asymmetric</i>. You get two keys instead of&nbsp;one:
+</p>
+<ul class="org-ul">
+<li>Your <i>public key</i> is, as the name suggests, something that you share with people you want to
+communicate with. It allows anyone to encrypt&nbsp;messages.</li>
+<li>Your <i>private key</i> is the opposite: it allows you, and only you, to decrypt any message encrypted
+with your public key. This is always kept&nbsp;secret.</li>
+</ul>
+<p>
+This concept can be expanded on and used in more interesting ways, but for now we&#8217;re going to focus
+on the simplest example: I want to send Alice a message that only she can read. How can we do&nbsp;this?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb514857" class="outline-2">
+<h2 id="orgb514857">What&#8217;s the&nbsp;Trick?</h2>
+<div class="outline-text-2" id="text-orgb514857">
+<p>
+I think a very useful way of thinking about an algorithm is to try and deconstruct it into the
+essential component or &#8220;trick&#8221; that makes it work and the components that simply let the essential
+insight of the algorithm&nbsp;work.
+</p>
+
+<p>
+Here, we can decompose RSA into two parts: finding a one-way function that can be used for
+public-key encryption, and making sure that you have to actually solve that problem in order to
+break the cipher. I don&#8217;t want to make it sound like the last part isn&#8217;t really hard or crucially
+important: a bare-bones RSA implementation will have all sorts of flaws that allow an attacker to
+completely bypass the actual math problem, and fixing these issues is an essential and interesting
+task. <i>However</i>, those parts aren&#8217;t nearly as elegant as the math, and so I&#8217;m not really going to be
+going into much detail about how RSA is implemented in&nbsp;practice.
+</p>
+
+<p>
+So, what one-way function does RSA use? (My caveat from last time still holds: it&#8217;s an open question
+whether one-way functions as I describe them exist, and so I&#8217;m using the term to mean &#8220;a function
+that, as of writing, is one-way and likely to remain&nbsp;so.&#8221;)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org89cb687" class="outline-2">
+<h2 id="org89cb687">A Note on&nbsp;Presentation</h2>
+<div class="outline-text-2" id="text-org89cb687">
+<p>
+RSA is often presented dryly starting with exactly how you generate keys, decrypt messages, and
+encrypt them. I think this approach is a little confusing, because it doesn&#8217;t at all explain how
+someone would think to do any of this in the first place. Instead, I&#8217;m going to start with the idea
+behind RSA, and only then explain how you actually use that kernel of an idea to actually send
+messages. That means that I&#8217;m only going to explain how to actually generate keys at the very end,
+so there will be a little magic going on in the next couple sections. Just stick with me: all will
+be explained at the&nbsp;end!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7f43902" class="outline-2">
+<h2 id="org7f43902">The RSA&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org7f43902">
+<p>
+Public-key cryptography is basically advertising a set of problems that only you know the solution
+to: anyone with your public key can encrypt a message using a problem in your set, and ideally only
+you can solve the problem and then use that to decrypt the message. In that vein, I&#8217;ll present RSA&#8217;s
+essential trick as a&nbsp;question:
+</p>
+
+<blockquote>
+<p>
+Given some number \(n = pq\) where \(p\) and \(q\) are prime, a number \(m\), and an exponent \(e\), what
+number \(d\) has the property that \((m^e)^d \equiv m \pmod n\), assuming such a number&nbsp;exists?
+</p>
+</blockquote>
+
+<p>
+In RSA, the public key includes \(n\) and \(e\) but not \(m\): this means that you can send any number
+between \(0\) and \(n-1\) through RSA, and you can do so as many times as you need to. The solution
+doesn&#8217;t change with different values of \(m\), only for different values of \(e\) and&nbsp;\(n\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6913ac7" class="outline-2">
+<h2 id="org6913ac7">An&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org6913ac7">
+<p>
+You might very well ask, &#8220;Nicholas, how would we generate \(n, e\), and \(d\) to make this work? Why is
+\(n\) a <i>semiprime</i> (the product of two primes)?&#8221; I&#8217;ll get there later. For now, we&#8217;re just going to
+look at how, assuming this problem can&#8217;t be solved easily, it lets us implement a public-key system
+and lets me send a message to Alice like I wanted to at the start of this&nbsp;post.
+</p>
+
+<p>
+Let&#8217;s start with a very, very small example, and then work up slightly. Let&#8217;s say I want to send the
+number \(12\) (called \(m\) for <i>message</i>) to&nbsp;Alice.
+</p>
+
+<ol class="org-ol">
+<li>First, I ask Alice for her public key, which is the pair \((n, e)\). She sends me \((55, 3)\)
+back. I don&#8217;t need to worry about how this is generated for&nbsp;now.</li>
+<li>I take my message \(m\) and compute \(m^e \pmod n\). In this case, that&#8217;s \(12^3 \equiv 1728 \equiv 23
+   \pmod{55}\). This is our <i>ciphertext</i>: the encrypted version of my&nbsp;message.</li>
+<li>Alice knows the solution of the problem I posed above. In this case, she knows that the <i>private</i>
+<i>key</i> \(d\) is \(7\), for any message, raising it to the third power and then raising that to the
+seventh power modulo \(n\) results in the original message. So, to decrypt my message, she computes
+\(23^7 \pmod{55} \equiv 12\), which was my original&nbsp;message!</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8121c6f" class="outline-2">
+<h2 id="org8121c6f">(Trying to) Break&nbsp;RSA</h2>
+<div class="outline-text-2" id="text-org8121c6f">
+<p>
+How might an attacker, who we&#8217;ll call Eve, try to decrypt the message I sent for Alice without
+knowing&nbsp;\(d\)? 
+</p>
+
+<p>
+One approach would be to simply solve the discrete logarithm problem I talked about last time: pick
+her own number, say \(5\), encrypt it by computing \(5^3 \mod 55 \equiv 15\), and then trying to find some
+exponent \(d\) such that \(15^d \equiv 5 \pmod{55}\). (Because anyone can encrypt messages, she can do
+this for any number that&#8217;s convenient for her!) As we discussed last time, this problem is thought
+to be fundamentally intractable for large moduli, so this method is a bust: to do this requires
+exponentially more computing power than the people sending messages, at least with current&nbsp;knowledge.
+</p>
+
+<p>
+Another approach is to factor \(n\). It might be unclear how this would help: we&#8217;ll get to that in a
+second. This approach is the most direct: if you need a one-sentence version of why breaking RSA is
+hard, you should probably go with &#8220;integer factorization is&nbsp;hard&#8221;.
+</p>
+
+<p>
+The last approach would be some other trick that avoids having to solve the integer factorization
+problem or the discrete logarithm problem. This is a very important thing to keep in mind! The RSA
+problem, as much as people often mix this up, is <i>not</i> proven to be equivalent to integer
+factorization or computing discrete logarithms. In fact, it&#8217;s very reasonable to think that solving
+either of those, which allows you to decrypt any message, should be harder than decrypting a single
+message. As of yet no efficient way of breaking RSA like this is known, but it&#8217;s not impossible&nbsp;either. 
+</p>
+
+<p>
+OK, so why does factoring \(n\) help? To see that, let&#8217;s go over how \(e\) and \(d\) are&nbsp;generated.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeb74e84" class="outline-2">
+<h2 id="orgeb74e84">Generating&nbsp;Keys</h2>
+<div class="outline-text-2" id="text-orgeb74e84">
+<p>
+So how did Alice find \(d\), if doing it seems so difficult? \(n\), \(e\) and \(d\) have to be generated
+together: the whole point is that finding \(d\) if you only know \(n\) and \(e\) is really hard. We can
+think of this as two&nbsp;sub-problems:
+</p>
+<ul class="org-ul">
+<li>First, we find a number \(x\) such that \(a^x \equiv 1 \pmod n\) for all \(a\) coprime to \(n\), for
+whichever \(n\) we end up&nbsp;picking.</li>
+<li>Then, we find two numbers \(e\) and \(d\) such that \(ed \equiv 1 \pmod&nbsp;x\).</li>
+</ul>
+<p>
+If we can do this, then we have, for any message&nbsp;\(m\),
+</p>
+
+<p>
+\[(m^e)^d \equiv m^{ed} \equiv m^{kx + 1} \equiv (m^x)^k \times m \equiv 1^k \times m \equiv m \pmod&nbsp;n\]
+</p>
+
+<p>
+which is the solution to the RSA problem that we&#8217;re looking for. Note that \(k\) is any positive
+integer, and we know that we can find a \(k\) such that \(ed = kx + 1\) because \(ed \equiv 1 \pmod&nbsp;x\).
+</p>
+
+<p>
+So how can we find some number \(x\) such that \(a^x \equiv 1 \pmod n\) for any \(a\) coprime to&nbsp;\(n\)? 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf2b4add" class="outline-2">
+<h2 id="orgf2b4add">The Carmichael&nbsp;Function</h2>
+<div class="outline-text-2" id="text-orgf2b4add">
+<p>
+The function that takes in \(n\) and finds us the smallest \(x\) this works for is called the <i>Carmichael</i>
+<i>function</i>. It&#8217;s usually written as&nbsp;\(\lambda(n)\).
+</p>
+
+<p>
+Remember how last time we talked about <i>primitive roots</i>, numbers that generated every possible
+exponent in their table of powers modulo some number \(n\)? Imagine \(n\) is prime for a second. In this
+case, for any primitive root \(r\), we&#8217;ll first have \(r^x \equiv 1 \pmod n\) when \(x = n - 1\): it&#8217;ll go
+through every number except \(0\), and then loop around. This means that the last number in the series
+has to be \(1\), which is what we&#8217;re looking for. Thus, for any prime \(p\), \(\lambda(p) = p -&nbsp;1\).
+</p>
+
+<p>
+Now let&#8217;s think about some \(n = pq\) that&#8217;s a semiprime. Let&#8217;s say we have a number \(x\) such that,
+for a primitive root \(r\) of \(n\) (i.e., a number that takes the longest possible time to loop back
+around to \(1\) without completely skipping it), \(r^x \equiv 1 \pmod n\). Because \(n = pq\), this means
+that \(r^x \equiv 1 \pmod p\) and \(r^x \equiv 1 \pmod q\). (Think about why this is true!) We just solved
+this problem for prime numbers: the first equation means \(x \equiv 0 \pmod{\lambda(p)}\) (that&#8217;s the definition
+of \(\lambda\), after all), and the second means \(x \equiv 0 \pmod{\lambda(q)}\). \(\lambda(p) = p - 1\) and \(\lambda(q) = q -
+1\). We&#8217;re looking for the first number that both \(p - 1\) and \(q - 1\) evenly divide. This is called
+the <i>least common multiple</i>, or \(lcm\). Thus, for any semiprime \(n = pq\), \(\lambda(n) = lcm(p - 1, q -&nbsp;1)\).
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+The language of group theory provides a very beautiful way of expressing what the Carmichael
+function does, but I&#8217;m trying to keep this accessible for people without a lot of mathematical
+background so I&#8217;ll skip talking about that for&nbsp;now.
+</p>
+</span>
+
+<p>
+That was a fair bit of math! It&#8217;s important to know <i>why</i> this last expression lets us generate keys,
+and some introductions to RSA skip going over why the Carmichael function works out to this value
+for semiprimes. That leaves a bad taste in my mouth: I hate explanations of anything that require
+magic. Go get coffee or something and come back and look over this again if it helps: getting a feel
+for why this works is vital to understanding how RSA actually uses integer factorization to make
+hard problems. Hopefully, you now understand why computing \(lcm(p - 1, q - 1)\) is useful: it&#8217;s the
+number that will let us generate \(e\) and&nbsp;\(d\).
+</p>
+
+<p>
+Note that this process only works if we know \(p\) and \(q\)! This is why factoring \(n\) is one way of
+breaking RSA: if we know \(p\) and \(q\), we can easily generate&nbsp;\(d\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4e4a65f" class="outline-2">
+<h2 id="org4e4a65f">Finding \(e\) and&nbsp;\(d\)</h2>
+<div class="outline-text-2" id="text-org4e4a65f">
+<p>
+So now we have some number \(\lambda(n)\) such that, for any positive integer \(k\), raising a number to the
+power \(k\lambda(n) + 1\) modulo \(n\) gets you your original number back. Now we just need to find two
+numbers \(e\) and \(d\) that multiply to one of these numbers. This is essentially solving \(ed \equiv 1 \pmod
+\lambda(n)\). For any specific \(e\), we can quickly find \(d\) using the <i>extended Euclidean algorithm</i>. I&#8217;m not
+going to go into that too deeply right now, because this will already be a long post: check the
+<a href="https://www.wikiwand.com/en/Modular_multiplicative_inverse#/Extended_Euclidean_algorithm">Wikipedia link</a> explaining it if you&#8217;re interested. I&#8217;m just going to keep going forward assuming
+this algorithm works and is&nbsp;fast.
+</p>
+
+
+<span class="marginnote"><p>
+</p>
+<p>
+The optimal way to do modular exponentation is actually based in the binary representation of the
+exponent. Imagine we&#8217;re trying to raise a number \(n\) to some power \(e\) where \(e_2 = 10011\) in
+binary. We can do this repeated squaring trick to find \(n^1, n^2, n^4\), and so on. We can essentially
+think of the binary representation of \(e\) as saying that \(e = 2^4 + 2^1 + 2^0\), and so \(n^e = n^4 \times
+n^1 \times n^0\). This means we have to do \(\log_2 e\) multiplications to generate all of the base
+numbers, and then we need to do one multiplcation for every \(1\) in the binary representation of
+\(e\). The number of $1$s in the binary representation of a number is called its <i>Hamming weight</i>: this
+is a long-winded way of saying that the easiest numbers to exponentiate by are those with a small
+Hamming&nbsp;weight.
+</p>
+</span>
+
+<p>
+This gives us a lot of choices: we can actually pick \(e\) or \(d\) to be whatever we want! In practice,
+because you&#8217;re going to be encrypting messages by raising them to power \(e\), we want \(e\) to amenable
+to the squaring trick we did earlier: finding \(m^{17}\) can be done with five multiplcations by repeated
+squaring by doing \(((((m^2)^2)^2)^2) \times m\), but computing \(m^{15}\) isn&#8217;t as easy. The encryption is usually
+about as secure regardless of the \(e\) you pick, and so it&#8217;s common to pick \(e = 2^{16} + 1 = 65537\) or
+\(e = 3\) or whatever else. (Alternatively, to make decryption easier, you could pick \(d\) specially to
+make decryption faster: this has the unfortunate side effect that it&#8217;s easier to guess \(d\),&nbsp;however.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc88b0c9" class="outline-2">
+<h2 id="orgc88b0c9">Bringing It All Together: A More Complex&nbsp;Example</h2>
+<div class="outline-text-2" id="text-orgc88b0c9">
+<p>
+Let&#8217;s do another example, with slightly bigger numbers. The twist is that now I&#8217;m the one generating
+a private key and Alice is the one sending a message. This will require all of the insight we&#8217;ve
+gained so&nbsp;far!
+</p>
+
+<ol class="org-ol">
+<li>First, I&#8217;ll generate two prime numbers: they should be roughly the same size and randomly
+generated, so factoring their product is as hard as possible. I&#8217;ll pick \(p = 241\) and \(q =
+   193\). Their product is \(n = pq = 46513\). In binary, this number is 16 digits long, so I have a
+<i>16-bit key</i>. (In the real world, I&#8217;d use a 1024-bit or 2048-bit number, which is quite a bit&nbsp;bigger!)</li>
+<li>Because I know \(p\) and \(q\), I can efficiently compute \(\lambda(n) = lcm(p - 1, q - 1) =&nbsp;960\).</li>
+<li>Now I can pick \(e\). I&#8217;ll use \(e = 17\), which is easy for other people to encrypt&nbsp;with.</li>
+<li>To find \(d\), I use the extended Euclidean algorithm to learn that \(17 \times 113 \equiv 1921 \equiv 1
+   \pmod{960}\), so \(d = 113\). I keep this&nbsp;secret.</li>
+<li>Now I send my public key to Alice: this is the pair \((n, e)\), so I send her \((46513,&nbsp;17)\).</li>
+<li>Let&#8217;s say Alice wants to send the number \(314\) to me. She computes \(314^{17} \pmod{46513} \equiv 15319\)
+and sends that number to&nbsp;me.</li>
+<li>Now, only I know \(d\), and so only I can compute \(15319^{113} \equiv 314 \pmod{46513}\). Thus, only
+Alice and I know what message she sent, and even someone who has listened to all of our
+communications would be unable to figure this&nbsp;out.</li>
+</ol>
+<p>
+I encourage you to check the math on this yourself: if you enjoy a little programming, try writing a
+basic version of&nbsp;RSA!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1f0ca2d" class="outline-2">
+<h2 id="org1f0ca2d">A&nbsp;Warning</h2>
+<div class="outline-text-2" id="text-org1f0ca2d">
+<p>
+Just like last time, I want to stress something: <i>if you are writing this yourself to use in any
+real-world</i> <i>application, stop!</i> (Doing it yourself is a great way to learn, however.) Getting the gist
+of it and implementing a version that&#8217;s actually secure are worlds apart in difficulty, and there
+are lots of ways this textbook version of RSA isn&#8217;t very secure. Leave it to the&nbsp;experts.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org554119a" class="outline-2">
+<h2 id="org554119a">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-org554119a">
+<p>
+So now we have another way of sending secure messages over insecure channels: something the world at
+large couldn&#8217;t do until 1977 at the very least. Again, this is a criminally underappreciated
+discovery, as important to the modern world as wireless Internet. The modern world simply could not
+function without the service RSA&nbsp;provides.
+</p>
+
+<p>
+Cryptography is about more than just sending secure messages, and there are other types of attackers
+than simple eavesdroppers. Next time, we&#8217;ll look at a solution to different problems, like <i>identity
+verification</i>:
+</p>
+
+<blockquote>
+<p>
+Alice and Bob are organizing anti-government activism in a country that represses political
+freedoms. Alice wants to tell Bob to meet her in a certain place, but they can only communicate over
+the Internet: Bob worries that the government, which controls their Internet provider, will forge a
+message from Alice and set him up. They have shared RSA public keys with each other, but because
+anyone can encrypt a message in RSA Bob can&#8217;t be sure that the messages he receives aren&#8217;t being
+forged. How can Bob verify that he&#8217;s communicating with the real&nbsp;Alice?
+</p>
+</blockquote>
+
+<p>
+This pops up in a much more mundane context as well: <i>password verification</i>. How can you show that
+you are who you say you are, but without letting anyone else forge your identity? (Note that just
+telling someone your password doesn&#8217;t work, because then they could impersonate you in the future.)
+The solution to this problem, as it appears in the modern world, requires a new tool in our toolbox:
+<i>cryptographic hash functions</i>. That&#8217;ll be next time. See you&nbsp;then!
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                <a href="../problem-solving-techniques-induction/" rel="prev" title="Problem Solving Techniques: Induction">
+                Previous post
+                </a>
+            </span>
+
+
+            <span class="next pagination-item newer">
+Next post
+            </span>
+
+        </div>
+
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>
