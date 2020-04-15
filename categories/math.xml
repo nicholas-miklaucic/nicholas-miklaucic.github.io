@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about math)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/math.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Tue, 21 Jan 2020 21:57:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Problem Solving Techniques: Induction</title><link>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about math)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/math.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Wed, 15 Apr 2020 16:56:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Basics of Cryptography, Part 3: Cryptographic Hashes</title><link>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;i&gt;This is the third post in a series: for part 1, go &lt;a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/"&gt;here&lt;/a&gt;, and for part 2, go &lt;a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/"&gt;here&lt;/a&gt;.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+We're previously discussed cryptography, in the modern world, as a way of sending secure messages
+through insecure channels. But this is not the only thing you might want to do in a world with
+malicious actors trying to thwart you. RSA and Diffie-Hellman exchange aren't vulnerable to simple
+eavesdroppers. However, there are other types of attacks that they don't protect against, and we
+might want to insulate ourselves against those attacks as well. One of them is a &lt;i&gt;man-in-the-middle&lt;/i&gt;
+attack—in essence, someone manipulating messages. As we've often done, let's imagine a scenario, the one
+I ended the last post with:
+&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;
+Alice and Bob are organizing anti-government activism in a country that represses political
+freedoms. Alice wants to tell Bob to meet her in a certain place, but they can only communicate over
+the Internet: Bob worries that Malcolm, the government employee that controls their Internet
+provider, will forge a message from Alice and set him up. How can Bob verify that Alice's messages
+haven't been modified?
+&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/"&gt;Read more…&lt;/a&gt; (14 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cs</category><category>math</category><guid>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/</guid><pubDate>Wed, 22 Jan 2020 19:21:23 GMT</pubDate></item><item><title>The Basics of Cryptography, Part 2: Intro To RSA</title><link>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+This is part 2 of a series: to see the first post, go &lt;a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/"&gt;here.&lt;/a&gt; If you're not familiar with things like
+modular arithmetic, read that before reading this.
+&lt;/p&gt;
+
+&lt;p&gt;
+Today we're going to continue to look behind the curtain at the algorithms that power the Internet
+we know and love. In this post, I'll cover the RSA cryptosystem: what it is, what it does, how it
+works, etc. RSA is such a useful algorithm because it sidesteps a lot of the problems with sending
+secure messages we talked about last time. You can think of it as a clever way of improving on the
+encryption model we used last time, not by simply improving it as it exists, but by completely
+sidestepping the security problems it had.
+&lt;/p&gt;
+
+&lt;p&gt;
+This post will introduce a pristine version of RSA, without the real-world complications, and apply
+it to the same problem we looked at last time: securely sending a message to someone else over an
+insecure channel, without prior communication. In the future, I'll look at how this textbook RSA
+fails in the real world, and additionally how you can use the idea behind RSA to do things besides
+sending secure messages.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/"&gt;Read more…&lt;/a&gt; (14 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cs</category><category>math</category><guid>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/</guid><pubDate>Tue, 21 Jan 2020 20:14:55 GMT</pubDate></item><item><title>Problem Solving Techniques: Induction</title><link>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;i&gt;This is the second in my series on problem-solving techniques: for the first, see &lt;a href="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/"&gt;this post on invariants.&lt;/a&gt;&lt;/i&gt;
 &lt;/p&gt;
 

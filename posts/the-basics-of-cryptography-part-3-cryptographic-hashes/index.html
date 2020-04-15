@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="What hash functions are and some of what you can do with them">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard&#8217;s Rho · The Basics of Cryptography, Part 3: Cryptographic Hashes </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../assets/demo.css" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="prev" href="../the-basics-of-cryptography-part-2-intro-to-rsa/" title="The Basics of Cryptography, Part 2: Intro To RSA" type="text/html">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 3: Cryptographic&nbsp;Hashes</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2020-01-22T14:21:23-05:00" itemprop="datePublished" title="2020-01-22 14:21">2020-01-22 14:21</time></span>
+        <meta name="description" itemprop="description" content="What hash functions are and some of what you can do with them">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+<i>This is the third post in a series: for part 1, go <a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">here</a>, and for part 2, go <a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/">here</a>.</i>
+</p>
+
+<p>
+We&#8217;re previously discussed cryptography, in the modern world, as a way of sending secure messages
+through insecure channels. But this is not the only thing you might want to do in a world with
+malicious actors trying to thwart you. RSA and Diffie-Hellman exchange aren&#8217;t vulnerable to simple
+eavesdroppers. However, there are other types of attacks that they don&#8217;t protect against, and we
+might want to insulate ourselves against those attacks as well. One of them is a <i>man-in-the-middle</i>
+attack—in essence, someone manipulating messages. As we&#8217;ve often done, let&#8217;s imagine a scenario, the one
+I ended the last post&nbsp;with:
+</p>
+
+<blockquote>
+<p>
+Alice and Bob are organizing anti-government activism in a country that represses political
+freedoms. Alice wants to tell Bob to meet her in a certain place, but they can only communicate over
+the Internet: Bob worries that Malcolm, the government employee that controls their Internet
+provider, will forge a message from Alice and set him up. How can Bob verify that Alice&#8217;s messages
+haven&#8217;t been&nbsp;modified?
+</p>
+</blockquote>
+
+<!-- TEASER_END -->
+
+<span class="marginnote"><p>
+</p>
+<p>
+RSA can be modified to work for identity verification, but not in the way we&#8217;ve discussed it. That&#8217;s
+why it&#8217;s sometimes called a <i>cryptosystem.</i>
+</p>
+</span>
+
+<p>
+Note that RSA and Diffie-Hellman can&#8217;t help us here. To see why, realize that Malcolm can simply
+intercept all of their communications, impersonating Alice to Bob and Bob to Alice. He can forward
+any message, and for Diffie-Hellman he can set up his own secret with both Alice and Bob and forward
+all messages through that channel. Alice and Bob have no way of ever knowing that this&nbsp;happened!
+</p>
+
+<p>
+The solution to this problem, along with lots of other cryptography solutions, is easiest to
+implement with a new <i>cryptographic primitive</i>. A primitive is a tool in our toolbox: a single thing
+we can chain and combine in interesting ways to create the desired kind of security. We&#8217;ve already
+seen &#8220;sharing a single secret&#8221; or &#8220;sending a message securely&#8221; as primitives. Today we&#8217;re going to
+add one&nbsp;more.
+</p>
+
+<div id="outline-container-org6f56c50" class="outline-2">
+<h2 id="org6f56c50">Cheating a&nbsp;Little</h2>
+<div class="outline-text-2" id="text-org6f56c50">
+<p>
+The actual math of hash functions isn&#8217;t very interesting, at least to me, and I don&#8217;t think it&#8217;s
+very illuminating to the student. The <i>application</i> of hash functions, however, is fascinating, and
+readily accessible. Because of that, I&#8217;m not going to be covering how hash functions actually
+work. Instead, I&#8217;ll just describe the properties of a good hash function and assume that some&nbsp;exist.
+</p>
+
+<p>
+A lot of cryptography assumes this: just like RSA, we usually can&#8217;t prove that these functions truly
+fulfill their goals, but we can reasonably hope that they are. When hash functions are broken—i.e.,
+their security guarantees fail to hold—the cryptography that depends on them also breaks. The Flame
+malware that attacked Iran in 2012, for example, used a bad hash function to impersonate Microsoft:
+this let it gain administrator privileges on Windows without the user&#8217;s&nbsp;knowledge.
+</p>
+</div>
+</div>
+<div id="outline-container-orgae0b95f" class="outline-2">
+<h2 id="orgae0b95f">What Properties Do Hash Functions&nbsp;Have?</h2>
+<div class="outline-text-2" id="text-orgae0b95f">
+<p>
+Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
+function \(f\) is a <i>cryptographic hash function</i> if it satisfies the&nbsp;following:
+</p>
+</div>
+
+<ul class="org-ul">
+<li>
+<a id="org0b73614"></a>Determinism<br><div class="outline-text-6" id="text-org0b73614">
+<p>
+\(f\) is a function in the mathematical sense: it always produces the same output for the same
+input. Note that the reverse is always false: because hash functions can take in input of any size
+but have limited possible outputs, there are always some inputs that have the same&nbsp;hash.
+</p>
+</div>
+</li>
+<li>
+<a id="orgfef659e"></a>Irreversibility<br><div class="outline-text-6" id="text-orgfef659e">
+<p>
+Given an output \(y\), it is computationally infeasible to find any input \(x\) such
+that \(f(x) = y\). (In practice, this translates to &#8220;no strategy significantly
+better than random guessing&nbsp;exists.&#8221;)
+</p>
+</div>
+</li>
+<li>
+<a id="orgee48d9d"></a>Collision Resistance<br><div class="outline-text-6" id="text-orgee48d9d">
+<p>
+Not only can the function not be easily inverted, but it is infeasible to find <i>any</i> two inputs that
+map to any output: any \(x_1, x_2\), and \(y\) such that \(f(x_1) = f(x_2) = y\). Such a pair of inputs
+would be called a <i>collision</i>. Again, because hash functions map any input to a limited range of
+outputs, collisions always exist, but ideally they&#8217;re impossible to produce on&nbsp;demand.
+</p>
+
+<p>
+There&#8217;s one requirement that isn&#8217;t usually technically part of the definition, but is often
+required. It doesn&#8217;t have an easy name, but I&#8217;ll&nbsp;try:
+</p>
+</div>
+</li>
+<li>
+<a id="org82a8fb7"></a>Maximal Entropy<br><div class="outline-text-6" id="text-org82a8fb7">
+<p>
+\(f\) should reveal as little information as possible, known in information theory has having maximal
+entropy. Hash functions should look random: learning <i>anything</i> about an input given its hash should
+be infeasible, and any sequence of hashes should look&nbsp;random.
+</p>
+
+<p>
+This is often stated as saying the function <i>avalanches</i>. If two inputs \(x\) and \(x&#8217;\) differ by even a
+single bit, their hashes should be completely uncorrelated: each bit in the output should be
+independent of each&nbsp;other.
+</p>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-orgdfd201d" class="outline-2">
+<h2 id="orgdfd201d">An Example: <code>SHA256</code>
+</h2>
+<div class="outline-text-2" id="text-orgdfd201d">
+<p>
+This is what the hashes of the letters A through D (represented as ASCII characters) look like when
+hashed with <code>SHA256</code> and then converted to&nbsp;hexadecimal:
+</p>
+
+<div class="highlight"><pre><span></span>06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0
+c0cde77fa8fef97d476c10aad3d2d54fcc2f336140d073651c2dcccf1e379fd6
+12f37a8a84034d3e623d726fe10e5031f4df997ac13f4d5571b5a90c41fb84fe
+7c447aa2524264a3e24df73a6fddd8db360840f895bcb5e54d643c18de26a8ae
+</pre></div>
+
+<p>
+Even though this is just counting up in binary, each output looks completely different. This is a
+good way of building intuition as to what the properties I described above mean. Loosely, hash
+functions should feel random but not actually <i>be</i>&nbsp;random.
+</p>
+
+<p>
+Alright, so let&#8217;s say we have a hash function. What can we do with&nbsp;it?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbf6eb5b" class="outline-2">
+<h2 id="orgbf6eb5b">Application 1: Message&nbsp;Integrity</h2>
+<div class="outline-text-2" id="text-orgbf6eb5b">
+<p>
+Our opening problem about Alice and Bob meeting up despite Malcolm&#8217;s interference is actually
+several separate problems. The one I want to focus on is preventing tampering. In plain RSA, for
+example, any attacker can add as much as they&#8217;d like to any message, even without being able to
+decrypt it, by simply adding numbers on the end. (This is called a <i>length</i> <i>extension attack.</i>)
+Many cryptography systems like the basic version of RSA are also <i>malleable</i>, meaning that you can
+change the message without being able to decrypt it. For example, in RSA if two numbers \(m_1\) and
+\(m_2\) encrypt to ciphertexts \(c_1\) and \(c_2\), then the encryption of \(m_1m_2\) is just \(c_1c_2\) (all
+modulo \(n\)). How can you prevent people from messing with your message in this&nbsp;way?
+</p>
+
+<p>
+Hashes provide a solution. All Alice has to do is end her messages by hashing them and including
+that hash with the message. Now any alteration of the message itself will be detected: the hash of
+the altered message won&#8217;t line up with the included hash. Without decrypting the message, which is
+infeasible, Malcolm has no way of altering the message without Bob&#8217;s&nbsp;knowledge.
+</p>
+
+<p>
+A quick note: hash functions are often used to check message integrity for more mundane reasons than
+espionage: it&#8217;s good to know if your Internet worked properly! These are usually called <i>checksums</i>
+instead. For example, installing a Linux distro to your computer requires complete trust of the
+website you download it from: a malicious actor could add code to the operating system that did all
+sorts of nefarious things. Because of this, Linux distribution maintainers make sure to publish
+checksums that are separate from the file itself. That way, you can be sure that you downloaded the
+file correctly and that no one messed with it before you&nbsp;install.
+</p>
+
+<p>
+We can go further: imagine now that instead of just hashing the current message, you hash the entire
+message history up until that point as well, including the previous hashes! This means that, if
+Alice and Bob ever have different ideas of what their message history is, they&#8217;ll know that someone
+has forged a message or prevented one from being sent: even something as simple as sending messages
+in a different order can be detected. You could do this by including the actual entire message
+history without hashing, but that would be prohibitively large and easier to mess&nbsp;with.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+If you&#8217;re interested in learning more about this, the exact system I just described is
+called a <i>Merkle tree</i>.
+</p>
+</span>
+
+<p>
+Cryptocurrencies like Bitcoin couldn&#8217;t exist without hashing: they use a scheme similar to the one I
+described above to make each record of a transaction depend on all of the previous
+transactions. Modifying this ledger requires you to recalculate all of the future transactions,
+which is prohibitively&nbsp;difficult.
+</p>
+</div>
+</div>
+<div id="outline-container-org44ed24d" class="outline-2">
+<h2 id="org44ed24d">Application 2: Proof of&nbsp;Work</h2>
+<div class="outline-text-2" id="text-org44ed24d">
+<p>
+Speaking of Bitcoin, it uses hashing for a completely separate application as well. Let&#8217;s say you
+want to make adding a transaction to the global ledger (i.e., recording that you paid me fifty
+bucks) difficult, much in the same way mining precious metals is. This difficulty introduces
+scarcity that makes the currency hold value and prevents people simply faking their account&nbsp;balance.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+This is a little simplified: Bitcoin in practice is somewhat complicated. This is the essential idea
+behind the system, however, and I think it&#8217;s more useful to know that than it is to be able to
+implement it yourself when there are already plenty of good implementations out&nbsp;there.
+</p>
+</span>
+
+<p>
+A good hash function should be more or less random, so finding outputs with any particular property
+is a difficult problem that&#8217;s easy to verify. For example, if I make a new currency, I could say
+that in order to publish a transaction you need to publish an input that, when you add it to the end
+of the transaction&#8217;s data, hashes to an output with 16 zeros at the start of its binary
+representation. If the hash I pick isn&#8217;t possible to reverse-engineer, even in cases like this where
+I only need to reverse-engineer part of the output, then doing this requires running, on average,
+\(2^{16} = 65536\) hashes. I can set the number of zeroes needed to whatever I want to make publishing
+transactions as hard as I&#8217;d like. Because transactions include a record of all of the previous
+hashes, like we just discussed, if I were to try and modify the existing ledger of transactions I
+would have to redo all of the work that was put into it from the point I want to change forward: if
+I just modified the data directly, anyone who recomputed the hashes would see that they didn&#8217;t start
+with enough zeroes or have whatever other special property the network agrees on. Because I require
+that you hash something that includes the transaction history, I can also prevent people from
+precomputing these hashes: because combining two pieces of data doesn&#8217;t easily translate to
+combining their hashes, there&#8217;s no effective way of &#8220;getting&nbsp;ahead.&#8221;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a41d38" class="outline-2">
+<h2 id="org0a41d38">Application 3: Password&nbsp;Verification</h2>
+<div class="outline-text-2" id="text-org0a41d38">
+<p>
+I&#8217;m pretty sure that you have used a password before. Passwords provide a useful way of verifying
+your identity. However, there&#8217;s a significant problem with basic passwords: if I tell you my
+password, you can now impersonate me and there&#8217;s not much I can do about&nbsp;it.
+</p>
+
+<p>
+Let&#8217;s say you&#8217;re running a website that needs users to authenticate. If you store people&#8217;s
+passwords, then if someone hacks your database they can impersonate any user and you can&#8217;t really do
+anything about&nbsp;it.
+</p>
+
+<p>
+Enter hashes! Instead of doing this, you can store the <i>hash</i> of each user&#8217;s password in a database.
+When someone wants to authenticate, you hash whatever they give you and then check it against your
+database. If it matches, then they&#8217;ve proven that they know their password without the need to
+actually store what that password is. Even if someone hacks your database, they can&#8217;t actually
+impersonate a user, because reversing any of those hashes should be difficult. This is why choosing
+good passwords is important! A lot of websites, contrary to best practice, use very fast hash
+functions. If a hacker can run a million hashes a second, it doesn&#8217;t take that long to check every
+word in the dictionary, every combination of letters up to 8 characters, or every password in the
+list of the top 100,000 most&nbsp;common.
+</p>
+
+<p>
+One important thing to do to make this system secure is to add a <i>salt</i> to the password before
+hashing it: some fixed data that is added each time. This prevents what are known evocatively as
+<i>rainbow tables</i>: simply spending a ton of time computing all of the hashes of passwords up to some
+amount of characters and then storing all of them. Then, you can simply look up hashes in that table
+instead of having to do all of that work every&nbsp;time.
+</p>
+
+<p>
+There&#8217;s a good practical application of this knowledge even if you aren&#8217;t a programmer. <i>Any</i>
+<i>website that emails you your password if you forget it is not trustworthy!</i> The reason reset links
+are used when you forget a password isn&#8217;t because website administrators want to inconvenience
+people, it&#8217;s because they honestly don&#8217;t know what your password was. Even the website itself can&#8217;t
+reverse-engineer their hashes, and so the only way to reset a password is to pick a new one and then
+overwrite the old hash with the new&nbsp;one.
+</p>
+
+<span class="marginnote"><p>
+</p>
+<p>
+This is why I&#8217;m so infuriated by maximum-length requirements on passwords! All outputs of a hash
+have the same size, so it&#8217;s not for any technical reason: it would be trivial in a well-designed
+system to let you have 400-character passwords. It&#8217;s meant to prevent easy-to-guess longer
+passwords, but having predictable long passwords is way more secure than very unpredictable short&nbsp;ones.)
+</p>
+</span>
+</div>
+</div>
+
+<div id="outline-container-org1d84c8b" class="outline-2">
+<h2 id="org1d84c8b">A Brief Non-Cryptographic&nbsp;Postlude</h2>
+<div class="outline-text-2" id="text-org1d84c8b">
+<p>
+Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least
+briefly go over some of the interesting ways they can be&nbsp;used.
+</p>
+</div>
+<div id="outline-container-org7948da7" class="outline-3">
+<h3 id="org7948da7">Hashmaps</h3>
+<div class="outline-text-3" id="text-org7948da7">
+<p>
+Let&#8217;s say you want to store a mapping from a person&#8217;s username to their password hash like I
+described above. What&#8217;s the best way to do that? One solution is to have, for example, 256 &#8220;buckets&#8221;
+numbered 0-255. When you want to store a username-hash pair, hash the username and take the first 8
+bits of the hash. That number, which is 0-255, is the &#8220;bucket&#8221; you store the hash&nbsp;in.
+</p>
+
+<p>
+This system requires some cleverness to actually implement: you have to deal with what happens if
+two inputs map to the same bucket, and you have to manage the tradeoff between having lots of
+buckets (which is wasteful for small numbers of keys) and having lots of collisions (which is
+wasteful because no system for dealing with collisions doesn&#8217;t have at least a little overhead or
+wasted space.) However, this is a much, much more efficient way of doing things than keeping a list
+of key-value pairs, because getting a value from a key doesn&#8217;t require searching the entire list of&nbsp;values.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc7afbb7" class="outline-3">
+<h3 id="orgc7afbb7">Equality</h3>
+<div class="outline-text-3" id="text-orgc7afbb7">
+<p>
+We discussed earlier using checksums as a way of quickly checking that two big pieces of data are
+equal. This can be used to prevent tampering, but it&#8217;s also useful in applications that require
+equality checking for large datasets as part as normal operation. Version control systems that allow
+multiple people to merge changes to the same files rely on hashes as an identifier for different
+versions: if the hash of my working directory and yours differ, then one of us made a change&nbsp;somewhere.
+</p>
+
+<p>
+A somewhat niche use that I&#8217;ll mention here is in chess AI. It&#8217;s a timesaver, when calculating chess
+positions, to remember if you&#8217;ve already seen a position before and analyzed it. To do this, chess
+AI programs use a hash function to compare different boards because it&#8217;s faster than checking it&nbsp;piece-by-piece.
+</p>
+
+<p>
+The reason I mention this is because, as far as I know, version control systems have never run into
+any problems with hash collisions that weren&#8217;t from malicious actors. If two different versions were
+to have the same hash, it would completely break the system, but to my knowledge this has never
+happened unintentionally. This <i>has</i> happened for the smaller hashes used in chess AI,&nbsp;however!
+</p>
+
+<p>
+Specifically, the game <a href="https://www.chessgames.com/perl/chessgame?gid=1352348">Pablo Lafuente vs. Shredder (2005)</a> features a bizarre error where, on move
+18, the computer Shredder (which would only lose this game in the tournament) trades bishops but
+just…doesn&#8217;t recapture the piece, a blindingly obvious blunder that cost it the game. This is
+believed to be a hash collision: for some reason Shredder thought that the given position was
+equivalent to a different one and played the wrong&nbsp;move.
+</p>
+</div>
+</div>
+<div id="outline-container-org43e1432" class="outline-3">
+<h3 id="org43e1432">Bloom&nbsp;Filters</h3>
+<div class="outline-text-3" id="text-org43e1432">
+<p>
+This sort of probabilistic tradeoff, where you accept the risk of an occasional error for speed,
+comes up a lot with hash functions. One cool data structure that uses this is called a <i>Bloom
+filter.</i> Let&#8217;s say you want something like a hashmap, but even faster, and the only thing you care
+about is quickly computing whether some input has already been&nbsp;seen.
+</p>
+
+<p>
+One solution is to store a list of, say, 256 bits. When you want to mark that you&#8217;ve seen an input,
+you hash it with, say, 3 different hashes and get the first 8 bits from each. This results in 3
+numbers between 0 and 255. Set each of those bits in the filter to&nbsp;1.
+</p>
+
+<p>
+If you hash an input and all of the bits you would flip are already 1, you&#8217;ve <i>probably</i> seen this
+input before. Sometimes, however, you&#8217;ll get unlucky and you&#8217;ll have flipped each bit of the filter
+you checked using a different input. If any of the bits you would flip are 0, however, then you&#8217;ve
+<i>definitely</i> not seen the input before. You can tune how many hashes you use and how any bits you
+keep in the filter to get the right tradeoff between space, accuracy, and&nbsp;efficiency.
+</p>
+
+<p>
+This is often combined with a deterministic system that&#8217;s slower but guaranteed to be correct in
+cases where in most cases whatever you&#8217;re looking up isn&#8217;t in the database. For example, if you want
+to block ads from certain URLs in a large list that&#8217;s not locally stored, it&#8217;s wasteful to get that
+list from the Internet each time you want to check a URL, because most URLs aren&#8217;t ads. You can
+combine this list with a locally-stored Bloom filter to very quickly eliminate the majority of URLs:
+because Bloom filters are always right if they give a negative answer, this will never result in ads
+being mistakenly shown: occasionally, you&#8217;ll query the list over the Internet and see that the URL
+isn&#8217;t an ad, but that&#8217;s an acceptable tradeoff for space and&nbsp;speed.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4baf29b" class="outline-2">
+<h2 id="org4baf29b">Conclusion</h2>
+<div class="outline-text-2" id="text-org4baf29b">
+<p>
+Whew, where was I? Like you might be starting to surmise, hash functions are used everywhere in
+computer science and cryptography. They&#8217;re an extraordinarily useful tool in all sorts of
+situations. They do introduce another possible weak point in a cryptographic system, but as long as
+the programmer chooses a secure hash function and replaces it when/if it&#8217;s found to be insecure
+they&#8217;re usually decently&nbsp;secure.
+</p>
+
+<p>
+Hash functions, asymmetric encryption, and key exchange are three extremely important fundamentals
+to a wide variety of cryptographic applications. Now that all three have been written up here, in
+the future this series will be more of a survey of interesting applications of these tools than
+adding new primitives. I don&#8217;t know what that will look like, but stay&nbsp;tuned!
+</p>
+
+<p>
+I hope that this series has helped readers appreciate the ingenuity of the systems that we take for
+granted when we use the Internet or digitally sign a paper. Today&#8217;s world is so specialized that
+it&#8217;s difficult to understand much about the things we use. We can drive without understanding
+catalytic converters, use microwaves without knowing anything about radiation, and take medicines
+without knowing how they work. I hope that this series helps demystify a small part of the
+environment that surrounds us. Thanks for reading, and see you next&nbsp;time!
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
+      </p>
+
+            <div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                <a href="../the-basics-of-cryptography-part-2-intro-to-rsa/" rel="prev" title="The Basics of Cryptography, Part 2: Intro To RSA">
+                Previous post
+                </a>
+            </span>
+
+
+            <span class="next pagination-item newer">
+Next post
+            </span>
+
+        </div>
+
+    </nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>
