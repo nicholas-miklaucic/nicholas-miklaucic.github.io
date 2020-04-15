@@ -2,10 +2,10 @@
 .. title: The Basics of Cryptography, Part 2: Intro To RSA
 .. slug: the-basics-of-cryptography-part-2-intro-to-rsa
 .. date: 2020-01-21 15:14:55 UTC-05:00
-.. tags: 
-.. category: 
+.. tags: math, cs
+.. category: intro-to-crypto
 .. link: 
-.. description: 
+.. description: Introduction to RSA
 .. type: text
 .. has_math: true
 #+END_COMMENT
@@ -261,7 +261,7 @@ function without the service RSA provides.
 
 Cryptography is about more than just sending secure messages, and there are other types of attackers
 than simple eavesdroppers. Next time, we'll look at a solution to different problems, like /identity
-verification/:
+verification/ and /message authenticity/:
 
 #+BEGIN_QUOTE
 Alice and Bob are organizing anti-government activism in a country that represses political
@@ -269,7 +269,7 @@ freedoms. Alice wants to tell Bob to meet her in a certain place, but they can o
 the Internet: Bob worries that the government, which controls their Internet provider, will forge a
 message from Alice and set him up. They have shared RSA public keys with each other, but because
 anyone can encrypt a message in RSA Bob can't be sure that the messages he receives aren't being
-forged. How can Bob verify that he's communicating with the real Alice?
+forged. How can Bob verify that Alice's messages haven't been modified?
 #+END_QUOTE
 
 This pops up in a much more mundane context as well: /password verification/. How can you show that

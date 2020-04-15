@@ -1,0 +1,295 @@
+#+BEGIN_COMMENT
+.. title: The Basics of Cryptography, Part 3: Cryptographic Hashes
+.. slug: the-basics-of-cryptography-part-3-cryptographic-hashes
+.. date: 2020-01-22 14:21:23 UTC-05:00
+.. tags: math, cs
+.. category: intro-to-crypto
+.. link: 
+.. description: What hash functions are and some of what you can do with them
+.. type: text
+.. has_math: true
+#+END_COMMENT
+/This is the third post in a series: for part 1, go [[https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/][here]], and for part 2, go [[https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/][here]]./
+
+We're previously discussed cryptography, in the modern world, as a way of sending secure messages
+through insecure channels. But this is not the only thing you might want to do in a world with
+malicious actors trying to thwart you. RSA and Diffie-Hellman exchange aren't vulnerable to simple
+eavesdroppers. However, there are other types of attacks that they don't protect against, and we
+might want to insulate ourselves against those attacks as well. One of them is a /man-in-the-middle/
+attack—in essence, someone manipulating messages. As we've often done, let's imagine a scenario, the one
+I ended the last post with:
+
+#+BEGIN_QUOTE
+Alice and Bob are organizing anti-government activism in a country that represses political
+freedoms. Alice wants to tell Bob to meet her in a certain place, but they can only communicate over
+the Internet: Bob worries that Malcolm, the government employee that controls their Internet
+provider, will forge a message from Alice and set him up. How can Bob verify that Alice's messages
+haven't been modified?
+#+END_QUOTE
+
+{{{TEASER_END}}}
+
+{{{mn}}}
+RSA can be modified to work for identity verification, but not in the way we've discussed it. That's
+why it's sometimes called a /cryptosystem./
+{{{mn-end}}}
+
+Note that RSA and Diffie-Hellman can't help us here. To see why, realize that Malcolm can simply
+intercept all of their communications, impersonating Alice to Bob and Bob to Alice. He can forward
+any message, and for Diffie-Hellman he can set up his own secret with both Alice and Bob and forward
+all messages through that channel. Alice and Bob have no way of ever knowing that this happened!
+
+The solution to this problem, along with lots of other cryptography solutions, is easiest to
+implement with a new /cryptographic primitive/. A primitive is a tool in our toolbox: a single thing
+we can chain and combine in interesting ways to create the desired kind of security. We've already
+seen "sharing a single secret" or "sending a message securely" as primitives. Today we're going to
+add one more.
+
+* Cheating a Little
+The actual math of hash functions isn't very interesting, at least to me, and I don't think it's
+very illuminating to the student. The /application/ of hash functions, however, is fascinating, and
+readily accessible. Because of that, I'm not going to be covering how hash functions actually
+work. Instead, I'll just describe the properties of a good hash function and assume that some
+exist.
+
+A lot of cryptography assumes this: just like RSA, we usually can't prove that these functions truly
+fulfill their goals, but we can reasonably hope that they are. When hash functions are broken—i.e.,
+their security guarantees fail to hold—the cryptography that depends on them also breaks. The Flame
+malware that attacked Iran in 2012, for example, used a bad hash function to impersonate Microsoft:
+this let it gain administrator privileges on Windows without the user's knowledge.
+* What Properties Do Hash Functions Have?
+Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
+function $f$ is a /cryptographic hash function/ if it satisfies the following:
+
+***** Determinism
+$f$ is a function in the mathematical sense: it always produces the same output for the same
+input. Note that the reverse is always false: because hash functions can take in input of any size
+but have limited possible outputs, there are always some inputs that have the same hash.
+***** Irreversibility
+Given an output $y$, it is computationally infeasible to find any input $x$ such
+that $f(x) = y$. (In practice, this translates to "no strategy significantly
+better than random guessing exists.")
+***** Collision Resistance
+Not only can the function not be easily inverted, but it is infeasible to find /any/ two inputs that
+map to any output: any $x_1, x_2$, and $y$ such that $f(x_1) = f(x_2) = y$. Such a pair of inputs
+would be called a /collision/. Again, because hash functions map any input to a limited range of
+outputs, collisions always exist, but ideally they're impossible to produce on demand.
+
+There's one requirement that isn't usually technically part of the definition, but is often
+required. It doesn't have an easy name, but I'll try:
+***** Maximal Entropy
+$f$ should reveal as little information as possible, known in information theory has having maximal
+entropy. Hash functions should look random: learning /anything/ about an input given its hash should
+be infeasible, and any sequence of hashes should look random.
+
+This is often stated as saying the function /avalanches/. If two inputs $x$ and $x'$ differ by even a
+single bit, their hashes should be completely uncorrelated: each bit in the output should be
+independent of each other.
+
+* An Example: ~SHA256~
+
+This is what the hashes of the letters A through D (represented as ASCII characters) look like when
+hashed with ~SHA256~ and then converted to hexadecimal:
+
+#+BEGIN_SRC sh
+06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0
+c0cde77fa8fef97d476c10aad3d2d54fcc2f336140d073651c2dcccf1e379fd6
+12f37a8a84034d3e623d726fe10e5031f4df997ac13f4d5571b5a90c41fb84fe
+7c447aa2524264a3e24df73a6fddd8db360840f895bcb5e54d643c18de26a8ae
+#+END_SRC
+
+Even though this is just counting up in binary, each output looks completely different. This is a
+good way of building intuition as to what the properties I described above mean. Loosely, hash
+functions should feel random but not actually /be/ random.
+
+Alright, so let's say we have a hash function. What can we do with it?
+
+* Application 1: Message Integrity
+Our opening problem about Alice and Bob meeting up despite Malcolm's interference is actually
+several separate problems. The one I want to focus on is preventing tampering. In plain RSA, for
+example, any attacker can add as much as they'd like to any message, even without being able to
+decrypt it, by simply adding numbers on the end. (This is called a /length/ /extension attack./)
+Many cryptography systems like the basic version of RSA are also /malleable/, meaning that you can
+change the message without being able to decrypt it. For example, in RSA if two numbers $m_1$ and
+$m_2$ encrypt to ciphertexts $c_1$ and $c_2$, then the encryption of $m_1m_2$ is just $c_1c_2$ (all
+modulo $n$). How can you prevent people from messing with your message in this way?
+
+Hashes provide a solution. All Alice has to do is end her messages by hashing them and including
+that hash with the message. Now any alteration of the message itself will be detected: the hash of
+the altered message won't line up with the included hash. Without decrypting the message, which is
+infeasible, Malcolm has no way of altering the message without Bob's knowledge.
+
+A quick note: hash functions are often used to check message integrity for more mundane reasons than
+espionage: it's good to know if your Internet worked properly! These are usually called /checksums/
+instead. For example, installing a Linux distro to your computer requires complete trust of the
+website you download it from: a malicious actor could add code to the operating system that did all
+sorts of nefarious things. Because of this, Linux distribution maintainers make sure to publish
+checksums that are separate from the file itself. That way, you can be sure that you downloaded the
+file correctly and that no one messed with it before you install.
+
+We can go further: imagine now that instead of just hashing the current message, you hash the entire
+message history up until that point as well, including the previous hashes! This means that, if
+Alice and Bob ever have different ideas of what their message history is, they'll know that someone
+has forged a message or prevented one from being sent: even something as simple as sending messages
+in a different order can be detected. You could do this by including the actual entire message
+history without hashing, but that would be prohibitively large and easier to mess with.
+
+{{{mn}}}
+If you're interested in learning more about this, the exact system I just described is
+called a /Merkle tree/.
+{{{mn-end}}}
+
+Cryptocurrencies like Bitcoin couldn't exist without hashing: they use a scheme similar to the one I
+described above to make each record of a transaction depend on all of the previous
+transactions. Modifying this ledger requires you to recalculate all of the future transactions,
+which is prohibitively difficult.
+* Application 2: Proof of Work
+Speaking of Bitcoin, it uses hashing for a completely separate application as well. Let's say you
+want to make adding a transaction to the global ledger (i.e., recording that you paid me fifty
+bucks) difficult, much in the same way mining precious metals is. This difficulty introduces
+scarcity that makes the currency hold value and prevents people simply faking their account balance.
+
+{{{mn}}}
+This is a little simplified: Bitcoin in practice is somewhat complicated. This is the essential idea
+behind the system, however, and I think it's more useful to know that than it is to be able to
+implement it yourself when there are already plenty of good implementations out there.
+{{{mn-end}}}
+
+A good hash function should be more or less random, so finding outputs with any particular property
+is a difficult problem that's easy to verify. For example, if I make a new currency, I could say
+that in order to publish a transaction you need to publish an input that, when you add it to the end
+of the transaction's data, hashes to an output with 16 zeros at the start of its binary
+representation. If the hash I pick isn't possible to reverse-engineer, even in cases like this where
+I only need to reverse-engineer part of the output, then doing this requires running, on average,
+$2^{16} = 65536$ hashes. I can set the number of zeroes needed to whatever I want to make publishing
+transactions as hard as I'd like. Because transactions include a record of all of the previous
+hashes, like we just discussed, if I were to try and modify the existing ledger of transactions I
+would have to redo all of the work that was put into it from the point I want to change forward: if
+I just modified the data directly, anyone who recomputed the hashes would see that they didn't start
+with enough zeroes or have whatever other special property the network agrees on. Because I require
+that you hash something that includes the transaction history, I can also prevent people from
+precomputing these hashes: because combining two pieces of data doesn't easily translate to
+combining their hashes, there's no effective way of "getting ahead."
+
+* Application 3: Password Verification
+I'm pretty sure that you have used a password before. Passwords provide a useful way of verifying
+your identity. However, there's a significant problem with basic passwords: if I tell you my
+password, you can now impersonate me and there's not much I can do about it.
+
+Let's say you're running a website that needs users to authenticate. If you store people's
+passwords, then if someone hacks your database they can impersonate any user and you can't really do
+anything about it.
+
+Enter hashes! Instead of doing this, you can store the /hash/ of each user's password in a database.
+When someone wants to authenticate, you hash whatever they give you and then check it against your
+database. If it matches, then they've proven that they know their password without the need to
+actually store what that password is. Even if someone hacks your database, they can't actually
+impersonate a user, because reversing any of those hashes should be difficult. This is why choosing
+good passwords is important! A lot of websites, contrary to best practice, use very fast hash
+functions. If a hacker can run a million hashes a second, it doesn't take that long to check every
+word in the dictionary, every combination of letters up to 8 characters, or every password in the
+list of the top 100,000 most common.
+
+One important thing to do to make this system secure is to add a /salt/ to the password before
+hashing it: some fixed data that is added each time. This prevents what are known evocatively as
+/rainbow tables/: simply spending a ton of time computing all of the hashes of passwords up to some
+amount of characters and then storing all of them. Then, you can simply look up hashes in that table
+instead of having to do all of that work every time.
+
+There's a good practical application of this knowledge even if you aren't a programmer. /Any/
+/website that emails you your password if you forget it is not trustworthy!/ The reason reset links
+are used when you forget a password isn't because website administrators want to inconvenience
+people, it's because they honestly don't know what your password was. Even the website itself can't
+reverse-engineer their hashes, and so the only way to reset a password is to pick a new one and then
+overwrite the old hash with the new one.
+
+{{{mn}}}
+This is why I'm so infuriated by maximum-length requirements on passwords! All outputs of a hash
+have the same size, so it's not for any technical reason: it would be trivial in a well-designed
+system to let you have 400-character passwords. It's meant to prevent easy-to-guess longer
+passwords, but having predictable long passwords is way more secure than very unpredictable short
+ones.)
+{{{mn-end}}}
+
+* A Brief Non-Cryptographic Postlude
+Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least
+briefly go over some of the interesting ways they can be used.
+** Hashmaps
+Let's say you want to store a mapping from a person's username to their password hash like I
+described above. What's the best way to do that? One solution is to have, for example, 256 "buckets"
+numbered 0-255. When you want to store a username-hash pair, hash the username and take the first 8
+bits of the hash. That number, which is 0-255, is the "bucket" you store the hash in.
+
+This system requires some cleverness to actually implement: you have to deal with what happens if
+two inputs map to the same bucket, and you have to manage the tradeoff between having lots of
+buckets (which is wasteful for small numbers of keys) and having lots of collisions (which is
+wasteful because no system for dealing with collisions doesn't have at least a little overhead or
+wasted space.) However, this is a much, much more efficient way of doing things than keeping a list
+of key-value pairs, because getting a value from a key doesn't require searching the entire list of
+values.
+** Equality
+We discussed earlier using checksums as a way of quickly checking that two big pieces of data are
+equal. This can be used to prevent tampering, but it's also useful in applications that require
+equality checking for large datasets as part as normal operation. Version control systems that allow
+multiple people to merge changes to the same files rely on hashes as an identifier for different
+versions: if the hash of my working directory and yours differ, then one of us made a change
+somewhere.
+
+A somewhat niche use that I'll mention here is in chess AI. It's a timesaver, when calculating chess
+positions, to remember if you've already seen a position before and analyzed it. To do this, chess
+AI programs use a hash function to compare different boards because it's faster than checking it
+piece-by-piece.
+
+The reason I mention this is because, as far as I know, version control systems have never run into
+any problems with hash collisions that weren't from malicious actors. If two different versions were
+to have the same hash, it would completely break the system, but to my knowledge this has never
+happened unintentionally. This /has/ happened for the smaller hashes used in chess AI, however!
+
+Specifically, the game [[https://www.chessgames.com/perl/chessgame?gid=1352348][Pablo Lafuente vs. Shredder (2005)]] features a bizarre error where, on move
+18, the computer Shredder (which would only lose this game in the tournament) trades bishops but
+just...doesn't recapture the piece, a blindingly obvious blunder that cost it the game. This is
+believed to be a hash collision: for some reason Shredder thought that the given position was
+equivalent to a different one and played the wrong move.
+** Bloom Filters
+This sort of probabilistic tradeoff, where you accept the risk of an occasional error for speed,
+comes up a lot with hash functions. One cool data structure that uses this is called a /Bloom
+filter./ Let's say you want something like a hashmap, but even faster, and the only thing you care
+about is quickly computing whether some input has already been seen.
+
+One solution is to store a list of, say, 256 bits. When you want to mark that you've seen an input,
+you hash it with, say, 3 different hashes and get the first 8 bits from each. This results in 3
+numbers between 0 and 255. Set each of those bits in the filter to 1.
+
+If you hash an input and all of the bits you would flip are already 1, you've /probably/ seen this
+input before. Sometimes, however, you'll get unlucky and you'll have flipped each bit of the filter
+you checked using a different input. If any of the bits you would flip are 0, however, then you've
+/definitely/ not seen the input before. You can tune how many hashes you use and how any bits you
+keep in the filter to get the right tradeoff between space, accuracy, and efficiency.
+
+This is often combined with a deterministic system that's slower but guaranteed to be correct in
+cases where in most cases whatever you're looking up isn't in the database. For example, if you want
+to block ads from certain URLs in a large list that's not locally stored, it's wasteful to get that
+list from the Internet each time you want to check a URL, because most URLs aren't ads. You can
+combine this list with a locally-stored Bloom filter to very quickly eliminate the majority of URLs:
+because Bloom filters are always right if they give a negative answer, this will never result in ads
+being mistakenly shown: occasionally, you'll query the list over the Internet and see that the URL
+isn't an ad, but that's an acceptable tradeoff for space and speed.
+
+* Conclusion
+Whew, where was I? Like you might be starting to surmise, hash functions are used everywhere in
+computer science and cryptography. They're an extraordinarily useful tool in all sorts of
+situations. They do introduce another possible weak point in a cryptographic system, but as long as
+the programmer chooses a secure hash function and replaces it when/if it's found to be insecure
+they're usually decently secure.
+
+Hash functions, asymmetric encryption, and key exchange are three extremely important fundamentals
+to a wide variety of cryptographic applications. Now that all three have been written up here, in
+the future this series will be more of a survey of interesting applications of these tools than
+adding new primitives. I don't know what that will look like, but stay tuned!
+
+I hope that this series has helped readers appreciate the ingenuity of the systems that we take for
+granted when we use the Internet or digitally sign a paper. Today's world is so specialized that
+it's difficult to understand much about the things we use. We can drive without understanding
+catalytic converters, use microwaves without knowing anything about radiation, and take medicines
+without knowing how they work. I hope that this series helps demystify a small part of the
+environment that surrounds us. Thanks for reading, and see you next time!
