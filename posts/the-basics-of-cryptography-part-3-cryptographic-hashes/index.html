@@ -103,9 +103,9 @@ seen &#8220;sharing a single secret&#8221; or &#8220;sending a message securely&
 add one&nbsp;more.
 </p>
 
-<div id="outline-container-org2ea246b" class="outline-2">
-<h2 id="org2ea246b">Cheating a&nbsp;Little</h2>
-<div class="outline-text-2" id="text-org2ea246b">
+<div id="outline-container-orgf79cf43" class="outline-2">
+<h2 id="orgf79cf43">Cheating a&nbsp;Little</h2>
+<div class="outline-text-2" id="text-orgf79cf43">
 <p>
 The actual math of hash functions isn&#8217;t very interesting, at least to me, and I don&#8217;t think it&#8217;s
 very illuminating to the student. The <i>application</i> of hash functions, however, is fascinating, and
@@ -122,17 +122,17 @@ this let it gain administrator privileges on Windows without the user&#8217;s&nb
 </p>
 </div>
 </div>
-<div id="outline-container-orgb770c4c" class="outline-2">
-<h2 id="orgb770c4c">What Properties Do Hash Functions&nbsp;Have?</h2>
-<div class="outline-text-2" id="text-orgb770c4c">
+<div id="outline-container-org5cfc814" class="outline-2">
+<h2 id="org5cfc814">What Properties Do Hash Functions&nbsp;Have?</h2>
+<div class="outline-text-2" id="text-org5cfc814">
 <p>
 Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
 function \(f\) is a <i>cryptographic hash function</i> if it satisfies the&nbsp;following:
 </p>
 </div>
-<div id="outline-container-org342bdf4" class="outline-3">
-<h3 id="org342bdf4">Determinism</h3>
-<div class="outline-text-3" id="text-org342bdf4">
+<div id="outline-container-orge35a7ee" class="outline-3">
+<h3 id="orge35a7ee">Determinism</h3>
+<div class="outline-text-3" id="text-orge35a7ee">
 <p>
 \(f\) is a function in the mathematical sense: it always produces the same output for the same
 input. Note that the reverse is always false: because hash functions can take in input of any size
@@ -140,9 +140,9 @@ but have limited possible outputs, there are always some inputs that have the sa
 </p>
 </div>
 </div>
-<div id="outline-container-orgd1b62d8" class="outline-3">
-<h3 id="orgd1b62d8">Irreversibility</h3>
-<div class="outline-text-3" id="text-orgd1b62d8">
+<div id="outline-container-org8b7f2d1" class="outline-3">
+<h3 id="org8b7f2d1">Irreversibility</h3>
+<div class="outline-text-3" id="text-org8b7f2d1">
 <p>
 Given an output \(y\), it is computationally infeasible to find any input \(x\) such
 that \(f(x) = y\). (In practice, this translates to &#8220;no strategy significantly
@@ -150,9 +150,9 @@ better than random guessing&nbsp;exists.&#8221;)
 </p>
 </div>
 </div>
-<div id="outline-container-orgaeffeac" class="outline-3">
-<h3 id="orgaeffeac">Collision&nbsp;Resistance</h3>
-<div class="outline-text-3" id="text-orgaeffeac">
+<div id="outline-container-orgcd0dd2b" class="outline-3">
+<h3 id="orgcd0dd2b">Collision&nbsp;Resistance</h3>
+<div class="outline-text-3" id="text-orgcd0dd2b">
 <p>
 Not only can the function not be easily inverted, but it is infeasible to find <i>any</i> two inputs that
 map to any output: any \(x_1, x_2\), and \(y\) such that \(f(x_1) = f(x_2) = y\). Such a pair of inputs
@@ -166,9 +166,9 @@ required. It doesn&#8217;t have an easy name, but I&#8217;ll&nbsp;try:
 </p>
 </div>
 </div>
-<div id="outline-container-org93555b4" class="outline-3">
-<h3 id="org93555b4">Maximal&nbsp;Entropy</h3>
-<div class="outline-text-3" id="text-org93555b4">
+<div id="outline-container-org4a2c10f" class="outline-3">
+<h3 id="org4a2c10f">Maximal&nbsp;Entropy</h3>
+<div class="outline-text-3" id="text-org4a2c10f">
 <p>
 \(f\) should reveal as little information as possible, known in information theory has having maximal
 entropy. Hash functions should look random: learning <i>anything</i> about an input given its hash should
@@ -184,10 +184,10 @@ independent of each&nbsp;other.
 </div>
 </div>
 
-<div id="outline-container-org1c4a542" class="outline-2">
-<h2 id="org1c4a542">An Example: <code>SHA256</code>
+<div id="outline-container-org1bb73ba" class="outline-2">
+<h2 id="org1bb73ba">An Example: <code>SHA256</code>
 </h2>
-<div class="outline-text-2" id="text-org1c4a542">
+<div class="outline-text-2" id="text-org1bb73ba">
 <p>
 This is what the hashes of the letters A through D (represented as ASCII characters) look like when
 hashed with <code>SHA256</code> and then converted to&nbsp;hexadecimal:
@@ -211,9 +211,9 @@ Alright, so let&#8217;s say we have a hash function. What can we do with&nbsp;it
 </div>
 </div>
 
-<div id="outline-container-org4e9e81a" class="outline-2">
-<h2 id="org4e9e81a">Application 1: Message&nbsp;Integrity</h2>
-<div class="outline-text-2" id="text-org4e9e81a">
+<div id="outline-container-orga087cf0" class="outline-2">
+<h2 id="orga087cf0">Application 1: Message&nbsp;Integrity</h2>
+<div class="outline-text-2" id="text-orga087cf0">
 <p>
 Our opening problem about Alice and Bob meeting up despite Malcolm&#8217;s interference is actually
 several separate problems. The one I want to focus on is preventing tampering. In plain RSA, for
@@ -266,9 +266,9 @@ which is prohibitively&nbsp;difficult.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc01e41e" class="outline-2">
-<h2 id="orgc01e41e">Application 2: Proof of&nbsp;Work</h2>
-<div class="outline-text-2" id="text-orgc01e41e">
+<div id="outline-container-org0f6f236" class="outline-2">
+<h2 id="org0f6f236">Application 2: Proof of&nbsp;Work</h2>
+<div class="outline-text-2" id="text-org0f6f236">
 <p>
 Speaking of Bitcoin, it uses hashing for a completely separate application as well. Let&#8217;s say you
 want to make adding a transaction to the global ledger (i.e., recording that you paid me fifty
@@ -304,9 +304,9 @@ combining their hashes, there&#8217;s no effective way of &#8220;getting&nbsp;ah
 </div>
 </div>
 
-<div id="outline-container-org00ccba3" class="outline-2">
-<h2 id="org00ccba3">Application 3: Password&nbsp;Verification</h2>
-<div class="outline-text-2" id="text-org00ccba3">
+<div id="outline-container-org5030cca" class="outline-2">
+<h2 id="org5030cca">Application 3: Password&nbsp;Verification</h2>
+<div class="outline-text-2" id="text-org5030cca">
 <p>
 I&#8217;m pretty sure that you have used a password before. Passwords provide a useful way of verifying
 your identity. However, there&#8217;s a significant problem with basic passwords: if I tell you my
@@ -359,17 +359,17 @@ passwords, but having predictable long passwords is way more secure than very un
 </div>
 </div>
 
-<div id="outline-container-orgd96cd75" class="outline-2">
-<h2 id="orgd96cd75">A Brief Non-Cryptographic&nbsp;Postlude</h2>
-<div class="outline-text-2" id="text-orgd96cd75">
+<div id="outline-container-org01ad4a0" class="outline-2">
+<h2 id="org01ad4a0">A Brief Non-Cryptographic&nbsp;Postlude</h2>
+<div class="outline-text-2" id="text-org01ad4a0">
 <p>
 Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least
 briefly go over some of the interesting ways they can be&nbsp;used.
 </p>
 </div>
-<div id="outline-container-orgae13e8d" class="outline-3">
-<h3 id="orgae13e8d">Hashmaps</h3>
-<div class="outline-text-3" id="text-orgae13e8d">
+<div id="outline-container-orgb6fd9c2" class="outline-3">
+<h3 id="orgb6fd9c2">Hashmaps</h3>
+<div class="outline-text-3" id="text-orgb6fd9c2">
 <p>
 Let&#8217;s say you want to store a mapping from a person&#8217;s username to their password hash like I
 described above. What&#8217;s the best way to do that? One solution is to have, for example, 256 &#8220;buckets&#8221;
@@ -387,9 +387,9 @@ of key-value pairs, because getting a value from a key doesn&#8217;t require sea
 </p>
 </div>
 </div>
-<div id="outline-container-org526c147" class="outline-3">
-<h3 id="org526c147">Equality</h3>
-<div class="outline-text-3" id="text-org526c147">
+<div id="outline-container-org2170193" class="outline-3">
+<h3 id="org2170193">Equality</h3>
+<div class="outline-text-3" id="text-org2170193">
 <p>
 We discussed earlier using checksums as a way of quickly checking that two big pieces of data are
 equal. This can be used to prevent tampering, but it&#8217;s also useful in applications that require
@@ -420,9 +420,9 @@ equivalent to a different one and played the wrong&nbsp;move.
 </p>
 </div>
 </div>
-<div id="outline-container-org70ffec4" class="outline-3">
-<h3 id="org70ffec4">Bloom&nbsp;Filters</h3>
-<div class="outline-text-3" id="text-org70ffec4">
+<div id="outline-container-org80c1b7e" class="outline-3">
+<h3 id="org80c1b7e">Bloom&nbsp;Filters</h3>
+<div class="outline-text-3" id="text-org80c1b7e">
 <p>
 This sort of probabilistic tradeoff, where you accept the risk of an occasional error for speed,
 comes up a lot with hash functions. One cool data structure that uses this is called a <i>Bloom
@@ -458,9 +458,9 @@ isn&#8217;t an ad, but that&#8217;s an acceptable tradeoff for space and&nbsp;sp
 </div>
 </div>
 
-<div id="outline-container-orgceada24" class="outline-2">
-<h2 id="orgceada24">Conclusion</h2>
-<div class="outline-text-2" id="text-orgceada24">
+<div id="outline-container-org00bd655" class="outline-2">
+<h2 id="org00bd655">Conclusion</h2>
+<div class="outline-text-2" id="text-org00bd655">
 <p>
 Whew, where was I? Like you might be starting to surmise, hash functions are used everywhere in
 computer science and cryptography. They&#8217;re an extraordinarily useful tool in all sorts of
@@ -526,6 +526,12 @@ Next post
     mtiTracking.src='mtiFontTrackingCode.js';
     (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
     })();
-    </script>
+    </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164231105-1');
+</script>
 </body>
 </html>

@@ -69,9 +69,9 @@ the end of this you&#8217;ll see what I&nbsp;mean.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-orgba7e1ac" class="outline-2">
-<h2 id="orgba7e1ac">Problem</h2>
-<div class="outline-text-2" id="text-orgba7e1ac">
+<div id="outline-container-orge366d67" class="outline-2">
+<h2 id="orge366d67">Problem</h2>
+<div class="outline-text-2" id="text-orge366d67">
 <p>
 I&#8217;ll be talking about using Pollard&#8217;s rho for integer factorization, arguably the most famous and
 important problem underlying modern cryptography. We have a big number \(n\) that isn&#8217;t prime, and we
@@ -106,9 +106,9 @@ amount multiplicatively increases the time it takes to factor a number with that
 </div>
 </div>
 
-<div id="outline-container-orgcdb4d36" class="outline-2">
-<h2 id="orgcdb4d36">Ideas</h2>
-<div class="outline-text-2" id="text-orgcdb4d36">
+<div id="outline-container-org20430ad" class="outline-2">
+<h2 id="org20430ad">Ideas</h2>
+<div class="outline-text-2" id="text-org20430ad">
 <p>
 I think it&#8217;s helpful, when analyzing algorithms, to think about what is <i>incidental</i> and what is
 <i>germane</i>. What aspects of an algorithm can be changed without significantly affecting its asymptotic
@@ -121,9 +121,9 @@ Pollard&#8217;s rho uses two important&nbsp;insights:
 </p>
 </div>
 
-<div id="outline-container-org6c42a04" class="outline-3">
-<h3 id="org6c42a04">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
-<div class="outline-text-3" id="text-org6c42a04">
+<div id="outline-container-org5c89861" class="outline-3">
+<h3 id="org5c89861">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
+<div class="outline-text-3" id="text-org5c89861">
 <p>
 Many algorithms in computer science rely on related, easier problems, and Pollard&#8217;s rho is no
 different. The <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a>, invented thousands of years ago (!), solves the problem of
@@ -147,9 +147,9 @@ GCD and find \(p\)). This leads us to our second&nbsp;insight:
 </p>
 </div>
 </div>
-<div id="outline-container-org367a930" class="outline-3">
-<h3 id="org367a930">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
-<div class="outline-text-3" id="text-org367a930">
+<div id="outline-container-org72bd401" class="outline-3">
+<h3 id="org72bd401">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
+<div class="outline-text-3" id="text-org72bd401">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -172,9 +172,9 @@ Now, how does John Pollard use these two&nbsp;ideas?
 </div>
 </div>
 
-<div id="outline-container-org54baed3" class="outline-2">
-<h2 id="org54baed3">The&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org54baed3">
+<div id="outline-container-org7e179f0" class="outline-2">
+<h2 id="org7e179f0">The&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org7e179f0">
 <ol class="org-ol">
 <li>Take your input number \(n\), and define a function \(f(x) = x^2 + 1 \pmod{n}\). The exact polynomial
 isn&#8217;t that important (one of those incidental details I mentioned earlier), but \(f(x)\) shouldn&#8217;t
@@ -192,9 +192,9 @@ Why does this work? What does it have to do with the birthday paradox? What is i
 </div>
 </div>
 
-<div id="outline-container-org0deb41f" class="outline-2">
-<h2 id="org0deb41f">Analysis</h2>
-<div class="outline-text-2" id="text-org0deb41f">
+<div id="outline-container-org8c90b5c" class="outline-2">
+<h2 id="org8c90b5c">Analysis</h2>
+<div class="outline-text-2" id="text-org8c90b5c">
 <p>
 The reason I call step 3 cycle-finding is because we can really think of this sequence \(x_1, x_2, \dots\)
 as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 \pmod{p},&nbsp;\dots\)
@@ -247,9 +247,9 @@ smallest prime&nbsp;factor.
 </div>
 </div>
 
-<div id="outline-container-org7bb747a" class="outline-2">
-<h2 id="org7bb747a">Why is this&nbsp;cool?</h2>
-<div class="outline-text-2" id="text-org7bb747a">
+<div id="outline-container-org405285b" class="outline-2">
+<h2 id="org405285b">Why is this&nbsp;cool?</h2>
+<div class="outline-text-2" id="text-org405285b">
 <p>
 There are two reasons I really like this&nbsp;algorithm:
 </p>
@@ -353,6 +353,12 @@ important for an intuitive understanding of why this might&nbsp;work.
     mtiTracking.src='mtiFontTrackingCode.js';
     (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
     })();
-    </script>
+    </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-164231105-1');
+</script>
 </body>
 </html>
