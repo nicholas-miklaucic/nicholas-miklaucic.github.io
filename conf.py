@@ -1354,15 +1354,3 @@ COMPILERS["orgmode"] = ('.org',)
 # Add org files to your POSTS, PAGES
 POSTS = POSTS + (("posts/*.org", "posts", "post.tmpl"),)
 PAGES = PAGES + (("pages/*.org", "pages", "page.tmpl"),)
-
-BODY_END = """
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script>
-<script type="text/javascript">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-164231105-1');
-</script>
-"""
