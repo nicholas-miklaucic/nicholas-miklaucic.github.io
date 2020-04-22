@@ -1,5 +1,12 @@
 # Macros for embedding media into org-mode posts.
 
+# Custom:
+#+MACRO: mn #+HTML: <span class="marginnote"><p>
+{{{mn}}}
+
+#+MACRO: mn-end #+HTML: </p></span>
+{{{mn-end}}}
+
 #+MACRO: TEASER_END #+HTML: <!-- TEASER_END -->
 {{{TEASER_END}}}
 
@@ -17,9 +24,3 @@
 
 #+MACRO: youtube #+HTML: <iframe width="$3" height="$2" src="https://www.youtube.com/embed/$1?rel=0&amp;hd=1&amp;wmode=transparent"></iframe>
 {{{youtube(8N_tupPBtWQ,240,320)}}}
-
-#+MACRO: mn #+HTML: <span class="marginnote"><p>
-{{{mn}}}
-
-#+MACRO: mn-end #+HTML: </p></span>
-{{{mn-end}}}

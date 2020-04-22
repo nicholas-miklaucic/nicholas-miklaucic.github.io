@@ -1411,14 +1411,19 @@ visualization technique for large, multidimensional datasets, because humans are
 picking up on small differences between datasets as long as they're visually small enough to
 compare. /Small multiples/, as this is called, are criminally underused: interactive animations where
 you select data makes it hard to compare between different choices because you can't see them on the
-screen at the same time, and adding too many dimensions on one plot visually clutters it.
+screen at the same time, and adding too many dimensions or data points on one plot visually
+clutters it, as you can see below:
 
 {{{mn}}}
 Picture credit to Conseil Général de L'environnement Et du Developpement Durable.
 {{{mn-end}}}
 
-#+CAPTION: I dare you to tell me anything useful from this chart without a minute of cross-referencing the legend.
-[[http://www.cgedd.developpement-durable.gouv.fr/local/cache-vignettes/L360xH270/house-price-france_cle5f11a8-5da9a.jpg]]
+[[img-url:/images/mortgage-duration.png]]
+
+That's...a bit much. There's also a ton of going back and forth from the legend,
+which makes it really hard to compare anything. ("Hang on, what was blue dashes
+again?") We'll see how small multiples can make it much easier to read in a lot
+of information at once.
 
 To show you how these facet grids work before we finish with our final plot, let's go back to the
 categorical data. Let's show the birth rates of different areas of the world by decade, first or

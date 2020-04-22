@@ -3,20 +3,24 @@
 ;; Load org-mode
 ;; Requires org-mode v8.x
 
+;; (require 'package)
+;; (setq package-load-list '((htmlize t)))
+;; (package-initialize)
+
 ;;; Custom configuration for the export.
-
-(require 'package)
-(setq package-load-list '((htmlize t)))
-(package-initialize)
-
-(require 'org)
-(require 'ox-html)
-
 ;;; Add any custom configuration that you would like to 'conf.el'.
 (setq nikola-use-pygments t
       org-export-with-toc nil
       org-export-with-section-numbers nil
+      load-file-name "/home/nicholas/win/pollardsrho/plugins/orgmode/init.el"
       org-startup-folded 'showeverything)
+
+
+;; because I use Doom, I don't think the default runs properly
+(load-file (expand-file-name "htmlize.el" (file-name-directory load-file-name)))
+
+(require 'org)
+(require 'ox-html)
 
 ;; Load additional configuration from conf.el
 (let ((conf (expand-file-name "conf.el" (file-name-directory load-file-name))))
@@ -106,10 +110,10 @@ contextual information."
           (code (org-element-property :value src-block))
           (code-html (org-html-format-code src-block info)))
       (if nikola-use-pygments
-          (pygmentize (downcase lang) (org-html-decode-plain-text code))
+          (progn
+            (unless lang (setq lang ""))
+            (pygmentize (downcase lang) (org-html-decode-plain-text code)))
         code-html))))
-
-
 
 ;; Export images with custom link type
 (defun org-custom-link-img-url-export (path desc format)
