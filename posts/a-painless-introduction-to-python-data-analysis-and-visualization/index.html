@@ -85,9 +85,9 @@ If any of these describe you, you&#8217;ve come to the right&nbsp;place!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org1016038" class="outline-2">
-<h2 id="org1016038">Structure</h2>
-<div class="outline-text-2" id="text-org1016038">
+<div id="outline-container-org6f001cc" class="outline-2">
+<h2 id="org6f001cc">Structure</h2>
+<div class="outline-text-2" id="text-org6f001cc">
 <p>
 We&#8217;re going to be using data from the World Bank: specifically, data with birth rates by year for
 each country. The data I&#8217;m using is <a href="https://gist.github.com/nicholas-miklaucic/af822d547b8796753b8d160ca76e0172">here.</a> Our goal will be <b>to learn something interesting from this</b>
@@ -125,9 +125,9 @@ Sound good? Let&#8217;s do&nbsp;this!
 </div>
 </div>
 
-<div id="outline-container-org53b0fa2" class="outline-2">
-<h2 id="org53b0fa2">Tools of the&nbsp;Trade</h2>
-<div class="outline-text-2" id="text-org53b0fa2">
+<div id="outline-container-org1deb955" class="outline-2">
+<h2 id="org1deb955">Tools of the&nbsp;Trade</h2>
+<div class="outline-text-2" id="text-org1deb955">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -160,19 +160,19 @@ Jupyter. (Just don&#8217;t be worried if you get slightly different results betw
 </p>
 </div>
 </div>
-<div id="outline-container-orge48091f" class="outline-2">
-<h2 id="orge48091f">Getting&nbsp;Started</h2>
-<div class="outline-text-2" id="text-orge48091f">
+<div id="outline-container-org99a525e" class="outline-2">
+<h2 id="org99a525e">Getting&nbsp;Started</h2>
+<div class="outline-text-2" id="text-org99a525e">
 <p>
 First things first: we need to import the libraries we&#8217;ll be using to work with the data. There are
 four we&#8217;re using: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, and <code>seaborn</code>. This can more or less be copy-pasted at
 the start of every notebook you&nbsp;use:
 </p>
 
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 <p>
 A quick primer as to what each of these&nbsp;are:
@@ -287,9 +287,9 @@ information&nbsp;in.
 </div>
 </div>
 
-<div id="outline-container-org8115a39" class="outline-2">
-<h2 id="org8115a39">What Are We Looking&nbsp;At?</h2>
-<div class="outline-text-2" id="text-org8115a39">
+<div id="outline-container-orgb277e62" class="outline-2">
+<h2 id="orgb277e62">What Are We Looking&nbsp;At?</h2>
+<div class="outline-text-2" id="text-orgb277e62">
 <p>
 OK, so what <i>is</i> a DataFrame? Let&#8217;s look at this sneak preview of <code>data</code> and talk about the general&nbsp;structure.
 </p>
@@ -350,9 +350,9 @@ types include integers, decimals, dates, and lists&nbsp;themselves.
 </div>
 </div>
 
-<div id="outline-container-orgfc56158" class="outline-2">
-<h2 id="orgfc56158">Tidying&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orgfc56158">
+<div id="outline-container-orgcdb8875" class="outline-2">
+<h2 id="orgcdb8875">Tidying&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgcdb8875">
 <p>
 There are some columns that we don&#8217;t really need, and a lot of the names are a bit long-winded. I
 also want the column names that are years to be typed as numbers so we can do things like compare
@@ -361,15 +361,15 @@ them. We&#8217;ll achieve all of that with the following piece of&nbsp;code:
 
 <div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Country Code"</span><span class="p">,</span> <span class="s2">"Series Name"</span><span class="p">,</span> <span class="s2">"Series Code"</span><span class="p">],</span> 
-    <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">trim_years</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">']'</span><span class="p">):</span>
 	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
 	<span class="k">return</span> <span class="n">col</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">trim_years</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Country Name'</span><span class="p">:</span> <span class="s1">'country'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">trim_years</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Country Name'</span><span class="p">:</span> <span class="s1">'country'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>
@@ -411,9 +411,9 @@ This outputs the&nbsp;following:
 </div>
 </div>
 
-<div id="outline-container-org957e7e7" class="outline-2">
-<h2 id="org957e7e7">..&nbsp;Problems</h2>
-<div class="outline-text-2" id="text-org957e7e7">
+<div id="outline-container-orgaa60245" class="outline-2">
+<h2 id="orgaa60245">..&nbsp;Problems</h2>
+<div class="outline-text-2" id="text-orgaa60245">
 <p>
 Let me reprint some of the&nbsp;data:
 </p>
@@ -546,11 +546,11 @@ operating on the series itself. For example, we can do an elementwise&nbsp;compa
 <div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 
-<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="bp">True</span>
-<span class="mi">1</span>     <span class="bp">True</span>
-<span class="mi">2</span>     <span class="bp">True</span>
-<span class="mi">3</span>    <span class="bp">False</span>
-<span class="mi">4</span>    <span class="bp">False</span>
+<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="kc">True</span>
+<span class="mi">1</span>     <span class="kc">True</span>
+<span class="mi">2</span>     <span class="kc">True</span>
+<span class="mi">3</span>    <span class="kc">False</span>
+<span class="mi">4</span>    <span class="kc">False</span>
 <span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
 </pre></div>
 
@@ -567,9 +567,9 @@ detour to look at one of the most important parts of understanding <code>pandas<
 </div>
 </div>
 
-<div id="outline-container-org99014e9" class="outline-2">
-<h2 id="org99014e9">Indexing Like a&nbsp;Boss</h2>
-<div class="outline-text-2" id="text-org99014e9">
+<div id="outline-container-org83e18e1" class="outline-2">
+<h2 id="org83e18e1">Indexing Like a&nbsp;Boss</h2>
+<div class="outline-text-2" id="text-org83e18e1">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -808,9 +808,9 @@ missing&nbsp;data.
 </div>
 </div>
 
-<div id="outline-container-org838336c" class="outline-2">
-<h2 id="org838336c">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
-<div class="outline-text-2" id="text-org838336c">
+<div id="outline-container-orgd8fd086" class="outline-2">
+<h2 id="orgd8fd086">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
+<div class="outline-text-2" id="text-orgd8fd086">
 <p>
 What should we do with these problematic rows? This question can be very complicated depending on
 the analysis you&#8217;re doing. A couple distinct approaches&nbsp;exist:
@@ -853,9 +853,9 @@ Now <code>data</code> has no null values. Let&#8217;s move&nbsp;on!
 </div>
 </div>
 
-<div id="outline-container-org70c1e63" class="outline-2">
-<h2 id="org70c1e63">Reshaping&nbsp;Data</h2>
-<div class="outline-text-2" id="text-org70c1e63">
+<div id="outline-container-org024868b" class="outline-2">
+<h2 id="org024868b">Reshaping&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org024868b">
 <p>
 Most libraries Python uses for data analysis don&#8217;t like data in <i>wide form</i> like we have here, where
 each row is a grouping of measurements and each column is a measurement type. Instead, they prefer
@@ -986,9 +986,9 @@ does what you want for&nbsp;you.
 </div>
 </div>
 
-<div id="outline-container-org433f07c" class="outline-2">
-<h2 id="org433f07c">Revenge of the&nbsp;Types</h2>
-<div class="outline-text-2" id="text-org433f07c">
+<div id="outline-container-org3d0c7fd" class="outline-2">
+<h2 id="org3d0c7fd">Revenge of the&nbsp;Types</h2>
+<div class="outline-text-2" id="text-org3d0c7fd">
 <p>
 One last&nbsp;thing:
 </p>
@@ -1004,9 +1004,9 @@ later, so we can fix that&nbsp;now:
 </div>
 </div>
 
-<div id="outline-container-org1321bb1" class="outline-2">
-<h2 id="org1321bb1">Intermission</h2>
-<div class="outline-text-2" id="text-org1321bb1">
+<div id="outline-container-orgc26227d" class="outline-2">
+<h2 id="orgc26227d">Intermission</h2>
+<div class="outline-text-2" id="text-orgc26227d">
 <p>
 OK, we&#8217;ve done a lot so far! We&#8217;ve taken in data off of the Internet, dealt with messy null values,
 and reshaped it so it&#8217;s exactly how we want it. Along the way we learned a lot of stuff about how
@@ -1020,9 +1020,9 @@ whatever you need to clear your head and focus on the fun part coming next. Read
 </div>
 </div>
 
-<div id="outline-container-org40f2dd4" class="outline-2">
-<h2 id="org40f2dd4">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
-<div class="outline-text-2" id="text-org40f2dd4">
+<div id="outline-container-orgc2d5340" class="outline-2">
+<h2 id="orgc2d5340">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
+<div class="outline-text-2" id="text-orgc2d5340">
 <p>
 A very common task in data analysis and visualization is to look at <i>categorical data</i>: data that
 comes in a set of limited options. Things like race, gender, class, age group, clinical trial group,
@@ -1074,9 +1074,9 @@ specifically for each of these, so <code>kind='bar'</code> is the same as using 
 </p>
 </div>
 
-<div id="outline-container-orgb0eead0" class="outline-3">
-<h3 id="orgb0eead0">Summary&nbsp;Plots</h3>
-<div class="outline-text-3" id="text-orgb0eead0">
+<div id="outline-container-orgcf62ccb" class="outline-3">
+<h3 id="orgcf62ccb">Summary&nbsp;Plots</h3>
+<div class="outline-text-3" id="text-orgcf62ccb">
 <p>
 Speaking of bar plots, some types of graphs are useful for summarizing data: they don&#8217;t show
 individual elements. An example of this is the bar plot we mentioned&nbsp;above:
@@ -1297,15 +1297,15 @@ an art&nbsp;project.
 </div>
 </div>
 
-<div id="outline-container-org15b417f" class="outline-2">
-<h2 id="org15b417f">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
-<div class="outline-text-2" id="text-org15b417f">
+<div id="outline-container-orgd10d6c7" class="outline-2">
+<h2 id="orgd10d6c7">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
+<div class="outline-text-2" id="text-orgd10d6c7">
 <p>
 OK, now we&#8217;re moving on from categorical plots. Let&#8217;s remove the <code>decade</code> field because we won&#8217;t need
 it any&nbsp;more:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>
@@ -1563,7 +1563,7 @@ visible because there are so many other data points. We can use a <i>rugplot</i>
 show these outliers more&nbsp;directly:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">flat</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">flat</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>
@@ -1581,9 +1581,9 @@ What&#8217;s the story here? Which countries and years have such anomalous data?
 </div>
 </div>
 
-<div id="outline-container-orgf271a2e" class="outline-2">
-<h2 id="orgf271a2e">Selecting Countries With Outlier&nbsp;Data</h2>
-<div class="outline-text-2" id="text-orgf271a2e">
+<div id="outline-container-org7d560dc" class="outline-2">
+<h2 id="org7d560dc">Selecting Countries With Outlier&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org7d560dc">
 <p>
 In many programs, doing something like this—selecting rows that match a fairly complicated
 criterion—would be a fairly difficult task. Not so in Python: the tools we already have can combine
@@ -1620,7 +1620,7 @@ takes in a column or list of columns to sort by and a couple other optional argu
 only have one column, all we need to do is tell Python to sort in descending&nbsp;order:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">max_diffs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">max_diffs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">max_diffs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -1684,9 +1684,9 @@ Pretty neat,&nbsp;huh?
 </div>
 </div>
 
-<div id="outline-container-org80092fc" class="outline-2">
-<h2 id="org80092fc">Bringing the&nbsp;Heat</h2>
-<div class="outline-text-2" id="text-org80092fc">
+<div id="outline-container-orgd7f1a47" class="outline-2">
+<h2 id="orgd7f1a47">Bringing the&nbsp;Heat</h2>
+<div class="outline-text-2" id="text-orgd7f1a47">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -1734,9 +1734,9 @@ for visualization: <i>facet&nbsp;grids.</i>
 </p>
 </div>
 </div>
-<div id="outline-container-orgad23607" class="outline-2">
-<h2 id="orgad23607">Looking Like Andy&nbsp;Warhol</h2>
-<div class="outline-text-2" id="text-orgad23607">
+<div id="outline-container-org2cbc67e" class="outline-2">
+<h2 id="org2cbc67e">Looking Like Andy&nbsp;Warhol</h2>
+<div class="outline-text-2" id="text-org2cbc67e">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -1756,7 +1756,8 @@ visualization technique for large, multidimensional datasets, because humans are
 picking up on small differences between datasets as long as they&#8217;re visually small enough to
 compare. <i>Small multiples</i>, as this is called, are criminally underused: interactive animations where
 you select data makes it hard to compare between different choices because you can&#8217;t see them on the
-screen at the same time, and adding too many dimensions on one plot visually clutters&nbsp;it.
+screen at the same time, and adding too many dimensions or data points on one plot visually
+clutters it, as you can see&nbsp;below:
 </p>
 
 <span class="marginnote"><p>
@@ -1766,11 +1767,15 @@ Picture credit to Conseil Général de L&#8217;environnement Et du Developpement
 </p>
 </span>
 
+<p>
+<img src="../../images/mortgage-duration.png" alt="nil"></p>
 
-<div class="figure">
-<p><img src="http://www.cgedd.developpement-durable.gouv.fr/local/cache-vignettes/L360xH270/house-price-france_cle5f11a8-5da9a.jpg" alt="house-price-france_cle5f11a8-5da9a.jpg"></p>
-<p><span class="figure-number">Figure 4: </span>I dare you to tell me anything useful from this chart without a minute of cross-referencing the&nbsp;legend.</p>
-</div>
+<p>
+That&#8217;s…a bit much. There&#8217;s also a ton of going back and forth from the legend,
+which makes it really hard to compare anything. (&#8220;Hang on, what was blue dashes
+again?&#8221;) We&#8217;ll see how small multiples can make it much easier to read in a lot
+of information at&nbsp;once.
+</p>
 
 <p>
 To show you how these facet grids work before we finish with our final plot, let&#8217;s go back to the
@@ -1815,8 +1820,8 @@ a facet plot with. Consult the documentation if you&#8217;re&nbsp;interested.
     <span class="n">palette</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span>
     <span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span>
     <span class="n">hue</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span>
-    <span class="n">dodge</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">ci</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1857,9 +1862,9 @@ probably be even more unreadable than it is&nbsp;now.
 </div>
 </div>
 
-<div id="outline-container-orgcb75668" class="outline-2">
-<h2 id="orgcb75668">The&nbsp;Finale</h2>
-<div class="outline-text-2" id="text-orgcb75668">
+<div id="outline-container-org27f703d" class="outline-2">
+<h2 id="org27f703d">The&nbsp;Finale</h2>
+<div class="outline-text-2" id="text-org27f703d">
 <p>
 OK, now we&#8217;re <i>finally</i> ready to do the last plot. We&#8217;re going to be graphing a continuous variable
 against a continuous variable, so instead of <code>catplot</code> we&#8217;re using <code>relplot</code>. There are fewer kinds of
@@ -1879,7 +1884,7 @@ identically to <code>catplot</code> in terms of the arguments it takes. Here we&
     <span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span>
     <span class="n">col_order</span><span class="o">=</span><span class="n">high_diff_countries</span><span class="p">,</span> 
     <span class="n">hue_order</span><span class="o">=</span><span class="n">high_diff_countries</span><span class="p">,</span>
-    <span class="n">legend</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -1934,9 +1939,9 @@ With that said: what <i>can</i> we actually learn from this&nbsp;plot?
 </div>
 </div>
 
-<div id="outline-container-org1f06678" class="outline-2">
-<h2 id="org1f06678">Epilogue: What Have We&nbsp;Learned?</h2>
-<div class="outline-text-2" id="text-org1f06678">
+<div id="outline-container-org2eb5d01" class="outline-2">
+<h2 id="org2eb5d01">Epilogue: What Have We&nbsp;Learned?</h2>
+<div class="outline-text-2" id="text-org2eb5d01">
 <p>
 <img src="../../images/sns-relplots/finale.png" alt="nil"></p>
 
@@ -2019,9 +2024,9 @@ abortions that lasted until the year was&nbsp;over.</li>
 </div>
 </div>
 
-<div id="outline-container-org470d941" class="outline-2">
-<h2 id="org470d941">Thanks for&nbsp;Reading!</h2>
-<div class="outline-text-2" id="text-org470d941">
+<div id="outline-container-orga7de9bf" class="outline-2">
+<h2 id="orga7de9bf">Thanks for&nbsp;Reading!</h2>
+<div class="outline-text-2" id="text-orga7de9bf">
 <p>
 That was a lot: if you made it here, you&#8217;re officially introduced to Python data analysis! If you
 want to see more examples of Python data science in action, feel free to browse the rest of this

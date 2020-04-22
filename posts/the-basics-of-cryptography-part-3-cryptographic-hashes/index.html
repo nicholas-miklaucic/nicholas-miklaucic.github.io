@@ -51,7 +51,7 @@
 <article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 3: Cryptographic&nbsp;Hashes</a></h1>
 
     <span class="post-date">
-      <time class="published dt-published" datetime="2020-01-22T14:21:23-05:00" itemprop="datePublished" title="2020-01-22 14:21">2020-01-22 14:21</time></span>
+      <time class="published dt-published" datetime="2020-04-15T14:00:00-05:00" itemprop="datePublished" title="2020-04-15 14:00">2020-04-15 14:00</time></span>
         <meta name="description" itemprop="description" content="What hash functions are and some of what you can do with them">
 <div class="e-content entry-content" itemprop="articleBody text">
     <p>
@@ -103,9 +103,9 @@ seen &#8220;sharing a single secret&#8221; or &#8220;sending a message securely&
 add one&nbsp;more.
 </p>
 
-<div id="outline-container-org6f56c50" class="outline-2">
-<h2 id="org6f56c50">Cheating a&nbsp;Little</h2>
-<div class="outline-text-2" id="text-org6f56c50">
+<div id="outline-container-org2ea246b" class="outline-2">
+<h2 id="org2ea246b">Cheating a&nbsp;Little</h2>
+<div class="outline-text-2" id="text-org2ea246b">
 <p>
 The actual math of hash functions isn&#8217;t very interesting, at least to me, and I don&#8217;t think it&#8217;s
 very illuminating to the student. The <i>application</i> of hash functions, however, is fascinating, and
@@ -122,36 +122,37 @@ this let it gain administrator privileges on Windows without the user&#8217;s&nb
 </p>
 </div>
 </div>
-<div id="outline-container-orgae0b95f" class="outline-2">
-<h2 id="orgae0b95f">What Properties Do Hash Functions&nbsp;Have?</h2>
-<div class="outline-text-2" id="text-orgae0b95f">
+<div id="outline-container-orgb770c4c" class="outline-2">
+<h2 id="orgb770c4c">What Properties Do Hash Functions&nbsp;Have?</h2>
+<div class="outline-text-2" id="text-orgb770c4c">
 <p>
 Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
 function \(f\) is a <i>cryptographic hash function</i> if it satisfies the&nbsp;following:
 </p>
 </div>
-
-<ul class="org-ul">
-<li>
-<a id="org0b73614"></a>Determinism<br><div class="outline-text-6" id="text-org0b73614">
+<div id="outline-container-org342bdf4" class="outline-3">
+<h3 id="org342bdf4">Determinism</h3>
+<div class="outline-text-3" id="text-org342bdf4">
 <p>
 \(f\) is a function in the mathematical sense: it always produces the same output for the same
 input. Note that the reverse is always false: because hash functions can take in input of any size
 but have limited possible outputs, there are always some inputs that have the same&nbsp;hash.
 </p>
 </div>
-</li>
-<li>
-<a id="orgfef659e"></a>Irreversibility<br><div class="outline-text-6" id="text-orgfef659e">
+</div>
+<div id="outline-container-orgd1b62d8" class="outline-3">
+<h3 id="orgd1b62d8">Irreversibility</h3>
+<div class="outline-text-3" id="text-orgd1b62d8">
 <p>
 Given an output \(y\), it is computationally infeasible to find any input \(x\) such
 that \(f(x) = y\). (In practice, this translates to &#8220;no strategy significantly
 better than random guessing&nbsp;exists.&#8221;)
 </p>
 </div>
-</li>
-<li>
-<a id="orgee48d9d"></a>Collision Resistance<br><div class="outline-text-6" id="text-orgee48d9d">
+</div>
+<div id="outline-container-orgaeffeac" class="outline-3">
+<h3 id="orgaeffeac">Collision&nbsp;Resistance</h3>
+<div class="outline-text-3" id="text-orgaeffeac">
 <p>
 Not only can the function not be easily inverted, but it is infeasible to find <i>any</i> two inputs that
 map to any output: any \(x_1, x_2\), and \(y\) such that \(f(x_1) = f(x_2) = y\). Such a pair of inputs
@@ -164,9 +165,10 @@ There&#8217;s one requirement that isn&#8217;t usually technically part of the d
 required. It doesn&#8217;t have an easy name, but I&#8217;ll&nbsp;try:
 </p>
 </div>
-</li>
-<li>
-<a id="org82a8fb7"></a>Maximal Entropy<br><div class="outline-text-6" id="text-org82a8fb7">
+</div>
+<div id="outline-container-org93555b4" class="outline-3">
+<h3 id="org93555b4">Maximal&nbsp;Entropy</h3>
+<div class="outline-text-3" id="text-org93555b4">
 <p>
 \(f\) should reveal as little information as possible, known in information theory has having maximal
 entropy. Hash functions should look random: learning <i>anything</i> about an input given its hash should
@@ -179,14 +181,13 @@ single bit, their hashes should be completely uncorrelated: each bit in the outp
 independent of each&nbsp;other.
 </p>
 </div>
-</li>
-</ul>
+</div>
 </div>
 
-<div id="outline-container-orgdfd201d" class="outline-2">
-<h2 id="orgdfd201d">An Example: <code>SHA256</code>
+<div id="outline-container-org1c4a542" class="outline-2">
+<h2 id="org1c4a542">An Example: <code>SHA256</code>
 </h2>
-<div class="outline-text-2" id="text-orgdfd201d">
+<div class="outline-text-2" id="text-org1c4a542">
 <p>
 This is what the hashes of the letters A through D (represented as ASCII characters) look like when
 hashed with <code>SHA256</code> and then converted to&nbsp;hexadecimal:
@@ -210,9 +211,9 @@ Alright, so let&#8217;s say we have a hash function. What can we do with&nbsp;it
 </div>
 </div>
 
-<div id="outline-container-orgbf6eb5b" class="outline-2">
-<h2 id="orgbf6eb5b">Application 1: Message&nbsp;Integrity</h2>
-<div class="outline-text-2" id="text-orgbf6eb5b">
+<div id="outline-container-org4e9e81a" class="outline-2">
+<h2 id="org4e9e81a">Application 1: Message&nbsp;Integrity</h2>
+<div class="outline-text-2" id="text-org4e9e81a">
 <p>
 Our opening problem about Alice and Bob meeting up despite Malcolm&#8217;s interference is actually
 several separate problems. The one I want to focus on is preventing tampering. In plain RSA, for
@@ -250,8 +251,7 @@ in a different order can be detected. You could do this by including the actual 
 history without hashing, but that would be prohibitively large and easier to mess&nbsp;with.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="marginnote">
 <p>
 If you&#8217;re interested in learning more about this, the exact system I just described is
 called a <i>Merkle tree</i>.
@@ -266,9 +266,9 @@ which is prohibitively&nbsp;difficult.
 </p>
 </div>
 </div>
-<div id="outline-container-org44ed24d" class="outline-2">
-<h2 id="org44ed24d">Application 2: Proof of&nbsp;Work</h2>
-<div class="outline-text-2" id="text-org44ed24d">
+<div id="outline-container-orgc01e41e" class="outline-2">
+<h2 id="orgc01e41e">Application 2: Proof of&nbsp;Work</h2>
+<div class="outline-text-2" id="text-orgc01e41e">
 <p>
 Speaking of Bitcoin, it uses hashing for a completely separate application as well. Let&#8217;s say you
 want to make adding a transaction to the global ledger (i.e., recording that you paid me fifty
@@ -276,8 +276,7 @@ bucks) difficult, much in the same way mining precious metals is. This difficult
 scarcity that makes the currency hold value and prevents people simply faking their account&nbsp;balance.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="marginnote">
 <p>
 This is a little simplified: Bitcoin in practice is somewhat complicated. This is the essential idea
 behind the system, however, and I think it&#8217;s more useful to know that than it is to be able to
@@ -305,9 +304,9 @@ combining their hashes, there&#8217;s no effective way of &#8220;getting&nbsp;ah
 </div>
 </div>
 
-<div id="outline-container-org0a41d38" class="outline-2">
-<h2 id="org0a41d38">Application 3: Password&nbsp;Verification</h2>
-<div class="outline-text-2" id="text-org0a41d38">
+<div id="outline-container-org00ccba3" class="outline-2">
+<h2 id="org00ccba3">Application 3: Password&nbsp;Verification</h2>
+<div class="outline-text-2" id="text-org00ccba3">
 <p>
 I&#8217;m pretty sure that you have used a password before. Passwords provide a useful way of verifying
 your identity. However, there&#8217;s a significant problem with basic passwords: if I tell you my
@@ -349,8 +348,7 @@ reverse-engineer their hashes, and so the only way to reset a password is to pic
 overwrite the old hash with the new&nbsp;one.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="marginnote">
 <p>
 This is why I&#8217;m so infuriated by maximum-length requirements on passwords! All outputs of a hash
 have the same size, so it&#8217;s not for any technical reason: it would be trivial in a well-designed
@@ -361,17 +359,17 @@ passwords, but having predictable long passwords is way more secure than very un
 </div>
 </div>
 
-<div id="outline-container-org1d84c8b" class="outline-2">
-<h2 id="org1d84c8b">A Brief Non-Cryptographic&nbsp;Postlude</h2>
-<div class="outline-text-2" id="text-org1d84c8b">
+<div id="outline-container-orgd96cd75" class="outline-2">
+<h2 id="orgd96cd75">A Brief Non-Cryptographic&nbsp;Postlude</h2>
+<div class="outline-text-2" id="text-orgd96cd75">
 <p>
 Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least
 briefly go over some of the interesting ways they can be&nbsp;used.
 </p>
 </div>
-<div id="outline-container-org7948da7" class="outline-3">
-<h3 id="org7948da7">Hashmaps</h3>
-<div class="outline-text-3" id="text-org7948da7">
+<div id="outline-container-orgae13e8d" class="outline-3">
+<h3 id="orgae13e8d">Hashmaps</h3>
+<div class="outline-text-3" id="text-orgae13e8d">
 <p>
 Let&#8217;s say you want to store a mapping from a person&#8217;s username to their password hash like I
 described above. What&#8217;s the best way to do that? One solution is to have, for example, 256 &#8220;buckets&#8221;
@@ -389,9 +387,9 @@ of key-value pairs, because getting a value from a key doesn&#8217;t require sea
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7afbb7" class="outline-3">
-<h3 id="orgc7afbb7">Equality</h3>
-<div class="outline-text-3" id="text-orgc7afbb7">
+<div id="outline-container-org526c147" class="outline-3">
+<h3 id="org526c147">Equality</h3>
+<div class="outline-text-3" id="text-org526c147">
 <p>
 We discussed earlier using checksums as a way of quickly checking that two big pieces of data are
 equal. This can be used to prevent tampering, but it&#8217;s also useful in applications that require
@@ -422,9 +420,9 @@ equivalent to a different one and played the wrong&nbsp;move.
 </p>
 </div>
 </div>
-<div id="outline-container-org43e1432" class="outline-3">
-<h3 id="org43e1432">Bloom&nbsp;Filters</h3>
-<div class="outline-text-3" id="text-org43e1432">
+<div id="outline-container-org70ffec4" class="outline-3">
+<h3 id="org70ffec4">Bloom&nbsp;Filters</h3>
+<div class="outline-text-3" id="text-org70ffec4">
 <p>
 This sort of probabilistic tradeoff, where you accept the risk of an occasional error for speed,
 comes up a lot with hash functions. One cool data structure that uses this is called a <i>Bloom
@@ -460,9 +458,9 @@ isn&#8217;t an ad, but that&#8217;s an acceptable tradeoff for space and&nbsp;sp
 </div>
 </div>
 
-<div id="outline-container-org4baf29b" class="outline-2">
-<h2 id="org4baf29b">Conclusion</h2>
-<div class="outline-text-2" id="text-org4baf29b">
+<div id="outline-container-orgceada24" class="outline-2">
+<h2 id="orgceada24">Conclusion</h2>
+<div class="outline-text-2" id="text-orgceada24">
 <p>
 Whew, where was I? Like you might be starting to surmise, hash functions are used everywhere in
 computer science and cryptography. They&#8217;re an extraordinarily useful tool in all sorts of

@@ -79,9 +79,9 @@ sending secure&nbsp;messages.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org7731b2a" class="outline-2">
-<h2 id="org7731b2a">A Brief Historical&nbsp;Prelude</h2>
-<div class="outline-text-2" id="text-org7731b2a">
+<div id="outline-container-org24b459d" class="outline-2">
+<h2 id="org24b459d">A Brief Historical&nbsp;Prelude</h2>
+<div class="outline-text-2" id="text-org24b459d">
 <p>
 RSA was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
 after Diffie-Hellman key exchange: we can essentially think of RSA as an answer to the question that
@@ -105,9 +105,9 @@ So, with that out of the way, what does RSA do and how does it do&nbsp;it?
 </div>
 </div>
 
-<div id="outline-container-org81bf8fb" class="outline-2">
-<h2 id="org81bf8fb">Public-Key&nbsp;Encryption</h2>
-<div class="outline-text-2" id="text-org81bf8fb">
+<div id="outline-container-orgbca10b1" class="outline-2">
+<h2 id="orgbca10b1">Public-Key&nbsp;Encryption</h2>
+<div class="outline-text-2" id="text-orgbca10b1">
 <p>
 RSA is a <i>public-key</i> cryptosystem. This means that, instead of a single password or code that can be
 used to encrypt and decrypt a message, like the Enigma machine we talked about last time, it&#8217;s
@@ -126,9 +126,9 @@ on the simplest example: I want to send Alice a message that only she can read. 
 </div>
 </div>
 
-<div id="outline-container-org242d29f" class="outline-2">
-<h2 id="org242d29f">What&#8217;s the&nbsp;Trick?</h2>
-<div class="outline-text-2" id="text-org242d29f">
+<div id="outline-container-org398f259" class="outline-2">
+<h2 id="org398f259">What&#8217;s the&nbsp;Trick?</h2>
+<div class="outline-text-2" id="text-org398f259">
 <p>
 I think a very useful way of thinking about an algorithm is to try and deconstruct it into the
 essential component or &#8220;trick&#8221; that makes it work and the components that simply let the essential
@@ -153,9 +153,9 @@ that, as of writing, is one-way and likely to remain&nbsp;so.&#8221;)
 </div>
 </div>
 
-<div id="outline-container-org83e6f17" class="outline-2">
-<h2 id="org83e6f17">A Note on&nbsp;Presentation</h2>
-<div class="outline-text-2" id="text-org83e6f17">
+<div id="outline-container-org44233d6" class="outline-2">
+<h2 id="org44233d6">A Note on&nbsp;Presentation</h2>
+<div class="outline-text-2" id="text-org44233d6">
 <p>
 RSA is often presented dryly starting with exactly how you generate keys, decrypt messages, and
 encrypt them. I think this approach is a little confusing, because it doesn&#8217;t at all explain how
@@ -168,9 +168,9 @@ be explained at the&nbsp;end!
 </div>
 </div>
 
-<div id="outline-container-org81b0eff" class="outline-2">
-<h2 id="org81b0eff">The RSA&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-org81b0eff">
+<div id="outline-container-org858edf0" class="outline-2">
+<h2 id="org858edf0">The RSA&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org858edf0">
 <p>
 Public-key cryptography is basically advertising a set of problems that only you know the solution
 to: anyone with your public key can encrypt a message using a problem in your set, and ideally only
@@ -193,9 +193,9 @@ doesn&#8217;t change with different values of \(m\), only for different values o
 </div>
 </div>
 
-<div id="outline-container-org16fff48" class="outline-2">
-<h2 id="org16fff48">An&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org16fff48">
+<div id="outline-container-org8d84f4b" class="outline-2">
+<h2 id="org8d84f4b">An&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org8d84f4b">
 <p>
 You might very well ask, &#8220;Nicholas, how would we generate \(n, e\), and \(d\) to make this work? Why is
 \(n\) a <i>semiprime</i> (the product of two primes)?&#8221; I&#8217;ll get there later. For now, we&#8217;re just going to
@@ -221,9 +221,9 @@ seventh power modulo \(n\) results in the original message. So, to decrypt my me
 </div>
 </div>
 
-<div id="outline-container-orgc61fa89" class="outline-2">
-<h2 id="orgc61fa89">(Trying to) Break&nbsp;RSA</h2>
-<div class="outline-text-2" id="text-orgc61fa89">
+<div id="outline-container-org5d7566d" class="outline-2">
+<h2 id="org5d7566d">(Trying to) Break&nbsp;RSA</h2>
+<div class="outline-text-2" id="text-org5d7566d">
 <p>
 How might an attacker, who we&#8217;ll call Eve, try to decrypt the message I sent for Alice without
 knowing&nbsp;\(d\)? 
@@ -259,9 +259,9 @@ OK, so why does factoring \(n\) help? To see that, let&#8217;s go over how \(e\)
 </div>
 </div>
 
-<div id="outline-container-org5954c7c" class="outline-2">
-<h2 id="org5954c7c">Generating&nbsp;Keys</h2>
-<div class="outline-text-2" id="text-org5954c7c">
+<div id="outline-container-org1546f9e" class="outline-2">
+<h2 id="org1546f9e">Generating&nbsp;Keys</h2>
+<div class="outline-text-2" id="text-org1546f9e">
 <p>
 So how did Alice find \(d\), if doing it seems so difficult? \(n\), \(e\) and \(d\) have to be generated
 together: the whole point is that finding \(d\) if you only know \(n\) and \(e\) is really hard. We can
@@ -291,9 +291,9 @@ So how can we find some number \(x\) such that \(a^x \equiv 1 \pmod n\) for any 
 </div>
 </div>
 
-<div id="outline-container-org918f3b4" class="outline-2">
-<h2 id="org918f3b4">The Carmichael&nbsp;Function</h2>
-<div class="outline-text-2" id="text-org918f3b4">
+<div id="outline-container-org93db6f0" class="outline-2">
+<h2 id="org93db6f0">The Carmichael&nbsp;Function</h2>
+<div class="outline-text-2" id="text-org93db6f0">
 <p>
 The function that takes in \(n\) and finds us the smallest \(x\) this works for is called the <i>Carmichael</i>
 <i>function</i>. It&#8217;s usually written as&nbsp;\(\lambda(n)\).
@@ -344,9 +344,9 @@ breaking RSA: if we know \(p\) and \(q\), we can easily generate&nbsp;\(d\).
 </div>
 </div>
 
-<div id="outline-container-orgd519a00" class="outline-2">
-<h2 id="orgd519a00">Finding \(e\) and&nbsp;\(d\)</h2>
-<div class="outline-text-2" id="text-orgd519a00">
+<div id="outline-container-orgf1876c1" class="outline-2">
+<h2 id="orgf1876c1">Finding \(e\) and&nbsp;\(d\)</h2>
+<div class="outline-text-2" id="text-orgf1876c1">
 <p>
 So now we have some number \(\lambda(n)\) such that, for any positive integer \(k\), raising a number to the
 power \(k\lambda(n) + 1\) modulo \(n\) gets you your original number back. Now we just need to find two
@@ -385,9 +385,9 @@ make decryption faster: this has the unfortunate side effect that it&#8217;s eas
 </div>
 </div>
 
-<div id="outline-container-org1194857" class="outline-2">
-<h2 id="org1194857">Bringing It All Together: A More Complex&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org1194857">
+<div id="outline-container-orgca7f44b" class="outline-2">
+<h2 id="orgca7f44b">Bringing It All Together: A More Complex&nbsp;Example</h2>
+<div class="outline-text-2" id="text-orgca7f44b">
 <p>
 Let&#8217;s do another example, with slightly bigger numbers. The twist is that now I&#8217;m the one generating
 a private key and Alice is the one sending a message. This will require all of the insight we&#8217;ve
@@ -417,9 +417,9 @@ basic version of&nbsp;RSA!
 </div>
 </div>
 
-<div id="outline-container-orge15d718" class="outline-2">
-<h2 id="orge15d718">A&nbsp;Warning</h2>
-<div class="outline-text-2" id="text-orge15d718">
+<div id="outline-container-org405adc4" class="outline-2">
+<h2 id="org405adc4">A&nbsp;Warning</h2>
+<div class="outline-text-2" id="text-org405adc4">
 <p>
 Just like last time, I want to stress something: <i>if you are writing this yourself to use in any
 real-world</i> <i>application, stop!</i> (Doing it yourself is a great way to learn, however.) Getting the gist
@@ -429,9 +429,9 @@ are lots of ways this textbook version of RSA isn&#8217;t very secure. Leave it 
 </div>
 </div>
 
-<div id="outline-container-org0478112" class="outline-2">
-<h2 id="org0478112">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org0478112">
+<div id="outline-container-orgb310af8" class="outline-2">
+<h2 id="orgb310af8">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgb310af8">
 <p>
 So now we have another way of sending secure messages over insecure channels: something the world at
 large couldn&#8217;t do until 1977 at the very least. Again, this is a criminally underappreciated

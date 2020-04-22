@@ -91,9 +91,9 @@ broad one, so it&#8217;ll be useful to first lay a foundation by getting some te
 rough taxonomy of the tools we&#8217;ll be using&nbsp;today.
 </p>
 
-<div id="outline-container-org4c612bb" class="outline-2">
-<h2 id="org4c612bb">What Is a Statistical&nbsp;Test?</h2>
-<div class="outline-text-2" id="text-org4c612bb">
+<div id="outline-container-org930af0c" class="outline-2">
+<h2 id="org930af0c">What Is a Statistical&nbsp;Test?</h2>
+<div class="outline-text-2" id="text-org930af0c">
 <p>
 A statistical test, in the way I&#8217;ll be using it today, means a way of testing a hypothesis. That
 hypothesis can be almost anything: perhaps it&#8217;s that the mean of one set of numbers is higher than
@@ -105,9 +105,9 @@ boring. (&#8220;Am I taller than my friend from Korea&#8221; is a much easier qu
 sample of Americans and Koreans I know, which population is&nbsp;taller.&#8221;)
 </p>
 </div>
-<div id="outline-container-org14513fa" class="outline-3">
-<h3 id="org14513fa">What Do Tests&nbsp;Do?</h3>
-<div class="outline-text-3" id="text-org14513fa">
+<div id="outline-container-org20ad598" class="outline-3">
+<h3 id="org20ad598">What Do Tests&nbsp;Do?</h3>
+<div class="outline-text-3" id="text-org20ad598">
 <p>
 A very important thing to keep in mind is that statistical tests <b>don&#8217;t prove that hypotheses are
 true.</b> That is, they can&#8217;t by their nature confirm one specific pattern given the infinite
@@ -128,9 +128,9 @@ are testing. I&#8217;ll make sure to keep it very clear what hypotheses match up
 </p>
 </div>
 </div>
-<div id="outline-container-org899ca98" class="outline-3">
-<h3 id="org899ca98">Assumptions</h3>
-<div class="outline-text-3" id="text-org899ca98">
+<div id="outline-container-org8deec92" class="outline-3">
+<h3 id="org8deec92">Assumptions</h3>
+<div class="outline-text-3" id="text-org8deec92">
 <p>
 This brings us to our next point: of course, there&#8217;s no way I&#8217;d actually know a random sample of
 either of those populations. Almost any statistical test has one or more assumptions about its data,
@@ -159,9 +159,9 @@ incorrect. What that out of the way, how do we interpret our results assuming th
 </p>
 </div>
 </div>
-<div id="outline-container-org170a731" class="outline-3">
-<h3 id="org170a731">Interpretation</h3>
-<div class="outline-text-3" id="text-org170a731">
+<div id="outline-container-org023655c" class="outline-3">
+<h3 id="org023655c">Interpretation</h3>
+<div class="outline-text-3" id="text-org023655c">
 <p>
 Tests will usually give a <i>test statistic</i>, some calculation based on our data, and that test
 statistic will usually follow a <i>test distribution.</i> Given those two things, we can determine how
@@ -182,9 +182,9 @@ OK, the philosophizing is over. Let&#8217;s get to the test&nbsp;themselves!
 </div>
 </div>
 </div>
-<div id="outline-container-org3c7f421" class="outline-2">
-<h2 id="org3c7f421">The Landscape of Statistical&nbsp;Hypotheses</h2>
-<div class="outline-text-2" id="text-org3c7f421">
+<div id="outline-container-org6577cf6" class="outline-2">
+<h2 id="org6577cf6">The Landscape of Statistical&nbsp;Hypotheses</h2>
+<div class="outline-text-2" id="text-org6577cf6">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -209,13 +209,13 @@ corroborated by using one of these tests. We&#8217;ll break these up into a coup
 </ul>
 </div>
 
-<div id="outline-container-orgfda4f96" class="outline-3">
-<h3 id="orgfda4f96">Testing the Distribution of a Single&nbsp;Dataset</h3>
-<div class="outline-text-3" id="text-orgfda4f96">
+<div id="outline-container-orgd7a5d50" class="outline-3">
+<h3 id="orgd7a5d50">Testing the Distribution of a Single&nbsp;Dataset</h3>
+<div class="outline-text-3" id="text-orgd7a5d50">
 </div>
-<div id="outline-container-orgba99b9e" class="outline-4">
-<h4 id="orgba99b9e">Normality</h4>
-<div class="outline-text-4" id="text-orgba99b9e">
+<div id="outline-container-orgb4a0ade" class="outline-4">
+<h4 id="orgb4a0ade">Normality</h4>
+<div class="outline-text-4" id="text-orgb4a0ade">
 <span class="marginnote"><p>
 
 </p>
@@ -235,7 +235,7 @@ We&#8217;ll start with the basics. Let&#8217;s say we have a dataset of 1000 <a 
 numbers from that dataset and make a&nbsp;histogram:
 </p>
 
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">psats</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># just to see a few numbers</span>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">psats</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># just to see a few numbers</span>
 </pre></div>
 
 <div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span><span class="mf">1010.</span><span class="p">,</span>  <span class="mf">770.</span><span class="p">,</span> <span class="mf">1340.</span><span class="p">,</span> <span class="mf">1070.</span><span class="p">,</span> <span class="mf">1310.</span><span class="p">])</span>
@@ -330,9 +330,9 @@ I promise most of these aren&#8217;t going to be as&nbsp;tricky!
 </div>
 </div>
 
-<div id="outline-container-org0eb7c7d" class="outline-4">
-<h4 id="org0eb7c7d">Other&nbsp;Distributions</h4>
-<div class="outline-text-4" id="text-org0eb7c7d">
+<div id="outline-container-orgde924ac" class="outline-4">
+<h4 id="orgde924ac">Other&nbsp;Distributions</h4>
+<div class="outline-text-4" id="text-orgde924ac">
 <span class="marginnote"><p>
 
 </p>
@@ -399,9 +399,9 @@ by sampling from a uniform distribution, so a result like this is very likely to
 </p>
 </div>
 </div>
-<div id="outline-container-org10980c4" class="outline-4">
-<h4 id="org10980c4">Discrete&nbsp;Distributions</h4>
-<div class="outline-text-4" id="text-org10980c4">
+<div id="outline-container-org2ab1f29" class="outline-4">
+<h4 id="org2ab1f29">Discrete&nbsp;Distributions</h4>
+<div class="outline-text-4" id="text-org2ab1f29">
 <p>
 What if our distribution isn&#8217;t continuous? For this, we can use the high-school stats classic: the
 <i>Pearson&#8217;s chi-squared test.</i> Calculating this by hand isn&#8217;t actually that hard, but we didn&#8217;t learn
@@ -428,12 +428,12 @@ probability doesn&#8217;t always even out. The question is: can we show that thi
 </p>
 
 <div class="highlight"><pre><span></span><span class="c1"># counts is the data I, um, "collected"</span>
-<span class="k">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span> <span class="o">/</span> <span class="mi">6</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
-<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">'Stat: '</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">'p: '</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Stat: '</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'p: '</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 </pre></div>
 
 <div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">34</span> <span class="mi">23</span> <span class="mi">13</span>  <span class="mi">7</span>  <span class="mi">8</span> <span class="mi">15</span><span class="p">]</span>
@@ -451,9 +451,9 @@ chance, giving the rest 10%&nbsp;chances.)
 </div>
 </div>
 </div>
-<div id="outline-container-orgbc1786e" class="outline-3">
-<h3 id="orgbc1786e">Testing a Threshold For a Single&nbsp;Dataset</h3>
-<div class="outline-text-3" id="text-orgbc1786e">
+<div id="outline-container-org60a8b3d" class="outline-3">
+<h3 id="org60a8b3d">Testing a Threshold For a Single&nbsp;Dataset</h3>
+<div class="outline-text-3" id="text-org60a8b3d">
 <p>
 This problem is another classic statistics question. Let&#8217;s say I&#8217;m arguing with my friend and they
 claim that soccer games are lame because, on average, there&#8217;s only two goals a game. Let&#8217;s test this
@@ -483,7 +483,7 @@ whole population we&#8217;re sampling is equal to the given&nbsp;value.
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_1samp</span><span class="p">(</span><span class="n">total_scores</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"p ="</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"p ="</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 
 <div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.012</span>
@@ -497,9 +497,9 @@ two-sided tests in most cases: it&#8217;s not usually fair to assume the mean is
 </div>
 </div>
 
-<div id="outline-container-org82755b4" class="outline-3">
-<h3 id="org82755b4">Comparing Means From Two&nbsp;Datasets</h3>
-<div class="outline-text-3" id="text-org82755b4">
+<div id="outline-container-orgd3b4fd3" class="outline-3">
+<h3 id="orgd3b4fd3">Comparing Means From Two&nbsp;Datasets</h3>
+<div class="outline-text-3" id="text-orgd3b4fd3">
 <p>
 This test can be extended to work for two distributions. There&#8217;s actually two distinct ways this
 often pops up that we should distinguish: <i>paired</i> and <i>unpaired</i>. In <i>paired</i> tests, the two datasets are
@@ -523,9 +523,9 @@ real life, and it isn&#8217;t that far off if you bend the rules a little, but i
 </p>
 </div>
 </div>
-<div id="outline-container-org6dd4f53" class="outline-3">
-<h3 id="org6dd4f53">Relational&nbsp;Statistics</h3>
-<div class="outline-text-3" id="text-org6dd4f53">
+<div id="outline-container-orgaeb67c2" class="outline-3">
+<h3 id="orgaeb67c2">Relational&nbsp;Statistics</h3>
+<div class="outline-text-3" id="text-orgaeb67c2">
 <p>
 Let&#8217;s say we have some paired data in different units and we want to figure out if they&#8217;re
 related. An example of this would be asking whether SAT scores correlate with freshman GPA in
@@ -598,9 +598,9 @@ So there&#8217;s a relationship, right? Well, maybe&nbsp;not:
 </div>
 </div>
 
-<div id="outline-container-org892e5d3" class="outline-2">
-<h2 id="org892e5d3">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org892e5d3">
+<div id="outline-container-org3a6a785" class="outline-2">
+<h2 id="org3a6a785">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-org3a6a785">
 <p>
 This provides a nice segue into my final point: it&#8217;s easy to overuse statistical tests or apply them
 in situations where their results are meaningless. These tests are best used to confirm whether a

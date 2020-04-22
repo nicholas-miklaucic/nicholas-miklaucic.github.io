@@ -78,9 +78,9 @@ I&#8217;ll save you the time: even if you looked through every single filename, 
 wrong. To see why appearances can be deceiving, we&#8217;ll have to talk about <i>Unicode</i>. 
 </p>
 
-<div id="outline-container-orgb3892ea" class="outline-2">
-<h2 id="orgb3892ea">Unicode</h2>
-<div class="outline-text-2" id="text-orgb3892ea">
+<div id="outline-container-org3a9d11e" class="outline-2">
+<h2 id="org3a9d11e">Unicode</h2>
+<div class="outline-text-2" id="text-org3a9d11e">
 <p>
 When you read these words, you think of them as words. But computers don&#8217;t see words: they see
 1s and 0s. How can we use bits to represent&nbsp;words?
@@ -121,9 +121,9 @@ Image is <a href="https://xkcd.com/1726/">XKCD 1726</a>.
 </div>
 </div>
 
-<div id="outline-container-org44a87c9" class="outline-2">
-<h2 id="org44a87c9">A Quick Note on&nbsp;Rendering</h2>
-<div class="outline-text-2" id="text-org44a87c9">
+<div id="outline-container-org0dfd0be" class="outline-2">
+<h2 id="org0dfd0be">A Quick Note on&nbsp;Rendering</h2>
+<div class="outline-text-2" id="text-org0dfd0be">
 <p>
 Unicode is… <i>inconsistently supported</i>, to put it mildly. Almost any weird character errors you see
 on the Web are the product of bad Unicode support by programmers who usually assume things are a lot
@@ -135,9 +135,9 @@ browser and lots of other things: sorry about that, but there&#8217;s not too mu
 </div>
 </div>
 
-<div id="outline-container-org2694b1d" class="outline-2">
-<h2 id="org2694b1d">A Guide to Unicode Tomfoolery for Fun and&nbsp;Profit</h2>
-<div class="outline-text-2" id="text-org2694b1d">
+<div id="outline-container-org7da9ead" class="outline-2">
+<h2 id="org7da9ead">A Guide to Unicode Tomfoolery for Fun and&nbsp;Profit</h2>
+<div class="outline-text-2" id="text-org7da9ead">
 <p>
 Let&#8217;s go through some of this weird Unicode stuff, why it&#8217;s there, and how it might be used and
 abused in other ways. Note that I&#8217;ll be writing the full hex code of the character like this:
@@ -146,9 +146,9 @@ can be written in strings as <code>'\uhhhh'</code>, so if you want to play aroun
 that. I&#8217;ll go from crazier to craziest, working our way up to the really weird stuff. Let&#8217;s get&nbsp;going!
 </p>
 </div>
-<div id="outline-container-org744c3cd" class="outline-3">
-<h3 id="org744c3cd">Combining Characters and Multi-Character&nbsp;Graphemes</h3>
-<div class="outline-text-3" id="text-org744c3cd">
+<div id="outline-container-orge2c50ff" class="outline-3">
+<h3 id="orge2c50ff">Combining Characters and Multi-Character&nbsp;Graphemes</h3>
+<div class="outline-text-3" id="text-orge2c50ff">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -189,9 +189,9 @@ deciding even how long a word is a very difficult thing to&nbsp;do.
 </p>
 </div>
 </div>
-<div id="outline-container-org85eb3a0" class="outline-3">
-<h3 id="org85eb3a0">Zero-Width&nbsp;Spaces</h3>
-<div class="outline-text-3" id="text-org85eb3a0">
+<div id="outline-container-org8cdcd79" class="outline-3">
+<h3 id="org8cdcd79">Zero-Width&nbsp;Spaces</h3>
+<div class="outline-text-3" id="text-org8cdcd79">
 <p>
 In some languages that don&#8217;t use spaces, like Japanese, it&#8217;s sometimes nice to use some type of
 word-break character that doesn&#8217;t actually take up space on the screen. Enter <code>U+200B</code>, the
@@ -208,9 +208,9 @@ spaces I put in the above&nbsp;paragraph?)
 </p>
 </div>
 </div>
-<div id="outline-container-org380235d" class="outline-3">
-<h3 id="org380235d">Doppelgängers</h3>
-<div class="outline-text-3" id="text-org380235d">
+<div id="outline-container-orgc4db0b4" class="outline-3">
+<h3 id="orgc4db0b4">Doppelgängers</h3>
+<div class="outline-text-3" id="text-orgc4db0b4">
 <p>
 Many characters in written languages happen to look very close to one another. The Greek question
 mark character, ;, looks an awful lot like the semicolon, ;. Many capital Cyrillic characters look
@@ -228,9 +228,9 @@ the web browser says you&#8217;re &#8220;Аpple Inc.&#8221;, never mind that it 
 </p>
 </div>
 </div>
-<div id="outline-container-org9eb96f9" class="outline-3">
-<h3 id="org9eb96f9">Directional&nbsp;Overrides</h3>
-<div class="outline-text-3" id="text-org9eb96f9">
+<div id="outline-container-org78875fc" class="outline-3">
+<h3 id="org78875fc">Directional&nbsp;Overrides</h3>
+<div class="outline-text-3" id="text-org78875fc">
 <p>
 The most interesting form of messing with Unicode for fun and profit is probably using <i>directional
 overrides</i>.
@@ -266,7 +266,7 @@ Well, everything after the arrow is flipped because it&#8217;s being read right 
 something that looks like&nbsp;this:
 </p>
 
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s2">"qtdol</span><span class="se">\u202e</span><span class="s2">fdp.exe"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"qtdol</span><span class="se">\u202e</span><span class="s2">fdp.exe"</span><span class="p">)</span>
 <span class="n">qtdolexe</span><span class="o">.</span><span class="n">pdf</span>
 </pre></div>
 
@@ -284,9 +284,9 @@ executable file in the bunch despite not looking like&nbsp;it.
 </div>
 </div>
 
-<div id="outline-container-orgba3a73c" class="outline-2">
-<h2 id="orgba3a73c">Takeaways</h2>
-<div class="outline-text-2" id="text-orgba3a73c">
+<div id="outline-container-org3b265c4" class="outline-2">
+<h2 id="org3b265c4">Takeaways</h2>
+<div class="outline-text-2" id="text-org3b265c4">
 <p>
 Some conclusions for any programmers out&nbsp;there:
 </p>

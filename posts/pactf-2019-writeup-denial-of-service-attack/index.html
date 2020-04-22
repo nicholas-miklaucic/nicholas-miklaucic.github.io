@@ -103,9 +103,9 @@ I&#8217;ll briefly introduce regular expressions so people can follow along: we&
 subset of the whole idea, so it&#8217;ll be quick to&nbsp;introduce.
 </p>
 
-<div id="outline-container-orgc3fb6d0" class="outline-2">
-<h2 id="orgc3fb6d0">What Are Regular Expressions? What&#8217;s So Regular About&nbsp;Them?</h2>
-<div class="outline-text-2" id="text-orgc3fb6d0">
+<div id="outline-container-org7f8c824" class="outline-2">
+<h2 id="org7f8c824">What Are Regular Expressions? What&#8217;s So Regular About&nbsp;Them?</h2>
+<div class="outline-text-2" id="text-org7f8c824">
 <p>
 Regular expressions (<i>regexes</i> from here on out) are a way of representing <i>regular languages</i>, a
 theoretical computer science construct that I&#8217;m going to criminally oversimplify to &#8220;clearly defined
@@ -134,9 +134,9 @@ aren&#8217;t always that way. How can a regular expression match slowly? Let&#82
 </p>
 </div>
 </div>
-<div id="outline-container-orgea5c6e5" class="outline-2">
-<h2 id="orgea5c6e5">Castastrophic&nbsp;Backtracking</h2>
-<div class="outline-text-2" id="text-orgea5c6e5">
+<div id="outline-container-org6e24b82" class="outline-2">
+<h2 id="org6e24b82">Castastrophic&nbsp;Backtracking</h2>
+<div class="outline-text-2" id="text-org6e24b82">
 <p>
 I&#8217;m going to add a little new syntax: <code>/A+/</code> means &#8220;one or more of <code>A</code> concatenated together,&#8221; which is
 just a shorthand for <code>/AA+/</code>. Similarly, we use parentheses to group things together: <code>/ab+/</code> means &#8220;<code>a</code>
@@ -220,9 +220,9 @@ but none of these attempts will ever match and stop the&nbsp;search.
 </div>
 </div>
 
-<div id="outline-container-orgbb46616" class="outline-2">
-<h2 id="orgbb46616">Takeaways</h2>
-<div class="outline-text-2" id="text-orgbb46616">
+<div id="outline-container-orgcb3d036" class="outline-2">
+<h2 id="orgcb3d036">Takeaways</h2>
+<div class="outline-text-2" id="text-orgcb3d036">
 <p>
 Regular expressions can be crazy! If you want to try to match regular expressions that you can&#8217;t
 easily verify will actually stop, make sure you implement some sort of timeout. Otherwise, you&#8217;re
