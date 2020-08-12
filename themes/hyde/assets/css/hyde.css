@@ -31,6 +31,8 @@
  * Update the foundational and global aspects of the page.
  */
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+@import url("../demo.css");
 
 html {
   font-family: "Applied Sans", Helvetica, Arial, sans-serif;

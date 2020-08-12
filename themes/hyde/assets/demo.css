@@ -14,24 +14,3 @@
     font-weight: 900;
     src:url("Fonts/c483740f-e783-4640-8815-35da09d2e3cc.woff2") format("woff2"),url("Fonts/3dc04126-7dd8-406b-817a-ff3a8323b364.woff") format("woff");
 }
-@font-face{
-    font-family:"ITC Galliard";
-    font-weight: 400;
-    src:url("Fonts/5266d034-a611-43c5-9a79-f62242a3e1f8.woff2") format("woff2"),url("Fonts/bfce9845-8e9b-46b3-9427-5ca3ade74de1.woff") format("woff");
-}
-@font-face{
-    font-family:"ITC Galliard";
-    font-style: italic;
-    src:url("Fonts/784cc221-1c5c-4f8b-87f4-2a6e585a23b3.woff2") format("woff2"),url("Fonts/c8bc81e8-06c5-4277-9125-de72b95a0151.woff") format("woff");
-}
-@font-face{
-    font-family:"ITC Galliard";
-    font-weight: bold;
-    src:url("Fonts/7658366c-b9f8-4c7f-b4e4-5ce6d3f4351d.woff2") format("woff2"),url("Fonts/e96c9ef5-4e90-46b2-adb5-3300be4a82d2.woff") format("woff");
-}
-@font-face{
-    font-family:"ITC Galliard";
-    font-weight: bold;
-    font-style: italic;
-    src:url("Fonts/42171d72-6d03-42a4-9e71-0fca3e6d9d97.woff2") format("woff2"),url("Fonts/e59f347d-4b5c-42bc-9787-5facaf7e8b42.woff") format("woff");
-}
