@@ -208,7 +208,7 @@ us:
 data.head()['Country Name']
 #+END_SRC
 
-This is what a Series looks like if you print it out, and so its what the above code returns:
+This is what a Series looks like if you print it out, and so it's what the above code returns:
 
 #+BEGIN_SRC python
 0       Afghanistan
@@ -937,7 +937,7 @@ sns.catplot(
 
 [[img-url:/images/sns-catplots/violin.png]]
 
-Much better! We can see something interesting from this that wasn't apparent from the barplot: in
+Much better! We can see something interesting from this that wasn't apparent from the barplot. In
 the 60's, the data was skewed: there were a few countries with small birthrates and a lot of
 countries with larger birthrates. Now, the reverse is true: most of the world has low birthrates,
 and a few countries have high birthrates.
@@ -1411,19 +1411,14 @@ visualization technique for large, multidimensional datasets, because humans are
 picking up on small differences between datasets as long as they're visually small enough to
 compare. /Small multiples/, as this is called, are criminally underused: interactive animations where
 you select data makes it hard to compare between different choices because you can't see them on the
-screen at the same time, and adding too many dimensions or data points on one plot visually
-clutters it, as you can see below:
+screen at the same time, and adding too many dimensions on one plot visually clutters it.
 
 {{{mn}}}
-Picture credit to Conseil Général de L'environnement Et du Developpement Durable.
+Picture credit to ProximityOne.
 {{{mn-end}}}
 
-[[img-url:/images/mortgage-duration.png]]
-
-That's...a bit much. There's also a ton of going back and forth from the legend,
-which makes it really hard to compare anything. ("Hang on, what was blue dashes
-again?") We'll see how small multiples can make it much easier to read in a lot
-of information at once.
+#+CAPTION: This is what we're trying to avoid.
+[[http://proximityone.com/hpi/hpi2017zip1.gif]]
 
 To show you how these facet grids work before we finish with our final plot, let's go back to the
 categorical data. Let's show the birth rates of different areas of the world by decade, first or

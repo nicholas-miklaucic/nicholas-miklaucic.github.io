@@ -11,7 +11,7 @@
 #+END_COMMENT
 /This is the third post in a series: for part 1, go [[https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/][here]], and for part 2, go [[https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/][here]]./
 
-We're previously discussed cryptography, in the modern world, as a way of sending secure messages
+We've previously discussed cryptography, in the modern world, as a way of sending secure messages
 through insecure channels. But this is not the only thing you might want to do in a world with
 malicious actors trying to thwart you. RSA and Diffie-Hellman exchange aren't vulnerable to simple
 eavesdroppers. However, there are other types of attacks that they don't protect against, and we
@@ -202,13 +202,13 @@ people, it's because they honestly don't know what your password was. Even the w
 reverse-engineer their hashes, and so the only way to reset a password is to pick a new one and then
 overwrite the old hash with the new one.
 
-#+HTML: <span class="marginnote">
+{{{mn}}}
 This is why I'm so infuriated by maximum-length requirements on passwords! All outputs of a hash
 have the same size, so it's not for any technical reason: it would be trivial in a well-designed
 system to let you have 400-character passwords. It's meant to prevent easy-to-guess longer
 passwords, but having predictable long passwords is way more secure than very unpredictable short
-ones.)
-#+HTML: </span>
+ones.
+{{{mn-end}}}
 
 * A Brief Non-Cryptographic Postlude
 Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least

@@ -75,9 +75,9 @@ the end of this you&#8217;ll see what I&nbsp;mean.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-orge366d67" class="outline-2">
-<h2 id="orge366d67">Problem</h2>
-<div class="outline-text-2" id="text-orge366d67">
+<div id="outline-container-org2e0fca6" class="outline-2">
+<h2 id="org2e0fca6">Problem</h2>
+<div class="outline-text-2" id="text-org2e0fca6">
 <p>
 I&#8217;ll be talking about using Pollard&#8217;s rho for integer factorization, arguably the most famous and
 important problem underlying modern cryptography. We have a big number \(n\) that isn&#8217;t prime, and we
@@ -112,9 +112,9 @@ amount multiplicatively increases the time it takes to factor a number with that
 </div>
 </div>
 
-<div id="outline-container-org20430ad" class="outline-2">
-<h2 id="org20430ad">Ideas</h2>
-<div class="outline-text-2" id="text-org20430ad">
+<div id="outline-container-orga9de0fe" class="outline-2">
+<h2 id="orga9de0fe">Ideas</h2>
+<div class="outline-text-2" id="text-orga9de0fe">
 <p>
 I think it&#8217;s helpful, when analyzing algorithms, to think about what is <i>incidental</i> and what is
 <i>germane</i>. What aspects of an algorithm can be changed without significantly affecting its asymptotic
@@ -127,9 +127,9 @@ Pollard&#8217;s rho uses two important&nbsp;insights:
 </p>
 </div>
 
-<div id="outline-container-org5c89861" class="outline-3">
-<h3 id="org5c89861">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
-<div class="outline-text-3" id="text-org5c89861">
+<div id="outline-container-orgafa833a" class="outline-3">
+<h3 id="orgafa833a">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
+<div class="outline-text-3" id="text-orgafa833a">
 <p>
 Many algorithms in computer science rely on related, easier problems, and Pollard&#8217;s rho is no
 different. The <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a>, invented thousands of years ago (!), solves the problem of
@@ -153,9 +153,9 @@ GCD and find \(p\)). This leads us to our second&nbsp;insight:
 </p>
 </div>
 </div>
-<div id="outline-container-org72bd401" class="outline-3">
-<h3 id="org72bd401">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
-<div class="outline-text-3" id="text-org72bd401">
+<div id="outline-container-org9d24a6c" class="outline-3">
+<h3 id="org9d24a6c">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
+<div class="outline-text-3" id="text-org9d24a6c">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -178,9 +178,9 @@ Now, how does John Pollard use these two&nbsp;ideas?
 </div>
 </div>
 
-<div id="outline-container-org7e179f0" class="outline-2">
-<h2 id="org7e179f0">The&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org7e179f0">
+<div id="outline-container-org4e3c82f" class="outline-2">
+<h2 id="org4e3c82f">The&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org4e3c82f">
 <ol class="org-ol">
 <li>Take your input number \(n\), and define a function \(f(x) = x^2 + 1 \pmod{n}\). The exact polynomial
 isn&#8217;t that important (one of those incidental details I mentioned earlier), but \(f(x)\) shouldn&#8217;t
@@ -198,9 +198,9 @@ Why does this work? What does it have to do with the birthday paradox? What is i
 </div>
 </div>
 
-<div id="outline-container-org8c90b5c" class="outline-2">
-<h2 id="org8c90b5c">Analysis</h2>
-<div class="outline-text-2" id="text-org8c90b5c">
+<div id="outline-container-orgd3b4ac7" class="outline-2">
+<h2 id="orgd3b4ac7">Analysis</h2>
+<div class="outline-text-2" id="text-orgd3b4ac7">
 <p>
 The reason I call step 3 cycle-finding is because we can really think of this sequence \(x_1, x_2, \dots\)
 as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 \pmod{p},&nbsp;\dots\)
@@ -236,7 +236,7 @@ more&nbsp;numbers.
 <p>
 One detail which I&#8217;d put in the incidental category, but which I nonetheless need to mention, is the
 existence of fast algorithms for finding a cycle in a sequence like this one. The standard one I&#8217;ll
-mention is <a href="https://www.wikiwand.com/en/Floyd%E2%80%93Warshall_algorithm"><i>Floyd&#8217;s algorithm</i></a>: keep track of two numbers, \(x_i\) and \(x_j\), and at every step
+mention is <a href="https://www.wikiwand.com/en/Floyd%25E2%2580%2593Warshall_algorithm"><i>Floyd&#8217;s algorithm</i></a>: keep track of two numbers, \(x_i\) and \(x_j\), and at every step
 increase \(i\) by 1 and \(j\) by 2.  Repeat until success. This is a huge improvement over keeping track
 of number you&#8217;ve seen, with only a small cost in terms of how efficiently it finds a cycle.  (For
 more details check the Wikipedia page linked&nbsp;above.)
@@ -253,9 +253,9 @@ smallest prime&nbsp;factor.
 </div>
 </div>
 
-<div id="outline-container-org405285b" class="outline-2">
-<h2 id="org405285b">Why is this&nbsp;cool?</h2>
-<div class="outline-text-2" id="text-org405285b">
+<div id="outline-container-org8186694" class="outline-2">
+<h2 id="org8186694">Why is this&nbsp;cool?</h2>
+<div class="outline-text-2" id="text-org8186694">
 <p>
 There are two reasons I really like this&nbsp;algorithm:
 </p>

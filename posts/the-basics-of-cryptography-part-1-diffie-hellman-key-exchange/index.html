@@ -112,9 +112,9 @@ with historical developments and use that framework to see what computers bring 
 in this post, we&#8217;ll cover how the secret sauce that computers bring actually&nbsp;works.
 </p>
 
-<div id="outline-container-org733abb3" class="outline-2">
-<h2 id="org733abb3">Terminology</h2>
-<div class="outline-text-2" id="text-org733abb3">
+<div id="outline-container-org131bc1b" class="outline-2">
+<h2 id="org131bc1b">Terminology</h2>
+<div class="outline-text-2" id="text-org131bc1b">
 <p>
 I want to briefly introduce some terminology which will make the rest of this easier to explain. A
 prior secret way of sending information, of the kind that you might expect Alice and Bob to need, is
@@ -130,9 +130,9 @@ With that out of the way, let&#8217;s get started! So how did people send secret
 </div>
 </div>
 
-<div id="outline-container-orgc8bba98" class="outline-2">
-<h2 id="orgc8bba98">History</h2>
-<div class="outline-text-2" id="text-orgc8bba98">
+<div id="outline-container-orga37c2ca" class="outline-2">
+<h2 id="orga37c2ca">History</h2>
+<div class="outline-text-2" id="text-orga37c2ca">
 <p>
 Pre-modern efforts in cryptography were based around a different situation than the one I just
 described: there <i>is</i> a prior channel, but it&#8217;s temporary, and you want to send messages on an
@@ -162,7 +162,7 @@ Credit to the Museo Scienza E Tecnologia Milano. Creative Commons&nbsp;license.
 
 
 <div class="figure">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg" alt="Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg" alt="Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg"></p>
 <p><span class="figure-number">Figure 1: </span>A model of the Enigma&nbsp;machine.</p>
 </div>
 
@@ -179,9 +179,9 @@ text are, roughly in order, ETAOINSHRDLCU, and comparing the most frequent symbo
 </div>
 </div>
 
-<div id="outline-container-orgdf070ac" class="outline-2">
-<h2 id="orgdf070ac">Doing&nbsp;Better</h2>
-<div class="outline-text-2" id="text-orgdf070ac">
+<div id="outline-container-org7301ed3" class="outline-2">
+<h2 id="org7301ed3">Doing&nbsp;Better</h2>
+<div class="outline-text-2" id="text-org7301ed3">
 <p>
 To get from these codes—methods that require a <i>prior channel</i> and are still insecure—to methods that
 are (to our knowledge!) secure and don&#8217;t require this prior channel will require computers. Modern
@@ -198,9 +198,9 @@ completely different approach to the&nbsp;problem.)
 </div>
 </div>
 
-<div id="outline-container-org0c8d34e" class="outline-2">
-<h2 id="org0c8d34e">Peter and&nbsp;Natasha</h2>
-<div class="outline-text-2" id="text-org0c8d34e">
+<div id="outline-container-org846552f" class="outline-2">
+<h2 id="org846552f">Peter and&nbsp;Natasha</h2>
+<div class="outline-text-2" id="text-org846552f">
 <p>
 Secure key exchange over a public channel seems…really hard, if not impossible. Surely if someone
 can listen to everything you say, you can&#8217;t tell someone a secret without them hearing it? I find it
@@ -253,9 +253,9 @@ look at is sending numerical&nbsp;information.)
 </div>
 </div>
 
-<div id="outline-container-org305ea77" class="outline-2">
-<h2 id="org305ea77">One-Way&nbsp;Functions</h2>
-<div class="outline-text-2" id="text-org305ea77">
+<div id="outline-container-org91c0675" class="outline-2">
+<h2 id="org91c0675">One-Way&nbsp;Functions</h2>
+<div class="outline-text-2" id="text-org91c0675">
 <p>
 What we&#8217;re describing is called a <i>one-way function</i>: some function \(f\) such that computing \(f(x)\) is
 easy, but finding the \(x\) for some \(y\) such that \(f(x) = y\) is hard. I&#8217;m not really going to worry
@@ -275,9 +275,9 @@ success in doing&#8221; and we&#8217;ll be&nbsp;good.
 </div>
 </div>
 
-<div id="outline-container-org73fd1b7" class="outline-2">
-<h2 id="org73fd1b7">The Discrete Logarithm&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-org73fd1b7">
+<div id="outline-container-orgf001762" class="outline-2">
+<h2 id="orgf001762">The Discrete Logarithm&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-orgf001762">
 <p>
 The one-way function we&#8217;ll be looking at, because it&#8217;s commonly used and easy to understand compared
 to others, is the <i>discrete logarithm problem</i>, specifically the one about <i>modular exponentiation.</i>
@@ -375,9 +375,9 @@ all we care about is that we share <i>some</i> secret, not any particular&nbsp;o
 </div>
 </div>
 
-<div id="outline-container-org9f78bf5" class="outline-2">
-<h2 id="org9f78bf5">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org9f78bf5">
+<div id="outline-container-orge51eb44" class="outline-2">
+<h2 id="orge51eb44">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-orge51eb44">
 <p>
 This algorithm is usually just called <i>Diffie-Hellman key exchange</i>, but Ralph Merkle should really
 get more of the credit. Our setup is that Alice and Bob want to agree on a secret number over a
@@ -421,9 +421,9 @@ even with supercomputers trying to break it, this encryption method is&nbsp;secu
 </div>
 </div>
 
-<div id="outline-container-org3487e1f" class="outline-2">
-<h2 id="org3487e1f">Conclusion</h2>
-<div class="outline-text-2" id="text-org3487e1f">
+<div id="outline-container-orgfb290f7" class="outline-2">
+<h2 id="orgfb290f7">Conclusion</h2>
+<div class="outline-text-2" id="text-orgfb290f7">
 <p>
 Let&#8217;s zoom out for a second. Until around 1970, any encryption method was reliant on the secrecy of
 the method itself or some prior secret key, and most of those methods were breakable (and,
