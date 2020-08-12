@@ -208,7 +208,7 @@ us:
 data.head()['Country Name']
 #+END_SRC
 
-This is what a Series looks like if you print it out, and so its what the above code returns:
+This is what a Series looks like if you print it out, and so it's what the above code returns:
 
 #+BEGIN_SRC python
 0       Afghanistan
@@ -937,7 +937,7 @@ sns.catplot(
 
 [[img-url:/images/sns-catplots/violin.png]]
 
-Much better! We can see something interesting from this that wasn't apparent from the barplot: in
+Much better! We can see something interesting from this that wasn't apparent from the barplot. In
 the 60's, the data was skewed: there were a few countries with small birthrates and a lot of
 countries with larger birthrates. Now, the reverse is true: most of the world has low birthrates,
 and a few countries have high birthrates.
@@ -1414,11 +1414,11 @@ you select data makes it hard to compare between different choices because you c
 screen at the same time, and adding too many dimensions on one plot visually clutters it.
 
 {{{mn}}}
-Picture credit to Conseil Général de L'environnement Et du Developpement Durable.
+Picture credit to ProximityOne.
 {{{mn-end}}}
 
-#+CAPTION: I dare you to tell me anything useful from this chart without a minute of cross-referencing the legend.
-[[http://www.cgedd.developpement-durable.gouv.fr/local/cache-vignettes/L360xH270/house-price-france_cle5f11a8-5da9a.jpg]]
+#+CAPTION: This is what we're trying to avoid.
+[[http://proximityone.com/hpi/hpi2017zip1.gif]]
 
 To show you how these facet grids work before we finish with our final plot, let's go back to the
 categorical data. Let's show the birth rates of different areas of the world by decade, first or

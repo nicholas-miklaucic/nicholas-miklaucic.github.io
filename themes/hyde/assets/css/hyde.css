@@ -31,6 +31,7 @@
  * Update the foundational and global aspects of the page.
  */
 
+
 html {
   font-family: "Applied Sans", Helvetica, Arial, sans-serif;
 }
@@ -54,17 +55,17 @@ html {
  */
 
 div.hsidebar, .hsidebar {
-    font-family: 'Applied Sans', sans-serif;
-    padding: 2rem 1rem;
-    color: rgba(255,255,255,.5);
-    background-color: #202020;
-    text-align: center;
-    margin-left: 0;
-    margin-bottom: 0;
+  font-family: 'Applied Sans', sans-serif;
+  padding: 2rem 1rem;
+  color: rgba(255,255,255,.5);
+  background-color: #202020;
+  text-align: center;
+  margin-left: 0;
+  margin-bottom: 0;
 }
 
 @media (min-width: 48em) {
-div.hsidebar, .hsidebar {
+  div.hsidebar, .hsidebar {
     position: fixed;
     text-align: left;
     top: 0;
@@ -102,8 +103,8 @@ div.hsidebar a, .hsidebar a {
 
 /* Sidebar nav */
 .sidebar-nav {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .sidebar-nav-item {
   display: block;
