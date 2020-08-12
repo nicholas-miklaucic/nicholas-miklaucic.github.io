@@ -25,7 +25,7 @@ insecure channel, without prior communication. In the future, I'll look at how t
 fails in the real world, and additionally how you can use the idea behind RSA to do things besides
 sending secure messages.
 
-{{{TEASER_END}}}
+#+HTML: <!-- TEASER_END -->
 
 * A Brief Historical Prelude
 RSA was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
@@ -175,11 +175,11 @@ of $\lambda$, after all), and the second means $x \equiv 0 \pmod{\lambda(q)}$. $
 1$. We're looking for the first number that both $p - 1$ and $q - 1$ evenly divide. This is called
 the /least common multiple/, or $lcm$. Thus, for any semiprime $n = pq$, $\lambda(n) = lcm(p - 1, q - 1)$.
 
-{{{mn}}}
+#+HTML: <span class="marginnote"><p>
 The language of group theory provides a very beautiful way of expressing what the Carmichael
 function does, but I'm trying to keep this accessible for people without a lot of mathematical
 background so I'll skip talking about that for now.
-{{{mn-end}}}
+#+HTML: </p></span>
 
 That was a fair bit of math! It's important to know /why/ this last expression lets us generate keys,
 and some introductions to RSA skip going over why the Carmichael function works out to this value
@@ -202,7 +202,7 @@ going to go into that too deeply right now, because this will already be a long 
 this algorithm works and is fast.
 
 
-{{{mn}}}
+#+HTML: <span class="marginnote"><p>
 The optimal way to do modular exponentation is actually based in the binary representation of the
 exponent. Imagine we're trying to raise a number $n$ to some power $e$ where $e_2 = 10011$ in
 binary. We can do this repeated squaring trick to find $n^1, n^2, n^4$, and so on. We can essentially
@@ -212,7 +212,7 @@ numbers, and then we need to do one multiplcation for every $1$ in the binary re
 $e$. The number of $1$s in the binary representation of a number is called its /Hamming weight/: this
 is a long-winded way of saying that the easiest numbers to exponentiate by are those with a small
 Hamming weight.
-{{{mn-end}}}
+#+HTML: </p></span>
 
 This gives us a lot of choices: we can actually pick $e$ or $d$ to be whatever we want! In practice,
 because you're going to be encrypting messages by raising them to power $e$, we want $e$ to amenable

@@ -34,6 +34,7 @@ from __future__ import unicode_literals
 import io
 import os
 from os.path import abspath, dirname, join
+import shlex
 import subprocess
 
 try:
@@ -61,7 +62,7 @@ class CompileOrgmode(PageCompiler):
         makedirs(os.path.dirname(dest))
         try:
             command = [
-                'emacs', '--batch',
+                'emacs', '-q', '--batch',
                 '-l', join(dirname(abspath(__file__)), 'init.el'),
                 '--eval', '(nikola-html-export "{0}" "{1}")'.format(
                     abspath(source), abspath(dest))
@@ -90,7 +91,8 @@ class CompileOrgmode(PageCompiler):
                 req_missing(['emacs', 'org-mode'],
                             'use the orgmode compiler', python=False)
         except subprocess.CalledProcessError as e:
-            raise Exception('Cannot compile {0} -- bad org-mode configuration (return code {1})'.format(source, e.returncode))
+            raise Exception('''Cannot compile {0} -- bad org-mode configuration (return code {1})
+The command is {2}'''.format(source, e.returncode, ' '.join(shlex.quote(arg) for arg in e.cmd)))
 
     def create_post(self, path, content=None, onefile=False, is_page=False, **kw):
         """Create post file with optional metadata."""

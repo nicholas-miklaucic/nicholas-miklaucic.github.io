@@ -101,7 +101,7 @@ ciphers that you can use once you have a secret key, the digital versions of the
 called /symmetric-key ciphers/. They're not actually that interesting from a mathematical perspective:
 they're usually not built around simple mathematical problems like key exchange, and they're often
 just basically a really souped-up version of something like the Enigma machine rather than a
-completely different approach to the problem.
+completely different approach to the problem.)
 
 * Peter and Natasha
 Secure key exchange over a public channel seems...really hard, if not impossible. Surely if someone
@@ -291,4 +291,3 @@ Next time, I'll look at another absolutely essential algorithm to the operation 
 the /RSA cryptosystem./ This set of algorithms allows you to verify your identity, securely sign a
 message, and provide another way of achieving the type of encryption that we discussed here, by
 letting anyone encrypt messages that only a single person can decrypt. See you then!
-

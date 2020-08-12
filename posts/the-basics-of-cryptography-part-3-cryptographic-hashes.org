@@ -1,7 +1,7 @@
 #+BEGIN_COMMENT
 .. title: The Basics of Cryptography, Part 3: Cryptographic Hashes
 .. slug: the-basics-of-cryptography-part-3-cryptographic-hashes
-.. date: 2020-01-22 14:21:23 UTC-05:00
+.. date: 2020-04-15 14:00:00 UTC-05:00
 .. tags: math, cs
 .. category: intro-to-crypto
 .. link: 
@@ -60,16 +60,15 @@ this let it gain administrator privileges on Windows without the user's knowledg
 * What Properties Do Hash Functions Have?
 Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
 function $f$ is a /cryptographic hash function/ if it satisfies the following:
-
-***** Determinism
+** Determinism
 $f$ is a function in the mathematical sense: it always produces the same output for the same
 input. Note that the reverse is always false: because hash functions can take in input of any size
 but have limited possible outputs, there are always some inputs that have the same hash.
-***** Irreversibility
+** Irreversibility
 Given an output $y$, it is computationally infeasible to find any input $x$ such
 that $f(x) = y$. (In practice, this translates to "no strategy significantly
 better than random guessing exists.")
-***** Collision Resistance
+** Collision Resistance
 Not only can the function not be easily inverted, but it is infeasible to find /any/ two inputs that
 map to any output: any $x_1, x_2$, and $y$ such that $f(x_1) = f(x_2) = y$. Such a pair of inputs
 would be called a /collision/. Again, because hash functions map any input to a limited range of
@@ -77,7 +76,7 @@ outputs, collisions always exist, but ideally they're impossible to produce on d
 
 There's one requirement that isn't usually technically part of the definition, but is often
 required. It doesn't have an easy name, but I'll try:
-***** Maximal Entropy
+** Maximal Entropy
 $f$ should reveal as little information as possible, known in information theory has having maximal
 entropy. Hash functions should look random: learning /anything/ about an input given its hash should
 be infeasible, and any sequence of hashes should look random.
@@ -134,10 +133,10 @@ has forged a message or prevented one from being sent: even something as simple 
 in a different order can be detected. You could do this by including the actual entire message
 history without hashing, but that would be prohibitively large and easier to mess with.
 
-{{{mn}}}
+#+HTML: <span class="marginnote">
 If you're interested in learning more about this, the exact system I just described is
 called a /Merkle tree/.
-{{{mn-end}}}
+#+HTML: </span>
 
 Cryptocurrencies like Bitcoin couldn't exist without hashing: they use a scheme similar to the one I
 described above to make each record of a transaction depend on all of the previous
@@ -149,11 +148,11 @@ want to make adding a transaction to the global ledger (i.e., recording that you
 bucks) difficult, much in the same way mining precious metals is. This difficulty introduces
 scarcity that makes the currency hold value and prevents people simply faking their account balance.
 
-{{{mn}}}
+#+HTML: <span class="marginnote">
 This is a little simplified: Bitcoin in practice is somewhat complicated. This is the essential idea
 behind the system, however, and I think it's more useful to know that than it is to be able to
 implement it yourself when there are already plenty of good implementations out there.
-{{{mn-end}}}
+#+HTML: </span>
 
 A good hash function should be more or less random, so finding outputs with any particular property
 is a difficult problem that's easy to verify. For example, if I make a new currency, I could say
