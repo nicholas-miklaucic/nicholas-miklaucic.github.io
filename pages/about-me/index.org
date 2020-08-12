@@ -13,14 +13,14 @@
 
 [[img-url:/images/headshot.jpg]]
 
-I'm Nicholas Miklaucic, a college student studying data science at Northeastern University. I went
-to high school at Phillips Academy Andover, where I participated and helped run a [[http://2019.pactf.com][cybersecurity
-competition for high schoolers]] among other things. I've always loved math and programming, and I
-hope to make a living out of them. When I'm not doing those things, I love being in the outdoors,
-playing and listening to music, and reading.
+I'm Nicholas Miklaucic, a college student studying data science and behavioral neuroscience at Northeastern University.
+I went to high school at Phillips Academy Andover, where I participated and helped run a [[http://2019.pactf.com][cybersecurity competition for
+high schoolers]] among other things. I'm interested in math, programming, and how computers can learn from the most
+advanced computational system in existence—the human brain. I hope to make a living in that field. I'm not doing those
+things, I love being in the outdoors, playing and listening to music, and reading.
 
 * Contact Me
  - [[https://github.com/nicholas-miklaucic][Github]]
  - [[mailto:nicholas.miklaucic@gmail.com][Email]]
- - [[https://discordapp.com][Discord]]: PollardsRho#7513
+ - [[https://discordapp.com][Discord]]: ~PollardsRho#7513~
  - [[https://www.linkedin.com/in/nicholas-miklaucic/][LinkedIn]]
