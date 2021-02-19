@@ -151,7 +151,7 @@
 'copy_assets:output/assets/Fonts/7695b892-9dbc-456c-b143-534f1d992fbc.woff2', (203264, 345)
 'copy_assets:output/assets/css/nikola_ipython.css', (444928, 615)
 'copy_assets:output/assets/Fonts/e96c9ef5-4e90-46b2-adb5-3300be4a82d2.woff', (204288, 344)
-'sitemap:output/sitemap.xml', (493568, 11454)
+'sitemap:output/sitemap.xml', (493568, 11452)
 'render_taxonomies:output/categories/cat_dataviz/index.html', (450560, 2377)
 'render_galleries:output/galleries/demo/tesla_lightning2_lg.jpg', (218112, 299)
 'render_taxonomies:output/categories/cat_pactf-writeups.xml', (218624, 1148)
