@@ -60,20 +60,21 @@
             <span class="post-date dateline"><time class="published dt-published" datetime="2021-02-19T14:34:17-05:00" title="2021-02-19 14:34">2021-02-19 14:34</time></span>
         </div>
     </header><div class="p-summary entry-summary">
-    <p>
+    <div>
+<p>
 <i>This series is the textual version of a presentation I gave to a class on
 effective</i> <i>data visualization. I&#8217;m reproducing it here both to add some
 information that</i> <i>was cut from the presentation for time and to put it in a
 publicly available</i> <i>place.</i>
 </p>
 
-<div id="outline-container-orgbefca19" class="outline-2">
-<h2 id="orgbefca19">Intro</h2>
-<div class="outline-text-2" id="text-orgbefca19">
+<div id="outline-container-orga9a67b1" class="outline-2">
+<h2 id="orga9a67b1">Intro</h2>
+<div class="outline-text-2" id="text-orga9a67b1">
 </div>
-<div id="outline-container-org583984e" class="outline-3">
-<h3 id="org583984e">What This Guide Is&nbsp;For</h3>
-<div class="outline-text-3" id="text-org583984e">
+<div id="outline-container-orga66df8d" class="outline-3">
+<h3 id="orga66df8d">What This Guide Is&nbsp;For</h3>
+<div class="outline-text-3" id="text-orga66df8d">
 <p>
 This series of posts is about how to make effective data visualization: exactly
 what I mean by that will become clear shortly. Much like one might critique
@@ -83,9 +84,9 @@ consumer of data visualization they encounter in their daily&nbsp;lives.
 </p>
 </div>
 </div>
-<div id="outline-container-org7b6ac65" class="outline-3">
-<h3 id="org7b6ac65">Who This Guide Is&nbsp;For</h3>
-<div class="outline-text-3" id="text-org7b6ac65">
+<div id="outline-container-org6b30ff8" class="outline-3">
+<h3 id="org6b30ff8">Who This Guide Is&nbsp;For</h3>
+<div class="outline-text-3" id="text-org6b30ff8">
 <p>
 This guide is for anyone! Unlike my other work on this blog, this guide expects
 no knowledge of coding or any platform for visualizations: learning such a tool
@@ -97,220 +98,10 @@ journalism, programming, and statistics: anyone who works with or cares about&nb
 <p>
 Without further ado, let&#8217;s get&nbsp;started!
 </p>
+
+<p class="more"><a href="posts/effective-data-visualization-part-1-what-is-effective-data-visualization/">Read&nbsp;more…</a></p>
 </div>
 </div>
-</div>
-<div id="outline-container-orgac1be72" class="outline-2">
-<h2 id="orgac1be72">What is Effective Data&nbsp;Visualization?</h2>
-<div class="outline-text-2" id="text-orgac1be72">
-<p>
-What do I mean by <i>effective</i> data visualization? Here, an effective data
-visualization is one that effectively helps the viewer process information. I
-care here about dataviz as a tool that increases our brains&#8217; ability to work
-with&nbsp;data.
-</p>
-
-<p>
-This is contrasted with purely aesthetic concerns. Some visuals that don&#8217;t look
-spiffy are nonetheless useful tools, and some visuals that are aesthetically
-unappealing are useful processing&nbsp;aids.
-</p>
-
-<p>
-Data can be deadly serious, and so data visualization can have tremendous&nbsp;importance.
-</p>
-
-<p>
-<img src="images/teachback/ChristaMcAuliffe.jpg" alt="nil">
-The <i>Challenger</i> disaster in which Christa McAuliffe, the person in the photo
-above, died is a grim reminder of information&#8217;s power. The O-ring failure
-that led to the explosion was preventable and understood. Thus, some authors
-like Edward Tufte have analyzed this tragedy as a failure of data visualization
-as much as anything else: the visualizations used to communicate the dire need
-to reschedule the launch failed to convey this knowledge to the people who made
-that fateful decision. This is to say that effectively communicating and
-understanding data is worthy of serious&nbsp;study.
-</p>
-
-<p>
-Why use data visualization at all? Why not use other tools, like spreadsheets or&nbsp;statistics?
-</p>
-</div>
-</div>
-
-<div id="outline-container-org91a1834" class="outline-2">
-<h2 id="org91a1834">Why is Effective Data&nbsp;Visualization?</h2>
-<div class="outline-text-2" id="text-org91a1834">
-<p>
-There&#8217;s a persistent myth that graphs are inherently less meaningful or useful
-than raw statistics. Statistics are very important, and I would certainly not
-advocate for replacing the statistics underlying, say, clinical trials with a
-bunch of&nbsp;graphs.
-</p>
-
-<p>
-The classic example of why we might use data visualization in addition to
-statistics comes to use from Frank Anscombe in the form of 4 different datasets
-like this&nbsp;one:
-</p>
-
-<table border="1" class="dataframe">
-<thead><tr style="text-align: right;">
-<th>x</th>
-      <th>y</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td>10.0</td>
-      <td>8.04</td>
-    </tr>
-<tr>
-<td>8.0</td>
-      <td>6.95</td>
-    </tr>
-<tr>
-<td>13.0</td>
-      <td>7.58</td>
-    </tr>
-<tr>
-<td>9.0</td>
-      <td>8.81</td>
-    </tr>
-<tr>
-<td>11.0</td>
-      <td>8.33</td>
-    </tr>
-<tr>
-<td>14.0</td>
-      <td>9.96</td>
-    </tr>
-<tr>
-<td>6.0</td>
-      <td>7.24</td>
-    </tr>
-<tr>
-<td>4.0</td>
-      <td>4.26</td>
-    </tr>
-<tr>
-<td>12.0</td>
-      <td>10.84</td>
-    </tr>
-<tr>
-<td>7.0</td>
-      <td>4.82</td>
-    </tr>
-<tr>
-<td>5.0</td>
-      <td>5.68</td>
-    </tr>
-</tbody>
-</table>
-<p>
-Imagine you&#8217;re trying to find out if y is related to x and figure out the nature
-of that relationship. It&#8217;s rather difficult to parse this information,
-especially given that this is just one-fourth of the total. Let&#8217;s try using some
-exploratory statistics to get a better sense of the data: the mean of each
-variable, the standard deviation of each variable, the regression line, the
-Pearson correlation, and the \(R^2\)&nbsp;value.
-</p>
-
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-      <th>\(\mu_x\)</th>
-      <th>\(\mu_y\)</th>
-      <th>\(\sigma_x\)</th>
-      <th>\(\sigma_y\)</th>
-      <th>\(r\)</th>
-      <th>Regression line</th>
-      <th>\(R^2\)</th>
-    </tr>
-<tr>
-<th>Dataset</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-</thead>
-<tbody>
-<tr>
-<th>I</th>
-      <td>9.0</td>
-      <td>7.501</td>
-      <td>3.317</td>
-      <td>2.032</td>
-      <td>0.816</td>
-      <td>0.500x + 3.000</td>
-      <td>0.667</td>
-    </tr>
-<tr>
-<th><span class="caps">II</span></th>
-      <td>9.0</td>
-      <td>7.501</td>
-      <td>3.317</td>
-      <td>2.032</td>
-      <td>0.816</td>
-      <td>0.500x + 3.000</td>
-      <td>0.666</td>
-    </tr>
-<tr>
-<th><span class="caps">III</span></th>
-      <td>9.0</td>
-      <td>7.500</td>
-      <td>3.317</td>
-      <td>2.030</td>
-      <td>0.816</td>
-      <td>0.500x + 3.000</td>
-      <td>0.666</td>
-    </tr>
-<tr>
-<th><span class="caps">IV</span></th>
-      <td>9.0</td>
-      <td>7.501</td>
-      <td>3.317</td>
-      <td>2.031</td>
-      <td>0.817</td>
-      <td>0.500x + 3.000</td>
-      <td>0.667</td>
-    </tr>
-</tbody>
-</table>
-<p>
-The standard statistics we might use when we don&#8217;t know what we&#8217;re looking for
-yet aren&#8217;t distinguishing these datasets at all. Let&#8217;s see what a plot looks&nbsp;like:
-</p>
-
-<p>
-<img src="images/teachback/anscombe.png" alt="nil"></p>
-
-<p>
-Sometimes a picture really is worth a thousand correlation&nbsp;values:
-</p>
-<ul class="org-ul">
-<li>The first dataset seems like a fairly standard linear correlation with some
-noise: linear regression seems like a good&nbsp;fit.</li>
-<li>The second dataset has a very regular relationship, but it&#8217;s not linear!
-Modeling this with a quadratic would work&nbsp;well.</li>
-<li>The third dataset has a very regular relationship with one crazy&nbsp;outlier.</li>
-<li>The fourth dataset is barely a dataset! Something has gone terribly wrong and
-a single influential outlier is preventing us from seeing that in&nbsp;statistics.</li>
-</ul>
-<p>
-There is no tool that is more effective at quickly sussing out these patterns
-than a visualization like this&nbsp;one.
-</p>
-
-<p>
-That&#8217;s all for today. Next time I&#8217;ll talk about visual complexity and visual
-overload, and I&#8217;ll do my part to combat some pernicious misconceptions about how
-sophisticated data visualization should be. See you&nbsp;then!
-</p>
 </div>
 </div>
     </div>

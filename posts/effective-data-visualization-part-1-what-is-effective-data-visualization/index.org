@@ -31,6 +31,8 @@ journalism, programming, and statistics: anyone who works with or cares about
 data.
 
 Without further ado, let's get started!
+
+{{{TEASER_END}}}
 * What is Effective Data Visualization?
 What do I mean by /effective/ data visualization? Here, an effective data
 visualization is one that effectively helps the viewer process information. I
