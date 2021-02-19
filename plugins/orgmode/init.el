@@ -12,7 +12,7 @@
 (setq nikola-use-pygments t
       org-export-with-toc nil
       org-export-with-section-numbers nil
-      load-file-name "/home/nicholas/Documents/pollardsrho/plugins/orgmode/init.el"
+      load-file-name "/home/nicholas/Documents/nicholas-miklaucic.github.io/plugins/orgmode/init.el"
       org-startup-folded 'showeverything)
 
 

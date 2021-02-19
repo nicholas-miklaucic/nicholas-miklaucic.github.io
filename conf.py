@@ -680,8 +680,8 @@ GITHUB_COMMIT_SOURCE = True
 
 FILTERS = {
    ".html": [filters.typogrify],
-    ".css": [filters.yui_compressor],
-    ".js": [filters.yui_compressor],
+    ".css": [],
+    ".js": [],
     ".png": [filters.optipng],
 }
 
