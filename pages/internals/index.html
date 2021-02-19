@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · Nikola Internals </title>
+<title>Pollard's Rho · Nikola Internals </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -38,11 +38,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -65,10 +65,10 @@ how it all fits&nbsp;together.</p>
 <dd>
 <p>Most of Nikola is implemented as plugins using <a class="reference external" href="http://yapsy.sourceforge.net/">Yapsy</a>.
 You can ignore that they are plugins and just think of them as regular python
-modules and packages with a funny little <code class="docutils literal">.plugin</code> file next to&nbsp;them.</p>
+modules and packages with a funny&nbsp;little <code class="docutils literal">.plugin</code> file next to&nbsp;them.</p>
 <p>So, 90% of the time, what you want to do is either write a new plugin or extend
 an existing&nbsp;one.</p>
-<p>There are several kinds of plugins, all implementing interfaces defined in
+<p>There are several kinds of plugins, all implementing interfaces defined&nbsp;in
 <code class="docutils literal">nikola/plugin_categories.py</code> and documented in
 <a class="reference external" href="https://getnikola.com/extending.html">Extending&nbsp;Nikola</a></p>
 <p>If your plugin has a dependency, please make sure it doesn&#8217;t make Nikola
@@ -77,8 +77,8 @@ with an informative&nbsp;message.</p>
 </dd>
 <dt>Commands are&nbsp;plugins</dt>
 <dd>
-<p>When you use <code class="docutils literal">nikola foo</code> you are using the plugin <code class="docutils literal">command/foo</code>. Those are
-used to extend Nikola&#8217;s command line. Their interface is defined in the <code class="docutils literal">Command</code>
+<p>When you&nbsp;use <code class="docutils literal">nikola foo</code> you are using the&nbsp;plugin <code class="docutils literal">command/foo</code>. Those are
+used to extend Nikola&#8217;s command line. Their interface is defined in&nbsp;the <code class="docutils literal">Command</code>
 class. They take options and arguments and do whatever you want, so go&nbsp;wild.</p>
 </dd>
 <dt>The <code class="docutils literal">build</code> command is&nbsp;special</dt>
@@ -96,7 +96,7 @@ into something, in this case a website. Instead of a Makefile, Nikola uses
 <dl class="simple">
 <dt>actions</dt>
 <dd>
-<p>What the task <strong>does</strong>. For example, convert a markdown document into&nbsp;HTML.</p>
+<p>What the task <strong>does</strong>. For example, convert a markdown document into&nbsp;<span class="caps">HTML</span>.</p>
 </dd>
 <dt>dependencies</dt>
 <dd>
@@ -117,19 +117,17 @@ option changes, redo it,&nbsp;etc.</p>
 <p>If you ever want to do your own tasks, you really should read the doit
 <a class="reference external" href="http://pydoit.org/tasks.html">documentation on&nbsp;tasks</a></p>
 </div>
-<p>So, what Nikola does, when you use the build command, is to read the
-configuration <code class="docutils literal">conf.py</code> from the current folder, instantiate
-the <code class="docutils literal">Nikola</code> class, and have it generate a whole list of tasks for doit
+<p>So, what Nikola does, when you use the build command, is to read the&nbsp;configuration <code class="docutils literal">conf.py</code> from the current folder, instantiate&nbsp;the <code class="docutils literal">Nikola</code> class, and have it generate a whole list of tasks for doit
 to process. Then doit will decide which tasks need doing, and do them, in
 the right&nbsp;order.</p>
-<p>The place where the tasks are generated is in <code class="docutils literal">Nikola.gen_tasks</code>, which collects tasks
-from all the plugins inheriting <code class="docutils literal">BaseTask</code>, massages them a bit, then passes them
+<p>The place where the tasks are generated is&nbsp;in <code class="docutils literal">Nikola.gen_tasks</code>, which collects tasks
+from all the plugins&nbsp;inheriting <code class="docutils literal">BaseTask</code>, massages them a bit, then passes them
 to&nbsp;doit.</p>
-<p>So, if you want things to happen on <code class="docutils literal">build</code> you want to create a Task plugin, or extend
+<p>So, if you want things to happen&nbsp;on <code class="docutils literal">build</code> you want to create a Task plugin, or extend
 one of the existing&nbsp;ones.</p>
 <div class="sidebar">
 <p class="sidebar-title">Tests</p>
-<p>While Nikola is not a hardcore TDD project, we like tests. So, please add them if you can.
+<p>While Nikola is not a hardcore <span class="caps">TDD</span> project, we like tests. So, please add them if you can.
 You can write unit tests or integration tests. (Doctests are not supported
 anymore due to&nbsp;fragility.)</p>
 </div>
@@ -137,11 +135,11 @@ anymore due to&nbsp;fragility.)</p>
 <div class="section" id="posts-and-pages">
 <h2>Posts and&nbsp;Pages</h2>
 <p>Nikola has a concept of posts and pages. Both are more or less the same thing, except
-posts are added into RSS feeds and pages are not. All of them are in a list called
-&#8220;the timeline&#8221; formed by objects of class <code class="docutils literal">Post</code>.</p>
+posts are added into <span class="caps">RSS</span> feeds and pages are not. All of them are in a list called
+&#8220;the timeline&#8221; formed by objects of&nbsp;class <code class="docutils literal">Post</code>.</p>
 <p>When you are creating a task that needs the list of posts and/or pages (for example,
-the RSS creation plugin) on task execution time, your plugin should call <code class="docutils literal">self.site.scan_posts()</code>
-in <code class="docutils literal">gen_tasks</code> to ensure the timeline is created and available in
+the <span class="caps">RSS</span> creation plugin) on task execution time, your plugin should&nbsp;call <code class="docutils literal">self.site.scan_posts()</code>
+in <code class="docutils literal">gen_tasks</code> to ensure the timeline is created and available&nbsp;in
 <code class="docutils literal">self.site.timeline</code>. You should not modify the timeline, because it will cause consistency&nbsp;issues.</p>
 <div class="sidebar">
 <p class="sidebar-title">scan_posts</p>
@@ -152,30 +150,29 @@ timeline creation, for example, while creating the&nbsp;tasks.</p>
 Nikola comes with plugins that use the timeline to create a website&nbsp;(surprised?).</p>
 <p>The workflow included with nikola is as follows&nbsp;(incomplete!):</p>
 <ol class="arabic simple">
-<li><p>The post is assigned a compiler based on its extension and the <code class="docutils literal">COMPILERS</code> option.</p></li>
-<li><p>The compiler is applied to the post data and a &#8220;HTML fragment&#8221; is produced. That
-fragment is stored in a cache (the <code class="docutils literal">posts</code> plugin).</p></li>
+<li><p>The post is assigned a compiler based on its extension and&nbsp;the <code class="docutils literal">COMPILERS</code> option.</p></li>
+<li><p>The compiler is applied to the post data and a &#8220;<span class="caps">HTML</span> fragment&#8221; is produced. That
+fragment is stored in a cache&nbsp;(the <code class="docutils literal">posts</code> plugin).</p></li>
 <li><p>The configured theme has templates (and a template engine), which are applied to the post&#8217;s
-HTML fragment and metadata (the <code class="docutils literal">pages</code> plugin).</p></li>
-<li><p>The original sources for the post are copied to some accessible place (the <code class="docutils literal">sources</code> plugin).</p></li>
-<li><p>If the post is tagged, some pages and RSS feeds for each tag are updated (the <code class="docutils literal">tags</code> plugin).</p></li>
-<li><p>If the post is new, it&#8217;s included in the blog&#8217;s RSS feed (the <code class="docutils literal">rss</code> plugin).</p></li>
-<li><p>The post is added in the right place in the index pages for the blog (the <code class="docutils literal">indexes</code> plugin).</p></li>
-<li><p>CSS/JS/Images for the theme are put in the right places (the <code class="docutils literal">copy_assets</code> and <code class="docutils literal">bundles</code> plugins).</p></li>
-<li><p>A File describing the whole site is created (the <code class="docutils literal">sitemap</code> plugin).</p></li>
+<span class="caps">HTML</span> fragment and metadata&nbsp;(the <code class="docutils literal">pages</code> plugin).</p></li>
+<li><p>The original sources for the post are copied to some accessible place&nbsp;(the <code class="docutils literal">sources</code> plugin).</p></li>
+<li><p>If the post is tagged, some pages and <span class="caps">RSS</span> feeds for each tag are updated&nbsp;(the <code class="docutils literal">tags</code> plugin).</p></li>
+<li><p>If the post is new, it&#8217;s included in the blog&#8217;s <span class="caps">RSS</span> feed&nbsp;(the <code class="docutils literal">rss</code> plugin).</p></li>
+<li><p>The post is added in the right place in the index pages for the blog&nbsp;(the <code class="docutils literal">indexes</code> plugin).</p></li>
+<li><p><span class="caps">CSS</span>/<span class="caps">JS</span>/Images for the theme are put in the right places&nbsp;(the <code class="docutils literal">copy_assets</code> and <code class="docutils literal">bundles</code> plugins).</p></li>
+<li><p>A File describing the whole site is created&nbsp;(the <code class="docutils literal">sitemap</code> plugin).</p></li>
 </ol>
 <p>You can add whatever you want to that list: just create a plugin for&nbsp;it.</p>
 <p>You can also expand Nikola&#8217;s capabilities at several&nbsp;points:</p>
 <dl class="simple">
 <dt>compilers</dt>
 <dd>
-<p>Nikola supports a variety of markups. If you want to add another one, you need to create
-a <code class="docutils literal">Compiler</code> plugin.</p>
+<p>Nikola supports a variety of markups. If you want to add another one, you need to create&nbsp;a <code class="docutils literal">Compiler</code> plugin.</p>
 </dd>
 <dt>templates</dt>
 <dd>
 <p>Nikola&#8217;s themes can use Jinja2 or Mako templates. If you prefer another template system,
-you have to create a <code class="docutils literal">TemplateSystem</code> plugin.</p>
+you have to create&nbsp;a <code class="docutils literal">TemplateSystem</code> plugin.</p>
 </dd>
 <dt>themes</dt>
 <dd>

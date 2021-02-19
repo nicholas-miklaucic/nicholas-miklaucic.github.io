@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Looking at the mathematics of Bayesian fallacies">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · Bayesian Fallacies, Part 2: The Math of the PSAT Math Section </title>
+<title>Pollard's Rho · Bayesian Fallacies, Part 2: The Math of the PSAT Math Section </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -40,11 +40,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -53,7 +53,7 @@
     </div>
 
     <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Bayesian Fallacies, Part 2: The Math of the PSAT Math&nbsp;Section</a></h1>
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Bayesian Fallacies, Part 2: The Math of the <span class="caps">PSAT</span> Math&nbsp;Section</a></h1>
 
     <span class="post-date">
       <time class="published dt-published" datetime="2019-10-27T20:18:00-04:00" itemprop="datePublished" title="2019-10-27 20:18">2019-10-27 20:18</time></span>
@@ -68,11 +68,11 @@ why. This post will lay the mathematical groundwork for that&nbsp;explanation!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org8e7fe2c" class="outline-2">
-<h2 id="org8e7fe2c">Breaking Out&nbsp;Bayes&#8217;</h2>
-<div class="outline-text-2" id="text-org8e7fe2c">
+<div id="outline-container-orgaa5de22" class="outline-2">
+<h2 id="orgaa5de22">Breaking Out&nbsp;Bayes&#8217;</h2>
+<div class="outline-text-2" id="text-orgaa5de22">
 <p>
-To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of PSAT test</b>
+To recap, the problem we&#8217;re studying is this: <b>given that someone places in the top 1% of <span class="caps">PSAT</span> test</b>
 <b>takers, what&#8217;s the chance they repeat that on a second administration?</b> We&#8217;re going to use Bayes&#8217;
 theorem to look at this mathematically. We&#8217;re also going to keep things abstract, so that we can plug
 this in for any scenario in which regression to the mean occurs. This will allow us to generalize
@@ -108,9 +108,9 @@ product of those terms over all of the possibilities to get what we really want,
 </div>
 </div>
 
-<div id="outline-container-org99be472" class="outline-2">
-<h2 id="org99be472">A Stats&nbsp;Struggle</h2>
-<div class="outline-text-2" id="text-org99be472">
+<div id="outline-container-org08e104d" class="outline-2">
+<h2 id="org08e104d">A Stats&nbsp;Struggle</h2>
+<div class="outline-text-2" id="text-org08e104d">
 <p>
 Let&#8217;s start with \(P(A|\mu = m)\): the probability that, given a certain mean \(m\), the second test
 administration is a&nbsp;qualifier. 
@@ -118,9 +118,9 @@ administration is a&nbsp;qualifier.
 
 <p>
 Unfortunately, this problem has no exact closed-form solution with elementary functions. It&#8217;s
-basically the CDF of the normal distribution that we need, which isn&#8217;t elementary. We&#8217;ll call this
+basically the <span class="caps">CDF</span> of the normal distribution that we need, which isn&#8217;t elementary. We&#8217;ll call this
 \(\Phi(x)\) so we can keep moving and worry about its calculation later. From this, we have \(P(A|\mu =
-m) = 1 - \Phi(\frac{t - m}{\sigma})\), where \(\Phi\) is the standard normal&nbsp;CDF.
+m) = 1 - \Phi(\frac{t - m}{\sigma})\), where \(\Phi\) is the standard normal&nbsp;<span class="caps">CDF</span>.
 </p>
 
 <p>
@@ -132,7 +132,7 @@ functionally the same if they&#8217;re not being conditioned on each other, so \
 
 <p>
 Using Bayes&#8217; Theorem, we have \(P(\mu = m|B) = \frac{P(B|\mu = m) P(B)}{P(\mu = m)}\). We just did one
-of those terms, so now let&#8217;s tackle \(P(\mu = m)\). This problem is a bit simpler, because the PDF of
+of those terms, so now let&#8217;s tackle \(P(\mu = m)\). This problem is a bit simpler, because the <span class="caps">PDF</span> of
 the normal distribution (what we need here) <i>is</i> a composition of elementary functions: \(P(\mu = m) =
 \psi(m) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{M -&nbsp;m}{S}\right)^2}\).
 </p>
@@ -150,9 +150,9 @@ to compute it once per&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-org609b01f" class="outline-2">
-<h2 id="org609b01f">Computational&nbsp;Calculus</h2>
-<div class="outline-text-2" id="text-org609b01f">
+<div id="outline-container-org91e02ab" class="outline-2">
+<h2 id="org91e02ab">Computational&nbsp;Calculus</h2>
+<div class="outline-text-2" id="text-org91e02ab">
 <p>
 So we finally have an…expression for \(P(\mu = m|B)\). It&#8217;s not nice to work with, or easy to
 compute by hand, but it is an expression, so we&#8217;ll leave it there for now. We already have \(P(A|\mu
@@ -202,9 +202,9 @@ remaining integral and solve the&nbsp;problem.
 </div>
 </div>
 
-<div id="outline-container-org74973d8" class="outline-2">
-<h2 id="org74973d8">Pretty&nbsp;Pictures</h2>
-<div class="outline-text-2" id="text-org74973d8">
+<div id="outline-container-orgc53e480" class="outline-2">
+<h2 id="orgc53e480">Pretty&nbsp;Pictures</h2>
+<div class="outline-text-2" id="text-orgc53e480">
 <p>
 I don&#8217;t want to just do this and tell you the answer, because that&#8217;s not really all that much fun on
 your end. Let&#8217;s break out some visuals&nbsp;instead! 
@@ -257,7 +257,7 @@ We can plot the prior and posterior together to show the effect of our&nbsp;know
 This is pretty cool when you think about it: by using Bayesian statistics, we can quantify something
 that you really don&#8217;t think of in the same way in standard high school stats—the effect of learning
 something new. By getting the knowledge that a test taker qualified, we can model the <i>selection
-effect</i> I described last time and we now know more about how good at the PSAT they&#8217;re likely to&nbsp;be.
+effect</i> I described last time and we now know more about how good at the <span class="caps">PSAT</span> they&#8217;re likely to&nbsp;be.
 </p>
 
 <p>
@@ -327,9 +327,9 @@ which gives us some confidence we didn&#8217;t mess anything up along the&nbsp;w
 </p>
 </div>
 </div>
-<div id="outline-container-orgfd2e080" class="outline-2">
-<h2 id="orgfd2e080">Next Time On <i>Bayesian Fallacies</i>…</h2>
-<div class="outline-text-2" id="text-orgfd2e080">
+<div id="outline-container-org4d274b1" class="outline-2">
+<h2 id="org4d274b1">Next Time On <i>Bayesian Fallacies</i>…</h2>
+<div class="outline-text-2" id="text-org4d274b1">
 <p>
 What was the point of all this again? Although we didn&#8217;t succeed in getting an exact closed form for
 \(P(A|B)\) given \(M, S, t\), and \(\sigma\), we did get an expression that a computer can easily evaluate
@@ -338,7 +338,7 @@ for us in no time flat, to a higher degree of precision than simulations can&nbs
 
 <p>
 The reason I wanted to do this in the first place was so we could explore what happens when we
-change the parameters. What about the way the PSAT example is set up makes it not display a large
+change the parameters. What about the way the <span class="caps">PSAT</span> example is set up makes it not display a large
 regression effect? If the National Merit cutoff were harsher or more lenient, how would \(P(A|B)\)
 change? Next time, we&#8217;ll explore how \(P(A|B)\) changes as a function of \(M, S, t\), and \(\sigma\), and
 we&#8217;ll finally answer the question of how this relates to Bayes&#8217; paradox and get some powerful ways

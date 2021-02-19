@@ -1,5 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about guide)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/guide.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Wed, 12 Aug 2020 19:01:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Whirlwind Tour of Statistical Tests</title><link>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about guide)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/guide.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Fri, 19 Feb 2021 21:50:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective Data Visualization, Part 1: What Is Effective Data Visualization?</title><link>https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;p&gt;
+&lt;i&gt;This series is the textual version of a presentation I gave to a class on
+effective&lt;/i&gt; &lt;i&gt;data visualization. I'm reproducing it here both to add some
+information that&lt;/i&gt; &lt;i&gt;was cut from the presentation for time and to put it in a
+publicly available&lt;/i&gt; &lt;i&gt;place.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;div id="outline-container-orgbefca19" class="outline-2"&gt;
+&lt;h2 id="orgbefca19"&gt;Intro&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbefca19"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org583984e" class="outline-3"&gt;
+&lt;h3 id="org583984e"&gt;What This Guide Is For&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org583984e"&gt;
+&lt;p&gt;
+This series of posts is about how to make effective data visualization: exactly
+what I mean by that will become clear shortly. Much like one might critique
+writing in a creative writing class, I'll focus on how to improve existing
+visualizations. This should hopefully also help the reader become a better
+consumer of data visualization they encounter in their daily lives.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org7b6ac65" class="outline-3"&gt;
+&lt;h3 id="org7b6ac65"&gt;Who This Guide Is For&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org7b6ac65"&gt;
+&lt;p&gt;
+This guide is for anyone! Unlike my other work on this blog, this guide expects
+no knowledge of coding or any platform for visualizations: learning such a tool
+is necessary to implement these ideas, but not necessary for this guide at all.
+My hope is that this is generally useful for people in business, data science,
+journalism, programming, and statistics: anyone who works with or cares about
+data.
+&lt;/p&gt;
+
+&lt;p&gt;
+Without further ado, let's get started!
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgac1be72" class="outline-2"&gt;
+&lt;h2 id="orgac1be72"&gt;What is Effective Data Visualization?&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgac1be72"&gt;
+&lt;p&gt;
+What do I mean by &lt;i&gt;effective&lt;/i&gt; data visualization? Here, an effective data
+visualization is one that effectively helps the viewer process information. I
+care here about dataviz as a tool that increases our brains' ability to work
+with data.
+&lt;/p&gt;
+
+&lt;p&gt;
+This is contrasted with purely aesthetic concerns. Some visuals that don't look
+spiffy are nonetheless useful tools, and some visuals that are aesthetically
+unappealing are useful processing aids.
+&lt;/p&gt;
+
+&lt;p&gt;
+Data can be deadly serious, and so data visualization can have tremendous
+importance.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;img src="https://nicholas-miklaucic.github.io/images/teachback/ChristaMcAuliffe.jpg" alt="nil"&gt;
+The &lt;i&gt;Challenger&lt;/i&gt; disaster in which Christa McAuliffe, the person in the photo
+above, died is a grim reminder of information's power. The O-ring failure
+that led to the explosion was preventable and understood. Thus, some authors
+like Edward Tufte have analyzed this tragedy as a failure of data visualization
+as much as anything else: the visualizations used to communicate the dire need
+to reschedule the launch failed to convey this knowledge to the people who made
+that fateful decision. This is to say that effectively communicating and
+understanding data is worthy of serious study.
+&lt;/p&gt;
+
+&lt;p&gt;
+Why use data visualization at all? Why not use other tools, like spreadsheets or
+statistics?
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org91a1834" class="outline-2"&gt;
+&lt;h2 id="org91a1834"&gt;Why is Effective Data Visualization?&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org91a1834"&gt;
+&lt;p&gt;
+There's a persistent myth that graphs are inherently less meaningful or useful
+than raw statistics. Statistics are very important, and I would certainly not
+advocate for replacing the statistics underlying, say, clinical trials with a
+bunch of graphs.
+&lt;/p&gt;
+
+&lt;p&gt;
+The classic example of why we might use data visualization in addition to
+statistics comes to use from Frank Anscombe in the form of 4 different datasets
+like this one:
+&lt;/p&gt;
+
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;x&lt;/th&gt;
+      &lt;th&gt;y&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10.0&lt;/td&gt;
+      &lt;td&gt;8.04&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8.0&lt;/td&gt;
+      &lt;td&gt;6.95&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;13.0&lt;/td&gt;
+      &lt;td&gt;7.58&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;9.0&lt;/td&gt;
+      &lt;td&gt;8.81&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;11.0&lt;/td&gt;
+      &lt;td&gt;8.33&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;9.96&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.0&lt;/td&gt;
+      &lt;td&gt;7.24&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4.0&lt;/td&gt;
+      &lt;td&gt;4.26&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12.0&lt;/td&gt;
+      &lt;td&gt;10.84&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7.0&lt;/td&gt;
+      &lt;td&gt;4.82&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;5.68&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Imagine you're trying to find out if y is related to x and figure out the nature
+of that relationship. It's rather difficult to parse this information,
+especially given that this is just one-fourth of the total. Let's try using some
+exploratory statistics to get a better sense of the data: the mean of each
+variable, the standard deviation of each variable, the regression line, the
+Pearson correlation, and the \(R^2\) value.
+&lt;/p&gt;
+
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;\(\mu_x\)&lt;/th&gt;
+      &lt;th&gt;\(\mu_y\)&lt;/th&gt;
+      &lt;th&gt;\(\sigma_x\)&lt;/th&gt;
+      &lt;th&gt;\(\sigma_y\)&lt;/th&gt;
+      &lt;th&gt;\(r\)&lt;/th&gt;
+      &lt;th&gt;Regression line&lt;/th&gt;
+      &lt;th&gt;\(R^2\)&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Dataset&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;I&lt;/th&gt;
+      &lt;td&gt;9.0&lt;/td&gt;
+      &lt;td&gt;7.501&lt;/td&gt;
+      &lt;td&gt;3.317&lt;/td&gt;
+      &lt;td&gt;2.032&lt;/td&gt;
+      &lt;td&gt;0.816&lt;/td&gt;
+      &lt;td&gt;0.500x + 3.000&lt;/td&gt;
+      &lt;td&gt;0.667&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;II&lt;/th&gt;
+      &lt;td&gt;9.0&lt;/td&gt;
+      &lt;td&gt;7.501&lt;/td&gt;
+      &lt;td&gt;3.317&lt;/td&gt;
+      &lt;td&gt;2.032&lt;/td&gt;
+      &lt;td&gt;0.816&lt;/td&gt;
+      &lt;td&gt;0.500x + 3.000&lt;/td&gt;
+      &lt;td&gt;0.666&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;III&lt;/th&gt;
+      &lt;td&gt;9.0&lt;/td&gt;
+      &lt;td&gt;7.500&lt;/td&gt;
+      &lt;td&gt;3.317&lt;/td&gt;
+      &lt;td&gt;2.030&lt;/td&gt;
+      &lt;td&gt;0.816&lt;/td&gt;
+      &lt;td&gt;0.500x + 3.000&lt;/td&gt;
+      &lt;td&gt;0.666&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;IV&lt;/th&gt;
+      &lt;td&gt;9.0&lt;/td&gt;
+      &lt;td&gt;7.501&lt;/td&gt;
+      &lt;td&gt;3.317&lt;/td&gt;
+      &lt;td&gt;2.031&lt;/td&gt;
+      &lt;td&gt;0.817&lt;/td&gt;
+      &lt;td&gt;0.500x + 3.000&lt;/td&gt;
+      &lt;td&gt;0.667&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+The standard statistics we might use when we don't know what we're looking for
+yet aren't distinguishing these datasets at all. Let's see what a plot looks
+like:
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;img src="https://nicholas-miklaucic.github.io/images/teachback/anscombe.png" alt="nil"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Sometimes a picture really is worth a thousand correlation values:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;The first dataset seems like a fairly standard linear correlation with some
+noise: linear regression seems like a good fit.&lt;/li&gt;
+&lt;li&gt;The second dataset has a very regular relationship, but it's not linear!
+Modeling this with a quadratic would work well.&lt;/li&gt;
+&lt;li&gt;The third dataset has a very regular relationship with one crazy outlier.&lt;/li&gt;
+&lt;li&gt;The fourth dataset is barely a dataset! Something has gone terribly wrong and
+a single influential outlier is preventing us from seeing that in
+statistics.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+There is no tool that is more effective at quickly sussing out these patterns
+than a visualization like this one.
+&lt;/p&gt;
+
+&lt;p&gt;
+That's all for today. Next time I'll talk about visual complexity and visual
+overload, and I'll do my part to combat some pernicious misconceptions about how
+sophisticated data visualization should be. See you then!
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>dataviz</category><category>guide</category><guid>https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/</guid><pubDate>Fri, 19 Feb 2021 19:34:17 GMT</pubDate></item><item><title>A Whirlwind Tour of Statistical Tests</title><link>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Hello again! 
 &lt;/p&gt;
 

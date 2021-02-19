@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · A Painless Introduction to Python Data Analysis and Visualization </title>
+<title>Pollard's Rho · A Painless Introduction to Python Data Analysis and Visualization </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -16,6 +16,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="next" href="../effective-data-visualization-part-1-what-is-effective-data-visualization/" title="Effective Data Visualization, Part 1: What Is Effective Data Visualization?" type="text/html">
 </head>
 <body class="">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -38,11 +39,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -90,9 +91,9 @@ If any of these describe you, you&#8217;ve come to the right&nbsp;place!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org30b631f" class="outline-2">
-<h2 id="org30b631f">Structure</h2>
-<div class="outline-text-2" id="text-org30b631f">
+<div id="outline-container-org354dd84" class="outline-2">
+<h2 id="org354dd84">Structure</h2>
+<div class="outline-text-2" id="text-org354dd84">
 <p>
 We&#8217;re going to be using data from the World Bank: specifically, data with birth rates by year for
 each country. The data I&#8217;m using is <a href="https://gist.github.com/nicholas-miklaucic/af822d547b8796753b8d160ca76e0172">here.</a> Our goal will be <b>to learn something interesting from this</b>
@@ -130,9 +131,9 @@ Sound good? Let&#8217;s do&nbsp;this!
 </div>
 </div>
 
-<div id="outline-container-orgb33e33f" class="outline-2">
-<h2 id="orgb33e33f">Tools of the&nbsp;Trade</h2>
-<div class="outline-text-2" id="text-orgb33e33f">
+<div id="outline-container-orgb2c2448" class="outline-2">
+<h2 id="orgb2c2448">Tools of the&nbsp;Trade</h2>
+<div class="outline-text-2" id="text-orgb2c2448">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -145,7 +146,7 @@ scientific languages are now compatible with&nbsp;Jupyter.
 Projects like the posts on this blog—multimedia, interdisciplinary documents that blend text,
 visuals, and code—are pretty common nowadays, and there&#8217;s a great tool for dealing with this
 particular mix of information: Jupyter notebooks. Jupyter notebooks are similar to notebooks in
-software like Mathematica or MATLAB: they are a collection of <i>cells</i>, where each cell is text or code
+software like Mathematica or <span class="caps">MATLAB</span>: they are a collection of <i>cells</i>, where each cell is text or code
 (usually Python) and you can view them&nbsp;together.
 </p>
 
@@ -165,19 +166,19 @@ Jupyter. (Just don&#8217;t be worried if you get slightly different results betw
 </p>
 </div>
 </div>
-<div id="outline-container-orgf0e39b8" class="outline-2">
-<h2 id="orgf0e39b8">Getting&nbsp;Started</h2>
-<div class="outline-text-2" id="text-orgf0e39b8">
+<div id="outline-container-orge669e2e" class="outline-2">
+<h2 id="orge669e2e">Getting&nbsp;Started</h2>
+<div class="outline-text-2" id="text-orge669e2e">
 <p>
 First things first: we need to import the libraries we&#8217;ll be using to work with the data. There are
-four we&#8217;re using: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, and <code>seaborn</code>. This can more or less be copy-pasted at
+four we&#8217;re&nbsp;using: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>,&nbsp;and <code>seaborn</code>. This can more or less be copy-pasted at
 the start of every notebook you&nbsp;use:
 </p>
 
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 <p>
 A quick primer as to what each of these&nbsp;are:
@@ -185,16 +186,16 @@ A quick primer as to what each of these&nbsp;are:
 <ul class="org-ul">
 <li>
 <code>numpy</code> is a library that works with lists of numbers and numerical programming, and it&#8217;s essential
-to what we&#8217;re doing: <code>pandas</code> builds off of it in many ways. It also uses C code for a lot of
+to what we&#8217;re&nbsp;doing: <code>pandas</code> builds off of it in many ways. It also uses C code for a lot of
 things, so it tends to be much faster than native&nbsp;Python.</li>
 <li>
 <code>pandas</code> is basically Python&#8217;s version of Excel: it works with tabulated data very&nbsp;effectively.</li>
 <li>
 <code>matplotlib</code> is a low-level plotting library that allows you to make all sorts of plots and
-customize them precisely. We won&#8217;t actually be using it much, but it powers <code>seaborn</code>, which we will
+customize them precisely. We won&#8217;t actually be using it much, but it&nbsp;powers <code>seaborn</code>, which we will
 be using a&nbsp;lot.</li>
 <li>
-<code>seaborn</code> is a library that uses <code>matplotlib</code>, but in a higher-level way. It&#8217;s generally oriented
+<code>seaborn</code> is a library that&nbsp;uses <code>matplotlib</code>, but in a higher-level way. It&#8217;s generally oriented
 towards scientific visualization, which is exactly what we&#8217;re doing today: trying to quickly make
 inferences and learn about&nbsp;information.</li>
 </ul>
@@ -208,9 +209,9 @@ so I&#8217;m skipping them here. The notebook goes over that in more detail if y
 </span>
 
 <p>
-Now we need to read in our data. <code>pandas</code> can read in an enormous variety of data formats, but I&#8217;m
-just going to use a CSV file. Usually, you&#8217;d give it a file on your computer. However, a
-little-known feature of <code>pandas</code> (at least, little-known among the people I&#8217;ve shared this with) is
+Now we need to read in our&nbsp;data. <code>pandas</code> can read in an enormous variety of data formats, but I&#8217;m
+just going to use a <span class="caps">CSV</span> file. Usually, you&#8217;d give it a file on your computer. However, a
+little-known feature&nbsp;of <code>pandas</code> (at least, little-known among the people I&#8217;ve shared this with) is
 that it can also take in URLs! That&#8217;s what we&#8217;ll do&nbsp;here:
 </p>
 
@@ -224,13 +225,13 @@ This reads in the data into a <i>DataFrame</i>, which is basically a super fancy
 
 <p>
 I&#8217;m pretty paranoid, so I like to check if this actually worked. The easiest way to just get a look
-at the beginning of the data. You can do this with the <code>head</code> command:
+at the beginning of the data. You can do this with&nbsp;the <code>head</code> command:
 </p>
 <div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 <p>
-This outputs text which Jupyter notebooks convert into more aesthetically pleasing HTML tables. I&#8217;ll
+This outputs text which Jupyter notebooks convert into more aesthetically pleasing <span class="caps">HTML</span> tables. I&#8217;ll
 be redoing that here in the blog&#8217;s style so you can see it here, but just know that it&#8217;ll look
 different when you do&nbsp;it.
 </p>
@@ -240,37 +241,37 @@ different when you do&nbsp;it.
 <th></th>
       <th>Country Name</th>
       <th>Country Code</th>
-      <th>1960 [YR1960]</th>
+      <th>1960 [<span class="caps">YR1960</span>]</th>
     </tr></thead>
 <tbody>
 <tr>
 <th>0</th>
       <td>Afghanistan</td>
-      <td>AFG</td>
+      <td><span class="caps">AFG</span></td>
       <td>7.45</td>
     </tr>
 <tr>
 <th>1</th>
       <td>Albania</td>
-      <td>ALB</td>
+      <td><span class="caps">ALB</span></td>
       <td>6.489</td>
     </tr>
 <tr>
 <th>2</th>
       <td>Algeria</td>
-      <td>DZA</td>
+      <td><span class="caps">DZA</span></td>
       <td>7.524</td>
     </tr>
 <tr>
 <th>3</th>
       <td>American Samoa</td>
-      <td>ASM</td>
+      <td><span class="caps">ASM</span></td>
       <td>..</td>
     </tr>
 <tr>
 <th>4</th>
       <td>Andorra</td>
-      <td>AND</td>
+      <td><span class="caps">AND</span></td>
       <td>..</td>
     </tr>
 </tbody>
@@ -285,18 +286,18 @@ function call to bring up its documentation inline: this is super&nbsp;handy.
 </span>
 
 <p>
-OK, we got our data in! It took one line of code, which isn&#8217;t that bad considering how many options
+<span class="caps">OK</span>, we got our data in! It took one line of code, which isn&#8217;t that bad considering how many options
 we have: consult the documentation to learn exactly how much you can mess with how it reads
 information&nbsp;in.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org12ef5ef" class="outline-2">
-<h2 id="org12ef5ef">What Are We Looking&nbsp;At?</h2>
-<div class="outline-text-2" id="text-org12ef5ef">
+<div id="outline-container-orge5d5aa0" class="outline-2">
+<h2 id="orge5d5aa0">What Are We Looking&nbsp;At?</h2>
+<div class="outline-text-2" id="text-orge5d5aa0">
 <p>
-OK, so what <i>is</i> a DataFrame? Let&#8217;s look at this sneak preview of <code>data</code> and talk about the general&nbsp;structure.
+<span class="caps">OK</span>, so what <i>is</i> a DataFrame? Let&#8217;s look at this sneak preview&nbsp;of <code>data</code> and talk about the general&nbsp;structure.
 </p>
 
 <span class="marginnote"><p>
@@ -335,29 +336,29 @@ This is what a Series looks like if you print it out, and so it&#8217;s what the
 </pre></div>
 
 <p>
-Series keep the name and the index. Also note this <code>dtype</code> field. What&#8217;s its&nbsp;deal?
+Series keep the name and the index. Also note&nbsp;this <code>dtype</code> field. What&#8217;s its&nbsp;deal?
 </p>
 
 <span class="marginnote"><p>
 </p>
 <p>
-Those well-versed in Python will know that this isn&#8217;t technically true: it&#8217;s closer to &#8220;<code>numpy</code> will
+Those well-versed in Python will know that this isn&#8217;t technically true: it&#8217;s closer to&nbsp;&#8221;<code>numpy</code> will
 actively throw an error if there&#8217;s a mismatch and vanilla Python won&#8217;t&#8221;, but it doesn&#8217;t really have
 much bearing on what we&#8217;re doing&nbsp;today.
 </p>
 </span>
 
 <p>
-In <code>numpy</code> and by extension <code>pandas</code>, unlike &#8220;vanilla&#8221; Python, there&#8217;s <i>static typing</i>: internally, all of
-your data has some type. <code>object</code> is the most general type, which is used for things like text. Other
+In <code>numpy</code> and by&nbsp;extension <code>pandas</code>, unlike &#8220;vanilla&#8221; Python, there&#8217;s <i>static typing</i>: internally, all of
+your data has some&nbsp;type. <code>object</code> is the most general type, which is used for things like text. Other
 types include integers, decimals, dates, and lists&nbsp;themselves.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8b8b78e" class="outline-2">
-<h2 id="org8b8b78e">Tidying&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org8b8b78e">
+<div id="outline-container-orgba7e821" class="outline-2">
+<h2 id="orgba7e821">Tidying&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgba7e821">
 <p>
 There are some columns that we don&#8217;t really need, and a lot of the names are a bit long-winded. I
 also want the column names that are years to be typed as numbers so we can do things like compare
@@ -366,31 +367,31 @@ them. We&#8217;ll achieve all of that with the following piece of&nbsp;code:
 
 <div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Country Code"</span><span class="p">,</span> <span class="s2">"Series Name"</span><span class="p">,</span> <span class="s2">"Series Code"</span><span class="p">],</span> 
-    <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">trim_years</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">']'</span><span class="p">):</span>
 	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
 	<span class="k">return</span> <span class="n">col</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">trim_years</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Country Name'</span><span class="p">:</span> <span class="s1">'country'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">trim_years</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Country Name'</span><span class="p">:</span> <span class="s1">'country'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>
-(I promise that <code>trim_years</code> function is the most pure Python you&#8217;ll get in this&nbsp;post!)
+(I promise&nbsp;that <code>trim_years</code> function is the most pure Python you&#8217;ll get in this&nbsp;post!)
 </p>
 
 <p>
-Let&#8217;s go through this in pieces. <code>.drop()</code> is a method that takes in columns or rows (if you pass
+Let&#8217;s go through this in&nbsp;pieces. <code>.drop()</code> is a method that takes in columns or rows (if you&nbsp;pass
 <code>index=[1, 2, 3]</code>, it&#8217;ll delete those rows) and drops them from the DataFrame, usually returning a new
-DataFrame. We want to modify an existing one, so we set <code>inplace=True</code>.
+DataFrame. We want to modify an existing one, so we&nbsp;set <code>inplace=True</code>.
 </p>
 
 <p>
-<code>.rename()</code> works very similarly to <code>drop</code> in terms of the parameters it takes, but the only difference
+<code>.rename()</code> works very similarly&nbsp;to <code>drop</code> in terms of the parameters it takes, but the only difference
 is that now the argument we pass in can either be a dictionary mapping old names to new names or a
-function that changes names. (We use a function because we want to remove the annoying <code>[YR1960]</code> bit
+function that changes names. (We use a function because we want to remove the&nbsp;annoying <code>[YR1960]</code> bit
 at the end of 50 names, which would be a lot of typing&nbsp;otherwise!)
 </p>
 
@@ -416,9 +417,9 @@ This outputs the&nbsp;following:
 </div>
 </div>
 
-<div id="outline-container-org16d0d0a" class="outline-2">
-<h2 id="org16d0d0a">..&nbsp;Problems</h2>
-<div class="outline-text-2" id="text-org16d0d0a">
+<div id="outline-container-org6d181e3" class="outline-2">
+<h2 id="org6d181e3">..&nbsp;Problems</h2>
+<div class="outline-text-2" id="text-org6d181e3">
 <p>
 Let me reprint some of the&nbsp;data:
 </p>
@@ -486,12 +487,12 @@ get a table back. This is what this code&nbsp;outputs:
 <p>
 As you can see, we have an issue—obviously the list of countries has changed a lot since 1960 and
 data collection has never been perfect, and so a lot of countries who have rows in this dataset
-don&#8217;t have a full set of years. The World Bank has just inserted <code>..</code> where this&nbsp;happens.
+don&#8217;t have a full set of years. The World Bank has just&nbsp;inserted <code>..</code> where this&nbsp;happens.
 </p>
 
 <p>
 <code>pandas</code> has lots of tools for dealing with null data. In order to use them, we have to make our data
-actually null, not this weird <code>".."</code> string. To fix that, we&#8217;ll use the <code>applymap</code> method, which applies
+actually null, not this&nbsp;weird <code>".."</code> string. To fix that, we&#8217;ll use&nbsp;the <code>applymap</code> method, which applies
 some function to every piece of data in the&nbsp;dataframe:
 </p>
 
@@ -499,13 +500,13 @@ some function to every piece of data in the&nbsp;dataframe:
 </pre></div>
 
 <p>
-Now our data has real null values, so we can use the tools <code>pandas</code> has for working with this
-particular problem. Specifically, we can use <code>pd.isnull()</code> to make a different DataFrame where each
-piece of data is <code>True</code> if that piece of data was null and false&nbsp;otherwise.
+Now our data has real null values, so we can use the&nbsp;tools <code>pandas</code> has for working with this
+particular problem. Specifically, we can&nbsp;use <code>pd.isnull()</code> to make a different DataFrame where each
+piece of data&nbsp;is <code>True</code> if that piece of data was null and false&nbsp;otherwise.
 </p>
 
 <p>
-Internally, this type of <i>Boolean</i> data is represented as <code>0</code> for <code>False</code> and <code>1</code> for <code>True</code>. This means we
+Internally, this type of <i>Boolean</i> data is represented&nbsp;as <code>0</code> for <code>False</code> and <code>1</code> for <code>True</code>. This means we
 can sum the individual rows to figure out which countries are&nbsp;problematic:
 </p>
 
@@ -521,17 +522,17 @@ can sum the individual rows to figure out which countries are&nbsp;problematic:
 </pre></div>
 
 <p>
-(<code>axis=1</code> means &#8220;sum across the rows&#8221;, and <code>axis=0</code> would sum across the columns. With no arguments, it
+(<code>axis=1</code> means &#8220;sum across the rows&#8221;,&nbsp;and <code>axis=0</code> would sum across the columns. With no arguments, it
 sums by both, and returns a single&nbsp;thing.)
 </p>
 
 <span class="marginnote"><p>
 </p>
 <p>
-There&#8217;s one big exception: Boolean algebra operations like <code>and</code> and <code>not</code>. To do those, you use the
-Python operations that are normally used for the <i>bitwise</i> version of these operations. <code>&amp;</code> is <code>and</code>, <code>~</code> is
-<code>not</code>, and <code>|</code> is <code>or</code>. However, because these have different order-of-operations rules than you&#8217;re used
-to with standard Python <code>and</code>, <code>not</code>, etc., you&#8217;ll need parentheses in most cases:&nbsp;it&#8217;s
+There&#8217;s one big exception: Boolean algebra operations&nbsp;like <code>and</code> and <code>not</code>. To do those, you use the
+Python operations that are normally used for the <i>bitwise</i> version of these&nbsp;operations. <code>&amp;</code> is <code>and</code>, <code>~</code> is
+<code>not</code>,&nbsp;and <code>|</code> is <code>or</code>. However, because these have different order-of-operations rules than you&#8217;re used
+to with standard&nbsp;Python <code>and</code>, <code>not</code>, etc., you&#8217;ll need parentheses in most cases:&nbsp;it&#8217;s
 </p>
 
 <p>
@@ -539,42 +540,42 @@ to with standard Python <code>and</code>, <code>not</code>, etc., you&#8217;ll n
 </p>
 
 <p>
-<code>data &gt; 2 | data &lt; 1</code>, because the second will try to compute <code>2 | data</code>.
+<code>data &gt; 2 | data &lt; 1</code>, because the second will try to&nbsp;compute <code>2 | data</code>.
 </p>
 </span>
 
 <p>
-One very cool thing about <code>numpy</code> and <code>pandas</code> is that many operations can be done elementwise by just
+One very cool thing&nbsp;about <code>numpy</code> and <code>pandas</code> is that many operations can be done elementwise by just
 operating on the series itself. For example, we can do an elementwise&nbsp;comparison:
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 
-<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="bp">True</span>
-<span class="mi">1</span>     <span class="bp">True</span>
-<span class="mi">2</span>     <span class="bp">True</span>
-<span class="mi">3</span>    <span class="bp">False</span>
-<span class="mi">4</span>    <span class="bp">False</span>
+<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="kc">True</span>
+<span class="mi">1</span>     <span class="kc">True</span>
+<span class="mi">2</span>     <span class="kc">True</span>
+<span class="mi">3</span>    <span class="kc">False</span>
+<span class="mi">4</span>    <span class="kc">False</span>
 <span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
 </pre></div>
 
 <p>
 This isn&#8217;t just for comparisons: we can do all sorts of math elementwise (we could have multiplied
-every count by <code>2</code>, for&nbsp;example.) 
+every count&nbsp;by <code>2</code>, for&nbsp;example.) 
 </p>
 
 <p>
-We can see if we look at more rows that every row has <code>1</code> null value. That means that one of the
+We can see if we look at more rows that every row&nbsp;has <code>1</code> null value. That means that one of the
 columns probably has an issue. Before I explain how to deal with that, we&#8217;re going to take a quick
-detour to look at one of the most important parts of understanding <code>pandas</code>: sophisticated&nbsp;indexing.
+detour to look at one of the most important parts of&nbsp;understanding <code>pandas</code>: sophisticated&nbsp;indexing.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org14d5c5d" class="outline-2">
-<h2 id="org14d5c5d">Indexing Like a&nbsp;Boss</h2>
-<div class="outline-text-2" id="text-org14d5c5d">
+<div id="outline-container-org27b44e8" class="outline-2">
+<h2 id="org27b44e8">Indexing Like a&nbsp;Boss</h2>
+<div class="outline-text-2" id="text-org27b44e8">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -584,29 +585,28 @@ I <i>may</i> be speaking from experience about not just fiddling with things unt
 
 <p>
 Understanding how indexing really works, as opposed to just fiddling with things until it works, is
-the key to effectively using <code>pandas</code>, and a lot of people I&#8217;ve worked with were much less effective
+the key to effectively&nbsp;using <code>pandas</code>, and a lot of people I&#8217;ve worked with were much less effective
 users of this software than they could be because they didn&#8217;t understand how these systems really
 worked. We&#8217;re going to fix that right&nbsp;now.
 </p>
 
 <p>
-Vanilla Python sequences, like <code>[1, 2, 3]</code> or <code>"hello"</code>, can be indexed using <i>slice notation</i>. You can
-use up to three arguments, separated by <code>:</code> and in square brackets, to do this. Like in <code>pandas</code>,
+Vanilla Python sequences,&nbsp;like <code>[1, 2, 3]</code> or <code>"hello"</code>, can be indexed using <i>slice notation</i>. You can
+use up to three arguments, separated&nbsp;by <code>:</code> and in square brackets, to do this. Like&nbsp;in <code>pandas</code>,
 everything is <i>0-indexed</i>: <code>0</code> is the first&nbsp;element. 
 </p>
 
 <p>
-Let&#8217;s start with the simplest case: a single number. If <code>l</code> is our list, then <code>l[2]</code> returns the third
+Let&#8217;s start with the simplest case: a single number.&nbsp;If <code>l</code> is our list,&nbsp;then <code>l[2]</code> returns the third
 element of the list (remember it&#8217;s 0-indexed!) We can add colons on either side of this number to
 change how it slices: effectively, the colon means &#8220;keep going until you hit the end of the list.&#8221;
-For example, <code>l[2:]</code> is &#8220;every element from the third one to the end as a new list&#8221;, and <code>l[:2]</code> is
-&#8220;every element up to <i>but not including</i> the third one.&#8221; This is a common sticking point: slices work
-like <code>range</code> or other Python functions in that it&#8217;s inclusive on the left side and exclusive on the
-right: you don&#8217;t include the last element. A good way to keep this in mind is that <code>l[:2]</code> returns 2&nbsp;elements. 
+For&nbsp;example, <code>l[2:]</code> is &#8220;every element from the third one to the end as a new list&#8221;,&nbsp;and <code>l[:2]</code> is
+&#8220;every element up to <i>but not including</i> the third one.&#8221; This is a common sticking point: slices work&nbsp;like <code>range</code> or other Python functions in that it&#8217;s inclusive on the left side and exclusive on the
+right: you don&#8217;t include the last element. A good way to keep this in mind is&nbsp;that <code>l[:2]</code> returns 2&nbsp;elements. 
 </p>
 
 <p>
-We can add a second number to get a range that doesn&#8217;t stop or start at the ends of the list. <code>l[1:3]</code>
+We can add a second number to get a range that doesn&#8217;t stop or start at the ends of the&nbsp;list. <code>l[1:3]</code>
 means &#8220;start at the second element and keep going until before you hit the fourth element.&#8221; This
 will have two elements: you can just subtract the end index from the start index to see how long a
 slice&nbsp;is.
@@ -615,7 +615,7 @@ slice&nbsp;is.
 <span class="marginnote"><p>
 </p>
 <p>
-You can even use negative steps: <code>l[::-1]</code> is the reverse of the original list, and <code>l[-2:1:-1]</code> means
+You can even use negative&nbsp;steps: <code>l[::-1]</code> is the reverse of the original list,&nbsp;and <code>l[-2:1:-1]</code> means
 &#8220;start from the element second to the back, count backwards by 1s until you hit before the second
 element, and return that as a&nbsp;list.&#8221;
 </p>
@@ -623,9 +623,9 @@ element, and return that as a&nbsp;list.&#8221;
 
 <p>
 There are two ways you can extend this slightly that aren&#8217;t as often used but are still good to
-know. Negative numbers essentially &#8220;wrap&#8221; and start counting from the <i>back</i> of the list. <code>l[-1]</code> is the
-last element, whatever number that is. <code>l[:-1]</code> is &#8220;everything but the last element.&#8221; The other
-extension is a second colon and a <i>step</i>, that takes every nth element. So, for example, <code>l[1:5:2]</code>
+know. Negative numbers essentially &#8220;wrap&#8221; and start counting from the <i>back</i> of the&nbsp;list. <code>l[-1]</code> is the
+last element, whatever number that&nbsp;is. <code>l[:-1]</code> is &#8220;everything but the last element.&#8221; The other
+extension is a second colon and a <i>step</i>, that takes every nth element. So, for&nbsp;example, <code>l[1:5:2]</code>
 means &#8220;start at the second element, and take every other element in the list until before you hit
 the sixth&nbsp;element.&#8221;
 </p>
@@ -663,27 +663,27 @@ This is a lot to take in at once: let&#8217;s show some examples which should cl
 </pre></div>
 
 <p>
-OK, so now how does this work with <code>pandas</code>?
+<span class="caps">OK</span>, so now how does this work&nbsp;with <code>pandas</code>?
 </p>
 
 <p>
-We already know we can index based on columns if we have a DataFrame, like <code>data['country']</code>. We also
-know we can index a Series, so <code>data['country'][2]</code> gives us the country value for the row with
+We already know we can index based on columns if we have a DataFrame,&nbsp;like <code>data['country']</code>. We also
+know we can index a Series,&nbsp;so <code>data['country'][2]</code> gives us the country value for the row with
 index&nbsp;2. 
 </p>
 
 <p>
-Both of these can be replaced by a list or other sequence. We can do <code>data[['country', 1960']]</code> to get two
-columns from a DataFrame, and we can do <code>data['country'][[0, 1, 4, 6]]</code> to get those specific rows from a
-DataFrame. We can also use <code>:</code> to get slices, so we could do <code>data['country'][4:19]</code> to get rows <code>4</code>
+Both of these can be replaced by a list or other sequence. We can&nbsp;do <code>data[['country', 1960']]</code> to get two
+columns from a DataFrame, and we can&nbsp;do <code>data['country'][[0, 1, 4, 6]]</code> to get those specific rows from a
+DataFrame. We can also&nbsp;use <code>:</code> to get slices, so we could&nbsp;do <code>data['country'][4:19]</code> to get&nbsp;rows <code>4</code>
 through <code>18</code>.
 </p>
 
 <p>
 This is very important: <b>we are indexing based on the values in the index, not based on the number of
-the row</b>. <code>4</code> returns the 5th row in the list, because that row has index <code>4</code>. If the row with index <code>4</code>
-was the hundredth row, it would still return that row. This means things like <code>data['country'][-1]</code>
-will return an error: <code>-1</code> isn&#8217;t in our&nbsp;index.
+the row</b>. <code>4</code> returns the 5th row in the list, because that row has&nbsp;index <code>4</code>. If the row with&nbsp;index <code>4</code>
+was the hundredth row, it would still return that row. This means things&nbsp;like <code>data['country'][-1]</code>
+will return an&nbsp;error: <code>-1</code> isn&#8217;t in our&nbsp;index.
 </p>
 
 <p>
@@ -693,7 +693,7 @@ see that it matters a lot, however, and so always make sure to keep it in&nbsp;m
 
 <p>
 2D structures like DataFrames can be indexed in both ways at once if we want to select some rows and
-some columns. We do this by using the <code>.loc</code> member of <code>data</code>, indexing using the rows we want, a comma,
+some columns. We do this by using&nbsp;the <code>.loc</code> member&nbsp;of <code>data</code>, indexing using the rows we want, a comma,
 and then the columns we&nbsp;want:
 </p>
 
@@ -729,23 +729,23 @@ Some things to&nbsp;note:
 </p>
 <ul class="org-ul">
 <li>The output is ordered by how we index: note how the rows are out of&nbsp;order.</li>
-<li>The index is kept. if we want to get Andorra&#8217;s row, we can&#8217;t use <code>0</code> as an index: we need to use <code>4</code>.</li>
+<li>The index is kept. if we want to get Andorra&#8217;s row, we can&#8217;t&nbsp;use <code>0</code> as an index: we need to&nbsp;use <code>4</code>.</li>
 </ul>
 <p>
-One other important thing about <code>.loc</code>: it returns a new copy of the DataFrame. The indexing we did
+One other important thing&nbsp;about <code>.loc</code>: it returns a new copy of the DataFrame. The indexing we did
 earlier returned a <i>view</i>, which has the same values but doesn&#8217;t act the same way if you modify
 it. We&#8217;re not going to delve too much into this, but just remember it&#8217;s a&nbsp;thing.
 </p>
 
 <p>
 You might wonder about how to index like vanilla Python does, based on the order of the
-elements. The solution to this is to use <code>iloc</code>: <code>data.iloc[-10]</code> will get the tenth-to-last row, for&nbsp;example.
+elements. The solution to this is to&nbsp;use <code>iloc</code>: <code>data.iloc[-10]</code> will get the tenth-to-last row, for&nbsp;example.
 </p>
 
 <p>
 We haven&#8217;t even gone over the coolest method of indexing yet! These libraries support something
 called <i>Boolean indexing</i>. This means we can, instead of taking in a list of indices, take in a Series
-or DataFrame filled with <code>True</code> and <code>False</code>. Indexing using this will only return the elements marked
+or DataFrame filled&nbsp;with <code>True</code> and <code>False</code>. Indexing using this will only return the elements&nbsp;marked
 <code>True</code>. Let&#8217;s see this in action by going back to the null values we&#8217;re trying to get rid of. First,
 let&#8217;s look at the columns that are problematic. Let&#8217;s first get the number of null values per&nbsp;column:
 </p>
@@ -767,9 +767,9 @@ This outputs the&nbsp;following:
 </pre></div>
 
 <p>
-Let&#8217;s get just the columns that have a lot of null values. We can do this by first doing <code>null_cols &gt;
-50</code>, which will return a series with the same index as <code>null_cols</code> but with <code>True</code> or <code>False</code> instead of a
-number in each place. We want to only select the columns with <code>True</code>, the problematic ones. Boolean
+Let&#8217;s get just the columns that have a lot of null values. We can do this by first&nbsp;doing <code>null_cols &gt;
+50</code>, which will return a series with the same index&nbsp;as <code>null_cols</code> but&nbsp;with <code>True</code> or <code>False</code> instead of a
+number in each place. We want to only select the columns&nbsp;with <code>True</code>, the problematic ones. Boolean
 indexing lets us do&nbsp;this:
 </p>
 
@@ -789,7 +789,7 @@ Make sure you understand why this&nbsp;works!
 
 <p>
 We can see that one of our columns is apparently almost completely null. This was the source of
-those pesky <code>1</code> values in the null counts by row. Let&#8217;s remove this and see what the by-row null
+those&nbsp;pesky <code>1</code> values in the null counts by row. Let&#8217;s remove this and see what the by-row null
 counts look like after&nbsp;that:
 </p>
 
@@ -806,16 +806,16 @@ counts look like after&nbsp;that:
 </pre></div>
 
 <p>
-We use <code>loc</code> here because otherwise Python thinks we&#8217;re trying to index the rows. Now we have more <code>0</code>
+We&nbsp;use <code>loc</code> here because otherwise Python thinks we&#8217;re trying to index the rows. Now we have&nbsp;more <code>0</code>
 values, and we&#8217;ve figured out exactly why we have null values: there are countries with lots of
 missing&nbsp;data.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2c1d480" class="outline-2">
-<h2 id="org2c1d480">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
-<div class="outline-text-2" id="text-org2c1d480">
+<div id="outline-container-org48c2d7a" class="outline-2">
+<h2 id="org48c2d7a">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
+<div class="outline-text-2" id="text-org48c2d7a">
 <p>
 What should we do with these problematic rows? This question can be very complicated depending on
 the analysis you&#8217;re doing. A couple distinct approaches&nbsp;exist:
@@ -839,7 +839,7 @@ my Andorran&nbsp;readership.)
 </p>
 <p>
 I want to show more Boolean indexing, but there&#8217;s a function that can do what we&#8217;re doing here more
-easily and with more features. The code to the left can be replaced by <code>df.dropna(axis=0,
+easily and with more features. The code to the left can be replaced&nbsp;by <code>df.dropna(axis=0,
 inplace=True)</code>.
 </p>
 
@@ -858,9 +858,9 @@ Now <code>data</code> has no null values. Let&#8217;s move&nbsp;on!
 </div>
 </div>
 
-<div id="outline-container-org7fac7c0" class="outline-2">
-<h2 id="org7fac7c0">Reshaping&nbsp;Data</h2>
-<div class="outline-text-2" id="text-org7fac7c0">
+<div id="outline-container-orgf045443" class="outline-2">
+<h2 id="orgf045443">Reshaping&nbsp;Data</h2>
+<div class="outline-text-2" id="text-orgf045443">
 <p>
 Most libraries Python uses for data analysis don&#8217;t like data in <i>wide form</i> like we have here, where
 each row is a grouping of measurements and each column is a measurement type. Instead, they prefer
@@ -910,12 +910,12 @@ one column. We&#8217;d like our data to look like&nbsp;this:
 </table>
 <p>
 This sort of operation is really difficult in a lot of spreadsheet programs, but in Python it&#8217;s a
-cinch. There are a couple major operations we can combine to achieve any reshaping we want: <code>pivot</code>,
-<code>melt</code>, <code>stack</code>, and <code>unstack</code>. Consult <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html">the pandas documentation</a> to learn more about all of&nbsp;them.
+cinch. There are a couple major operations we can combine to achieve any reshaping we&nbsp;want: <code>pivot</code>,
+<code>melt</code>, <code>stack</code>,&nbsp;and <code>unstack</code>. Consult <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html">the pandas documentation</a> to learn more about all of&nbsp;them.
 </p>
 
 <p>
-The operation we&#8217;re doing is <code>melt</code>: the metaphor for the name escapes me, but it&#8217;s exactly what we&nbsp;need:
+The operation we&#8217;re doing&nbsp;is <code>melt</code>: the metaphor for the name escapes me, but it&#8217;s exactly what we&nbsp;need:
 </p>
 
 <span class="marginnote"><p>
@@ -931,7 +931,7 @@ This image comes from the pandas docs linked&nbsp;above.
 </div>
 
 <p>
-We give <code>melt</code> the names of the columns we&#8217;re making and the names of columns we want to keep
+We&nbsp;give <code>melt</code> the names of the columns we&#8217;re making and the names of columns we want to keep
 separately. Let&#8217;s see this in&nbsp;action:
 </p>
 
@@ -991,15 +991,15 @@ does what you want for&nbsp;you.
 </div>
 </div>
 
-<div id="outline-container-orgecd3a5f" class="outline-2">
-<h2 id="orgecd3a5f">Revenge of the&nbsp;Types</h2>
-<div class="outline-text-2" id="text-orgecd3a5f">
+<div id="outline-container-orgbdcf4ea" class="outline-2">
+<h2 id="orgbdcf4ea">Revenge of the&nbsp;Types</h2>
+<div class="outline-text-2" id="text-orgbdcf4ea">
 <p>
 One last&nbsp;thing:
 </p>
 
 <p>
-Due to the way <code>..</code> was used, these columns don&#8217;t have the types they should: that&#8217;ll mess us up
+Due to the&nbsp;way <code>..</code> was used, these columns don&#8217;t have the types they should: that&#8217;ll mess us up
 later, so we can fix that&nbsp;now:
 </p>
 
@@ -1009,11 +1009,11 @@ later, so we can fix that&nbsp;now:
 </div>
 </div>
 
-<div id="outline-container-orgef003fe" class="outline-2">
-<h2 id="orgef003fe">Intermission</h2>
-<div class="outline-text-2" id="text-orgef003fe">
+<div id="outline-container-orgeb5b2df" class="outline-2">
+<h2 id="orgeb5b2df">Intermission</h2>
+<div class="outline-text-2" id="text-orgeb5b2df">
 <p>
-OK, we&#8217;ve done a lot so far! We&#8217;ve taken in data off of the Internet, dealt with messy null values,
+<span class="caps">OK</span>, we&#8217;ve done a lot so far! We&#8217;ve taken in data off of the Internet, dealt with messy null values,
 and reshaped it so it&#8217;s exactly how we want it. Along the way we learned a lot of stuff about how
 these libraries work. Now we can get to the fun&nbsp;stuff!
 </p>
@@ -1025,9 +1025,9 @@ whatever you need to clear your head and focus on the fun part coming next. Read
 </div>
 </div>
 
-<div id="outline-container-org9576b0a" class="outline-2">
-<h2 id="org9576b0a">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
-<div class="outline-text-2" id="text-org9576b0a">
+<div id="outline-container-orgd18b696" class="outline-2">
+<h2 id="orgd18b696">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
+<div class="outline-text-2" id="text-orgd18b696">
 <p>
 A very common task in data analysis and visualization is to look at <i>categorical data</i>: data that
 comes in a set of limited options. Things like race, gender, class, age group, clinical trial group,
@@ -1043,7 +1043,7 @@ plots a bit less cluttered and more&nbsp;educational.
 
 <p>
 How do you add columns to a DataFrame? It&#8217;s easy: we just pretend it already exists and set it
-ourselves. The following code adds a <code>decade</code> column with the decade of each&nbsp;measurement:
+ourselves. The following code adds&nbsp;a <code>decade</code> column with the decade of each&nbsp;measurement:
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
@@ -1059,8 +1059,8 @@ Now let&#8217;s get to the&nbsp;pictures!
 </p>
 
 <p>
-Visualization is easiest with the high-level library <code>seaborn</code>, which makes effective, beautiful plots
-easy. Seaborn&#8217;s categorical plot interface comes through the high-level function <code>catplot</code>. It takes
+Visualization is easiest with the high-level&nbsp;library <code>seaborn</code>, which makes effective, beautiful plots
+easy. Seaborn&#8217;s categorical plot interface comes through the high-level&nbsp;function <code>catplot</code>. It takes
 an input DataFrame like the one we have, a column name to use for the x-axis, a column name to use
 for the y-axis, and a ton of other arguments that control what&nbsp;happens.
 </p>
@@ -1073,15 +1073,15 @@ documentation to learn&nbsp;more.
 </p>
 </span>
 <p>
-There are lots of different <code>seaborn</code> categorical plots that do different things, controlled by the
+There are lots of&nbsp;different <code>seaborn</code> categorical plots that do different things, controlled by&nbsp;the
 <code>kind</code> argument, and we&#8217;ll take a whirlwind tour through them. Note that there are functions
-specifically for each of these, so <code>kind='bar'</code> is the same as using <code>sns.barplot</code>.
+specifically for each of these,&nbsp;so <code>kind='bar'</code> is the same as&nbsp;using <code>sns.barplot</code>.
 </p>
 </div>
 
-<div id="outline-container-orgf5d9413" class="outline-3">
-<h3 id="orgf5d9413">Summary&nbsp;Plots</h3>
-<div class="outline-text-3" id="text-orgf5d9413">
+<div id="outline-container-org849c4f4" class="outline-3">
+<h3 id="org849c4f4">Summary&nbsp;Plots</h3>
+<div class="outline-text-3" id="text-org849c4f4">
 <p>
 Speaking of bar plots, some types of graphs are useful for summarizing data: they don&#8217;t show
 individual elements. An example of this is the bar plot we mentioned&nbsp;above:
@@ -1111,7 +1111,7 @@ Color choice in data visualization is one of my favorite subjects, and I&#8217;m
 more about it now because I know I won&#8217;t stop and I&#8217;m sure you have better things to do with your
 time right now. Stay tuned in the future for a post where I&#8217;ll really dig deep and explain how to
 use color effectively. For now, just stick with the defaults if you&#8217;re not sure what to do: they&#8217;re
-really good. Most visuals on this blog use <code>plasma</code> if you want to copy&nbsp;that.
+really good. Most visuals on this blog&nbsp;use <code>plasma</code> if you want to copy&nbsp;that.
 </p>
 </span>
 
@@ -1119,7 +1119,7 @@ really good. Most visuals on this blog use <code>plasma</code> if you want to co
 <p>
 It&#8217;s autumn in Boston as I write this, and there&#8217;s beautiful fall color. Because of that, I&#8217;ll
 switch out the color palette I&#8217;m using to reflect that color scheme. We can do that by adding
-another argument to <code>catplot</code>:
+another argument&nbsp;to <code>catplot</code>:
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
@@ -1141,8 +1141,8 @@ with the important ones&nbsp;here.
 </p>
 
 <p>
-OK, back to the different plots. Bar plots, despite their ubiquity, don&#8217;t show very much
-information, and because they take up a lot of space they&#8217;re not my first choice. <code>seaborn</code> allows us
+<span class="caps">OK</span>, back to the different plots. Bar plots, despite their ubiquity, don&#8217;t show very much
+information, and because they take up a lot of space they&#8217;re not my first&nbsp;choice. <code>seaborn</code> allows us
 to instantly switch this out for a more informative version, the box&nbsp;plot:
 </p>
 
@@ -1193,8 +1193,7 @@ Taking this concept to its logical conclusions, we get the continuous <i>violin 
 <img src="../../images/sns-catplots/violin-squished.png" alt="nil"></p>
 
 <p>
-There&#8217;s a problem: this is hard to look at because it&#8217;s squished horizontally. The <code>aspect</code> argument
-of <code>catplot</code> changes the width/height ratio: by setting it to <code>2</code>, we can widen our&nbsp;plot:
+There&#8217;s a problem: this is hard to look at because it&#8217;s squished horizontally.&nbsp;The <code>aspect</code> argument&nbsp;of <code>catplot</code> changes the width/height ratio: by setting it&nbsp;to <code>2</code>, we can widen our&nbsp;plot:
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
@@ -1240,7 +1239,7 @@ data. This allows us to show more points and follow trends more&nbsp;easily.
 </p>
 
 <p>
-Another type of plot in <code>seaborn</code> shows all of the data points. This type of plot is ineffective for
+Another type of plot&nbsp;in <code>seaborn</code> shows all of the data points. This type of plot is ineffective for
 large datasets, but it works well for small ones. To show that, I&#8217;ll take every hundredth data point
 and use those for the next plots. First, the <i>swarmplot</i>, which tries to group points together without
 overlapping&nbsp;them:
@@ -1302,15 +1301,15 @@ an art&nbsp;project.
 </div>
 </div>
 
-<div id="outline-container-org0014107" class="outline-2">
-<h2 id="org0014107">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
-<div class="outline-text-2" id="text-org0014107">
+<div id="outline-container-orgdd9fab3" class="outline-2">
+<h2 id="orgdd9fab3">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
+<div class="outline-text-2" id="text-orgdd9fab3">
 <p>
-OK, now we&#8217;re moving on from categorical plots. Let&#8217;s remove the <code>decade</code> field because we won&#8217;t need
+<span class="caps">OK</span>, now we&#8217;re moving on from categorical plots. Let&#8217;s remove&nbsp;the <code>decade</code> field because we won&#8217;t need
 it any&nbsp;more:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>
@@ -1323,7 +1322,7 @@ stable and smoothly go up or down, but there are some&nbsp;outliers.
 
 <p>
 How would we go about answering this? Long form isn&#8217;t very useful for answering this question, so
-let&#8217;s pivot back to wide form by using <code>df.pivot()</code>:
+let&#8217;s pivot back to wide form by&nbsp;using <code>df.pivot()</code>:
 </p>
 
 
@@ -1461,8 +1460,7 @@ Now let&#8217;s&nbsp;pivot!
 </table>
 <p>
 There is more than one way to do this operation: feel free to explore alternatives. Now I want the
-differences between consecutive years. We&#8217;re in luck, because there&#8217;s a function that does that for
-us: <code>df.diff()</code>. It takes in the axis we want to use for the differences. Note that taking differences
+differences between consecutive years. We&#8217;re in luck, because there&#8217;s a function that does that for&nbsp;us: <code>df.diff()</code>. It takes in the axis we want to use for the differences. Note that taking differences
 decreases the number of points we have by 1 in each row: we can&#8217;t get the difference between 1960
 and 1959 because we don&#8217;t have 1959 data. We solve this by dropping the 1960&nbsp;column:
 </p>
@@ -1543,8 +1541,8 @@ list of&nbsp;data.
 </span>
 
 <p>
-I&#8217;m interested in the <i>distribution</i> of this data: particularly, whether there are outliers. <code>seaborn</code>
-has a very useful function called <code>distplot</code> that can visualize distributions of data. It can do
+I&#8217;m interested in the <i>distribution</i> of this data: particularly, whether there are&nbsp;outliers. <code>seaborn</code>
+has a very useful function&nbsp;called <code>distplot</code> that can visualize distributions of data. It can do
 histograms, kernel density estimates, fit statistical distributions, and more. In general, this is a
 great way to visually check for outliers or abnormalities that might warrant further investigation
 in all sorts of&nbsp;datasets.
@@ -1552,7 +1550,7 @@ in all sorts of&nbsp;datasets.
 
 <p>
 Because we have 2D data we need to <i>flatten</i> it first. Because we only care about the raw numbers we
-can do this by getting the values as a matrix and then calling <code>.flatten()</code>:
+can do this by getting the values as a matrix and then&nbsp;calling <code>.flatten()</code>:
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">flat</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -1568,7 +1566,7 @@ visible because there are so many other data points. We can use a <i>rugplot</i>
 show these outliers more&nbsp;directly:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">flat</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">flat</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>
@@ -1586,9 +1584,9 @@ What&#8217;s the story here? Which countries and years have such anomalous data?
 </div>
 </div>
 
-<div id="outline-container-org7c16a63" class="outline-2">
-<h2 id="org7c16a63">Selecting Countries With Outlier&nbsp;Data</h2>
-<div class="outline-text-2" id="text-org7c16a63">
+<div id="outline-container-org51e85e8" class="outline-2">
+<h2 id="org51e85e8">Selecting Countries With Outlier&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org51e85e8">
 <p>
 In many programs, doing something like this—selecting rows that match a fairly complicated
 criterion—would be a fairly difficult task. Not so in Python: the tools we already have can combine
@@ -1620,12 +1618,12 @@ We&#8217;ll first take the diffs and get their absolute value. We&#8217;ll then 
 
 <p>
 Now we want to sort this data. This is a cornerstone of a lot of common operations on data, so it&#8217;s
-a good thing that we&#8217;re doing it now. The function that does this is called <code>df.sort_values()</code>, and it
+a good thing that we&#8217;re doing it now. The function that does this is&nbsp;called <code>df.sort_values()</code>, and it
 takes in a column or list of columns to sort by and a couple other optional arguments. Because we
 only have one column, all we need to do is tell Python to sort in descending&nbsp;order:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">max_diffs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">max_diffs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">max_diffs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -1654,12 +1652,12 @@ break 12 up in lots of ways. You can easily replace this and see what changes. L
 </pre></div>
 
 <p>
-We use <code>.loc</code> because otherwise <code>pandas</code> thinks we&#8217;re indexing&nbsp;columns.
+We&nbsp;use <code>.loc</code> because&nbsp;otherwise <code>pandas</code> thinks we&#8217;re indexing&nbsp;columns.
 </p>
 
 <p>
 Now we need to do the same thing with our original dataset. One difference is that we want to query
-based on a column (<code>country</code>), not the index. We can do that using Boolean indexing like&nbsp;this:
+based on a column&nbsp;(<code>country</code>), not the index. We can do that using Boolean indexing like&nbsp;this:
 </p>
 
 <div class="highlight"><pre><span></span><span class="c1"># HDC: High-Diff Country</span>
@@ -1674,9 +1672,9 @@ interesting&nbsp;ways.
 </p>
 
 <p>
-There&#8217;s actually a slicker way of doing this that I didn&#8217;t know about until recently: the <code>df.query</code>
+There&#8217;s actually a slicker way of doing this that I didn&#8217;t know about until recently:&nbsp;the <code>df.query</code>
 method. <code>query</code> takes a string, where column names can be written out as they are and local variables
-need to be prefixed with <code>@</code>. This allows us to use simpler expressions and make our code more
+need to be prefixed&nbsp;with <code>@</code>. This allows us to use simpler expressions and make our code more
 readable. Here&#8217;s the alternative version of the above&nbsp;code:
 </p>
 
@@ -1689,14 +1687,14 @@ Pretty neat,&nbsp;huh?
 </div>
 </div>
 
-<div id="outline-container-orgcd0530f" class="outline-2">
-<h2 id="orgcd0530f">Bringing the&nbsp;Heat</h2>
-<div class="outline-text-2" id="text-orgcd0530f">
+<div id="outline-container-org621c62b" class="outline-2">
+<h2 id="org621c62b">Bringing the&nbsp;Heat</h2>
+<div class="outline-text-2" id="text-org621c62b">
 <span class="marginnote"><p>
 </p>
 <p>
 One interesting version of a heatmap is a <i>clustermap</i>: a heatmap that groups columns so similar rows
-are visually together. This can be combined with <code>df.corr()</code>, which produces pairwise correlations of
+are visually together. This can be combined&nbsp;with <code>df.corr()</code>, which produces pairwise correlations of
 numerical data, to very quickly search for patterns in large multidimensional datasets. You can
 consult its documentation if you&#8217;re&nbsp;interested.
 </p>
@@ -1705,13 +1703,13 @@ consult its documentation if you&#8217;re&nbsp;interested.
 <p>
 I want to show a type of visualization we haven&#8217;t used yet: the <i>heatmap</i>. Heatmaps can be extremely
 useful in all sorts of different ways, and they&#8217;re oddly hard to do with a lot of data analysis
-software. Python has no such problems: <code>sns.heatmap</code> has us covered. Heatmaps, like distribution
+software. Python has no such&nbsp;problems: <code>sns.heatmap</code> has us covered. Heatmaps, like distribution
 plots, are pretty flexible as far as&nbsp;data. 
 </p>
 
 <p>
 One wrinkle is that the default choice for the colormap isn&#8217;t very useful—in particular, it&#8217;s often
-nice to center the colormap at 0, and it&#8217;s often nice to use <code>robust=True</code> to avoid having single
+nice to center the colormap at 0, and it&#8217;s often nice to&nbsp;use <code>robust=True</code> to avoid having single
 outliers mess with your colors. We want to see the outliers, so we won&#8217;t be doing this, but we will
 set the center to 0 so our visuals aren&#8217;t&nbsp;misleading.
 </p>
@@ -1739,9 +1737,9 @@ for visualization: <i>facet&nbsp;grids.</i>
 </p>
 </div>
 </div>
-<div id="outline-container-org2d9ae17" class="outline-2">
-<h2 id="org2d9ae17">Looking Like Andy&nbsp;Warhol</h2>
-<div class="outline-text-2" id="text-org2d9ae17">
+<div id="outline-container-org3b12876" class="outline-2">
+<h2 id="org3b12876">Looking Like Andy&nbsp;Warhol</h2>
+<div class="outline-text-2" id="text-org3b12876">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -1780,8 +1778,8 @@ Picture credit to&nbsp;ProximityOne.
 <p>
 To show you how these facet grids work before we finish with our final plot, let&#8217;s go back to the
 categorical data. Let&#8217;s show the birth rates of different areas of the world by decade, first or
-second half-decade, and area. As it turns out, <code>catplot</code> had the ability to do this the whole time!
-All we needed to do was pass in <code>row</code> and/or <code>col</code>. (Again, this is where you really admire the API for
+second half-decade, and area. As it turns&nbsp;out, <code>catplot</code> had the ability to do this the whole time!
+All we needed to do was pass&nbsp;in <code>row</code> and/or <code>col</code>. (Again, this is where you really admire the <span class="caps">API</span> for
 these libraries: we can generate insanely complicated graphs in a single function call and it&#8217;s
 pretty&nbsp;intuitive.)
 </p>
@@ -1790,8 +1788,8 @@ pretty&nbsp;intuitive.)
     <span class="s1">'North America'</span><span class="p">,</span>
     <span class="s1">'Sub-Saharan Africa'</span><span class="p">,</span>
     <span class="s1">'South Asia'</span><span class="p">,</span>
-    <span class="s1">'Middle East <span class="amp">&amp;</span> North Africa'</span><span class="p">,</span>
-    <span class="s1">'Latin America <span class="amp">&amp;</span> Carribbean'</span>
+    <span class="s1">'Middle East &amp; North Africa'</span><span class="p">,</span>
+    <span class="s1">'Latin America &amp; Carribbean'</span>
 <span class="p">]</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">'country in @world_areas'</span><span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -1820,8 +1818,8 @@ a facet plot with. Consult the documentation if you&#8217;re&nbsp;interested.
     <span class="n">palette</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span>
     <span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span>
     <span class="n">hue</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span>
-    <span class="n">dodge</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">ci</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1847,7 +1845,7 @@ approach. Take a second to see what&#8217;s going&nbsp;on.
 <li>The column indicates the decade, so the whole chart progresses forward in&nbsp;time.</li>
 <li>The x-axis indicates the half-decade, so each subplot is also oriented in&nbsp;time.</li>
 <li>The hue indicates the decade again. We could make hue a different categorical data to add one more
-dimension to this plot, but I didn&#8217;t have another one to add. This is why I added <code>dodge=False</code>:
+dimension to this plot, but I didn&#8217;t have another one to add. This is why I&nbsp;added <code>dodge=False</code>:
 normally, when the hue changes, it will plot the different bars beside each other, but in this
 case each subplot only has one type of decade so I&#8217;m not doing&nbsp;that.</li>
 <li>The y-axis indicates the fertility&nbsp;rate.</li>
@@ -1856,21 +1854,21 @@ case each subplot only has one type of decade so I&#8217;m not doing&nbsp;that.<
 <p>
 All in all, this (admittedly convoluted) plot shows four different dimensions to our data! This is
 three categorical variables and one continuous variable. We could have even extended this further
-and shown five by adding a different <code>hue</code>, but at that point in cases like this the graph would
+and shown five by adding a&nbsp;different <code>hue</code>, but at that point in cases like this the graph would
 probably be even more unreadable than it is&nbsp;now.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2d9c8f1" class="outline-2">
-<h2 id="org2d9c8f1">The&nbsp;Finale</h2>
-<div class="outline-text-2" id="text-org2d9c8f1">
+<div id="outline-container-org7e21be0" class="outline-2">
+<h2 id="org7e21be0">The&nbsp;Finale</h2>
+<div class="outline-text-2" id="text-org7e21be0">
 <p>
-OK, now we&#8217;re <i>finally</i> ready to do the last plot. We&#8217;re going to be graphing a continuous variable
-against a continuous variable, so instead of <code>catplot</code> we&#8217;re using <code>relplot</code>. There are fewer kinds of
+<span class="caps">OK</span>, now we&#8217;re <i>finally</i> ready to do the last plot. We&#8217;re going to be graphing a continuous variable
+against a continuous variable, so instead&nbsp;of <code>catplot</code> we&#8217;re&nbsp;using <code>relplot</code>. There are fewer kinds of
 relational plot: you can do a scatterplot, a regression line and a scatterplot, and a lineplot where
 you connect each dot. This last one is what we&#8217;re doing. Other than that, it works almost
-identically to <code>catplot</code> in terms of the arguments it takes. Here we&nbsp;go!
+identically&nbsp;to <code>catplot</code> in terms of the arguments it takes. Here we&nbsp;go!
 </p>
 
 <div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
@@ -1884,7 +1882,7 @@ identically to <code>catplot</code> in terms of the arguments it takes. Here we&
     <span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span>
     <span class="n">col_order</span><span class="o">=</span><span class="n">high_diff_countries</span><span class="p">,</span> 
     <span class="n">hue_order</span><span class="o">=</span><span class="n">high_diff_countries</span><span class="p">,</span>
-    <span class="n">legend</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -1896,13 +1894,13 @@ First, let&#8217;s go over the new parameters I used in&nbsp;turn:
 </p>
 <ul class="org-ul">
 <li>
-<code>col_wrap</code> allows the columns to wrap and make new rows if you aren&#8217;t using the <code>row</code> variable. Here
+<code>col_wrap</code> allows the columns to wrap and make new rows if you aren&#8217;t using&nbsp;the <code>row</code> variable. Here
 I make it so each row has 4&nbsp;plots.</li>
 <li>
-<code>hue</code> is the same as <code>col</code>, just like our last example. Lineplots don&#8217;t have the same &#8220;dodging&#8221;
+<code>hue</code> is the same&nbsp;as <code>col</code>, just like our last example. Lineplots don&#8217;t have the same &#8220;dodging&#8221;
 behavior that barplots do, so I don&#8217;t need to add anything else to make it work. This could be
 another categorical variable if I had one to&nbsp;show.</li>
-<li>The kind of plot is a lineplot, as I mentioned above (as opposed to <code>'scatter'</code> or <code>'reg'</code>.)</li>
+<li>The kind of plot is a lineplot, as I mentioned above (as opposed&nbsp;to <code>'scatter'</code> or <code>'reg'</code>.)</li>
 <li>I turn the legend off because it&#8217;s redundant: the titles of each subplot tell you the&nbsp;country.</li>
 <li>
 <code>col_order</code> and <code>hue_order</code> control how the plot is ordered. It defaults to whichever categories it
@@ -1939,9 +1937,9 @@ With that said: what <i>can</i> we actually learn from this&nbsp;plot?
 </div>
 </div>
 
-<div id="outline-container-org9194302" class="outline-2">
-<h2 id="org9194302">Epilogue: What Have We&nbsp;Learned?</h2>
-<div class="outline-text-2" id="text-org9194302">
+<div id="outline-container-org2e7450f" class="outline-2">
+<h2 id="org2e7450f">Epilogue: What Have We&nbsp;Learned?</h2>
+<div class="outline-text-2" id="text-org2e7450f">
 <p>
 <img src="../../images/sns-relplots/finale.png" alt="nil"></p>
 
@@ -1953,7 +1951,7 @@ at that are easy with visuals like these?) Take a minute: I&#8217;ll&nbsp;wait.
 </p>
 
 <p>
-OK, done? I&#8217;m sure you could say a lot more than what I&#8217;m going to, but these are the questions I
+<span class="caps">OK</span>, done? I&#8217;m sure you could say a lot more than what I&#8217;m going to, but these are the questions I
 ask and the answers I see when I look at this&nbsp;data:
 </p>
 
@@ -2000,7 +1998,7 @@ better education,&nbsp;etc.</li>
 rapidly after the Korean War, China undergoing the Cultural Revolution and industrialization
 (death rates would perhaps provide a more complete picture of this chapter in the past, however),
 and Iran developing rapidly after the Iranian Revolution of 1979. Better historians than I am
-could probably tell you more, and by integrating other statistics like GDP per capita you could
+could probably tell you more, and by integrating other statistics like <span class="caps">GDP</span> per capita you could
 provide a much more holistic&nbsp;picture.</li>
 <li>The only countries with really unexpected outliers, not simply a year with rapid demographic
 transition, are the top three: Romania, Malta, and&nbsp;Japan.</li>
@@ -2024,9 +2022,9 @@ abortions that lasted until the year was&nbsp;over.</li>
 </div>
 </div>
 
-<div id="outline-container-org712a3cd" class="outline-2">
-<h2 id="org712a3cd">Thanks for&nbsp;Reading!</h2>
-<div class="outline-text-2" id="text-org712a3cd">
+<div id="outline-container-org1004cc6" class="outline-2">
+<h2 id="org1004cc6">Thanks for&nbsp;Reading!</h2>
+<div class="outline-text-2" id="text-org1004cc6">
 <p>
 That was a lot: if you made it here, you&#8217;re officially introduced to Python data analysis! If you
 want to see more examples of Python data science in action, feel free to browse the rest of this
@@ -2040,7 +2038,21 @@ blog. If you have any questions or have anything to correct, let me&nbsp;know!
             <span class="tag"><a class="p-category" href="../../categories/guide/" rel="tag">guide</a></span>
       </p>
 
-    
+            <div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                Previous post
+            </span>
+
+
+            <span class="next pagination-item newer">
+                <a href="../effective-data-visualization-part-1-what-is-effective-data-visualization/" rel="next" title="Effective Data Visualization, Part 1: What Is Effective Data Visualization?">
+Next post
+              </a>
+            </span>
+
+        </div>
+
     </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>

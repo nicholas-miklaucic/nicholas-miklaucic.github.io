@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html prefix="
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="A guide to effective data visualization">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollard's Rho · Effective Data Visualization, Part 1: What Is Effective Data Visualization? </title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'UA-164231105-1');
+    </script><meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<link rel="prev" href="../a-painless-introduction-to-python-data-analysis-and-visualization/" title="A Painless Introduction to Python Data Analysis and Visualization" type="text/html">
+</head>
+<body class="">
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    <div class="hsidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+              <h1>
+                <a href="https://nicholas-miklaucic.github.io/">
+                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+
+        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
+    </a></h1>
+
+                </a>
+              </h1>
+                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
+
+            </div>
+                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
+    
+    
+    </nav><footer id="footer"><span class="copyright">
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            </span>
+            
+            
+        </footer>
+</div>
+    </div>
+
+    <div class="content container" id="content">
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Effective Data Visualization, Part 1: What Is Effective Data&nbsp;Visualization?</a></h1>
+
+    <span class="post-date">
+      <time class="published dt-published" datetime="2021-02-19T14:34:17-05:00" itemprop="datePublished" title="2021-02-19 14:34">2021-02-19 14:34</time></span>
+        <meta name="description" itemprop="description" content="A guide to effective data visualization">
+<div class="e-content entry-content" itemprop="articleBody text">
+    <p>
+<i>This series is the textual version of a presentation I gave to a class on
+effective</i> <i>data visualization. I&#8217;m reproducing it here both to add some
+information that</i> <i>was cut from the presentation for time and to put it in a
+publicly available</i> <i>place.</i>
+</p>
+
+<div id="outline-container-orgbefca19" class="outline-2">
+<h2 id="orgbefca19">Intro</h2>
+<div class="outline-text-2" id="text-orgbefca19">
+</div>
+<div id="outline-container-org583984e" class="outline-3">
+<h3 id="org583984e">What This Guide Is&nbsp;For</h3>
+<div class="outline-text-3" id="text-org583984e">
+<p>
+This series of posts is about how to make effective data visualization: exactly
+what I mean by that will become clear shortly. Much like one might critique
+writing in a creative writing class, I&#8217;ll focus on how to improve existing
+visualizations. This should hopefully also help the reader become a better
+consumer of data visualization they encounter in their daily&nbsp;lives.
+</p>
+</div>
+</div>
+<div id="outline-container-org7b6ac65" class="outline-3">
+<h3 id="org7b6ac65">Who This Guide Is&nbsp;For</h3>
+<div class="outline-text-3" id="text-org7b6ac65">
+<p>
+This guide is for anyone! Unlike my other work on this blog, this guide expects
+no knowledge of coding or any platform for visualizations: learning such a tool
+is necessary to implement these ideas, but not necessary for this guide at all.
+My hope is that this is generally useful for people in business, data science,
+journalism, programming, and statistics: anyone who works with or cares about&nbsp;data.
+</p>
+
+<p>
+Without further ado, let&#8217;s get&nbsp;started!
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgac1be72" class="outline-2">
+<h2 id="orgac1be72">What is Effective Data&nbsp;Visualization?</h2>
+<div class="outline-text-2" id="text-orgac1be72">
+<p>
+What do I mean by <i>effective</i> data visualization? Here, an effective data
+visualization is one that effectively helps the viewer process information. I
+care here about dataviz as a tool that increases our brains&#8217; ability to work
+with&nbsp;data.
+</p>
+
+<p>
+This is contrasted with purely aesthetic concerns. Some visuals that don&#8217;t look
+spiffy are nonetheless useful tools, and some visuals that are aesthetically
+unappealing are useful processing&nbsp;aids.
+</p>
+
+<p>
+Data can be deadly serious, and so data visualization can have tremendous&nbsp;importance.
+</p>
+
+<p>
+<img src="../../images/teachback/ChristaMcAuliffe.jpg" alt="nil">
+The <i>Challenger</i> disaster in which Christa McAuliffe, the person in the photo
+above, died is a grim reminder of information&#8217;s power. The O-ring failure
+that led to the explosion was preventable and understood. Thus, some authors
+like Edward Tufte have analyzed this tragedy as a failure of data visualization
+as much as anything else: the visualizations used to communicate the dire need
+to reschedule the launch failed to convey this knowledge to the people who made
+that fateful decision. This is to say that effectively communicating and
+understanding data is worthy of serious&nbsp;study.
+</p>
+
+<p>
+Why use data visualization at all? Why not use other tools, like spreadsheets or&nbsp;statistics?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org91a1834" class="outline-2">
+<h2 id="org91a1834">Why is Effective Data&nbsp;Visualization?</h2>
+<div class="outline-text-2" id="text-org91a1834">
+<p>
+There&#8217;s a persistent myth that graphs are inherently less meaningful or useful
+than raw statistics. Statistics are very important, and I would certainly not
+advocate for replacing the statistics underlying, say, clinical trials with a
+bunch of&nbsp;graphs.
+</p>
+
+<p>
+The classic example of why we might use data visualization in addition to
+statistics comes to use from Frank Anscombe in the form of 4 different datasets
+like this&nbsp;one:
+</p>
+
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th>x</th>
+      <th>y</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>10.0</td>
+      <td>8.04</td>
+    </tr>
+<tr>
+<td>8.0</td>
+      <td>6.95</td>
+    </tr>
+<tr>
+<td>13.0</td>
+      <td>7.58</td>
+    </tr>
+<tr>
+<td>9.0</td>
+      <td>8.81</td>
+    </tr>
+<tr>
+<td>11.0</td>
+      <td>8.33</td>
+    </tr>
+<tr>
+<td>14.0</td>
+      <td>9.96</td>
+    </tr>
+<tr>
+<td>6.0</td>
+      <td>7.24</td>
+    </tr>
+<tr>
+<td>4.0</td>
+      <td>4.26</td>
+    </tr>
+<tr>
+<td>12.0</td>
+      <td>10.84</td>
+    </tr>
+<tr>
+<td>7.0</td>
+      <td>4.82</td>
+    </tr>
+<tr>
+<td>5.0</td>
+      <td>5.68</td>
+    </tr>
+</tbody>
+</table>
+<p>
+Imagine you&#8217;re trying to find out if y is related to x and figure out the nature
+of that relationship. It&#8217;s rather difficult to parse this information,
+especially given that this is just one-fourth of the total. Let&#8217;s try using some
+exploratory statistics to get a better sense of the data: the mean of each
+variable, the standard deviation of each variable, the regression line, the
+Pearson correlation, and the \(R^2\)&nbsp;value.
+</p>
+
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>\(\mu_x\)</th>
+      <th>\(\mu_y\)</th>
+      <th>\(\sigma_x\)</th>
+      <th>\(\sigma_y\)</th>
+      <th>\(r\)</th>
+      <th>Regression line</th>
+      <th>\(R^2\)</th>
+    </tr>
+<tr>
+<th>Dataset</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>I</th>
+      <td>9.0</td>
+      <td>7.501</td>
+      <td>3.317</td>
+      <td>2.032</td>
+      <td>0.816</td>
+      <td>0.500x + 3.000</td>
+      <td>0.667</td>
+    </tr>
+<tr>
+<th><span class="caps">II</span></th>
+      <td>9.0</td>
+      <td>7.501</td>
+      <td>3.317</td>
+      <td>2.032</td>
+      <td>0.816</td>
+      <td>0.500x + 3.000</td>
+      <td>0.666</td>
+    </tr>
+<tr>
+<th><span class="caps">III</span></th>
+      <td>9.0</td>
+      <td>7.500</td>
+      <td>3.317</td>
+      <td>2.030</td>
+      <td>0.816</td>
+      <td>0.500x + 3.000</td>
+      <td>0.666</td>
+    </tr>
+<tr>
+<th><span class="caps">IV</span></th>
+      <td>9.0</td>
+      <td>7.501</td>
+      <td>3.317</td>
+      <td>2.031</td>
+      <td>0.817</td>
+      <td>0.500x + 3.000</td>
+      <td>0.667</td>
+    </tr>
+</tbody>
+</table>
+<p>
+The standard statistics we might use when we don&#8217;t know what we&#8217;re looking for
+yet aren&#8217;t distinguishing these datasets at all. Let&#8217;s see what a plot looks&nbsp;like:
+</p>
+
+<p>
+<img src="../../images/teachback/anscombe.png" alt="nil"></p>
+
+<p>
+Sometimes a picture really is worth a thousand correlation&nbsp;values:
+</p>
+<ul class="org-ul">
+<li>The first dataset seems like a fairly standard linear correlation with some
+noise: linear regression seems like a good&nbsp;fit.</li>
+<li>The second dataset has a very regular relationship, but it&#8217;s not linear!
+Modeling this with a quadratic would work&nbsp;well.</li>
+<li>The third dataset has a very regular relationship with one crazy&nbsp;outlier.</li>
+<li>The fourth dataset is barely a dataset! Something has gone terribly wrong and
+a single influential outlier is preventing us from seeing that in&nbsp;statistics.</li>
+</ul>
+<p>
+There is no tool that is more effective at quickly sussing out these patterns
+than a visualization like this&nbsp;one.
+</p>
+
+<p>
+That&#8217;s all for today. Next time I&#8217;ll talk about visual complexity and visual
+overload, and I&#8217;ll do my part to combat some pernicious misconceptions about how
+sophisticated data visualization should be. See you&nbsp;then!
+</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
+            <span class="tag"><a class="p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></span>
+            <span class="tag"><a class="p-category" href="../../categories/guide/" rel="tag">guide</a></span>
+      </p>
+
+            <div class="pager hidden-print pagination">
+
+            <span class="previous pagination-item older">
+                <a href="../a-painless-introduction-to-python-data-analysis-and-visualization/" rel="prev" title="A Painless Introduction to Python Data Analysis and Visualization">
+                Previous post
+                </a>
+            </span>
+
+
+            <span class="next pagination-item newer">
+Next post
+            </span>
+
+        </div>
+
+    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+                        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nicholas-miklaucic-github-io",
+            disqus_url="https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/",
+        disqus_title="Effective Data Visualization, Part 1: What Is Effective Data Visualization?",
+        disqus_identifier="cache/posts/effective-data-visualization-part-1-what-is-effective-data-visualization.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+</div>
+            <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script type="text/javascript">
+    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
+    (function() {
+    var mtiTracking = document.createElement('script');
+    mtiTracking.type='text/javascript';
+    mtiTracking.async='true';
+    mtiTracking.src='mtiFontTrackingCode.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+    })();
+    </script>
+</body>
+</html>

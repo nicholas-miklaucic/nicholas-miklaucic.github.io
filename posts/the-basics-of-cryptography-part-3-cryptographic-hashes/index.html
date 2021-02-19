@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="What hash functions are and some of what you can do with them">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · The Basics of Cryptography, Part 3: Cryptographic Hashes </title>
+<title>Pollard's Rho · The Basics of Cryptography, Part 3: Cryptographic Hashes </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -40,11 +40,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -66,7 +66,7 @@
 <p>
 We&#8217;ve previously discussed cryptography, in the modern world, as a way of sending secure messages
 through insecure channels. But this is not the only thing you might want to do in a world with
-malicious actors trying to thwart you. RSA and Diffie-Hellman exchange aren&#8217;t vulnerable to simple
+malicious actors trying to thwart you. <span class="caps">RSA</span> and Diffie-Hellman exchange aren&#8217;t vulnerable to simple
 eavesdroppers. However, there are other types of attacks that they don&#8217;t protect against, and we
 might want to insulate ourselves against those attacks as well. One of them is a <i>man-in-the-middle</i>
 attack—in essence, someone manipulating messages. As we&#8217;ve often done, let&#8217;s imagine a scenario, the one
@@ -88,13 +88,13 @@ haven&#8217;t been&nbsp;modified?
 <span class="marginnote"><p>
 </p>
 <p>
-RSA can be modified to work for identity verification, but not in the way we&#8217;ve discussed it. That&#8217;s
+<span class="caps">RSA</span> can be modified to work for identity verification, but not in the way we&#8217;ve discussed it. That&#8217;s
 why it&#8217;s sometimes called a <i>cryptosystem.</i>
 </p>
 </span>
 
 <p>
-Note that RSA and Diffie-Hellman can&#8217;t help us here. To see why, realize that Malcolm can simply
+Note that <span class="caps">RSA</span> and Diffie-Hellman can&#8217;t help us here. To see why, realize that Malcolm can simply
 intercept all of their communications, impersonating Alice to Bob and Bob to Alice. He can forward
 any message, and for Diffie-Hellman he can set up his own secret with both Alice and Bob and forward
 all messages through that channel. Alice and Bob have no way of ever knowing that this&nbsp;happened!
@@ -108,9 +108,9 @@ seen &#8220;sharing a single secret&#8221; or &#8220;sending a message securely&
 add one&nbsp;more.
 </p>
 
-<div id="outline-container-org33491ad" class="outline-2">
-<h2 id="org33491ad">Cheating a&nbsp;Little</h2>
-<div class="outline-text-2" id="text-org33491ad">
+<div id="outline-container-orgcc0aa4f" class="outline-2">
+<h2 id="orgcc0aa4f">Cheating a&nbsp;Little</h2>
+<div class="outline-text-2" id="text-orgcc0aa4f">
 <p>
 The actual math of hash functions isn&#8217;t very interesting, at least to me, and I don&#8217;t think it&#8217;s
 very illuminating to the student. The <i>application</i> of hash functions, however, is fascinating, and
@@ -119,7 +119,7 @@ work. Instead, I&#8217;ll just describe the properties of a good hash function a
 </p>
 
 <p>
-A lot of cryptography assumes this: just like RSA, we usually can&#8217;t prove that these functions truly
+A lot of cryptography assumes this: just like <span class="caps">RSA</span>, we usually can&#8217;t prove that these functions truly
 fulfill their goals, but we can reasonably hope that they are. When hash functions are broken—i.e.,
 their security guarantees fail to hold—the cryptography that depends on them also breaks. The Flame
 malware that attacked Iran in 2012, for example, used a bad hash function to impersonate Microsoft:
@@ -127,17 +127,17 @@ this let it gain administrator privileges on Windows without the user&#8217;s&nb
 </p>
 </div>
 </div>
-<div id="outline-container-orga368896" class="outline-2">
-<h2 id="orga368896">What Properties Do Hash Functions&nbsp;Have?</h2>
-<div class="outline-text-2" id="text-orga368896">
+<div id="outline-container-org7245cc2" class="outline-2">
+<h2 id="org7245cc2">What Properties Do Hash Functions&nbsp;Have?</h2>
+<div class="outline-text-2" id="text-org7245cc2">
 <p>
 Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
 function \(f\) is a <i>cryptographic hash function</i> if it satisfies the&nbsp;following:
 </p>
 </div>
-<div id="outline-container-org9f3d8f4" class="outline-3">
-<h3 id="org9f3d8f4">Determinism</h3>
-<div class="outline-text-3" id="text-org9f3d8f4">
+<div id="outline-container-org3f0897b" class="outline-3">
+<h3 id="org3f0897b">Determinism</h3>
+<div class="outline-text-3" id="text-org3f0897b">
 <p>
 \(f\) is a function in the mathematical sense: it always produces the same output for the same
 input. Note that the reverse is always false: because hash functions can take in input of any size
@@ -145,9 +145,9 @@ but have limited possible outputs, there are always some inputs that have the sa
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8027d3" class="outline-3">
-<h3 id="orgb8027d3">Irreversibility</h3>
-<div class="outline-text-3" id="text-orgb8027d3">
+<div id="outline-container-orgb323dfb" class="outline-3">
+<h3 id="orgb323dfb">Irreversibility</h3>
+<div class="outline-text-3" id="text-orgb323dfb">
 <p>
 Given an output \(y\), it is computationally infeasible to find any input \(x\) such
 that \(f(x) = y\). (In practice, this translates to &#8220;no strategy significantly
@@ -155,9 +155,9 @@ better than random guessing&nbsp;exists.&#8221;)
 </p>
 </div>
 </div>
-<div id="outline-container-orgbbc11eb" class="outline-3">
-<h3 id="orgbbc11eb">Collision&nbsp;Resistance</h3>
-<div class="outline-text-3" id="text-orgbbc11eb">
+<div id="outline-container-org0737316" class="outline-3">
+<h3 id="org0737316">Collision&nbsp;Resistance</h3>
+<div class="outline-text-3" id="text-org0737316">
 <p>
 Not only can the function not be easily inverted, but it is infeasible to find <i>any</i> two inputs that
 map to any output: any \(x_1, x_2\), and \(y\) such that \(f(x_1) = f(x_2) = y\). Such a pair of inputs
@@ -171,9 +171,9 @@ required. It doesn&#8217;t have an easy name, but I&#8217;ll&nbsp;try:
 </p>
 </div>
 </div>
-<div id="outline-container-orga74dbf4" class="outline-3">
-<h3 id="orga74dbf4">Maximal&nbsp;Entropy</h3>
-<div class="outline-text-3" id="text-orga74dbf4">
+<div id="outline-container-org7287414" class="outline-3">
+<h3 id="org7287414">Maximal&nbsp;Entropy</h3>
+<div class="outline-text-3" id="text-org7287414">
 <p>
 \(f\) should reveal as little information as possible, known in information theory has having maximal
 entropy. Hash functions should look random: learning <i>anything</i> about an input given its hash should
@@ -189,13 +189,13 @@ independent of each&nbsp;other.
 </div>
 </div>
 
-<div id="outline-container-org6b99633" class="outline-2">
-<h2 id="org6b99633">An Example: <code>SHA256</code>
+<div id="outline-container-orged94264" class="outline-2">
+<h2 id="orged94264">An&nbsp;Example: <code>SHA256</code>
 </h2>
-<div class="outline-text-2" id="text-org6b99633">
+<div class="outline-text-2" id="text-orged94264">
 <p>
-This is what the hashes of the letters A through D (represented as ASCII characters) look like when
-hashed with <code>SHA256</code> and then converted to&nbsp;hexadecimal:
+This is what the hashes of the letters A through D (represented as <span class="caps">ASCII</span> characters) look like when
+hashed&nbsp;with <code>SHA256</code> and then converted to&nbsp;hexadecimal:
 </p>
 
 <div class="highlight"><pre><span></span>06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0
@@ -216,16 +216,16 @@ Alright, so let&#8217;s say we have a hash function. What can we do with&nbsp;it
 </div>
 </div>
 
-<div id="outline-container-org38449ff" class="outline-2">
-<h2 id="org38449ff">Application 1: Message&nbsp;Integrity</h2>
-<div class="outline-text-2" id="text-org38449ff">
+<div id="outline-container-org49b86d5" class="outline-2">
+<h2 id="org49b86d5">Application 1: Message&nbsp;Integrity</h2>
+<div class="outline-text-2" id="text-org49b86d5">
 <p>
 Our opening problem about Alice and Bob meeting up despite Malcolm&#8217;s interference is actually
-several separate problems. The one I want to focus on is preventing tampering. In plain RSA, for
+several separate problems. The one I want to focus on is preventing tampering. In plain <span class="caps">RSA</span>, for
 example, any attacker can add as much as they&#8217;d like to any message, even without being able to
 decrypt it, by simply adding numbers on the end. (This is called a <i>length</i> <i>extension attack.</i>)
-Many cryptography systems like the basic version of RSA are also <i>malleable</i>, meaning that you can
-change the message without being able to decrypt it. For example, in RSA if two numbers \(m_1\) and
+Many cryptography systems like the basic version of <span class="caps">RSA</span> are also <i>malleable</i>, meaning that you can
+change the message without being able to decrypt it. For example, in <span class="caps">RSA</span> if two numbers \(m_1\) and
 \(m_2\) encrypt to ciphertexts \(c_1\) and \(c_2\), then the encryption of \(m_1m_2\) is just \(c_1c_2\) (all
 modulo \(n\)). How can you prevent people from messing with your message in this&nbsp;way?
 </p>
@@ -271,9 +271,9 @@ which is prohibitively&nbsp;difficult.
 </p>
 </div>
 </div>
-<div id="outline-container-org6ebd2df" class="outline-2">
-<h2 id="org6ebd2df">Application 2: Proof of&nbsp;Work</h2>
-<div class="outline-text-2" id="text-org6ebd2df">
+<div id="outline-container-orgfdfe222" class="outline-2">
+<h2 id="orgfdfe222">Application 2: Proof of&nbsp;Work</h2>
+<div class="outline-text-2" id="text-orgfdfe222">
 <p>
 Speaking of Bitcoin, it uses hashing for a completely separate application as well. Let&#8217;s say you
 want to make adding a transaction to the global ledger (i.e., recording that you paid me fifty
@@ -309,9 +309,9 @@ combining their hashes, there&#8217;s no effective way of &#8220;getting&nbsp;ah
 </div>
 </div>
 
-<div id="outline-container-org3afa7ba" class="outline-2">
-<h2 id="org3afa7ba">Application 3: Password&nbsp;Verification</h2>
-<div class="outline-text-2" id="text-org3afa7ba">
+<div id="outline-container-org45cc094" class="outline-2">
+<h2 id="org45cc094">Application 3: Password&nbsp;Verification</h2>
+<div class="outline-text-2" id="text-org45cc094">
 <p>
 I&#8217;m pretty sure that you have used a password before. Passwords provide a useful way of verifying
 your identity. However, there&#8217;s a significant problem with basic passwords: if I tell you my
@@ -365,17 +365,17 @@ passwords, but having predictable long passwords is way more secure than very un
 </div>
 </div>
 
-<div id="outline-container-org1191ba8" class="outline-2">
-<h2 id="org1191ba8">A Brief Non-Cryptographic&nbsp;Postlude</h2>
-<div class="outline-text-2" id="text-org1191ba8">
+<div id="outline-container-org1b97dea" class="outline-2">
+<h2 id="org1b97dea">A Brief Non-Cryptographic&nbsp;Postlude</h2>
+<div class="outline-text-2" id="text-org1b97dea">
 <p>
 Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least
 briefly go over some of the interesting ways they can be&nbsp;used.
 </p>
 </div>
-<div id="outline-container-org5f5c1ab" class="outline-3">
-<h3 id="org5f5c1ab">Hashmaps</h3>
-<div class="outline-text-3" id="text-org5f5c1ab">
+<div id="outline-container-org9f1fcee" class="outline-3">
+<h3 id="org9f1fcee">Hashmaps</h3>
+<div class="outline-text-3" id="text-org9f1fcee">
 <p>
 Let&#8217;s say you want to store a mapping from a person&#8217;s username to their password hash like I
 described above. What&#8217;s the best way to do that? One solution is to have, for example, 256 &#8220;buckets&#8221;
@@ -393,9 +393,9 @@ of key-value pairs, because getting a value from a key doesn&#8217;t require sea
 </p>
 </div>
 </div>
-<div id="outline-container-org074ff68" class="outline-3">
-<h3 id="org074ff68">Equality</h3>
-<div class="outline-text-3" id="text-org074ff68">
+<div id="outline-container-org5784a29" class="outline-3">
+<h3 id="org5784a29">Equality</h3>
+<div class="outline-text-3" id="text-org5784a29">
 <p>
 We discussed earlier using checksums as a way of quickly checking that two big pieces of data are
 equal. This can be used to prevent tampering, but it&#8217;s also useful in applications that require
@@ -405,16 +405,16 @@ versions: if the hash of my working directory and yours differ, then one of us m
 </p>
 
 <p>
-A somewhat niche use that I&#8217;ll mention here is in chess AI. It&#8217;s a timesaver, when calculating chess
+A somewhat niche use that I&#8217;ll mention here is in chess <span class="caps">AI</span>. It&#8217;s a timesaver, when calculating chess
 positions, to remember if you&#8217;ve already seen a position before and analyzed it. To do this, chess
-AI programs use a hash function to compare different boards because it&#8217;s faster than checking it&nbsp;piece-by-piece.
+<span class="caps">AI</span> programs use a hash function to compare different boards because it&#8217;s faster than checking it&nbsp;piece-by-piece.
 </p>
 
 <p>
 The reason I mention this is because, as far as I know, version control systems have never run into
 any problems with hash collisions that weren&#8217;t from malicious actors. If two different versions were
 to have the same hash, it would completely break the system, but to my knowledge this has never
-happened unintentionally. This <i>has</i> happened for the smaller hashes used in chess AI,&nbsp;however!
+happened unintentionally. This <i>has</i> happened for the smaller hashes used in chess <span class="caps">AI</span>,&nbsp;however!
 </p>
 
 <p>
@@ -426,9 +426,9 @@ equivalent to a different one and played the wrong&nbsp;move.
 </p>
 </div>
 </div>
-<div id="outline-container-org1651055" class="outline-3">
-<h3 id="org1651055">Bloom&nbsp;Filters</h3>
-<div class="outline-text-3" id="text-org1651055">
+<div id="outline-container-orgb97567b" class="outline-3">
+<h3 id="orgb97567b">Bloom&nbsp;Filters</h3>
+<div class="outline-text-3" id="text-orgb97567b">
 <p>
 This sort of probabilistic tradeoff, where you accept the risk of an occasional error for speed,
 comes up a lot with hash functions. One cool data structure that uses this is called a <i>Bloom
@@ -454,19 +454,19 @@ keep in the filter to get the right tradeoff between space, accuracy, and&nbsp;e
 This is often combined with a deterministic system that&#8217;s slower but guaranteed to be correct in
 cases where in most cases whatever you&#8217;re looking up isn&#8217;t in the database. For example, if you want
 to block ads from certain URLs in a large list that&#8217;s not locally stored, it&#8217;s wasteful to get that
-list from the Internet each time you want to check a URL, because most URLs aren&#8217;t ads. You can
+list from the Internet each time you want to check a <span class="caps">URL</span>, because most URLs aren&#8217;t ads. You can
 combine this list with a locally-stored Bloom filter to very quickly eliminate the majority of URLs:
 because Bloom filters are always right if they give a negative answer, this will never result in ads
-being mistakenly shown: occasionally, you&#8217;ll query the list over the Internet and see that the URL
+being mistakenly shown: occasionally, you&#8217;ll query the list over the Internet and see that the <span class="caps">URL</span>
 isn&#8217;t an ad, but that&#8217;s an acceptable tradeoff for space and&nbsp;speed.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc14e737" class="outline-2">
-<h2 id="orgc14e737">Conclusion</h2>
-<div class="outline-text-2" id="text-orgc14e737">
+<div id="outline-container-org213c2f2" class="outline-2">
+<h2 id="org213c2f2">Conclusion</h2>
+<div class="outline-text-2" id="text-org213c2f2">
 <p>
 Whew, where was I? Like you might be starting to surmise, hash functions are used everywhere in
 computer science and cryptography. They&#8217;re an extraordinarily useful tool in all sorts of

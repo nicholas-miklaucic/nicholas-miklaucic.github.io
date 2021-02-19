@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Using invariants for clever solutions to problems">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · Problem-Solving Techniques: Invariants </title>
+<title>Pollard's Rho · Problem-Solving Techniques: Invariants </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -40,11 +40,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -81,9 +81,9 @@ such tool today:&nbsp;invariants.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org9cea640" class="outline-2">
-<h2 id="org9cea640">What is an&nbsp;Invariant?</h2>
-<div class="outline-text-2" id="text-org9cea640">
+<div id="outline-container-org5b71574" class="outline-2">
+<h2 id="org5b71574">What is an&nbsp;Invariant?</h2>
+<div class="outline-text-2" id="text-org5b71574">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -101,9 +101,9 @@ shape is invariant under translation, rotation, or&nbsp;reflection.
 </div>
 </div>
 
-<div id="outline-container-org3db1960" class="outline-2">
-<h2 id="org3db1960">Why Do We&nbsp;Care?</h2>
-<div class="outline-text-2" id="text-org3db1960">
+<div id="outline-container-orgb4c54fb" class="outline-2">
+<h2 id="orgb4c54fb">Why Do We&nbsp;Care?</h2>
+<div class="outline-text-2" id="text-orgb4c54fb">
 <p>
 The idea that area is invariant under these types of transformations is probably something you
 already knew. Thinking about it like this, though, lets us easily use it in ways that aren&#8217;t
@@ -113,16 +113,16 @@ entirely obvious&nbsp;otherwise.
 <p>
 Take, for example, the problem of determining if two triangles are congruent: that is, if one can be
 mapped onto the other through transformation, rotation, and reflection. In high school geometry you
-learn that three sides determine a triangle, called <i>SSS congruence</i>, and also that two sides and the
-angle between then does the same thing, called <i>SAS congruence</i>. If the three side lengths or two side
+learn that three sides determine a triangle, called <i><span class="caps">SSS</span> congruence</i>, and also that two sides and the
+angle between then does the same thing, called <i><span class="caps">SAS</span> congruence</i>. If the three side lengths or two side
 lengths and the angle between them match between two triangles, then we know that they can be mapped
 to one another. You also might learn that two sides and an angle not between both of them does not
-establish congruence. This isn&#8217;t intuitively obvious to many, and spurious &#8220;SSA congruence&#8221; is the
+establish congruence. This isn&#8217;t intuitively obvious to many, and spurious &#8220;<span class="caps">SSA</span> congruence&#8221; is the
 source of a lot of confusion in geometry&nbsp;classes.
 </p>
 
 <p>
-One way you might intuit that this doesn&#8217;t work is that SSS and SAS come with associated formulae
+One way you might intuit that this doesn&#8217;t work is that <span class="caps">SSS</span> and <span class="caps">SAS</span> come with associated formulae
 for the area of their corresponding triangle: because area is invariant under any transformation
 between congruent triangles, we know that congruence implies equal area. <a href="https://en.wikipedia.org/wiki/Heron%2527s_formula">Heron&#8217;s formula</a> gives you
 the area of a triangle given its side lengths, and given two side lengths \(a\) and \(b\) and the angle
@@ -133,22 +133,22 @@ different&nbsp;areas.
 
 <p>
 I&#8217;m interested in the fact that <b>knowing these formulae can suggest a completely different</b>
-<b>conjecture about congruence.</b> Knowing that SSS and SAS define a triangle&#8217;s <i>area</i> can suggest a
+<b>conjecture about congruence.</b> Knowing that <span class="caps">SSS</span> and <span class="caps">SAS</span> define a triangle&#8217;s <i>area</i> can suggest a
 completely different result about transforming triangles into one&nbsp;another.
 </p>
 
 <p>
 You might reasonably think that this sort of idea isn&#8217;t really that noteworthy or interesting, and
-you hardly need to think about area as an invariant to come up with SSS or SAS congruence. I would
+you hardly need to think about area as an invariant to come up with <span class="caps">SSS</span> or <span class="caps">SAS</span> congruence. I would
 argue, however, that this jump is only underwhelming because the results it gives us are familiar
 already. Let&#8217;s see how this sort of thinking can be applied to problems with less clear&nbsp;solutions.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4934a2a" class="outline-2">
-<h2 id="org4934a2a">General&nbsp;Terminology</h2>
-<div class="outline-text-2" id="text-org4934a2a">
+<div id="outline-container-org0250253" class="outline-2">
+<h2 id="org0250253">General&nbsp;Terminology</h2>
+<div class="outline-text-2" id="text-org0250253">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -171,9 +171,9 @@ all have some specific value for an invariant an <i>equivalence class</i>.
 </div>
 </div>
 
-<div id="outline-container-org6593c73" class="outline-2">
-<h2 id="org6593c73">A Cooler&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org6593c73">
+<div id="outline-container-org4e8be2e" class="outline-2">
+<h2 id="org4e8be2e">A Cooler&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org4e8be2e">
 <p>
 Imagine we have a grid and we can place 1x2 dominoes in that grid. There are all sorts of shapes we
 can make by placing these dominoes in different ways: we could make a 2x2 square, a 1x4 line, most
@@ -226,9 +226,9 @@ this tool. Now we know to try this method. The question is, how do we apply this
 </div>
 </div>
 
-<div id="outline-container-orgc29e315" class="outline-2">
-<h2 id="orgc29e315">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Invariants</h2>
-<div class="outline-text-2" id="text-orgc29e315">
+<div id="outline-container-orgeb2c364" class="outline-2">
+<h2 id="orgeb2c364">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Invariants</h2>
+<div class="outline-text-2" id="text-orgeb2c364">
 <p>
 I&#8217;m going to break this up into a couple of distinct&nbsp;steps.
 </p>
@@ -314,9 +314,9 @@ between the&nbsp;shapes.
 </div>
 </div>
 
-<div id="outline-container-org4609f31" class="outline-2">
-<h2 id="org4609f31">Generalization</h2>
-<div class="outline-text-2" id="text-org4609f31">
+<div id="outline-container-orgc326834" class="outline-2">
+<h2 id="orgc326834">Generalization</h2>
+<div class="outline-text-2" id="text-orgc326834">
 <p>
 Using invariance is especially fruitful because it suggests a number of other very interesting
 questions. Specifically, we know that our two invariants are <i>necessary</i> for a map to exist between
@@ -345,9 +345,9 @@ Thurston, W. (1990). Conway&#8217;s Tiling Groups. The American Mathematical Mon
 </div>
 </div>
 
-<div id="outline-container-org7b661c4" class="outline-2">
-<h2 id="org7b661c4">Gallery</h2>
-<div class="outline-text-2" id="text-org7b661c4">
+<div id="outline-container-org4b457ff" class="outline-2">
+<h2 id="org4b457ff">Gallery</h2>
+<div class="outline-text-2" id="text-org4b457ff">
 <p>
 Now that we&#8217;ve developed one example in full, I want to quickly run through a bunch of other
 problems where invariants are useful as a way to aid the reader in recognizing possible invariants
@@ -356,9 +356,9 @@ interested reader to learn&nbsp;more.
 </p>
 </div>
 
-<div id="outline-container-org1fd45ce" class="outline-3">
-<h3 id="org1fd45ce">The 15&nbsp;puzzle</h3>
-<div class="outline-text-3" id="text-org1fd45ce">
+<div id="outline-container-org733caec" class="outline-3">
+<h3 id="org733caec">The 15&nbsp;puzzle</h3>
+<div class="outline-text-3" id="text-org733caec">
 <p>
 There&#8217;s a famous sliding block <a href="https://en.wikipedia.org/wiki/15_puzzle">puzzle</a> that starts with a 4x4 grid tiled with numbers, with the last
 16 tile missing. The task is to switch the 14 and 15 tiles. There&#8217;s a parity invariant, a bit too
@@ -367,9 +367,9 @@ didn&#8217;t stop Sam Loyd, famed puzzle author, from offering $1,000 for doing 
 </p>
 </div>
 </div>
-<div id="outline-container-org7c66b3c" class="outline-3">
-<h3 id="org7c66b3c">Rubik&#8217;s&nbsp;Cube</h3>
-<div class="outline-text-3" id="text-org7c66b3c">
+<div id="outline-container-org4c48fb8" class="outline-3">
+<h3 id="org4c48fb8">Rubik&#8217;s&nbsp;Cube</h3>
+<div class="outline-text-3" id="text-org4c48fb8">
 <p>
 There&#8217;s another parity invariant here that applies to the standard Rubik&#8217;s cube: it&#8217;s impossible to
 switch two adjacent edge pieces without doing anything else. (If you have any friends who solve
@@ -381,9 +381,9 @@ chance of being&nbsp;soluble.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfb84e14" class="outline-3">
-<h3 id="orgfb84e14">Polygon&nbsp;Dissection</h3>
-<div class="outline-text-3" id="text-orgfb84e14">
+<div id="outline-container-org7ab71c3" class="outline-3">
+<h3 id="org7ab71c3">Polygon&nbsp;Dissection</h3>
+<div class="outline-text-3" id="text-org7ab71c3">
 <p>
 Given two polygons, can you cut one into pieces and reassemble them to get the other? The invariant
 that is most useful here is area. Satisfyingly, unlike our dominoes, this time area is both
@@ -392,9 +392,9 @@ congruence of shapes), a fact proved by the <a href="https://en.wikipedia.org/wi
 </p>
 </div>
 </div>
-<div id="outline-container-org53bd94b" class="outline-3">
-<h3 id="org53bd94b">Polyhedra&nbsp;Dissection</h3>
-<div class="outline-text-3" id="text-org53bd94b">
+<div id="outline-container-orgd5b63a2" class="outline-3">
+<h3 id="orgd5b63a2">Polyhedra&nbsp;Dissection</h3>
+<div class="outline-text-3" id="text-orgd5b63a2">
 <p>
 Extending the Wallace-Bolyai-Gerwien theorem to polyhedra was a famous problem, included on David
 Hilbert&#8217;s seminal list of problems presented in 1900 as important directions for future
@@ -406,9 +406,9 @@ show that two polyhedra can be dissected into each&nbsp;other.
 </p>
 </div>
 </div>
-<div id="outline-container-org5460cc6" class="outline-3">
-<h3 id="org5460cc6">Physical&nbsp;Systems</h3>
-<div class="outline-text-3" id="text-org5460cc6">
+<div id="outline-container-orga81f57c" class="outline-3">
+<h3 id="orga81f57c">Physical&nbsp;Systems</h3>
+<div class="outline-text-3" id="text-orga81f57c">
 <p>
 All sorts of invariants occur in physics problems, depending on the exact transformations being
 used: momentum, energy, the speed of light, etc. These are usually called <i>conservation laws</i>. Taking
@@ -418,9 +418,9 @@ connects invariants to symmetries called <a href="https://en.wikipedia.org/wiki/
 </p>
 </div>
 </div>
-<div id="outline-container-orge5c8ca7" class="outline-3">
-<h3 id="orge5c8ca7">Topology</h3>
-<div class="outline-text-3" id="text-orge5c8ca7">
+<div id="outline-container-org03baa31" class="outline-3">
+<h3 id="org03baa31">Topology</h3>
+<div class="outline-text-3" id="text-org03baa31">
 <p>
 I earlier mentioned that you can think of geometry as the study of invariants under translation,
 rotation, and reflection. What if we generalized this list to include any type of continuous
@@ -437,9 +437,9 @@ transform either into a torus (a donut shape) without tearing them because the t
 </p>
 </div>
 </div>
-<div id="outline-container-orgb6e1c00" class="outline-3">
-<h3 id="orgb6e1c00">Theorema&nbsp;Egregium</h3>
-<div class="outline-text-3" id="text-orgb6e1c00">
+<div id="outline-container-org24050ee" class="outline-3">
+<h3 id="org24050ee">Theorema&nbsp;Egregium</h3>
+<div class="outline-text-3" id="text-org24050ee">
 <p>
 The <a href="https://en.wikipedia.org/wiki/Gaussian_curvature?oldformat=true">theorema egregium</a> (&#8220;remarkable theorem&#8221;), proved by Gauss, loosely states that the curvature of
 a 2D surface doesn&#8217;t change depending on how you bend it in 3D space. For example, you can&#8217;t bend an
@@ -459,9 +459,9 @@ flat. Or, put another way, folding pizza makes it more&nbsp;stable!
 </div>
 </div>
 
-<div id="outline-container-org8e8137a" class="outline-2">
-<h2 id="org8e8137a">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org8e8137a">
+<div id="outline-container-orgc0ba678" class="outline-2">
+<h2 id="orgc0ba678">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgc0ba678">
 <p>
 I have two hopes at this point: that you, the reader, are now a little better at solving math
 problems creatively, and that you&#8217;ve seen how powerful invariants are in mathematics and for

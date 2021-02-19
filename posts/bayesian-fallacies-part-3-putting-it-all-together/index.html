@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Putting the Bayesian stats all together">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · Bayesian Fallacies, Part 3: Putting It All Together </title>
+<title>Pollard's Rho · Bayesian Fallacies, Part 3: Putting It All Together </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -40,11 +40,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -60,7 +60,7 @@
         <meta name="description" itemprop="description" content="Putting the Bayesian stats all together">
 <div class="e-content entry-content" itemprop="articleBody text">
     <p>
-Last time, we did a thorough mathematical analysis of our running PSAT test score problem, and got
+Last time, we did a thorough mathematical analysis of our running <span class="caps">PSAT</span> test score problem, and got
 some sense of why it doesn&#8217;t exhibit a strong regression to the mean effect. This time, we&#8217;ll
 generalize the problem completely and examine it in other contexts. We&#8217;ll bookend it by connecting
 it to Bayes&#8217; paradox, something I promised in the first post but haven&#8217;t done&nbsp;yet.
@@ -68,9 +68,9 @@ it to Bayes&#8217; paradox, something I promised in the first post but haven&#82
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org427cab3" class="outline-2">
-<h2 id="org427cab3">Dimensional Analysis and&nbsp;Reframing</h2>
-<div class="outline-text-2" id="text-org427cab3">
+<div id="outline-container-org67218a7" class="outline-2">
+<h2 id="org67218a7">Dimensional Analysis and&nbsp;Reframing</h2>
+<div class="outline-text-2" id="text-org67218a7">
 <p>
 Let&#8217;s zoom out. How can we frame this problem in a way that lets us apply this math to any example
 of the effect? In particular, consider \(P(A|B)\) as a function of \(M, S, \sigma\), and \(t\). What can
@@ -116,13 +116,13 @@ You might object that we haven&#8217;t been <i>using</i> any dimensions. How can
 </p>
 
 <p>
-My answer is that they&#8217;ve been there the whole time: I just haven&#8217;t been talking about them! PSAT
+My answer is that they&#8217;ve been there the whole time: I just haven&#8217;t been talking about them! <span class="caps">PSAT</span>
 points <i>is</i> a dimension of this problem, with all of the rules that mass or length have: we&#8217;ll use \(p\)
 as a shorthand to mirror \(m\) or \(s\) or \(^\circ C\) in physics. The reason I haven&#8217;t needed to talk
 about it is because all of these parameters have the same dimension: \(p\). This means that we can
 combined them and never need to worry about creating formulas that don&#8217;t work
 dimensionally. However, it will guide us in abstracting this problem now. How can we mess around
-with our <i>parameter space</i> to make the problem easier to generalize outside of PSAT&nbsp;points?
+with our <i>parameter space</i> to make the problem easier to generalize outside of <span class="caps">PSAT</span>&nbsp;points?
 </p>
 
 <p>
@@ -191,19 +191,19 @@ formulas we were using&nbsp;earlier.
 
 <p>
 To recap: by the principles of dimensional analysis, \(P(A|B)\) varies <i>only</i> as a function of \(z\) and
-\(\rho\): nothing else matters. This means we can compare problems with our PSAT example without
+\(\rho\): nothing else matters. This means we can compare problems with our <span class="caps">PSAT</span> example without
 redoing any math: just plug the new values in and we&#8217;re good to&nbsp;go!
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf182424" class="outline-2">
-<h2 id="orgf182424">\(z\) and \(\rho\) In&nbsp;Context</h2>
-<div class="outline-text-2" id="text-orgf182424">
+<div id="outline-container-orgcd433f5" class="outline-2">
+<h2 id="orgcd433f5">\(z\) and \(\rho\) In&nbsp;Context</h2>
+<div class="outline-text-2" id="text-orgcd433f5">
 <p>
 We want to get an intuitive sense of how \(z\) and \(\rho\) affect \(P(A|B)\) so we can intuit how
 different systems exhibit regression to the mean. First things first: what are the values of \(z\) and
-\(\rho\) for our PSAT running&nbsp;example?
+\(\rho\) for our <span class="caps">PSAT</span> running&nbsp;example?
 </p>
 
 <p>
@@ -216,7 +216,7 @@ around that for any version of the problem with these&nbsp;parameters.
 </p>
 <p>
 Note that the actual function \(P(A|B)\) of \(z\) and \(\rho\), if you wrote it out, would be a horrific
-mess of integrals and the normal CDF. This is normal for dimensional analysis: it&#8217;s nice when the
+mess of integrals and the normal <span class="caps">CDF</span>. This is normal for dimensional analysis: it&#8217;s nice when the
 value you care about is a nice function of your dimensionless quantities, but that isn&#8217;t always
 so. The importance of this technique is that, so long as we <i>can</i> compute \(P(A|B)\), we can still
 reason about different forms of the&nbsp;problem.
@@ -236,7 +236,7 @@ next time? That effect—comparing people to their prior selves—is a more gene
 regression to the mean. To borrow the Olympic ski jump example again, if the Norway skiier had a
 good first jump they&#8217;re still likely to have a good second jump, because Norwary Olympic skiiers
 tend to be really good, but it&#8217;s likely to be worse than their first. We&#8217;re going to focus on
-\(P(A|B)\) because it&#8217;s the one we care about for the PSAT example, but note that in the real world we
+\(P(A|B)\) because it&#8217;s the one we care about for the <span class="caps">PSAT</span> example, but note that in the real world we
 often are actually talking about this quantity. (The two values correlate with each other in
 reverse, so in comparing different scenarios it doesn&#8217;t matter which one we use: if \(P(A|B)\) is
 lower in one scenario than in another, the probability of doing worse the second time will be higher
@@ -244,13 +244,13 @@ and vice&nbsp;versa.)
 </p>
 </div>
 
-<div id="outline-container-org7a466f4" class="outline-3">
-<h3 id="org7a466f4"><span class="dquo">&#8220;</span>Sophomore Slump&#8221;: NBA Rookie&nbsp;Seasons</h3>
+<div id="outline-container-orgd639c34" class="outline-3">
+<h3 id="orgd639c34"><span class="dquo">&#8220;</span>Sophomore Slump&#8221;: <span class="caps">NBA</span> Rookie&nbsp;Seasons</h3>
 </div>
 </div>
-<div id="outline-container-orgfa0b226" class="outline-2">
-<h2 id="orgfa0b226">Medical Testing: Bringing It&nbsp;Home</h2>
-<div class="outline-text-2" id="text-orgfa0b226">
+<div id="outline-container-org4e42a5d" class="outline-2">
+<h2 id="org4e42a5d">Medical Testing: Bringing It&nbsp;Home</h2>
+<div class="outline-text-2" id="text-org4e42a5d">
 <p>
 Wait…does medical testing? It should: it&#8217;s finally time to connect this to Bayes&#8217; paradox and how
 I started this series. To refresh your memory, this was the example I used to introduce this&nbsp;phenomenon.
@@ -280,8 +280,8 @@ smaller than we&#8217;d&nbsp;expect.
 </p>
 
 <p>
-Now this is very close to matching our PSAT problem, and there&#8217;s only one more difference: in this
-example, our hidden variable (whether you have the disease) is <i>discrete</i>, and in our PSAT problem the
+Now this is very close to matching our <span class="caps">PSAT</span> problem, and there&#8217;s only one more difference: in this
+example, our hidden variable (whether you have the disease) is <i>discrete</i>, and in our <span class="caps">PSAT</span> problem the
 hidden variable \(\mu\) is <i>continuous</i>. Let&#8217;s fix&nbsp;this:
 </p>
 
@@ -297,18 +297,18 @@ disease once, what is the probability you test positive&nbsp;again?
 </blockquote>
 
 <p>
-This should seem <i>very</i> familiar: it is exactly the same as the PSAT example. I&#8217;ll follow this up with
-what I&#8217;d call the conjugate of this problem: the PSAT problem reframed as a discrete&nbsp;problem.
+This should seem <i>very</i> familiar: it is exactly the same as the <span class="caps">PSAT</span> example. I&#8217;ll follow this up with
+what I&#8217;d call the conjugate of this problem: the <span class="caps">PSAT</span> problem reframed as a discrete&nbsp;problem.
 </p>
 
 <p>
-#+BEGIN<sub>QUOTE</sub>$
-A rare disease called &#8220;Super Effective PSAT Studying&#8221; (SEPS) is afflicting the youth of America. It
-has a 1% prevalence in the general population. It causes an increase in the average score of PSAT
+#+<span class="caps">BEGIN</span><sub><span class="caps">QUOTE</span></sub>$
+A rare disease called &#8220;Super Effective <span class="caps">PSAT</span> Studying&#8221; (<span class="caps">SEPS</span>) is afflicting the youth of America. It
+has a 1% prevalence in the general population. It causes an increase in the average score of <span class="caps">PSAT</span>
 tests of the afflicted by two standard deviations. A test has been developed that administers the
-PSAT and tests for the National Merit cutoff. What is the chance that someone who tests positive the
+<span class="caps">PSAT</span> and tests for the National Merit cutoff. What is the chance that someone who tests positive the
 first time tests positive a second time?
-#+END<sub>QUOTE</sub></p>
+#+<span class="caps">END</span><sub><span class="caps">QUOTE</span></sub></p>
 
 <p>
 This should help in connecting the dots. Now that we&#8217;ve seen how mathematically similar these

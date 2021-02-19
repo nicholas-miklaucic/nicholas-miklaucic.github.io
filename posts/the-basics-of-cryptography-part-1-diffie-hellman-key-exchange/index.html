@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="How to send secure messages through insecure channels">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange </title>
+<title>Pollard's Rho · The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -40,11 +40,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -111,9 +111,9 @@ with historical developments and use that framework to see what computers bring 
 in this post, we&#8217;ll cover how the secret sauce that computers bring actually&nbsp;works.
 </p>
 
-<div id="outline-container-org131bc1b" class="outline-2">
-<h2 id="org131bc1b">Terminology</h2>
-<div class="outline-text-2" id="text-org131bc1b">
+<div id="outline-container-orge26e71f" class="outline-2">
+<h2 id="orge26e71f">Terminology</h2>
+<div class="outline-text-2" id="text-orge26e71f">
 <p>
 I want to briefly introduce some terminology which will make the rest of this easier to explain. A
 prior secret way of sending information, of the kind that you might expect Alice and Bob to need, is
@@ -129,9 +129,9 @@ With that out of the way, let&#8217;s get started! So how did people send secret
 </div>
 </div>
 
-<div id="outline-container-orga37c2ca" class="outline-2">
-<h2 id="orga37c2ca">History</h2>
-<div class="outline-text-2" id="text-orga37c2ca">
+<div id="outline-container-org232d396" class="outline-2">
+<h2 id="org232d396">History</h2>
+<div class="outline-text-2" id="text-org232d396">
 <p>
 Pre-modern efforts in cryptography were based around a different situation than the one I just
 described: there <i>is</i> a prior channel, but it&#8217;s temporary, and you want to send messages on an
@@ -172,15 +172,15 @@ information. Famously, the Enigma machine was broken using early computers and t
 mathematicians and scientists at Bletchley Park, which significantly benefitted the Allied war
 effort. Caesar ciphers (and transposition ciphers more generally, where symbols are replaced in some
 uniform pattern) can also be broken through <i>frequency analysis</i>: the most common letters in English
-text are, roughly in order, ETAOINSHRDLCU, and comparing the most frequent symbols in the <i>ciphertext</i>
+text are, roughly in order, <span class="caps">ETAOINSHRDLCU</span>, and comparing the most frequent symbols in the <i>ciphertext</i>
 (the coded message) to these letters and trying to find common words is usually enough to break&nbsp;them.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7301ed3" class="outline-2">
-<h2 id="org7301ed3">Doing&nbsp;Better</h2>
-<div class="outline-text-2" id="text-org7301ed3">
+<div id="outline-container-org0f1176e" class="outline-2">
+<h2 id="org0f1176e">Doing&nbsp;Better</h2>
+<div class="outline-text-2" id="text-org0f1176e">
 <p>
 To get from these codes—methods that require a <i>prior channel</i> and are still insecure—to methods that
 are (to our knowledge!) secure and don&#8217;t require this prior channel will require computers. Modern
@@ -197,9 +197,9 @@ completely different approach to the&nbsp;problem.)
 </div>
 </div>
 
-<div id="outline-container-org846552f" class="outline-2">
-<h2 id="org846552f">Peter and&nbsp;Natasha</h2>
-<div class="outline-text-2" id="text-org846552f">
+<div id="outline-container-org525818f" class="outline-2">
+<h2 id="org525818f">Peter and&nbsp;Natasha</h2>
+<div class="outline-text-2" id="text-org525818f">
 <p>
 Secure key exchange over a public channel seems…really hard, if not impossible. Surely if someone
 can listen to everything you say, you can&#8217;t tell someone a secret without them hearing it? I find it
@@ -233,7 +233,7 @@ while and coming back. I&#8217;ll&nbsp;wait!
 </p>
 
 <p>
-OK, so how do Peter and Natasha fix this problem? There&#8217;s a particularly clever&nbsp;solution:
+<span class="caps">OK</span>, so how do Peter and Natasha fix this problem? There&#8217;s a particularly clever&nbsp;solution:
 </p>
 <ol class="org-ol">
 <li>Peter puts the necklace in a box, locks it with his padlock, and sends it to&nbsp;Natasha.</li>
@@ -252,9 +252,9 @@ look at is sending numerical&nbsp;information.)
 </div>
 </div>
 
-<div id="outline-container-org91c0675" class="outline-2">
-<h2 id="org91c0675">One-Way&nbsp;Functions</h2>
-<div class="outline-text-2" id="text-org91c0675">
+<div id="outline-container-org482e143" class="outline-2">
+<h2 id="org482e143">One-Way&nbsp;Functions</h2>
+<div class="outline-text-2" id="text-org482e143">
 <p>
 What we&#8217;re describing is called a <i>one-way function</i>: some function \(f\) such that computing \(f(x)\) is
 easy, but finding the \(x\) for some \(y\) such that \(f(x) = y\) is hard. I&#8217;m not really going to worry
@@ -266,7 +266,7 @@ something and the computing power needed to crack&nbsp;it.
 
 <p>
 A quick disclaimer: it&#8217;s actually unknown whether one-way functions really exist in the sense I&#8217;m
-talking about them! (If you&#8217;re familiar with \(P = NP\), a famous unsolved problem in computer
+talking about them! (If you&#8217;re familiar with \(P = <span class="caps">NP</span>\), a famous unsolved problem in computer
 science, the answer hinges on that problem.) So, whenever I say &#8220;one-way function&#8221;, just mentally
 substitute &#8220;functions that people have spent fifty years trying to undo easily and haven&#8217;t found any
 success in doing&#8221; and we&#8217;ll be&nbsp;good.
@@ -274,9 +274,9 @@ success in doing&#8221; and we&#8217;ll be&nbsp;good.
 </div>
 </div>
 
-<div id="outline-container-orgf001762" class="outline-2">
-<h2 id="orgf001762">The Discrete Logarithm&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-orgf001762">
+<div id="outline-container-org2ad3752" class="outline-2">
+<h2 id="org2ad3752">The Discrete Logarithm&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org2ad3752">
 <p>
 The one-way function we&#8217;ll be looking at, because it&#8217;s commonly used and easy to understand compared
 to others, is the <i>discrete logarithm problem</i>, specifically the one about <i>modular exponentiation.</i>
@@ -374,9 +374,9 @@ all we care about is that we share <i>some</i> secret, not any particular&nbsp;o
 </div>
 </div>
 
-<div id="outline-container-orge51eb44" class="outline-2">
-<h2 id="orge51eb44">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-orge51eb44">
+<div id="outline-container-org60e2db7" class="outline-2">
+<h2 id="org60e2db7">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org60e2db7">
 <p>
 This algorithm is usually just called <i>Diffie-Hellman key exchange</i>, but Ralph Merkle should really
 get more of the credit. Our setup is that Alice and Bob want to agree on a secret number over a
@@ -420,9 +420,9 @@ even with supercomputers trying to break it, this encryption method is&nbsp;secu
 </div>
 </div>
 
-<div id="outline-container-orgfb290f7" class="outline-2">
-<h2 id="orgfb290f7">Conclusion</h2>
-<div class="outline-text-2" id="text-orgfb290f7">
+<div id="outline-container-orgf0144da" class="outline-2">
+<h2 id="orgf0144da">Conclusion</h2>
+<div class="outline-text-2" id="text-orgf0144da">
 <p>
 Let&#8217;s zoom out for a second. Until around 1970, any encryption method was reliant on the secrecy of
 the method itself or some prior secret key, and most of those methods were breakable (and,
@@ -455,7 +455,7 @@ someone else wrote is basically always more secure than doing it&nbsp;yourself.
 
 <p>
 Next time, I&#8217;ll look at another absolutely essential algorithm to the operation of the modern world:
-the <i>RSA cryptosystem.</i> This set of algorithms allows you to verify your identity, securely sign a
+the <i><span class="caps">RSA</span> cryptosystem.</i> This set of algorithms allows you to verify your identity, securely sign a
 message, and provide another way of achieving the type of encryption that we discussed here, by
 letting anyone encrypt messages that only a single person can decrypt. See you&nbsp;then!
 </p>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Introduction to RSA">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · The Basics of Cryptography, Part 2: Intro To RSA </title>
+<title>Pollard's Rho · The Basics of Cryptography, Part 2: Intro To RSA </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -41,11 +41,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -54,7 +54,7 @@
     </div>
 
     <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 2: Intro To&nbsp;RSA</a></h1>
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 2: Intro To&nbsp;<span class="caps">RSA</span></a></h1>
 
     <span class="post-date">
       <time class="published dt-published" datetime="2020-01-21T15:14:55-05:00" itemprop="datePublished" title="2020-01-21 15:14">2020-01-21 15:14</time></span>
@@ -67,54 +67,54 @@ modular arithmetic, read that before reading&nbsp;this.
 
 <p>
 Today we&#8217;re going to continue to look behind the curtain at the algorithms that power the Internet
-we know and love. In this post, I&#8217;ll cover the RSA cryptosystem: what it is, what it does, how it
-works, etc. RSA is such a useful algorithm because it sidesteps a lot of the problems with sending
+we know and love. In this post, I&#8217;ll cover the <span class="caps">RSA</span> cryptosystem: what it is, what it does, how it
+works, etc. <span class="caps">RSA</span> is such a useful algorithm because it sidesteps a lot of the problems with sending
 secure messages we talked about last time. You can think of it as a clever way of improving on the
 encryption model we used last time, not by simply improving it as it exists, but by completely
 sidestepping the security problems it&nbsp;had.
 </p>
 
 <p>
-This post will introduce a pristine version of RSA, without the real-world complications, and apply
+This post will introduce a pristine version of <span class="caps">RSA</span>, without the real-world complications, and apply
 it to the same problem we looked at last time: securely sending a message to someone else over an
-insecure channel, without prior communication. In the future, I&#8217;ll look at how this textbook RSA
-fails in the real world, and additionally how you can use the idea behind RSA to do things besides
+insecure channel, without prior communication. In the future, I&#8217;ll look at how this textbook <span class="caps">RSA</span>
+fails in the real world, and additionally how you can use the idea behind <span class="caps">RSA</span> to do things besides
 sending secure&nbsp;messages.
 </p>
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org9751b8f" class="outline-2">
-<h2 id="org9751b8f">A Brief Historical&nbsp;Prelude</h2>
-<div class="outline-text-2" id="text-org9751b8f">
+<div id="outline-container-orgc42fc23" class="outline-2">
+<h2 id="orgc42fc23">A Brief Historical&nbsp;Prelude</h2>
+<div class="outline-text-2" id="text-orgc42fc23">
 <p>
-RSA was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
-after Diffie-Hellman key exchange: we can essentially think of RSA as an answer to the question that
+<span class="caps">RSA</span> was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
+after Diffie-Hellman key exchange: we can essentially think of <span class="caps">RSA</span> as an answer to the question that
 key exchange posed: &#8220;are there one-way functions that can be used to encrypt messages?&#8221; The goal was
 to have some mathematical guarantee of security backed by the difficulty of solving some sort of
 problem&nbsp;algorithmically. 
 </p>
 
 <p>
-RSA encryption is still widely used today, despite lots of alternatives popping up over the past
+<span class="caps">RSA</span> encryption is still widely used today, despite lots of alternatives popping up over the past
 several decades. I think there are a couple reasons for this: it&#8217;s decently fast, it was first, and
-it&#8217;s fairly easy for non-mathematicians to understand. RSA being first is incredibly important:
+it&#8217;s fairly easy for non-mathematicians to understand. <span class="caps">RSA</span> being first is incredibly important:
 before its publication, it was unclear if such a method of encryption even existed, and having a
-fairly simple mathematical justification for the claim that breaking RSA would require billions of
+fairly simple mathematical justification for the claim that breaking <span class="caps">RSA</span> would require billions of
 years to break was enormously&nbsp;appealing.
 </p>
 
 <p>
-So, with that out of the way, what does RSA do and how does it do&nbsp;it?
+So, with that out of the way, what does <span class="caps">RSA</span> do and how does it do&nbsp;it?
 </p>
 </div>
 </div>
 
-<div id="outline-container-org87b5c05" class="outline-2">
-<h2 id="org87b5c05">Public-Key&nbsp;Encryption</h2>
-<div class="outline-text-2" id="text-org87b5c05">
+<div id="outline-container-org5511549" class="outline-2">
+<h2 id="org5511549">Public-Key&nbsp;Encryption</h2>
+<div class="outline-text-2" id="text-org5511549">
 <p>
-RSA is a <i>public-key</i> cryptosystem. This means that, instead of a single password or code that can be
+<span class="caps">RSA</span> is a <i>public-key</i> cryptosystem. This means that, instead of a single password or code that can be
 used to encrypt and decrypt a message, like the Enigma machine we talked about last time, it&#8217;s
 fundamentally <i>asymmetric</i>. You get two keys instead of&nbsp;one:
 </p>
@@ -131,9 +131,9 @@ on the simplest example: I want to send Alice a message that only she can read. 
 </div>
 </div>
 
-<div id="outline-container-org365312a" class="outline-2">
-<h2 id="org365312a">What&#8217;s the&nbsp;Trick?</h2>
-<div class="outline-text-2" id="text-org365312a">
+<div id="outline-container-orgec84ba6" class="outline-2">
+<h2 id="orgec84ba6">What&#8217;s the&nbsp;Trick?</h2>
+<div class="outline-text-2" id="text-orgec84ba6">
 <p>
 I think a very useful way of thinking about an algorithm is to try and deconstruct it into the
 essential component or &#8220;trick&#8221; that makes it work and the components that simply let the essential
@@ -141,31 +141,31 @@ insight of the algorithm&nbsp;work.
 </p>
 
 <p>
-Here, we can decompose RSA into two parts: finding a one-way function that can be used for
+Here, we can decompose <span class="caps">RSA</span> into two parts: finding a one-way function that can be used for
 public-key encryption, and making sure that you have to actually solve that problem in order to
 break the cipher. I don&#8217;t want to make it sound like the last part isn&#8217;t really hard or crucially
-important: a bare-bones RSA implementation will have all sorts of flaws that allow an attacker to
+important: a bare-bones <span class="caps">RSA</span> implementation will have all sorts of flaws that allow an attacker to
 completely bypass the actual math problem, and fixing these issues is an essential and interesting
 task. <i>However</i>, those parts aren&#8217;t nearly as elegant as the math, and so I&#8217;m not really going to be
-going into much detail about how RSA is implemented in&nbsp;practice.
+going into much detail about how <span class="caps">RSA</span> is implemented in&nbsp;practice.
 </p>
 
 <p>
-So, what one-way function does RSA use? (My caveat from last time still holds: it&#8217;s an open question
+So, what one-way function does <span class="caps">RSA</span> use? (My caveat from last time still holds: it&#8217;s an open question
 whether one-way functions as I describe them exist, and so I&#8217;m using the term to mean &#8220;a function
 that, as of writing, is one-way and likely to remain&nbsp;so.&#8221;)
 </p>
 </div>
 </div>
 
-<div id="outline-container-org099c8c8" class="outline-2">
-<h2 id="org099c8c8">A Note on&nbsp;Presentation</h2>
-<div class="outline-text-2" id="text-org099c8c8">
+<div id="outline-container-org7b36b0c" class="outline-2">
+<h2 id="org7b36b0c">A Note on&nbsp;Presentation</h2>
+<div class="outline-text-2" id="text-org7b36b0c">
 <p>
-RSA is often presented dryly starting with exactly how you generate keys, decrypt messages, and
+<span class="caps">RSA</span> is often presented dryly starting with exactly how you generate keys, decrypt messages, and
 encrypt them. I think this approach is a little confusing, because it doesn&#8217;t at all explain how
 someone would think to do any of this in the first place. Instead, I&#8217;m going to start with the idea
-behind RSA, and only then explain how you actually use that kernel of an idea to actually send
+behind <span class="caps">RSA</span>, and only then explain how you actually use that kernel of an idea to actually send
 messages. That means that I&#8217;m only going to explain how to actually generate keys at the very end,
 so there will be a little magic going on in the next couple sections. Just stick with me: all will
 be explained at the&nbsp;end!
@@ -173,13 +173,13 @@ be explained at the&nbsp;end!
 </div>
 </div>
 
-<div id="outline-container-orga3609a3" class="outline-2">
-<h2 id="orga3609a3">The RSA&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-orga3609a3">
+<div id="outline-container-org3f3a12c" class="outline-2">
+<h2 id="org3f3a12c">The <span class="caps">RSA</span>&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org3f3a12c">
 <p>
 Public-key cryptography is basically advertising a set of problems that only you know the solution
 to: anyone with your public key can encrypt a message using a problem in your set, and ideally only
-you can solve the problem and then use that to decrypt the message. In that vein, I&#8217;ll present RSA&#8217;s
+you can solve the problem and then use that to decrypt the message. In that vein, I&#8217;ll present <span class="caps">RSA</span>&#8217;s
 essential trick as a&nbsp;question:
 </p>
 
@@ -191,16 +191,16 @@ number \(d\) has the property that \((m^e)^d \equiv m \pmod n\), assuming such a
 </blockquote>
 
 <p>
-In RSA, the public key includes \(n\) and \(e\) but not \(m\): this means that you can send any number
-between \(0\) and \(n-1\) through RSA, and you can do so as many times as you need to. The solution
+In <span class="caps">RSA</span>, the public key includes \(n\) and \(e\) but not \(m\): this means that you can send any number
+between \(0\) and \(n-1\) through <span class="caps">RSA</span>, and you can do so as many times as you need to. The solution
 doesn&#8217;t change with different values of \(m\), only for different values of \(e\) and&nbsp;\(n\).
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6d27972" class="outline-2">
-<h2 id="org6d27972">An&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org6d27972">
+<div id="outline-container-org5f38763" class="outline-2">
+<h2 id="org5f38763">An&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org5f38763">
 <p>
 You might very well ask, &#8220;Nicholas, how would we generate \(n, e\), and \(d\) to make this work? Why is
 \(n\) a <i>semiprime</i> (the product of two primes)?&#8221; I&#8217;ll get there later. For now, we&#8217;re just going to
@@ -226,9 +226,9 @@ seventh power modulo \(n\) results in the original message. So, to decrypt my me
 </div>
 </div>
 
-<div id="outline-container-orge3fd55c" class="outline-2">
-<h2 id="orge3fd55c">(Trying to) Break&nbsp;RSA</h2>
-<div class="outline-text-2" id="text-orge3fd55c">
+<div id="outline-container-org4df76ec" class="outline-2">
+<h2 id="org4df76ec">(Trying to) Break&nbsp;<span class="caps">RSA</span></h2>
+<div class="outline-text-2" id="text-org4df76ec">
 <p>
 How might an attacker, who we&#8217;ll call Eve, try to decrypt the message I sent for Alice without
 knowing&nbsp;\(d\)? 
@@ -245,28 +245,28 @@ exponentially more computing power than the people sending messages, at least wi
 
 <p>
 Another approach is to factor \(n\). It might be unclear how this would help: we&#8217;ll get to that in a
-second. This approach is the most direct: if you need a one-sentence version of why breaking RSA is
+second. This approach is the most direct: if you need a one-sentence version of why breaking <span class="caps">RSA</span> is
 hard, you should probably go with &#8220;integer factorization is&nbsp;hard&#8221;.
 </p>
 
 <p>
 The last approach would be some other trick that avoids having to solve the integer factorization
-problem or the discrete logarithm problem. This is a very important thing to keep in mind! The RSA
+problem or the discrete logarithm problem. This is a very important thing to keep in mind! The <span class="caps">RSA</span>
 problem, as much as people often mix this up, is <i>not</i> proven to be equivalent to integer
 factorization or computing discrete logarithms. In fact, it&#8217;s very reasonable to think that solving
 either of those, which allows you to decrypt any message, should be harder than decrypting a single
-message. As of yet no efficient way of breaking RSA like this is known, but it&#8217;s not impossible&nbsp;either. 
+message. As of yet no efficient way of breaking <span class="caps">RSA</span> like this is known, but it&#8217;s not impossible&nbsp;either. 
 </p>
 
 <p>
-OK, so why does factoring \(n\) help? To see that, let&#8217;s go over how \(e\) and \(d\) are&nbsp;generated.
+<span class="caps">OK</span>, so why does factoring \(n\) help? To see that, let&#8217;s go over how \(e\) and \(d\) are&nbsp;generated.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org58e62b9" class="outline-2">
-<h2 id="org58e62b9">Generating&nbsp;Keys</h2>
-<div class="outline-text-2" id="text-org58e62b9">
+<div id="outline-container-org99b9ce7" class="outline-2">
+<h2 id="org99b9ce7">Generating&nbsp;Keys</h2>
+<div class="outline-text-2" id="text-org99b9ce7">
 <p>
 So how did Alice find \(d\), if doing it seems so difficult? \(n\), \(e\) and \(d\) have to be generated
 together: the whole point is that finding \(d\) if you only know \(n\) and \(e\) is really hard. We can
@@ -286,7 +286,7 @@ If we can do this, then we have, for any message&nbsp;\(m\),
 </p>
 
 <p>
-which is the solution to the RSA problem that we&#8217;re looking for. Note that \(k\) is any positive
+which is the solution to the <span class="caps">RSA</span> problem that we&#8217;re looking for. Note that \(k\) is any positive
 integer, and we know that we can find a \(k\) such that \(ed = kx + 1\) because \(ed \equiv 1 \pmod&nbsp;x\).
 </p>
 
@@ -296,9 +296,9 @@ So how can we find some number \(x\) such that \(a^x \equiv 1 \pmod n\) for any 
 </div>
 </div>
 
-<div id="outline-container-org36d8596" class="outline-2">
-<h2 id="org36d8596">The Carmichael&nbsp;Function</h2>
-<div class="outline-text-2" id="text-org36d8596">
+<div id="outline-container-orga2308bb" class="outline-2">
+<h2 id="orga2308bb">The Carmichael&nbsp;Function</h2>
+<div class="outline-text-2" id="text-orga2308bb">
 <p>
 The function that takes in \(n\) and finds us the smallest \(x\) this works for is called the <i>Carmichael</i>
 <i>function</i>. It&#8217;s usually written as&nbsp;\(\lambda(n)\).
@@ -334,24 +334,24 @@ background so I&#8217;ll skip talking about that for&nbsp;now.
 
 <p>
 That was a fair bit of math! It&#8217;s important to know <i>why</i> this last expression lets us generate keys,
-and some introductions to RSA skip going over why the Carmichael function works out to this value
+and some introductions to <span class="caps">RSA</span> skip going over why the Carmichael function works out to this value
 for semiprimes. That leaves a bad taste in my mouth: I hate explanations of anything that require
 magic. Go get coffee or something and come back and look over this again if it helps: getting a feel
-for why this works is vital to understanding how RSA actually uses integer factorization to make
+for why this works is vital to understanding how <span class="caps">RSA</span> actually uses integer factorization to make
 hard problems. Hopefully, you now understand why computing \(lcm(p - 1, q - 1)\) is useful: it&#8217;s the
 number that will let us generate \(e\) and&nbsp;\(d\).
 </p>
 
 <p>
 Note that this process only works if we know \(p\) and \(q\)! This is why factoring \(n\) is one way of
-breaking RSA: if we know \(p\) and \(q\), we can easily generate&nbsp;\(d\).
+breaking <span class="caps">RSA</span>: if we know \(p\) and \(q\), we can easily generate&nbsp;\(d\).
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga8b3846" class="outline-2">
-<h2 id="orga8b3846">Finding \(e\) and&nbsp;\(d\)</h2>
-<div class="outline-text-2" id="text-orga8b3846">
+<div id="outline-container-orga150b5a" class="outline-2">
+<h2 id="orga150b5a">Finding \(e\) and&nbsp;\(d\)</h2>
+<div class="outline-text-2" id="text-orga150b5a">
 <p>
 So now we have some number \(\lambda(n)\) such that, for any positive integer \(k\), raising a number to the
 power \(k\lambda(n) + 1\) modulo \(n\) gets you your original number back. Now we just need to find two
@@ -390,9 +390,9 @@ make decryption faster: this has the unfortunate side effect that it&#8217;s eas
 </div>
 </div>
 
-<div id="outline-container-org0a7b507" class="outline-2">
-<h2 id="org0a7b507">Bringing It All Together: A More Complex&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org0a7b507">
+<div id="outline-container-orgef16891" class="outline-2">
+<h2 id="orgef16891">Bringing It All Together: A More Complex&nbsp;Example</h2>
+<div class="outline-text-2" id="text-orgef16891">
 <p>
 Let&#8217;s do another example, with slightly bigger numbers. The twist is that now I&#8217;m the one generating
 a private key and Alice is the one sending a message. This will require all of the insight we&#8217;ve
@@ -417,31 +417,31 @@ communications would be unable to figure this&nbsp;out.</li>
 </ol>
 <p>
 I encourage you to check the math on this yourself: if you enjoy a little programming, try writing a
-basic version of&nbsp;RSA!
+basic version of&nbsp;<span class="caps">RSA</span>!
 </p>
 </div>
 </div>
 
-<div id="outline-container-org10af772" class="outline-2">
-<h2 id="org10af772">A&nbsp;Warning</h2>
-<div class="outline-text-2" id="text-org10af772">
+<div id="outline-container-orge8ac560" class="outline-2">
+<h2 id="orge8ac560">A&nbsp;Warning</h2>
+<div class="outline-text-2" id="text-orge8ac560">
 <p>
 Just like last time, I want to stress something: <i>if you are writing this yourself to use in any
 real-world</i> <i>application, stop!</i> (Doing it yourself is a great way to learn, however.) Getting the gist
 of it and implementing a version that&#8217;s actually secure are worlds apart in difficulty, and there
-are lots of ways this textbook version of RSA isn&#8217;t very secure. Leave it to the&nbsp;experts.
+are lots of ways this textbook version of <span class="caps">RSA</span> isn&#8217;t very secure. Leave it to the&nbsp;experts.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgad02d93" class="outline-2">
-<h2 id="orgad02d93">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orgad02d93">
+<div id="outline-container-org0a023de" class="outline-2">
+<h2 id="org0a023de">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-org0a023de">
 <p>
 So now we have another way of sending secure messages over insecure channels: something the world at
 large couldn&#8217;t do until 1977 at the very least. Again, this is a criminally underappreciated
 discovery, as important to the modern world as wireless Internet. The modern world simply could not
-function without the service RSA&nbsp;provides.
+function without the service <span class="caps">RSA</span>&nbsp;provides.
 </p>
 
 <p>
@@ -455,8 +455,8 @@ verification</i> and <i>message authenticity</i>:
 Alice and Bob are organizing anti-government activism in a country that represses political
 freedoms. Alice wants to tell Bob to meet her in a certain place, but they can only communicate over
 the Internet: Bob worries that the government, which controls their Internet provider, will forge a
-message from Alice and set him up. They have shared RSA public keys with each other, but because
-anyone can encrypt a message in RSA Bob can&#8217;t be sure that the messages he receives aren&#8217;t being
+message from Alice and set him up. They have shared <span class="caps">RSA</span> public keys with each other, but because
+anyone can encrypt a message in <span class="caps">RSA</span> Bob can&#8217;t be sure that the messages he receives aren&#8217;t being
 forged. How can Bob verify that Alice&#8217;s messages haven&#8217;t been&nbsp;modified?
 </p>
 </blockquote>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Opening into the void and Pollard's rho algorithm">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · Hello, World! </title>
+<title>Pollard's Rho · Hello, World! </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -39,11 +39,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -66,7 +66,7 @@ math and computer science backgrounds can find something useful for&nbsp;them.
 </p>
 
 <p>
-So, hello world!<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> I thought the first thing I should probably do is explain why I go by the tag
+So, hello world!<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> I thought the first thing I should probably do is explain why I go by the&nbsp;tag
 <code>PollardsRho</code> in various places and why I decided to give this blog the title &#8220;Pollard&#8217;s Rho.&#8221; Simply
 put, it&#8217;s my favorite algorithm: kind of an esoteric category to have a favorite in, but I&#8217;m sure by
 the end of this you&#8217;ll see what I&nbsp;mean.
@@ -74,9 +74,9 @@ the end of this you&#8217;ll see what I&nbsp;mean.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org2e0fca6" class="outline-2">
-<h2 id="org2e0fca6">Problem</h2>
-<div class="outline-text-2" id="text-org2e0fca6">
+<div id="outline-container-orgc5e670c" class="outline-2">
+<h2 id="orgc5e670c">Problem</h2>
+<div class="outline-text-2" id="text-orgc5e670c">
 <p>
 I&#8217;ll be talking about using Pollard&#8217;s rho for integer factorization, arguably the most famous and
 important problem underlying modern cryptography. We have a big number \(n\) that isn&#8217;t prime, and we
@@ -111,9 +111,9 @@ amount multiplicatively increases the time it takes to factor a number with that
 </div>
 </div>
 
-<div id="outline-container-orga9de0fe" class="outline-2">
-<h2 id="orga9de0fe">Ideas</h2>
-<div class="outline-text-2" id="text-orga9de0fe">
+<div id="outline-container-org994d221" class="outline-2">
+<h2 id="org994d221">Ideas</h2>
+<div class="outline-text-2" id="text-org994d221">
 <p>
 I think it&#8217;s helpful, when analyzing algorithms, to think about what is <i>incidental</i> and what is
 <i>germane</i>. What aspects of an algorithm can be changed without significantly affecting its asymptotic
@@ -126,13 +126,13 @@ Pollard&#8217;s rho uses two important&nbsp;insights:
 </p>
 </div>
 
-<div id="outline-container-orgafa833a" class="outline-3">
-<h3 id="orgafa833a">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
-<div class="outline-text-3" id="text-orgafa833a">
+<div id="outline-container-org30c027c" class="outline-3">
+<h3 id="org30c027c">Insight 1: The Euclidean algorithm allows us to solve a related problem&nbsp;quickly.</h3>
+<div class="outline-text-3" id="text-org30c027c">
 <p>
 Many algorithms in computer science rely on related, easier problems, and Pollard&#8217;s rho is no
 different. The <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a>, invented thousands of years ago (!), solves the problem of
-finding the greatest common divisor of two numbers. This GCD, if it&#8217;s not \(1\) or either of the input
+finding the greatest common divisor of two numbers. This <span class="caps">GCD</span>, if it&#8217;s not \(1\) or either of the input
 numbers, is a divisor of both, which is exactly what we want. Importantly, the Euclidean algorithm
 runs in polynomial time, meaning that it&#8217;s significantly faster than something like trial division
 where the input size is in the top of an exponent. Here, adding another digit to both numbers
@@ -140,7 +140,7 @@ doesn&#8217;t multiplicatively increase the running&nbsp;time.
 </p>
 
 <p>
-The problem for us is that simply computing the GCD of our input \(n\) and a bunch of other numbers
+The problem for us is that simply computing the <span class="caps">GCD</span> of our input \(n\) and a bunch of other numbers
 isn&#8217;t really improving on trial division, because figuring out which numbers will give us a useful
 result is as hard to factoring&nbsp;\(n\). 
 </p>
@@ -148,13 +148,13 @@ result is as hard to factoring&nbsp;\(n\).
 <p>
 The right frame of mind for this problem is now to think about it like this: we&#8217;re trying to find a
 pair of numbers that are <i>equivalent</i> in a certain way (specifically, modulo \(p\), so we can compute their
-GCD and find \(p\)). This leads us to our second&nbsp;insight:
+<span class="caps">GCD</span> and find \(p\)). This leads us to our second&nbsp;insight:
 </p>
 </div>
 </div>
-<div id="outline-container-org9d24a6c" class="outline-3">
-<h3 id="org9d24a6c">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
-<div class="outline-text-3" id="text-org9d24a6c">
+<div id="outline-container-orgcee764c" class="outline-3">
+<h3 id="orgcee764c">Insight 2: The birthday paradox means that finding <i>any</i> equivalent pair of something takes much fewer attempts to do than finding a pair with some specific&nbsp;element.</h3>
+<div class="outline-text-3" id="text-orgcee764c">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -177,9 +177,9 @@ Now, how does John Pollard use these two&nbsp;ideas?
 </div>
 </div>
 
-<div id="outline-container-org4e3c82f" class="outline-2">
-<h2 id="org4e3c82f">The&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org4e3c82f">
+<div id="outline-container-org5b7e216" class="outline-2">
+<h2 id="org5b7e216">The&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org5b7e216">
 <ol class="org-ol">
 <li>Take your input number \(n\), and define a function \(f(x) = x^2 + 1 \pmod{n}\). The exact polynomial
 isn&#8217;t that important (one of those incidental details I mentioned earlier), but \(f(x)\) shouldn&#8217;t
@@ -188,7 +188,7 @@ share factors with \(x\): this is the simplest way of doing&nbsp;that.</li>
 \(x_1, x_2, x_3\),&nbsp;etc.</li>
 <li>Use a cycle-finding algorithm to find some pair such that \(\gcd(|x_i - x_j|, n) \neq 1\). I call
 this <i>cycle-finding</i> for reasons that will be apparent&nbsp;shortly.</li>
-<li>Once you find such a pair, if the GCD is \(n\), then restart with different parameters. Otherwise,
+<li>Once you find such a pair, if the <span class="caps">GCD</span> is \(n\), then restart with different parameters. Otherwise,
 you have found a factor of \(n\) and the algorithm is a&nbsp;success.</li>
 </ol>
 <p>
@@ -197,9 +197,9 @@ Why does this work? What does it have to do with the birthday paradox? What is i
 </div>
 </div>
 
-<div id="outline-container-orgd3b4ac7" class="outline-2">
-<h2 id="orgd3b4ac7">Analysis</h2>
-<div class="outline-text-2" id="text-orgd3b4ac7">
+<div id="outline-container-org978296b" class="outline-2">
+<h2 id="org978296b">Analysis</h2>
+<div class="outline-text-2" id="text-org978296b">
 <p>
 The reason I call step 3 cycle-finding is because we can really think of this sequence \(x_1, x_2, \dots\)
 as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 \pmod{p},&nbsp;\dots\)
@@ -209,7 +209,7 @@ as &#8220;shadowing&#8221; the real sequence we care about: \(x_1 \pmod{p}, x_2 
 Obviously, because we don&#8217;t know \(p\), we can&#8217;t observe the second sequence (which I&#8217;ll call \(y_1, y_2\)
 , etc.) directly. However, this second sequence has to repeat eventually: there are finitely many
 possible values. When it does, with arbitrary \(y_i = y_j\), we&#8217;ll have that \(|x_i - x_j|\) is a multiple
-of \(p\): thus, its GCD with \(n\) will probably<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> be \(p\), and we&#8217;ll have achieved our&nbsp;goal.
+of \(p\): thus, its <span class="caps">GCD</span> with \(n\) will probably<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> be \(p\), and we&#8217;ll have achieved our&nbsp;goal.
 </p>
 
 <p>
@@ -252,9 +252,9 @@ smallest prime&nbsp;factor.
 </div>
 </div>
 
-<div id="outline-container-org8186694" class="outline-2">
-<h2 id="org8186694">Why is this&nbsp;cool?</h2>
-<div class="outline-text-2" id="text-org8186694">
+<div id="outline-container-org108b2ee" class="outline-2">
+<h2 id="org108b2ee">Why is this&nbsp;cool?</h2>
+<div class="outline-text-2" id="text-org108b2ee">
 <p>
 There are two reasons I really like this&nbsp;algorithm:
 </p>
@@ -275,7 +275,7 @@ See the&nbsp;resemblance?
 
 <p>
 Secondly, this algorithm was published in 1975.<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> Integer factorization became important in
-cryptography from a practical perspective when the <a href="https://doi.org/10.1145/359340.359342">RSA cryptosystem</a> was published in 1978. Nowadays,
+cryptography from a practical perspective when the <a href="https://doi.org/10.1145/359340.359342"><span class="caps">RSA</span> cryptosystem</a> was published in 1978. Nowadays,
 this problem underlies an enormous amount of modern encryption: every time you send your credit card
 info over the Internet and that info stays safe, you should probably thank the fact that this
 problem is&nbsp;hard.
@@ -285,7 +285,7 @@ problem is&nbsp;hard.
 Given this, you&#8217;d think that useful algorithms for factoring integers would have not been that big
 of a deal until 1978, especially given that computers weren&#8217;t really that big of a deal then either
 (or the Internet). But John Pollard, not a programmer but a mathematician, invented this anyway. I
-like to think that Pollard didn&#8217;t invent this to break RSA and become a rich hacker, or just for a
+like to think that Pollard didn&#8217;t invent this to break <span class="caps">RSA</span> and become a rich hacker, or just for a
 paycheck, but instead because it was <i>there</i> waiting for him. Pollard&#8217;s rho algorithm stands out to me
 as a wonderful example of the good things that can come from a deep appreciation of the beauty and
 wonder in the world—of the power and elegance of mathematics, computing, and&nbsp;data.
@@ -324,7 +324,7 @@ important for an intuitive understanding of why this might&nbsp;work.
 
 <div class="footdef">
 <sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup><div class="footpara"><p class="footpara">
-<a href="https://doi.org/10.1007/BF01933667">https://doi.org/10.1007/BF01933667</a>
+<a href="https://doi.org/10.1007/BF01933667">https://doi.org/10.1007/<span class="caps">BF01933667</span></a>
 </p></div>
 </div>
 

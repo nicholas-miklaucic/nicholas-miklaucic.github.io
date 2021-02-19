@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Explaining the solution to How'd I Get Hacked? and Unicode skullduggery">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · PACTF 2019 Writeup: How&#8217;d I Get Hacked? </title>
+<title>Pollard's Rho · PACTF 2019 Writeup: How'd I Get Hacked? </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -40,11 +40,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -53,14 +53,14 @@
     </div>
 
     <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">PACTF 2019 Writeup: How&#8217;d I Get&nbsp;Hacked?</a></h1>
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url"><span class="caps">PACTF</span> 2019 Writeup: How&#8217;d I Get&nbsp;Hacked?</a></h1>
 
     <span class="post-date">
       <time class="published dt-published" datetime="2020-01-12T23:44:37-05:00" itemprop="datePublished" title="2020-01-12 23:44">2020-01-12 23:44</time></span>
         <meta name="description" itemprop="description" content="Explaining the solution to How'd I Get Hacked? and Unicode skullduggery">
 <div class="e-content entry-content" itemprop="articleBody text">
     <p>
-As I mentioned <a href="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/">in this post</a>, I wrote several problems for PACTF 2019, a cybersecurity and
+As I mentioned <a href="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/">in this post</a>, I wrote several problems for <span class="caps">PACTF</span> 2019, a cybersecurity and
 programming competition held for high schoolers. I&#8217;ve been asked to do writeups for each of the
 problems I did, and so I&#8217;ll be trying to do that—at least, where I think there&#8217;s something
 interesting to talk about for the people reading this who didn&#8217;t compete and don&#8217;t care about the&nbsp;contest. 
@@ -83,16 +83,16 @@ I&#8217;ll save you the time: even if you looked through every single filename, 
 wrong. To see why appearances can be deceiving, we&#8217;ll have to talk about <i>Unicode</i>. 
 </p>
 
-<div id="outline-container-orgd865b8f" class="outline-2">
-<h2 id="orgd865b8f">Unicode</h2>
-<div class="outline-text-2" id="text-orgd865b8f">
+<div id="outline-container-orgd9755f4" class="outline-2">
+<h2 id="orgd9755f4">Unicode</h2>
+<div class="outline-text-2" id="text-orgd9755f4">
 <p>
 When you read these words, you think of them as words. But computers don&#8217;t see words: they see
 1s and 0s. How can we use bits to represent&nbsp;words?
 </p>
 
 <p>
-One effort was <i>ASCII</i>, the system that early computers used. This system used 7 bits per character,
+One effort was <i><span class="caps">ASCII</span></i>, the system that early computers used. This system used 7 bits per character,
 which gives 128 slots for characters. This allows for punctuation, the uppercase and lowercase
 English alphabet, digits, some whitespace (like spaces and tabs), and some control&nbsp;characters. 
 </p>
@@ -115,7 +115,7 @@ human language, even ones that aren&#8217;t spoken&nbsp;anymore.
 <span class="marginnote"><p>
 </p>
 <p>
-Image is <a href="https://xkcd.com/1726/">XKCD 1726</a>.
+Image is <a href="https://xkcd.com/1726/"><span class="caps">XKCD</span> 1726</a>.
 </p>
 </span>
 
@@ -126,9 +126,9 @@ Image is <a href="https://xkcd.com/1726/">XKCD 1726</a>.
 </div>
 </div>
 
-<div id="outline-container-orgd88a496" class="outline-2">
-<h2 id="orgd88a496">A Quick Note on&nbsp;Rendering</h2>
-<div class="outline-text-2" id="text-orgd88a496">
+<div id="outline-container-orge6e5ec9" class="outline-2">
+<h2 id="orge6e5ec9">A Quick Note on&nbsp;Rendering</h2>
+<div class="outline-text-2" id="text-orge6e5ec9">
 <p>
 Unicode is… <i>inconsistently supported</i>, to put it mildly. Almost any weird character errors you see
 on the Web are the product of bad Unicode support by programmers who usually assume things are a lot
@@ -140,20 +140,20 @@ browser and lots of other things: sorry about that, but there&#8217;s not too mu
 </div>
 </div>
 
-<div id="outline-container-orgea696b3" class="outline-2">
-<h2 id="orgea696b3">A Guide to Unicode Tomfoolery for Fun and&nbsp;Profit</h2>
-<div class="outline-text-2" id="text-orgea696b3">
+<div id="outline-container-org5c0efce" class="outline-2">
+<h2 id="org5c0efce">A Guide to Unicode Tomfoolery for Fun and&nbsp;Profit</h2>
+<div class="outline-text-2" id="text-org5c0efce">
 <p>
 Let&#8217;s go through some of this weird Unicode stuff, why it&#8217;s there, and how it might be used and
-abused in other ways. Note that I&#8217;ll be writing the full hex code of the character like this:
-<code>U+HHHH</code>, where <code>HHHH</code> is a four-letter hexadecimal code that represents sixteen bits. In Python, this
-can be written in strings as <code>'\uhhhh'</code>, so if you want to play around with this you can use
+abused in other ways. Note that I&#8217;ll be writing the full hex code of the character like&nbsp;this:
+<code>U+HHHH</code>,&nbsp;where <code>HHHH</code> is a four-letter hexadecimal code that represents sixteen bits. In Python, this
+can be written in strings&nbsp;as <code>'\uhhhh'</code>, so if you want to play around with this you can use
 that. I&#8217;ll go from crazier to craziest, working our way up to the really weird stuff. Let&#8217;s get&nbsp;going!
 </p>
 </div>
-<div id="outline-container-orgd18eaa8" class="outline-3">
-<h3 id="orgd18eaa8">Combining Characters and Multi-Character&nbsp;Graphemes</h3>
-<div class="outline-text-3" id="text-orgd18eaa8">
+<div id="outline-container-org551694a" class="outline-3">
+<h3 id="org551694a">Combining Characters and Multi-Character&nbsp;Graphemes</h3>
+<div class="outline-text-3" id="text-org551694a">
 <span class="marginnote"><p>
 </p>
 <p>
@@ -172,10 +172,10 @@ commonly, so you&#8217;ll see <i>coöperate</i>.
 </span>
 <p>
 How do you represent words like <i>naïveté</i> in Unicode? Well, there are actually several ways. Unicode
-does have <i>code points</i> (i.e., specific encodings) for some characters with an accent, like <code>U+00E9</code> for
+does have <i>code points</i> (i.e., specific encodings) for some characters with an accent,&nbsp;like <code>U+00E9</code> for
 é. This allows keyboards to use this character, for example. But it also has a second system where
 we combine accents with the unaccented character. This is useful for things like making Compose keys
-work on keyboards, for example. In this system, you can use the <code>U+0301</code> character, the <i>combining</i>
+work on keyboards, for example. In this system, you can use&nbsp;the <code>U+0301</code> character, the <i>combining</i>
 <i>acute accent</i>, after the character you want to put an accent&nbsp;on. 
 </p>
 
@@ -194,12 +194,12 @@ deciding even how long a word is a very difficult thing to&nbsp;do.
 </p>
 </div>
 </div>
-<div id="outline-container-org44325a6" class="outline-3">
-<h3 id="org44325a6">Zero-Width&nbsp;Spaces</h3>
-<div class="outline-text-3" id="text-org44325a6">
+<div id="outline-container-org4d9aaca" class="outline-3">
+<h3 id="org4d9aaca">Zero-Width&nbsp;Spaces</h3>
+<div class="outline-text-3" id="text-org4d9aaca">
 <p>
 In some languages that don&#8217;t use spaces, like Japanese, it&#8217;s sometimes nice to use some type of
-word-break character that doesn&#8217;t actually take up space on the screen. Enter <code>U+200B</code>, the
+word-break character that doesn&#8217;t actually take up space on the screen.&nbsp;Enter <code>U+200B</code>, the
 <i>zero-width space</i>: ​. (You probably don&#8217;t see anything between the space after the colon and the
 period, right? <i>Exactly.</i>)
 </p>
@@ -213,9 +213,9 @@ spaces I put in the above&nbsp;paragraph?)
 </p>
 </div>
 </div>
-<div id="outline-container-org193e34a" class="outline-3">
-<h3 id="org193e34a">Doppelgängers</h3>
-<div class="outline-text-3" id="text-org193e34a">
+<div id="outline-container-org1a48d65" class="outline-3">
+<h3 id="org1a48d65">Doppelgängers</h3>
+<div class="outline-text-3" id="text-org1a48d65">
 <p>
 Many characters in written languages happen to look very close to one another. The Greek question
 mark character, ;, looks an awful lot like the semicolon, ;. Many capital Cyrillic characters look
@@ -233,9 +233,9 @@ the web browser says you&#8217;re &#8220;Аpple Inc.&#8221;, never mind that it 
 </p>
 </div>
 </div>
-<div id="outline-container-org49eebe7" class="outline-3">
-<h3 id="org49eebe7">Directional&nbsp;Overrides</h3>
-<div class="outline-text-3" id="text-org49eebe7">
+<div id="outline-container-orgdf52693" class="outline-3">
+<h3 id="orgdf52693">Directional&nbsp;Overrides</h3>
+<div class="outline-text-3" id="text-orgdf52693">
 <p>
 The most interesting form of messing with Unicode for fun and profit is probably using <i>directional
 overrides</i>.
@@ -245,8 +245,7 @@ overrides</i>.
 How is Unicode supposed to deal with languages like English that read left-to-right and languages
 like Hebrew that read right-to-left? Ideally, it should be possible to have single documents with
 both English and a right-to-left language, say if I were to include an Arabic quote on this
-blog. Unicode solves this by using a couple distinct control characters: <code>U+202D</code>, the &#8220;left-to-right
-override&#8221;; <code>U+202E</code>, the &#8220;right-to-left override&#8221;, and a bunch of others for more specific&nbsp;uses.
+blog. Unicode solves this by using a couple distinct control&nbsp;characters: <code>U+202D</code>, the &#8220;left-to-right&nbsp;override&#8221;; <code>U+202E</code>, the &#8220;right-to-left override&#8221;, and a bunch of others for more specific&nbsp;uses.
 </p>
 
 <p>
@@ -256,7 +255,7 @@ forging specific words, and it has one other use that is really interesting and 
 </p>
 
 <p>
-In Windows, a file is executable if its name ends with <code>.exe</code> <i>in the order the characters have in</i>
+In Windows, a file is executable if its name ends&nbsp;with <code>.exe</code> <i>in the order the characters have in</i>
 <i>code, not how they&#8217;re rendered.</i> However, file names are rendered correctly (otherwise, Arabic
 computer users would have to read everything backwards). Additionally, some file managers and other
 software will read the last characters as they&#8217;re rendered, and so they won&#8217;t notice this when
@@ -265,13 +264,13 @@ very interesting attack opens up to&nbsp;us.
 </p>
 
 <p>
-Let&#8217;s call the RTL override character <code>←</code> for convenience, and so I don&#8217;t have to actually use these
-characters. Let&#8217;s say I had a filename like <code>qtdol←fdp.exe</code>. How will this filename get rendered?
+Let&#8217;s call the <span class="caps">RTL</span> override&nbsp;character <code>←</code> for convenience, and so I don&#8217;t have to actually use these
+characters. Let&#8217;s say I had a filename&nbsp;like <code>qtdol←fdp.exe</code>. How will this filename get rendered?
 Well, everything after the arrow is flipped because it&#8217;s being read right to left. Thus, you&#8217;ll get
 something that looks like&nbsp;this:
 </p>
 
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s2">"qtdol</span><span class="se">\u202e</span><span class="s2">fdp.exe"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"qtdol</span><span class="se">\u202e</span><span class="s2">fdp.exe"</span><span class="p">)</span>
 <span class="n">qtdolexe</span><span class="o">.</span><span class="n">pdf</span>
 </pre></div>
 
@@ -281,17 +280,17 @@ and mess around with it: it&#8217;s really fun and pretty crazy if you&#8217;re 
 </p>
 
 <p>
-This file looks like a PDF, but internally it&#8217;s actually an executable! This is the trick hiding in
-the PACTF problem: one of the files has this type of skullduggery in it, and so it&#8217;s the only
+This file looks like a <span class="caps">PDF</span>, but internally it&#8217;s actually an executable! This is the trick hiding in
+the <span class="caps">PACTF</span> problem: one of the files has this type of skullduggery in it, and so it&#8217;s the only
 executable file in the bunch despite not looking like&nbsp;it.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga89393f" class="outline-2">
-<h2 id="orga89393f">Takeaways</h2>
-<div class="outline-text-2" id="text-orga89393f">
+<div id="outline-container-org33badf9" class="outline-2">
+<h2 id="org33badf9">Takeaways</h2>
+<div class="outline-text-2" id="text-org33badf9">
 <p>
 Some conclusions for any programmers out&nbsp;there:
 </p>
@@ -306,7 +305,7 @@ field and see what happens: the vast majority of applications don&#8217;t deal w
 at&nbsp;all.</li>
 </ul>
 <p>
-Hope you enjoyed this: I&#8217;ll be continuing this with more posts about PACTF problems in the
+Hope you enjoyed this: I&#8217;ll be continuing this with more posts about <span class="caps">PACTF</span> problems in the
 future. Stay&nbsp;tuned!
 </p>
 </div>

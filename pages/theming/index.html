@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard&#8217;s Rho · Theming Nikola </title>
+<title>Pollard's Rho · Theming Nikola </title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
      window.dataLayer = window.dataLayer || [];
@@ -38,11 +38,11 @@
                 <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../about-me/">About Me</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
         <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml">RSS feed</a>
+        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
     
     
     </nav><footer id="footer"><span class="copyright">
-              Contents © 2020         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             </span>
             
             
@@ -63,7 +63,7 @@
 <dd class="author"><p>Roberto Alsina &lt;<a class="reference external" href="mailto:ralsina@netmanagers.com.ar">ralsina@netmanagers.com.ar</a>&gt;</p></dd>
 </dl>
 <div class="contents alert alert-primary float-md-right topic" id="contents">
-<p class="topic-title first">Contents</p>
+<p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#the-structure" id="id1">The&nbsp;Structure</a></p></li>
 <li><p><a class="reference internal" href="#theme-meta-files" id="id2">Theme meta&nbsp;files</a></p></li>
@@ -73,7 +73,7 @@
 <li><p><a class="reference internal" href="#customizing-themes-to-user-color-preference-and-section-colors" id="id6">Customizing themes to user color preference and section&nbsp;colors</a></p></li>
 <li><p><a class="reference internal" href="#identifying-and-customizing-different-kinds-of-pages-with-a-shared-template" id="id7">Identifying and customizing different kinds of pages with a shared&nbsp;template</a></p></li>
 <li><p><a class="reference internal" href="#messages-and-translations" id="id8">Messages and&nbsp;Translations</a></p></li>
-<li><p><a class="reference internal" href="#less-and-sass" id="id9">LESS and&nbsp;Sass</a></p></li>
+<li><p><a class="reference internal" href="#less-and-sass" id="id9"><span class="caps">LESS</span> and&nbsp;Sass</a></p></li>
 </ul>
 </div>
 <p class="lead">This document is a reference about themes. If you want a tutorial, please read
@@ -81,23 +81,22 @@
 theme for your site, check out the <a class="reference external" href="https://themes.getnikola.com/">Themes Index</a>.</p>
 <div class="section" id="the-structure">
 <h2><a class="toc-backref" href="#id1">The&nbsp;Structure</a></h2>
-<p>Themes are located in the <code class="docutils literal">themes</code> folder where Nikola is installed, and in the <code class="docutils literal">themes</code> folder
+<p>Themes are located in&nbsp;the <code class="docutils literal">themes</code> folder where Nikola is installed, and in&nbsp;the <code class="docutils literal">themes</code> folder
 of your site, one folder per theme. The folder name is the theme&nbsp;name.</p>
 <p>A Nikola theme consists of the following folders (they are <em>all</em>&nbsp;optional):</p>
 <dl>
 <dt>assets</dt>
 <dd>
-<p>This is where you would put your CSS, JavaScript and image files. It will be copied
-into <code class="docutils literal">output/assets</code> when you build the site, and the templates will contain
-references to them. The default subdirectories are <code class="docutils literal">css</code>, <code class="docutils literal">js</code>, <code class="docutils literal">xml</code>
+<p>This is where you would put your <span class="caps">CSS</span>, JavaScript and image files. It will be copied&nbsp;into <code class="docutils literal">output/assets</code> when you build the site, and the templates will contain
+references to them. The default subdirectories&nbsp;are <code class="docutils literal">css</code>, <code class="docutils literal">js</code>, <code class="docutils literal">xml</code>
 and <code class="docutils literal">fonts</code> (Bootstrap).</p>
 <p>The included themes use <a class="reference external" href="https://getbootstrap.com/">Bootstrap</a>,
-<a class="reference external" href="https://feimosi.github.io/baguetteBox.js/">baguetteBox</a>, <a class="reference external" href="http://flickr.github.io/justified-layout/">Justified Layout by Flickr</a> and <a class="reference external" href="https://momentjs.com/">Moment.js</a>, so they are in assets, along with CSS files for
+<a class="reference external" href="https://feimosi.github.io/baguetteBox.js/">baguetteBox</a>, <a class="reference external" href="http://flickr.github.io/justified-layout/">Justified Layout by Flickr</a> and <a class="reference external" href="https://momentjs.com/">Moment.js</a>, so they are in assets, along with <span class="caps">CSS</span> files for
 syntax highlighting, reStructuredText and Jupyter, as well as a minified
 copy of&nbsp;jQuery.</p>
 <p>If you want to base your theme on other frameworks (or on no framework at all)
 just remember to put there everything you need for deployment. (Not all of
-the listed assets are used by <code class="docutils literal">base</code>)</p>
+the listed assets are used&nbsp;by <code class="docutils literal">base</code>)</p>
 </dd>
 <dt>templates</dt>
 <dd>
@@ -112,14 +111,14 @@ so that it can be translated into other&nbsp;languages.</p>
 </dd>
 <dt>less,&nbsp;sass</dt>
 <dd>
-<p>Files to be compiled into CSS using LESS and Sass (both require&nbsp;plugins)</p>
+<p>Files to be compiled into <span class="caps">CSS</span> using <span class="caps">LESS</span> and Sass (both require&nbsp;plugins)</p>
 </dd>
 </dl>
 <p>This mandatory&nbsp;file:</p>
 <dl class="simple">
 <dt>&lt;theme&gt;.theme</dt>
 <dd>
-<p>An INI file containing theme meta data. The file format is described in
+<p>An <span class="caps">INI</span> file containing theme meta data. The file format is described in
 detail below, in the <a class="reference internal" href="#theme-meta-files">Theme meta files</a>&nbsp;section.</p>
 </dd>
 </dl>
@@ -134,53 +133,53 @@ respectively.  Those are needed for older versions (Nikola v7.8.5 and&nbsp;older
 <dd>
 <p>A <a class="reference external" href="https://docs.python.org/3/library/configparser.html">config</a> file
 containing a list of files to be turned into bundles. For&nbsp;example:</p>
-<pre class="code ini"><a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-1"></a><span class="na">assets/css/all.css</span><span class="o">=</span><span class="s"></span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-2"></a><span class="s">    bootstrap.min.css,</span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-3"></a><span class="s">    rst_base.css,</span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-4"></a><span class="s">    nikola_rst.css,</span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-5"></a><span class="s">    code.css,</span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-6"></a><span class="s">    baguetteBox.min.css,</span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-7"></a><span class="s">    theme.css,</span>
-<a name="rest_code_b273f2d36a474a27a24d08230d8eaf72-8"></a><span class="s">    custom.css,</span>
+<pre class="code ini"><a name="rest_code_ee917df432c9411abd4c258809ce1dfc-1"></a><span class="na">assets/css/all.css</span><span class="o">=</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-2"></a>    <span class="na">bootstrap.min.css,</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-3"></a>    <span class="na">rst_base.css,</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-4"></a>    <span class="na">nikola_rst.css,</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-5"></a>    <span class="na">code.css,</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-6"></a>    <span class="na">baguetteBox.min.css,</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-7"></a>    <span class="na">theme.css,</span>
+<a name="rest_code_ee917df432c9411abd4c258809ce1dfc-8"></a>    <span class="na">custom.css,</span>
 </pre>
 <p>This creates a file called &#8220;assets/css/all.css&#8221; in your output that is the
 combination of all the other file paths, relative to the output file.
 This makes the page much more efficient because it avoids multiple connections to the server,
 at the cost of some extra difficult&nbsp;debugging.</p>
-<p>Bundling applies to CSS and JS&nbsp;files.</p>
-<p>Templates should use either the bundle or the individual files based on the <code class="docutils literal">use_bundles</code>
-variable, which in turn is set by the <code class="docutils literal">USE_BUNDLES</code> option.</p>
+<p>Bundling applies to <span class="caps">CSS</span> and <span class="caps">JS</span>&nbsp;files.</p>
+<p>Templates should use either the bundle or the individual files based on&nbsp;the <code class="docutils literal">use_bundles</code>
+variable, which in turn is set by&nbsp;the <code class="docutils literal">USE_BUNDLES</code> option.</p>
 </dd>
 </dl>
 </div>
 <div class="section" id="theme-meta-files">
 <h2><a class="toc-backref" href="#id2">Theme meta&nbsp;files</a></h2>
-<p>As of Nikola v7.8.6, Nikola uses meta files for themes. Those are INI files,
-with the same name as your theme, and a <code class="docutils literal">.theme</code> extension, eg.
+<p>As of Nikola v7.8.6, Nikola uses meta files for themes. Those are <span class="caps">INI</span> files,
+with the same name as your theme, and&nbsp;a <code class="docutils literal">.theme</code> extension,&nbsp;eg.
 <code class="docutils literal">bootstrap3.theme</code>. Here is an example, from the bootstrap3&nbsp;theme:</p>
-<pre class="code ini"><a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-1"></a><span class="k">[Theme]</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-2"></a><span class="na">engine</span> <span class="o">=</span> <span class="s">mako</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-3"></a><span class="na">parent</span> <span class="o">=</span> <span class="s">base</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-4"></a><span class="na">author</span> <span class="o">=</span> <span class="s">The Nikola Contributors</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-5"></a><span class="na">author_url</span> <span class="o">=</span> <span class="s">https://getnikola.com/</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-6"></a><span class="na">based_on</span> <span class="o">=</span> <span class="s">Bootstrap 3 &lt;http://getbootstrap.com/&gt;</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-7"></a><span class="na">license</span> <span class="o">=</span> <span class="s">MIT</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-8"></a><span class="na">tags</span> <span class="o">=</span> <span class="s">bootstrap</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-9"></a>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-10"></a><span class="k">[Family]</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-11"></a><span class="na">family</span> <span class="o">=</span> <span class="s">bootstrap3</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-12"></a><span class="na">jinja_version</span> <span class="o">=</span> <span class="s">bootstrap3-jinja</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-13"></a><span class="na">variants</span> <span class="o">=</span> <span class="s">bootstrap3-gradients, bootstrap3-gradients-jinja</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-14"></a>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-15"></a><span class="k">[Nikola]</span>
-<a name="rest_code_4b9a0aeeb4a8465990eadc80eb2bd9db-16"></a><span class="na">bootswatch</span> <span class="o">=</span> <span class="s">True</span>
+<pre class="code ini"><a name="rest_code_2473550672254aaa8e7e39386595a2e8-1"></a><span class="k">[Theme]</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-2"></a><span class="na">engine</span> <span class="o">=</span> <span class="s">mako</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-3"></a><span class="na">parent</span> <span class="o">=</span> <span class="s">base</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-4"></a><span class="na">author</span> <span class="o">=</span> <span class="s">The Nikola Contributors</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-5"></a><span class="na">author_url</span> <span class="o">=</span> <span class="s">https://getnikola.com/</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-6"></a><span class="na">based_on</span> <span class="o">=</span> <span class="s">Bootstrap 3 &lt;http://getbootstrap.com/&gt;</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-7"></a><span class="na">license</span> <span class="o">=</span> <span class="s">MIT</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-8"></a><span class="na">tags</span> <span class="o">=</span> <span class="s">bootstrap</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-9"></a>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-10"></a><span class="k">[Family]</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-11"></a><span class="na">family</span> <span class="o">=</span> <span class="s">bootstrap3</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-12"></a><span class="na">jinja_version</span> <span class="o">=</span> <span class="s">bootstrap3-jinja</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-13"></a><span class="na">variants</span> <span class="o">=</span> <span class="s">bootstrap3-gradients, bootstrap3-gradients-jinja</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-14"></a>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-15"></a><span class="k">[Nikola]</span>
+<a name="rest_code_2473550672254aaa8e7e39386595a2e8-16"></a><span class="na">bootswatch</span> <span class="o">=</span> <span class="s">True</span>
 </pre>
 <p>The following keys are currently&nbsp;supported:</p>
 <ul>
 <li>
 <p><code class="docutils literal">Theme</code> — contains information about the&nbsp;theme.</p>
 <ul>
-<li><p><code class="docutils literal">engine</code> — engine used by the theme. Should be <code class="docutils literal">mako</code> or <code class="docutils literal">jinja</code>.</p></li>
+<li><p><code class="docutils literal">engine</code> — engine used by the theme. Should&nbsp;be <code class="docutils literal">mako</code> or <code class="docutils literal">jinja</code>.</p></li>
 <li>
 <p><code class="docutils literal">parent</code> — the parent theme. Any resources missing in this theme, will be
 looked up in the parent theme (and then in the grandparent,&nbsp;etc).</p>
@@ -190,16 +189,16 @@ You <strong>must</strong> define a parent, otherwise many features won’t work 
 missing templates, messages, and&nbsp;assets.</p>
 <p>The following settings are&nbsp;recommended:</p>
 <ul class="simple">
-<li><p>If your theme uses Bootstrap 3, inherit the <code class="docutils literal">bootstrap3</code> theme.</p></li>
-<li><p>If your theme uses Jinja as a template engine, inherit <code class="docutils literal"><span class="pre">base-jinja</span></code>
+<li><p>If your theme uses Bootstrap 3, inherit&nbsp;the <code class="docutils literal">bootstrap3</code> theme.</p></li>
+<li><p>If your theme uses Jinja as a template engine,&nbsp;inherit <code class="docutils literal"><span class="pre">base-jinja</span></code>
 or <code class="docutils literal"><span class="pre">bootstrap3-jinja</span></code></p></li>
-<li><p>In any other case, inherit <code class="docutils literal">base</code>.</p></li>
+<li><p>In any other case,&nbsp;inherit <code class="docutils literal">base</code>.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal">author</code>, <code class="docutils literal">author_url</code> — used to identify theme&nbsp;author.</p></li>
 <li><p><code class="docutils literal">based_on</code> — optional list of inspirations, frameworks, etc. used in the
-theme. Should be comma-separated, the format <code class="docutils literal">Name &lt;URL&gt;</code> is&nbsp;recommended.</p></li>
-<li><p><code class="docutils literal">license</code> — theme license. Pick MIT if you have no&nbsp;preference.</p></li>
+theme. Should be comma-separated, the&nbsp;format <code class="docutils literal">Name &lt;URL&gt;</code> is&nbsp;recommended.</p></li>
+<li><p><code class="docutils literal">license</code> — theme license. Pick <span class="caps">MIT</span> if you have no&nbsp;preference.</p></li>
 <li><p><code class="docutils literal">tags</code> — optional list of tags (comma-separated) to describe the&nbsp;theme.</p></li>
 </ul>
 </li>
@@ -219,43 +218,41 @@ mako/jinja version listed&nbsp;above)</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal">bootswatch</code> — whether or not theme supports Bootswatch styling (optional,
 defaults to&nbsp;False)</p></li>
-<li><p><code class="docutils literal">ignored_assets</code> — comma-separated list of assets to ignore (relative to
-the <code class="docutils literal">assets/</code> directory, eg. <code class="docutils literal">css/theme.css</code>)</p></li>
+<li><p><code class="docutils literal">ignored_assets</code> — comma-separated list of assets to ignore (relative to&nbsp;the <code class="docutils literal">assets/</code> directory,&nbsp;eg. <code class="docutils literal">css/theme.css</code>)</p></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="templates">
 <h2><a class="toc-backref" href="#id3">Templates</a></h2>
-<p>In templates there is a number of files whose name ends in <code class="docutils literal">.tmpl</code>. Those are the
+<p>In templates there is a number of files whose name ends&nbsp;in <code class="docutils literal">.tmpl</code>. Those are the
 theme’s page templates. They are done using the <a class="reference external" href="http://makotemplates.org">Mako</a>
 or <a class="reference external" href="http://jinja.pocoo.org">Jinja2</a> template languages. If you want to do a theme, you
-should learn one first. What engine is used by the theme is declared in the <code class="docutils literal">engine</code> file.</p>
+should learn one first. What engine is used by the theme is declared in&nbsp;the <code class="docutils literal">engine</code> file.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you are using Mako templates, and want some extra speed when building the site
 you can install Beaker and <a class="reference external" href="http://docs.makotemplates.org/en/latest/caching.html">make templates be&nbsp;cached</a></p>
 </div>
 <p>Both template engines have a nifty concept of template inheritance. That means that a
-template can inherit from another and only change small bits of the output. For example,
-<code class="docutils literal">base.tmpl</code> defines the whole layout for a page but has only a placeholder for content
-so <code class="docutils literal">post.tmpl</code> only define the content, and the layout is inherited from <code class="docutils literal">base.tmpl</code>.</p>
+template can inherit from another and only change small bits of the output. For&nbsp;example,
+<code class="docutils literal">base.tmpl</code> defines the whole layout for a page but has only a placeholder for content&nbsp;so <code class="docutils literal">post.tmpl</code> only define the content, and the layout is inherited&nbsp;from <code class="docutils literal">base.tmpl</code>.</p>
 <p>Another concept is theme inheritance. You do not need to duplicate all the
 default templates in your theme — you can just override the ones you want
 changed, and the rest will come from the parent theme. (Every theme needs a&nbsp;parent.)</p>
 <p>Apart from the <a class="reference internal" href="#built-in-templates">built-in templates</a> listed below, you can add other templates for specific
-pages, which the user can then use in his <code class="docutils literal">POSTS</code> or <code class="docutils literal">PAGES</code> option in
+pages, which the user can then use in&nbsp;his <code class="docutils literal">POSTS</code> or <code class="docutils literal">PAGES</code> option&nbsp;in
 <code class="docutils literal">conf.py</code>.  Also, you can specify a custom template to be used by a post or
-page via the <code class="docutils literal">template</code> metadata, and custom templates can be added in the
+page via&nbsp;the <code class="docutils literal">template</code> metadata, and custom templates can be added in&nbsp;the
 <code class="docutils literal">templates/</code> folder of your&nbsp;site.</p>
-<p>If you want to modify (override) a built-in template, use <code class="docutils literal">nikola theme <span class="pre">-c</span>
-<span class="pre">&lt;name&gt;.tmpl</span></code>.  This command will copy the specified template file to the
+<p>If you want to modify (override) a built-in template,&nbsp;use <code class="docutils literal">nikola theme <span class="pre">-c</span>
+<span class="pre">&lt;name&gt;.tmpl</span></code>.  This command will copy the specified template file to&nbsp;the
 <code class="docutils literal">templates/</code> directory of your currently used&nbsp;theme.</p>
 <p>Keep in mind that your theme is <em>yours</em>, so you can require whatever data you
-want (eg. you may depend on specific custom <code class="docutils literal">GLOBAL_CONTEXT</code> variables, or
+want (eg. you may depend on specific&nbsp;custom <code class="docutils literal">GLOBAL_CONTEXT</code> variables, or
 post meta attributes). You don’t need to keep the same theme structure as the
 default themes do (although many of those names are hardcoded). Inheriting from
-at least <code class="docutils literal">base</code> (or <code class="docutils literal"><span class="pre">base-jinja</span></code>) is heavily recommended, but not strictly
+at&nbsp;least <code class="docutils literal">base</code> (or <code class="docutils literal"><span class="pre">base-jinja</span></code>) is heavily recommended, but not strictly
 required (unless you want to share it on the Themes&nbsp;Index).</p>
 </div>
 <div class="section" id="built-in-templates">
@@ -264,16 +261,16 @@ required (unless you want to share it on the Themes&nbsp;Index).</p>
 <dl>
 <dt><code class="docutils literal">base.tmpl</code></dt>
 <dd>
-<p>This template defines the basic page layout for the site. It’s mostly plain HTML
+<p>This template defines the basic page layout for the site. It’s mostly plain <span class="caps">HTML</span>
 but defines a few blocks that can be re-defined by inheriting&nbsp;templates.</p>
-<p>It has some separate pieces defined in <code class="docutils literal">base_helper.tmpl</code>,
+<p>It has some separate pieces defined&nbsp;in <code class="docutils literal">base_helper.tmpl</code>,
 <code class="docutils literal">base_header.tmpl</code> and <code class="docutils literal">base_footer.tmpl</code> so they can be
 easily&nbsp;overridden.</p>
 </dd>
 <dt><code class="docutils literal">index.tmpl</code></dt>
 <dd>
-<p>Template used to render the multipost indexes. The posts are in a <code class="docutils literal">posts</code> variable.
-Some functionality is in the <code class="docutils literal">index_helper.tmpl</code> helper&nbsp;template.</p>
+<p>Template used to render the multipost indexes. The posts are in&nbsp;a <code class="docutils literal">posts</code> variable.
+Some functionality is in&nbsp;the <code class="docutils literal">index_helper.tmpl</code> helper&nbsp;template.</p>
 </dd>
 <dt>
 <code class="docutils literal">archive_navigation_helper.tmpl</code> (internal)</dt>
@@ -283,8 +280,8 @@ archive&nbsp;templates.</p>
 </dd>
 <dt><code class="docutils literal">archiveindex.tmpl</code></dt>
 <dd>
-<p>Used to display archives, if <code class="docutils literal">ARCHIVES_ARE_INDEXES</code> is True.
-By default, it just inherits <code class="docutils literal">index.tmpl</code>, with added archive navigation
+<p>Used to display archives,&nbsp;if <code class="docutils literal">ARCHIVES_ARE_INDEXES</code> is True.
+By default, it just&nbsp;inherits <code class="docutils literal">index.tmpl</code>, with added archive navigation
 and&nbsp;feeds.</p>
 </dd>
 <dt><code class="docutils literal">author.tmpl</code></dt>
@@ -293,52 +290,52 @@ and&nbsp;feeds.</p>
 </dd>
 <dt><code class="docutils literal">authorindex.tmpl</code></dt>
 <dd>
-<p>Used to display author indexes, if <code class="docutils literal">AUTHOR_PAGES_ARE_INDEXES</code> is True.
-By default, it just inherits <code class="docutils literal">index.tmpl</code>, with added&nbsp;feeds.</p>
+<p>Used to display author indexes,&nbsp;if <code class="docutils literal">AUTHOR_PAGES_ARE_INDEXES</code> is True.
+By default, it just&nbsp;inherits <code class="docutils literal">index.tmpl</code>, with added&nbsp;feeds.</p>
 </dd>
 <dt>
 <code class="docutils literal">comments_helper.tmpl</code> (internal)</dt>
 <dd>
 <p>This template handles comments. You should probably never touch it :-)
 It uses a bunch of helper templates, one for each supported comment system
-(all of which start with <code class="docutils literal">comments_helper</code>)</p>
+(all of which start&nbsp;with <code class="docutils literal">comments_helper</code>)</p>
 </dd>
 <dt>
 <code class="docutils literal">ui_helper.tmpl</code>, <code class="docutils literal">pagination_helper.tmpl</code>
 </dt>
 <dd>
-<p>These templates help render specific UI items, and can be tweaked as&nbsp;needed.</p>
+<p>These templates help render specific <span class="caps">UI</span> items, and can be tweaked as&nbsp;needed.</p>
 </dd>
 <dt><code class="docutils literal">gallery.tmpl</code></dt>
 <dd>
 <p>Template used for image galleries. Interesting data&nbsp;includes:</p>
 <ul class="simple">
-<li><p><code class="docutils literal">post</code>: A post object, containing descriptive <code class="docutils literal">post.text()</code> for the&nbsp;gallery.</p></li>
-<li><p><code class="docutils literal">crumbs</code>: A list of <code class="docutils literal">link, crumb</code> to implement&nbsp;breadcrumbs.</p></li>
+<li><p><code class="docutils literal">post</code>: A post object, containing&nbsp;descriptive <code class="docutils literal">post.text()</code> for the&nbsp;gallery.</p></li>
+<li><p><code class="docutils literal">crumbs</code>: A list&nbsp;of <code class="docutils literal">link, crumb</code> to implement&nbsp;breadcrumbs.</p></li>
 <li><p><code class="docutils literal">folders</code>: A list of folders to implement hierarchical gallery&nbsp;navigation.</p></li>
 <li><p><code class="docutils literal">enable_comments</code>: To enable/disable comments in&nbsp;galleries.</p></li>
-<li><p><code class="docutils literal">thumbnail_size</code>: The <code class="docutils literal">THUMBNAIL_SIZE</code> option.</p></li>
+<li><p><code class="docutils literal">thumbnail_size</code>:&nbsp;The <code class="docutils literal">THUMBNAIL_SIZE</code> option.</p></li>
 <li>
 <p><code class="docutils literal">photo_array</code>: a list of dictionaries, each&nbsp;containing:</p>
 <ul>
-<li><p><code class="docutils literal">url</code>: URL for the full-sized&nbsp;image.</p></li>
-<li><p><code class="docutils literal">url_thumb</code>: URL for the&nbsp;thumbnail.</p></li>
+<li><p><code class="docutils literal">url</code>: <span class="caps">URL</span> for the full-sized&nbsp;image.</p></li>
+<li><p><code class="docutils literal">url_thumb</code>: <span class="caps">URL</span> for the&nbsp;thumbnail.</p></li>
 <li><p><code class="docutils literal">title</code>: The title of the&nbsp;image.</p></li>
-<li><p><code class="docutils literal">size</code>: A dict containing <code class="docutils literal">w</code> and <code class="docutils literal">h</code>, the real size of the&nbsp;thumbnail.</p></li>
+<li><p><code class="docutils literal">size</code>: A dict&nbsp;containing <code class="docutils literal">w</code> and <code class="docutils literal">h</code>, the real size of the&nbsp;thumbnail.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal">photo_array_json</code>: a JSON dump of photo_array, used by the
+<li><p><code class="docutils literal">photo_array_json</code>: a <span class="caps">JSON</span> dump of photo_array, used by&nbsp;the
 <code class="docutils literal"><span class="pre">justified-layout</span></code> script</p></li>
 </ul>
 </dd>
 <dt><code class="docutils literal">list.tmpl</code></dt>
 <dd>
-<p>Template used to display generic lists of links, which it gets in <code class="docutils literal">items</code>,
+<p>Template used to display generic lists of links, which it gets&nbsp;in <code class="docutils literal">items</code>,
 a list of <em>(text, link, count)</em>&nbsp;elements.</p>
 </dd>
 <dt><code class="docutils literal">list_post.tmpl</code></dt>
 <dd>
-<p>Template used to display generic lists of posts, which it gets in <code class="docutils literal">posts</code>.</p>
+<p>Template used to display generic lists of posts, which it gets&nbsp;in <code class="docutils literal">posts</code>.</p>
 </dd>
 <dt><code class="docutils literal">listing.tmpl</code></dt>
 <dd>
@@ -351,23 +348,23 @@ a list of <em>(text, link, count)</em>&nbsp;elements.</p>
 </dd>
 <dt><code class="docutils literal">post.tmpl</code></dt>
 <dd>
-<p>Template used by default for blog posts, gets the data in a <code class="docutils literal">post</code> object
-which is an instance of the Post class. Some functionality is in the
+<p>Template used by default for blog posts, gets the data in&nbsp;a <code class="docutils literal">post</code> object
+which is an instance of the Post class. Some functionality is in&nbsp;the
 <code class="docutils literal">post_helper.tmpl</code> and <code class="docutils literal">post_header.tmpl</code> templates.</p>
 </dd>
 <dt><code class="docutils literal">post_list_directive.tmpl</code></dt>
 <dd>
-<p>Template used by the <code class="docutils literal">post_list</code> reStructuredText&nbsp;directive.</p>
+<p>Template used by&nbsp;the <code class="docutils literal">post_list</code> reStructuredText&nbsp;directive.</p>
 </dd>
 <dt><code class="docutils literal">sectionindex.tmpl</code></dt>
 <dd>
-<p>Used to display section indexes, if <code class="docutils literal">POST_SECTIONS_ARE_INDEXES</code> is True.
-By default, it just inherits <code class="docutils literal">index.tmpl</code>, with added&nbsp;feeds.</p>
+<p>Used to display section indexes,&nbsp;if <code class="docutils literal">POST_SECTIONS_ARE_INDEXES</code> is True.
+By default, it just&nbsp;inherits <code class="docutils literal">index.tmpl</code>, with added&nbsp;feeds.</p>
 </dd>
 <dt><code class="docutils literal">page.tmpl</code></dt>
 <dd>
 <p>Used for pages that are not part of a blog, usually a cleaner, less
-intrusive layout than <code class="docutils literal">post.tmpl</code>, but same&nbsp;parameters.</p>
+intrusive layout&nbsp;than <code class="docutils literal">post.tmpl</code>, but same&nbsp;parameters.</p>
 </dd>
 <dt><code class="docutils literal">tag.tmpl</code></dt>
 <dd>
@@ -375,8 +372,8 @@ intrusive layout than <code class="docutils literal">post.tmpl</code>, but same&
 </dd>
 <dt><code class="docutils literal">tagindex.tmpl</code></dt>
 <dd>
-<p>Used to show the contents of a single tag or category, if <code class="docutils literal">TAG_PAGES_ARE_INDEXES</code> is True.
-By default, it just inherits <code class="docutils literal">index.tmpl</code>, with added feeds and some
+<p>Used to show the contents of a single tag or category,&nbsp;if <code class="docutils literal">TAG_PAGES_ARE_INDEXES</code> is True.
+By default, it just&nbsp;inherits <code class="docutils literal">index.tmpl</code>, with added feeds and some
 extra&nbsp;features.</p>
 </dd>
 <dt><code class="docutils literal">tags.tmpl</code></dt>
@@ -392,93 +389,92 @@ document: <a class="reference external" href="https://getnikola.com/template-var
 </div>
 <div class="section" id="customizing-themes-to-user-color-preference-and-section-colors">
 <h2><a class="toc-backref" href="#id6">Customizing themes to user color preference and section&nbsp;colors</a></h2>
-<p>The user’s preference for theme color is exposed in templates as
-<code class="docutils literal">theme_color</code> set in the <code class="docutils literal">THEME_COLOR</code> option.</p>
+<p>The user’s preference for theme color is exposed in templates&nbsp;as
+<code class="docutils literal">theme_color</code> set in&nbsp;the <code class="docutils literal">THEME_COLOR</code> option.</p>
 <p>Each section has an assigned color that is either set by the user or auto
-selected by adjusting the hue of the user’s <code class="docutils literal">THEME_COLOR</code>. The color is
-exposed in templates through <code class="docutils literal">post.section_color(lang)</code>. The function that
+selected by adjusting the hue of the&nbsp;user’s <code class="docutils literal">THEME_COLOR</code>. The color is
+exposed in templates&nbsp;through <code class="docutils literal">post.section_color(lang)</code>. The function that
 generates the colors from strings and any given color (by section name and
-theme color for sections) is exposed through the
+theme color for sections) is exposed through&nbsp;the
 <code class="docutils literal">colorize_str_from_base_color(string, hex_color)</code> function</p>
 <p>Hex color values, like that returned by the theme or section color can be
-altered in the HSL colorspace through the function
+altered in the <span class="caps">HSL</span> colorspace through the&nbsp;function
 <code class="docutils literal">color_hsl_adjust_hex(hex_string, adjust_h, adjust_s, adjust_l)</code>.
 Adjustments are given in values between 1.0 and -1.0. For example, the theme
 color can be made lighter using this&nbsp;code:</p>
-<pre class="code html+mako"><a name="rest_code_d01787a934b24348baf7d931527958c0-1"></a><span class="c">&lt;!-- Mako --&gt;</span>
-<a name="rest_code_d01787a934b24348baf7d931527958c0-2"></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"color: </span><span class="cp">${</span><span class="n">color_hsl_adjust_hex</span><span class="p">(</span><span class="n">theme_color</span><span class="p">,</span> <span class="n">adjust_l</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span><span class="cp">}</span><span class="s">"</span><span class="p">&gt;</span>
+<pre class="code html+mako"><a name="rest_code_e5b0ac3567a14b5981c4cbe1908239af-1"></a><span class="c">&lt;!-- Mako --&gt;</span>
+<a name="rest_code_e5b0ac3567a14b5981c4cbe1908239af-2"></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"color: </span><span class="cp">${</span><span class="n">color_hsl_adjust_hex</span><span class="p">(</span><span class="n">theme_color</span><span class="p">,</span> <span class="n">adjust_l</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span><span class="cp">}</span><span class="s">"</span><span class="p">&gt;</span>
 </pre>
-<pre class="code html+jinja"><a name="rest_code_cb4564faab264dbba04e939e1d722360-1"></a><span class="c">&lt;!-- Jinja2 --&gt;</span>
-<a name="rest_code_cb4564faab264dbba04e939e1d722360-2"></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"color: </span><span class="cp">{{</span> <span class="nv">color_hsl_adjust_hex</span><span class="o">(</span><span class="nv">theme_color</span><span class="o">,</span> <span class="nv">adjust_l</span><span class="o">=</span><span class="m">0.05</span><span class="o">)</span> <span class="cp">}}</span><span class="s">"</span><span class="p">&gt;</span>
+<pre class="code html+jinja"><a name="rest_code_f307a8be6a8a4ef38b697442f455e80a-1"></a><span class="c">&lt;!-- Jinja2 --&gt;</span>
+<a name="rest_code_f307a8be6a8a4ef38b697442f455e80a-2"></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"color: </span><span class="cp">{{</span> <span class="nv">color_hsl_adjust_hex</span><span class="o">(</span><span class="nv">theme_color</span><span class="o">,</span> <span class="nv">adjust_l</span><span class="o">=</span><span class="m">0.05</span><span class="o">)</span> <span class="cp">}}</span><span class="s">"</span><span class="p">&gt;</span>
 </pre>
 </div>
 <div class="section" id="identifying-and-customizing-different-kinds-of-pages-with-a-shared-template">
 <h2><a class="toc-backref" href="#id7">Identifying and customizing different kinds of pages with a shared&nbsp;template</a></h2>
-<p>Nikola provides a <code class="docutils literal">pagekind</code> in each template contexts that can be used to
-modify shared templates based on the context it’s being used. For example,
-the <code class="docutils literal">base_helper.tmpl</code> is used in all pages, <code class="docutils literal">index.tmpl</code> is used in
+<p>Nikola provides&nbsp;a <code class="docutils literal">pagekind</code> in each template contexts that can be used to
+modify shared templates based on the context it’s being used. For example,&nbsp;the <code class="docutils literal">base_helper.tmpl</code> is used in all&nbsp;pages, <code class="docutils literal">index.tmpl</code> is used in
 many contexts and you may want to add or remove something from only one of
 these&nbsp;contexts.</p>
 <p>Example of conditionally loading different resources on all index pages
 (archives, author pages, and tag pages), and others again to the front page
 and in every post&nbsp;pages:</p>
-<pre class="code html+mako"><a name="rest_code_84bca0294b9e4025b49da1464c3bff86-1"></a><span class="c">&lt;!-- Mako --&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-3"></a>    …
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-4"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-5"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/multicolumn.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-6"></a>    <span class="cp">%</span><span class="k"> endif</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-7"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'front_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-8"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/fancy_homepage.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-9"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/post_carousel.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-10"></a>    <span class="cp">%</span><span class="k"> endif</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-11"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'post_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-12"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/article.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-13"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/comment_system.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-14"></a>    <span class="cp">%</span><span class="k"> endif</span>
-<a name="rest_code_84bca0294b9e4025b49da1464c3bff86-15"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<pre class="code html+mako"><a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-1"></a><span class="c">&lt;!-- Mako --&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-3"></a>    …
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-4"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-5"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/multicolumn.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-6"></a>    <span class="cp">%</span><span class="k"> endif</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-7"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'front_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-8"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/fancy_homepage.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-9"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/post_carousel.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-10"></a>    <span class="cp">%</span><span class="k"> endif</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-11"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'post_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-12"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/article.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-13"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/comment_system.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-14"></a>    <span class="cp">%</span><span class="k"> endif</span>
+<a name="rest_code_a7805637d5634750ba3cb1a621ae8f36-15"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 </pre>
-<pre class="code html+jinja"><a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-1"></a><span class="c">&lt;!-- Jinja2 --&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-3"></a>    …
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-4"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-5"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/multicolumn.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-6"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-7"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'front_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-8"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/fancy_homepage.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-9"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/post_carousel.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-10"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-11"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'post_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-12"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/article.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-13"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/comment_system.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-14"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<a name="rest_code_a3739b99fde24a0d9344fbc77dea1089-15"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<pre class="code html+jinja"><a name="rest_code_cd812186676d4252aa07179c3202401c-1"></a><span class="c">&lt;!-- Jinja2 --&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-3"></a>    …
+<a name="rest_code_cd812186676d4252aa07179c3202401c-4"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-5"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/multicolumn.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-6"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-7"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'front_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-8"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/fancy_homepage.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-9"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/post_carousel.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-10"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-11"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'post_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-12"></a>        <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"/assets/css/article.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-13"></a>        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"/assets/js/comment_system.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-14"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a name="rest_code_cd812186676d4252aa07179c3202401c-15"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 </pre>
-<p>Promoting visits to the front page when visiting other filtered
+<p>Promoting visits to the front page when visiting other&nbsp;filtered
 <code class="docutils literal">index.tmpl</code> page variants such as author pages and tag pages. This
-could have been included in <code class="docutils literal">index.tmpl</code> or maybe in <code class="docutils literal">base.tmpl</code>
+could have been included&nbsp;in <code class="docutils literal">index.tmpl</code> or maybe&nbsp;in <code class="docutils literal">base.tmpl</code>
 depending on what you want to&nbsp;achieve.</p>
-<pre class="code html+mako"><a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-1"></a><span class="c">&lt;!-- Mako --&gt;</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-2"></a><span class="cp">%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-3"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'author_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-4"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>These posts were written by <span class="cp">${</span><span class="n">author</span><span class="cp">}</span>. See posts by all
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-5"></a>           authors on the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-6"></a>    <span class="cp">%</span> <span class="k">elif</span> <span class="s1">'tag_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-7"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a filtered selection of posts tagged “<span class="cp">${</span><span class="n">tag</span><span class="cp">}</span>”, visit
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-8"></a>           the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> to see all posts.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-9"></a>    <span class="cp">%</span><span class="k"> endif</span>
-<a name="rest_code_299c7efbd6bd4cecbbf50715273b08ed-10"></a><span class="cp">%</span><span class="k"> endif</span>
+<pre class="code html+mako"><a name="rest_code_392813aef8004777a010f7fa539e56cd-1"></a><span class="c">&lt;!-- Mako --&gt;</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-2"></a><span class="cp">%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-3"></a>    <span class="cp">%</span> <span class="k">if</span> <span class="s1">'author_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-4"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>These posts were written by <span class="cp">${</span><span class="n">author</span><span class="cp">}</span>. See posts by all
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-5"></a>           authors on the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-6"></a>    <span class="cp">%</span> <span class="k">elif</span> <span class="s1">'tag_page'</span> <span class="ow">in</span> <span class="n">pagekind</span><span class="p">:</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-7"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a filtered selection of posts tagged “<span class="cp">${</span><span class="n">tag</span><span class="cp">}</span>”, visit
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-8"></a>           the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> to see all posts.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-9"></a>    <span class="cp">%</span><span class="k"> endif</span>
+<a name="rest_code_392813aef8004777a010f7fa539e56cd-10"></a><span class="cp">%</span><span class="k"> endif</span>
 </pre>
-<pre class="code html+jinja"><a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-1"></a><span class="c">&lt;!-- Jinja2 --&gt;</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-2"></a><span class="cp">{%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-3"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'author_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-4"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>These posts were written by <span class="cp">{{</span> <span class="nv">author</span> <span class="cp">}}</span>. See posts by all
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-5"></a>           authors on the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-6"></a>    <span class="cp">{%</span> <span class="k">elif</span> <span class="s1">'tag_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-7"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a filtered selection of posts tagged “<span class="cp">{{</span> <span class="nv">tag</span> <span class="cp">}}</span>”, visit
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-8"></a>           the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> to see all posts.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-9"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<a name="rest_code_530b1cbd5e384f908cac44b2109bfe95-10"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<pre class="code html+jinja"><a name="rest_code_996f581e01c64d7895436f06869eb31d-1"></a><span class="c">&lt;!-- Jinja2 --&gt;</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-2"></a><span class="cp">{%</span> <span class="k">if</span> <span class="s1">'index'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-3"></a>    <span class="cp">{%</span> <span class="k">if</span> <span class="s1">'author_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-4"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>These posts were written by <span class="cp">{{</span> <span class="nv">author</span> <span class="cp">}}</span>. See posts by all
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-5"></a>           authors on the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-6"></a>    <span class="cp">{%</span> <span class="k">elif</span> <span class="s1">'tag_page'</span> <span class="k">in</span> <span class="nv">pagekind</span> <span class="cp">%}</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-7"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a filtered selection of posts tagged “<span class="cp">{{</span> <span class="nv">tag</span> <span class="cp">}}</span>”, visit
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-8"></a>           the <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>front page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> to see all posts.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-9"></a>    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a name="rest_code_996f581e01c64d7895436f06869eb31d-10"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </pre>
 <p>List of page kinds provided by default&nbsp;plugins:</p>
 <ul class="simple">
@@ -509,27 +505,26 @@ depending on what you want to&nbsp;achieve.</p>
 <p>The included themes are translated into a variety of languages. You can add your own translation
 at <a class="reference external" href="https://www.transifex.com/projects/p/nikola/">https://www.transifex.com/projects/p/nikola/</a></p>
 <p>If you want to create a theme that has new strings, and you want those strings to be translatable,
-then your theme will need a custom <code class="docutils literal">messages</code> folder.</p>
+then your theme will need a&nbsp;custom <code class="docutils literal">messages</code> folder.</p>
 </div>
 <div class="section" id="less-and-sass">
 <h2>
-<a class="reference external" href="http://lesscss.org/">LESS</a> and <a class="reference external" href="http://sass-lang.com/">Sass</a>
+<a class="reference external" href="http://lesscss.org/"><span class="caps">LESS</span></a> and <a class="reference external" href="http://sass-lang.com/">Sass</a>
 </h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The LESS and Sass compilers were moved to the Plugins Index in
+<p>The <span class="caps">LESS</span> and Sass compilers were moved to the Plugins Index in
 Nikola&nbsp;v7.0.0.</p>
 </div>
-<p>If you want to use those CSS extensions, you can — just store your files
-in the <code class="docutils literal">less</code> or <code class="docutils literal">sass</code> directory of your&nbsp;theme.</p>
-<p>In order to have them work, you need to create a list of <code class="docutils literal">.less</code> or
-<code class="docutils literal"><span class="pre">.scss/.sass</span></code> files to compile — the list should be in a file named
-<code class="docutils literal">targets</code> in the respective directory (<code class="docutils literal">less</code>/<code class="docutils literal">sass</code>).</p>
-<p>The files listed in the <code class="docutils literal">targets</code> file will be passed to the respective
-compiler, which you have to install manually (<code class="docutils literal">lessc</code> which comes from
-the Node.js package named <code class="docutils literal">less</code> or <code class="docutils literal">sass</code> from a Ruby package aptly
-named <code class="docutils literal">sass</code>).  Whatever the compiler outputs will be saved as a CSS
-file in your rendered site, with the <code class="docutils literal">.css</code> extension.</p>
+<p>If you want to use those <span class="caps">CSS</span> extensions, you can — just store your files
+in&nbsp;the <code class="docutils literal">less</code> or <code class="docutils literal">sass</code> directory of your&nbsp;theme.</p>
+<p>In order to have them work, you need to create a list&nbsp;of <code class="docutils literal">.less</code> or
+<code class="docutils literal"><span class="pre">.scss/.sass</span></code> files to compile — the list should be in a file&nbsp;named
+<code class="docutils literal">targets</code> in the respective directory&nbsp;(<code class="docutils literal">less</code>/<code class="docutils literal">sass</code>).</p>
+<p>The files listed in&nbsp;the <code class="docutils literal">targets</code> file will be passed to the respective
+compiler, which you have to install manually&nbsp;(<code class="docutils literal">lessc</code> which comes from
+the Node.js package&nbsp;named <code class="docutils literal">less</code> or <code class="docutils literal">sass</code> from a Ruby package aptly&nbsp;named <code class="docutils literal">sass</code>).  Whatever the compiler outputs will be saved as a <span class="caps">CSS</span>
+file in your rendered site, with&nbsp;the <code class="docutils literal">.css</code> extension.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Conflicts may occur if you have two files with the same base name
