@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about dataviz)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/dataviz.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Fri, 19 Feb 2021 21:52:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective Data Visualization, Part 1: What Is Effective Data Visualization?</title><link>https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pollard's Rho (Posts about dataviz)</title><link>https://nicholas-miklaucic.github.io/</link><description></description><atom:link href="https://nicholas-miklaucic.github.io/categories/dataviz.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:nicholas.miklaucic@gmail.com"&gt;Nicholas Miklaucic&lt;/a&gt; </copyright><lastBuildDate>Sat, 20 Feb 2021 01:40:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective Data Visualization, Part 1: What Is Effective Data Visualization?</title><link>https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/</link><dc:creator>Nicholas Miklaucic</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;i&gt;This series is the textual version of a presentation I gave to a class on
 effective&lt;/i&gt; &lt;i&gt;data visualization. I'm reproducing it here both to add some
 information that&lt;/i&gt; &lt;i&gt;was cut from the presentation for time and to put it in a
 publicly available&lt;/i&gt; &lt;i&gt;place.&lt;/i&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-orga9a67b1" class="outline-2"&gt;
-&lt;h2 id="orga9a67b1"&gt;Intro&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orga9a67b1"&gt;
+&lt;div id="outline-container-org286fd4f" class="outline-2"&gt;
+&lt;h2 id="org286fd4f"&gt;Intro&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org286fd4f"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga66df8d" class="outline-3"&gt;
-&lt;h3 id="orga66df8d"&gt;What This Guide Is For&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga66df8d"&gt;
+&lt;div id="outline-container-org8e64dca" class="outline-3"&gt;
+&lt;h3 id="org8e64dca"&gt;What This Guide Is For&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org8e64dca"&gt;
 &lt;p&gt;
 This series of posts is about how to make effective data visualization: exactly
 what I mean by that will become clear shortly. Much like one might critique
@@ -22,9 +22,9 @@ consumer of data visualization they encounter in their daily lives.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org6b30ff8" class="outline-3"&gt;
-&lt;h3 id="org6b30ff8"&gt;Who This Guide Is For&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6b30ff8"&gt;
+&lt;div id="outline-container-org0a68252" class="outline-3"&gt;
+&lt;h3 id="org0a68252"&gt;Who This Guide Is For&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org0a68252"&gt;
 &lt;p&gt;
 This guide is for anyone! Unlike my other work on this blog, this guide expects
 no knowledge of coding or any platform for visualizations: learning such a tool
