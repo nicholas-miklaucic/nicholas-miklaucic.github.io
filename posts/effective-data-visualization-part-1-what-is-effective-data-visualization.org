@@ -47,16 +47,16 @@ Data can be deadly serious, and so data visualization can have tremendous
 importance.
 
 #+CAPTION: Christa McAuliffe (Credit: NASA)
-[[img-url:/images/teachback/ChristaMcAuliffe.jpg
-]]
+[[img-url:/images/teachback/ChristaMcAuliffe.jpg ]]
+
 The /Challenger/ disaster in which Christa McAuliffe, the person in the photo
-above, died is a grim reminder of information's power. The O-ring failure
-that led to the explosion was preventable and understood. Thus, some authors
-like Edward Tufte have analyzed this tragedy as a failure of data visualization
-as much as anything else: the visualizations used to communicate the dire need
-to reschedule the launch failed to convey this knowledge to the people who made
-that fateful decision. This is to say that effectively communicating and
-understanding data is worthy of serious study.
+above, died is a grim reminder of information's power. The O-ring failure that
+led to the explosion was preventable and understood. Thus, some authors like
+Edward Tufte have analyzed this tragedy as a failure of data visualization as
+much as anything else: the visualizations used to communicate the dire need to
+reschedule the launch failed to convey this knowledge to the people who made
+that fateful decision. [[http://williamwolff.org/wp-content/uploads/2013/01/tufte-challenger-1997.pdf][Here's a link to Tufte's analysis.]] This is to say that
+effectively communicating and understanding data is worthy of serious study.
 
 Why use data visualization at all? Why not use other tools, like spreadsheets or
 statistics?
