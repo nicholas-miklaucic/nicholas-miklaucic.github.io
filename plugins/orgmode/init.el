@@ -2,25 +2,25 @@
 
 ;; Load org-mode
 ;; Requires org-mode v8.x
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(setq package-load-list '((htmlize t)))
+(package-initialize)
 
-;; (require 'package)
-;; (setq package-load-list '((htmlize t)))
-;; (package-initialize)
+(unless (package-installed-p 'htmlize)
+  (package-refresh-contents)
+  (package-install 'htmlize))
+
+(require 'org)
+(require 'ox-html)
 
 ;;; Custom configuration for the export.
+
 ;;; Add any custom configuration that you would like to 'conf.el'.
 (setq nikola-use-pygments t
       org-export-with-toc nil
       org-export-with-section-numbers nil
-      load-file-name "/home/nicholas/Documents/nicholas-miklaucic.github.io/plugins/orgmode/init.el"
       org-startup-folded 'showeverything)
-
-
-;; because I use Doom, I don't think the default runs properly
-(load-file (expand-file-name "htmlize.el" (file-name-directory load-file-name)))
-
-(require 'org)
-(require 'ox-html)
 
 ;; Load additional configuration from conf.el
 (let ((conf (expand-file-name "conf.el" (file-name-directory load-file-name))))
@@ -113,7 +113,9 @@ contextual information."
           (progn
             (unless lang (setq lang ""))
             (pygmentize (downcase lang) (org-html-decode-plain-text code)))
-        code-html))))
+        ;; this doesn't work for me without pygments: no code blocks!
+        ;; monkey patch
+        (concat "<div class='code-container'><div class='code-block'><pre><code class=" lang ">" code-html "</code></pre></div></div>")))))
 
 ;; Export images with custom link type
 (defun org-custom-link-img-url-export (path desc format)
@@ -121,6 +123,22 @@ contextual information."
    ((eq format 'html)
     (format "<img src=\"%s\" alt=\"%s\"/>" path desc))))
 (org-add-link-type "img-url" nil 'org-custom-link-img-url-export)
+
+;; Export images with built-in file scheme
+(defun org-file-link-img-url-export (path desc format)
+  (cond
+   ((eq format 'html)
+    (format "<img src=\"/%s\" alt=\"%s\"/>" path desc))))
+(org-add-link-type "file" nil 'org-file-link-img-url-export)
+
+;; Support for magic links (link:// scheme)
+(org-link-set-parameters
+  "link"
+  :export (lambda (path desc backend)
+             (cond
+               ((eq 'html backend)
+                (format "<a href=\"link:%s\">%s</a>"
+                        path (or desc path))))))
 
 ;; Export function used by Nikola.
 (defun nikola-html-export (infile outfile)

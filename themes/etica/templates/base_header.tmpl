@@ -1,0 +1,79 @@
+{#  -*- coding: utf-8 -*- #}
+{% import 'base_helper.tmpl' as base with context %}
+
+{% macro html_header() %}
+    <nav class="navbar justify-content-center">
+        <div class="navbar-content">
+            {{ html_site_title() }}
+        </div>
+        <div class="navbar-content">
+            {{ html_translation_header() }}
+        </div>
+        <div class="navbar-content">
+            {{ html_navigation_links() }}
+            {% if search_form %}
+                <div class="searchform" role="search">
+                    {{ search_form }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav>
+    {{ template_hooks['page_header']() }}
+{% endmacro %}
+
+{% macro html_site_title() %}
+    <a class="nav-link" id="brand" href="{{ _link("root", None, lang) }}" title="{{ blog_title|e }}" rel="home">
+        {% if logo_url %}
+            <img src="{{ logo_url }}" alt="{{ blog_title|e }}" id="logo">
+        {% endif %}
+
+        {% if show_blog_title %}
+            <span id="blog-title" class="navbar-brand">{{ blog_title|e }}</span>
+        {% endif %}
+    </a>
+{% endmacro %}
+
+{% macro html_navigation_links() %}
+    <ul class="navbar-nav">
+        {{ html_navigation_links_entries(navigation_links) }}
+        {{ html_navigation_links_entries(navigation_alt_links) }}
+        {{ template_hooks['menu']() }}
+        {{ template_hooks['menu_alt']() }}
+    </ul>
+{% endmacro %}
+
+{% macro html_navigation_links_entries(navigation_links_source) %}
+    {% for url, text in navigation_links_source[lang] %}
+        {% if isinstance(url, tuple) %}
+            <li> {{ text }}
+                <ul>
+                    {% for suburl, text in url %}
+                        {% if rel_link(permalink, suburl) == "#" %}
+                            <li class="nav-item active"><a class="nav-link" href="{{ permalink }}">{{ text }}<span class="sr-only"> {{ messages("(active)", lang) }}</span></a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{{ suburl }}">{{ text }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            {% if rel_link(permalink, url) == "#" %}
+                <li class="nav-item active"><a class="nav-link" href="{{ permalink }}">{{ text }}<span class="sr-only"> {{ messages("(active)", lang) }}</span></a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url }}">{{ text }}</a></li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro html_translation_header() %}
+    {% if translations|length > 1 %}
+        <div id="toptranslations">
+            <h2>{{ messages("Languages:") }}</h2>
+            {{ base.html_translations() }}
+        </div>
+    {% endif %}
+{% endmacro %}

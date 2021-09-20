@@ -62,7 +62,7 @@ class CompileOrgmode(PageCompiler):
         makedirs(os.path.dirname(dest))
         try:
             command = [
-                'emacs', '-q', '--batch',
+                'emacs', '--batch',
                 '-l', join(dirname(abspath(__file__)), 'init.el'),
                 '--eval', '(nikola-html-export "{0}" "{1}")'.format(
                     abspath(source), abspath(dest))

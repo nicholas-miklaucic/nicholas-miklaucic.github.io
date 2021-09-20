@@ -1,0 +1,89 @@
+:root {
+
+
+
+    /* Change to indigo */
+    --primary-color: var(--indigo-color);                                     /* Before: var(--blue-color) */
+    --primary-color-light: var(--indigo-color-light);                         /* Before: var(--blue-color-light) */
+    --primary-color-very-light: var(--indigo-color-very-light);               /* Before: var(--blue-color-very-light) */
+    --primary-color-dark: var(--indigo-color-dark);                           /* Before: var(--blue-color-dark) */
+    --primary-color-very-dark: var(--indigo-color-very-dark);                 /* Before: var(--blue-color-very-dark) */
+    --primary-box-shadow-color: var(--indigo-box-shadow-color);               /* Before: var(--blue-box-shadow-color) */
+    --primary-box-shadow-color-darker: var(--indigo-box-shadow-color-darker); /* Before: var(--blue-box-shadow-color-darker) */
+    --text-color-on-primary-color-bg: var(--text-color-on-indigo-color-bg);   /* Before: var(--text-color-on-blue-color-bg) */
+}
+
+body {
+    font-family: lft-etica, sans-serif;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: lft-etica, sans-serif;
+}
+
+#blog-title {
+    font-weight: 300;
+}
+
+.dataframe td, code, kbd {
+    font-family: lft-etica-mono, monospaced;
+}
+
+.dataframe td, .dataframe th {
+    text-align: right;
+}
+
+/* Use standard monospace font for code blocks: Etica is a bit much. */
+pre code {
+    font-family: monospaced;
+}
+
+.metadata {
+    font-family: lft-etica-mono, monospaced;
+    font-weight: 300;
+}
+
+/* Credit https://kennethfriedman.org/thoughts/2019/marginal-notes/
+ Unlike his work, I just hide margin notes when the screen is too small (a la Tufte) */
+/*Marginal Notes on Desktop*/
+.margin-note {
+    display: inline;
+    float: right;
+    position: relative;
+    width: 20vw;
+    margin-right: -24vw;
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .margin-note {
+        display: none;
+    }
+}
+
+table td, table tr {
+    border: none !important;
+}
+
+div.code-container {
+    position: relative;
+}
+
+div.code-block {
+    width: 100%;
+}
+
+div.code-block pre {
+    width: 100%;
+}
+
+div.code-block button {
+  box-sizing: border-box;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  user-select: none;
+  /* padding: 5px 10px; */
+  position: absolute;
+  top: 0;
+  right: 0;
+}
