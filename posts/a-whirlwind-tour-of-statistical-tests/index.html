@@ -1,63 +1,90 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Statistical tests explained in Python">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · A Whirlwind Tour of Statistical Tests </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>A Whirlwind Tour of Statistical Tests | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="A Whirlwind Tour of Statistical Tests">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/">
+<meta property="og:description" content="Statistical tests explained in Python">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-11-07T12:08:21-05:00">
+<meta property="article:tag" content="guide">
+<meta property="article:tag" content="math">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">A Whirlwind Tour of Statistical&nbsp;Tests</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">A Whirlwind Tour of Statistical&nbsp;Tests</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2019-11-07T12:08:21-05:00" itemprop="datePublished" title="2019-11-07 12:08">2019-11-07 12:08</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/a-whirlwind-tour-of-statistical-tests-for-programmers.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2019-11-07T12:08:21-05:00" itemprop="datePublished" title="2019-11-07 12:08">2019-11-07 12:08</time></span>
-        <meta name="description" itemprop="description" content="Statistical tests explained in Python">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 Hello&nbsp;again! 
 </p>
@@ -96,9 +123,9 @@ broad one, so it&#8217;ll be useful to first lay a foundation by getting some te
 rough taxonomy of the tools we&#8217;ll be using&nbsp;today.
 </p>
 
-<div id="outline-container-orgd3b9ebd" class="outline-2">
-<h2 id="orgd3b9ebd">What Is a Statistical&nbsp;Test?</h2>
-<div class="outline-text-2" id="text-orgd3b9ebd">
+<div id="outline-container-org3f5612a" class="outline-2">
+<h2 id="org3f5612a">What Is a Statistical&nbsp;Test?</h2>
+<div class="outline-text-2" id="text-org3f5612a">
 <p>
 A statistical test, in the way I&#8217;ll be using it today, means a way of testing a hypothesis. That
 hypothesis can be almost anything: perhaps it&#8217;s that the mean of one set of numbers is higher than
@@ -110,9 +137,9 @@ boring. (&#8220;Am I taller than my friend from Korea&#8221; is a much easier qu
 sample of Americans and Koreans I know, which population is&nbsp;taller.&#8221;)
 </p>
 </div>
-<div id="outline-container-org9746330" class="outline-3">
-<h3 id="org9746330">What Do Tests&nbsp;Do?</h3>
-<div class="outline-text-3" id="text-org9746330">
+<div id="outline-container-org93b9bf6" class="outline-3">
+<h3 id="org93b9bf6">What Do Tests&nbsp;Do?</h3>
+<div class="outline-text-3" id="text-org93b9bf6">
 <p>
 A very important thing to keep in mind is that statistical tests <b>don&#8217;t prove that hypotheses are
 true.</b> That is, they can&#8217;t by their nature confirm one specific pattern given the infinite
@@ -133,9 +160,9 @@ are testing. I&#8217;ll make sure to keep it very clear what hypotheses match up
 </p>
 </div>
 </div>
-<div id="outline-container-org4a46831" class="outline-3">
-<h3 id="org4a46831">Assumptions</h3>
-<div class="outline-text-3" id="text-org4a46831">
+<div id="outline-container-org2ccbd6a" class="outline-3">
+<h3 id="org2ccbd6a">Assumptions</h3>
+<div class="outline-text-3" id="text-org2ccbd6a">
 <p>
 This brings us to our next point: of course, there&#8217;s no way I&#8217;d actually know a random sample of
 either of those populations. Almost any statistical test has one or more assumptions about its data,
@@ -164,9 +191,9 @@ incorrect. What that out of the way, how do we interpret our results assuming th
 </p>
 </div>
 </div>
-<div id="outline-container-orgd325dea" class="outline-3">
-<h3 id="orgd325dea">Interpretation</h3>
-<div class="outline-text-3" id="text-orgd325dea">
+<div id="outline-container-orgeb8bb2f" class="outline-3">
+<h3 id="orgeb8bb2f">Interpretation</h3>
+<div class="outline-text-3" id="text-orgeb8bb2f">
 <p>
 Tests will usually give a <i>test statistic</i>, some calculation based on our data, and that test
 statistic will usually follow a <i>test distribution.</i> Given those two things, we can determine how
@@ -187,11 +214,10 @@ significant results purely by&nbsp;chance!)
 </div>
 </div>
 </div>
-<div id="outline-container-org623831a" class="outline-2">
-<h2 id="org623831a">The Landscape of Statistical&nbsp;Hypotheses</h2>
-<div class="outline-text-2" id="text-org623831a">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-org3611e8e" class="outline-2">
+<h2 id="org3611e8e">The Landscape of Statistical&nbsp;Hypotheses</h2>
+<div class="outline-text-2" id="text-org3611e8e">
+<span class="margin-note">
 <p>
 Obviously there are a lot of statistical tests out there: I couldn&#8217;t possibly summarize all of them
 here. However, these are the ones I&#8217;ve seen the most often in scientific publications and my own
@@ -214,16 +240,15 @@ corroborated by using one of these tests. We&#8217;ll break these up into a coup
 </ul>
 </div>
 
-<div id="outline-container-org229da53" class="outline-3">
-<h3 id="org229da53">Testing the Distribution of a Single&nbsp;Dataset</h3>
-<div class="outline-text-3" id="text-org229da53">
+<div id="outline-container-orgbbe8f3c" class="outline-3">
+<h3 id="orgbbe8f3c">Testing the Distribution of a Single&nbsp;Dataset</h3>
+<div class="outline-text-3" id="text-orgbbe8f3c">
 </div>
-<div id="outline-container-orga180279" class="outline-4">
-<h4 id="orga180279">Normality</h4>
-<div class="outline-text-4" id="text-orga180279">
-<span class="marginnote"><p>
+<div id="outline-container-org2657dd9" class="outline-4">
+<h4 id="org2657dd9">Normality</h4>
+<div class="outline-text-4" id="text-org2657dd9">
+<span class="margin-note">
 
-</p>
 <p>
 From now on, assume we&#8217;ve imported the Python&nbsp;libraries <code>numpy</code>, <code>pandas</code>, <code>seaborn</code>,&nbsp;and <code>scipy.stats</code> as
 <code>np</code>, <code>pd</code>, <code>sns</code>,&nbsp;and <code>stats</code> respectively.
@@ -240,11 +265,11 @@ We&#8217;ll start with the basics. Let&#8217;s say we have a dataset of 1000 <a 
 numbers from that dataset and make a&nbsp;histogram:
 </p>
 
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">psats</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># just to see a few numbers</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">print(psats[:5])  # just to see a few numbers
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span><span class="mf">1010.</span><span class="p">,</span>  <span class="mf">770.</span><span class="p">,</span> <span class="mf">1340.</span><span class="p">,</span> <span class="mf">1070.</span><span class="p">,</span> <span class="mf">1310.</span><span class="p">])</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">array([1010.,  770., 1340., 1070., 1310.])
+</code></pre></div></div>
 
 <p>
 <img src="../../images/stat-tests/psat-hist.png" alt="nil"></p>
@@ -256,11 +281,11 @@ there are several normality tests, but the one we&#8217;ll use and the one I&#82
 <i>Shapiro-Wilk test</i>: 
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">psats</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">stats.shapiro(psats)
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">0.9979366660118103</span><span class="p">,</span> <span class="mf">0.2571161985397339</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">(0.9979366660118103, 0.2571161985397339)
+</code></pre></div></div>
 
 <p>
 This outputs a combination of test statistic first and the p-value second. I haven&#8217;t said what our
@@ -283,14 +308,14 @@ points. What does the Shapiro-Wilk test say&nbsp;now?
 <p>
 <img src="../../images/stat-tests/psat-fit-more.png" alt="nil"></p>
 
-<div class="highlight"><pre><span></span><span class="c1"># now with more data</span>
-<span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">psats</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># now with more data
+stats.shapiro(psats)
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="ne">UserWarning</span><span class="p">:</span> <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">accurate</span> <span class="k">for</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="mf">5000.</span>
+<div class="code-container"><div class="code-block"><pre><code class="python">UserWarning: p-value may not be accurate for N &gt; 5000.
 
-<span class="p">(</span><span class="mf">0.9985979795455933</span><span class="p">,</span> <span class="mf">9.862207406285961e-08</span><span class="p">)</span>
-</pre></div>
+(0.9985979795455933, 9.862207406285961e-08)
+</code></pre></div></div>
 
 <p>
 We can see that the histogram has some weird spikes and our test now returns an incredibly low
@@ -335,12 +360,11 @@ I promise most of these aren&#8217;t going to be as&nbsp;tricky!
 </div>
 </div>
 
-<div id="outline-container-org9e03661" class="outline-4">
-<h4 id="org9e03661">Other&nbsp;Distributions</h4>
-<div class="outline-text-4" id="text-org9e03661">
-<span class="marginnote"><p>
+<div id="outline-container-org7bcefc8" class="outline-4">
+<h4 id="org7bcefc8">Other&nbsp;Distributions</h4>
+<div class="outline-text-4" id="text-org7bcefc8">
+<span class="margin-note">
 
-</p>
 <p>
 <span class="dquo">&#8220;</span>But Nicholas&#8221;, I hear you ask, &#8220;why couldn&#8217;t we just use this test for testing normality?&#8221; You
 could: it&#8217;s just that the Shapiro-Wilk test is more precise and will detect smaller
@@ -356,8 +380,7 @@ general and useful tool. It has the same caveat as above (it can detect tiny dif
 enough sample sizes), but since we just made a big point about that I&#8217;ll gloss over it this&nbsp;time. 
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 <code>scipy.stats</code> distributions have all sorts of useful functions: for example, I used the normal one to
 make the expected <span class="caps">CDF</span> I used in the plot above. Check the docs to learn&nbsp;more.
@@ -391,11 +414,11 @@ whether we add them,&nbsp;because <code>scipy</code> will fit this distribution&
 <p>
 <img src="../../images/stat-tests/uniform-hist.png" alt="nil"></p>
 
-<div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">'uniform'</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">stats.kstest(data, 'uniform', (0, 1))
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="n">KstestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="mf">0.025222960578</span><span class="p">,</span> <span class="n">pvalue</span><span class="o">=</span><span class="mf">0.54801947328</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">KstestResult(statistic=0.025222960578, pvalue=0.54801947328)
+</code></pre></div></div>
 
 <p>
 The null hypothesis is that the data was drawn from this distribution: again, there&#8217;s an inherent
@@ -404,9 +427,9 @@ by sampling from a uniform distribution, so a result like this is very likely to
 </p>
 </div>
 </div>
-<div id="outline-container-org42089db" class="outline-4">
-<h4 id="org42089db">Discrete&nbsp;Distributions</h4>
-<div class="outline-text-4" id="text-org42089db">
+<div id="outline-container-org080bc22" class="outline-4">
+<h4 id="org080bc22">Discrete&nbsp;Distributions</h4>
+<div class="outline-text-4" id="text-org080bc22">
 <p>
 What if our distribution isn&#8217;t continuous? For this, we can use the high-school stats classic: the
 <i>Pearson&#8217;s chi-squared test.</i> Calculating this by hand isn&#8217;t actually that hard, but we didn&#8217;t learn
@@ -432,20 +455,20 @@ There&#8217;s some variation, but that&#8217;s to be expected: ask any board gam
 probability doesn&#8217;t always even out. The question is: can we show that this wouldn&#8217;t happen by&nbsp;chance?
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># counts is the data I, um, "collected"</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-<span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span> <span class="o">/</span> <span class="mi">6</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Stat: '</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'p: '</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># counts is the data I, um, "collected"
+print(counts)
+expected = [100 / 6] * 6
+print(np.round(expected, 1))
+stat, p = stats.chisquare(counts, expected, 5)
+print('Stat: ', round(stat, 2))
+print('p: ', p)
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">34</span> <span class="mi">23</span> <span class="mi">13</span>  <span class="mi">7</span>  <span class="mi">8</span> <span class="mi">15</span><span class="p">]</span>
-<span class="p">[</span><span class="mf">16.7</span> <span class="mf">16.7</span> <span class="mf">16.7</span> <span class="mf">16.7</span> <span class="mf">16.7</span> <span class="mf">16.7</span><span class="p">]</span>
-<span class="n">Stat</span><span class="p">:</span>  <span class="mf">31.52</span>
-<span class="n">p</span><span class="p">:</span>  <span class="n">nan</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">[34 23 13  7  8 15]
+[16.7 16.7 16.7 16.7 16.7 16.7]
+Stat:  31.52
+p:  nan
+</code></pre></div></div>
 
 <p>
 Our p-value was so&nbsp;low <code>scipy</code> gave up! This happens a lot with this test: it&#8217;s very precise and gives
@@ -456,30 +479,29 @@ chance, giving the rest 10%&nbsp;chances.)
 </div>
 </div>
 </div>
-<div id="outline-container-org8fba1ec" class="outline-3">
-<h3 id="org8fba1ec">Testing a Threshold For a Single&nbsp;Dataset</h3>
-<div class="outline-text-3" id="text-org8fba1ec">
+<div id="outline-container-orgdb0f1d2" class="outline-3">
+<h3 id="orgdb0f1d2">Testing a Threshold For a Single&nbsp;Dataset</h3>
+<div class="outline-text-3" id="text-orgdb0f1d2">
 <p>
 This problem is another classic statistics question. Let&#8217;s say I&#8217;m arguing with my friend and they
 claim that soccer games are lame because, on average, there&#8217;s only two goals a game. Let&#8217;s test this
 claim against some recent Champions League games as of this&nbsp;writing:
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Scores from&nbsp;<span class="caps">ESPN</span>.
 </p>
 </span>
 
-<div class="highlight"><pre><span></span><span class="c1"># from November 5-6, 2019</span>
-<span class="n">total_scores</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> 
-    <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="mi">5</span>
-<span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># from November 5-6, 2019
+total_scores = [
+    2, 3, 2, 3, 6, 
+    1, 6, 4, 0, 2,
+    5, 8, 3, 4, 2,
+    5
+]
+</code></pre></div></div>
 
 <p>
 The test we&#8217;re going to use is called the <i>Student&#8217;s t-test</i>, named for William Sealy Gosset who wrote
@@ -487,12 +509,12 @@ under the pseudonym Student. It&#8217;s pretty simple: it tests the null hypothe
 whole population we&#8217;re sampling is equal to the given&nbsp;value.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_1samp</span><span class="p">(</span><span class="n">total_scores</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"p ="</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">stat, p = stats.ttest_1samp(total_scores, 2)
+print("p =", round(p, 3))
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.012</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">p = 0.012
+</code></pre></div></div>
 
 <p>
 This is indicative that our friend is wrong: the data doesn&#8217;t support it. Note that this is
@@ -502,9 +524,9 @@ two-sided tests in most cases: it&#8217;s not usually fair to assume the mean is
 </div>
 </div>
 
-<div id="outline-container-orgcdf860a" class="outline-3">
-<h3 id="orgcdf860a">Comparing Means From Two&nbsp;Datasets</h3>
-<div class="outline-text-3" id="text-orgcdf860a">
+<div id="outline-container-orgf0195e2" class="outline-3">
+<h3 id="orgf0195e2">Comparing Means From Two&nbsp;Datasets</h3>
+<div class="outline-text-3" id="text-orgf0195e2">
 <p>
 This test can be extended to work for two distributions. There&#8217;s actually two distinct ways this
 often pops up that we should distinguish: <i>paired</i> and <i>unpaired</i>. In <i>paired</i> tests, the two datasets are
@@ -515,11 +537,11 @@ would be trying to determine if Champions League games have more goals than Prem
 games. This is pretty simple to do in Python and has a familiar&nbsp;form:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># "ind" for "independent" meaning "unpaired"</span>
-<span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">champions</span><span class="p">,</span> <span class="n">premier</span><span class="p">)</span>
-<span class="c1"># "rel" for "related" meaning "paired"</span>
-<span class="n">stats</span><span class="o">.</span><span class="n">ttest_rel</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># "ind" for "independent" meaning "unpaired"
+stats.ttest_ind(champions, premier)
+# "rel" for "related" meaning "paired"
+stats.ttest_rel(before, after)
+</code></pre></div></div>
 
 <p>
 There are some assumptions here. We&#8217;re assuming that the data have the same variance (regardless of
@@ -528,17 +550,16 @@ real life, and it isn&#8217;t that far off if you bend the rules a little, but i
 </p>
 </div>
 </div>
-<div id="outline-container-org84d32b3" class="outline-3">
-<h3 id="org84d32b3">Relational&nbsp;Statistics</h3>
-<div class="outline-text-3" id="text-org84d32b3">
+<div id="outline-container-org1991670" class="outline-3">
+<h3 id="org1991670">Relational&nbsp;Statistics</h3>
+<div class="outline-text-3" id="text-org1991670">
 <p>
 Let&#8217;s say we have some paired data in different units and we want to figure out if they&#8217;re
 related. An example of this would be asking whether <span class="caps">SAT</span> scores correlate with freshman <span class="caps">GPA</span> in
 college. The example we&#8217;ll use is gas mileage vs. weight for some car&nbsp;models:
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 This dataset comes&nbsp;with <code>seaborn</code>: <code>sns.load_dataset("mpg")</code> is all you&nbsp;need.
 </p>
@@ -561,12 +582,12 @@ doesn&#8217;t usually have too many problems, at least when you combine it with 
 one above. Let&#8217;s see what comes&nbsp;out:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># assuming we've loaded our data into df</span>
-<span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'mpg'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">'weight'</span><span class="p">])</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># assuming we've loaded our data into df
+stats.pearsonr(df['mpg'], df['weight'])
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.831740933244335</span><span class="p">,</span> <span class="mf">2.9727995640500577e-103</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">(-0.831740933244335, 2.9727995640500577e-103)
+</code></pre></div></div>
 
 <p>
 The test statistic here is quite common and easy to interpret on its own: -1 means perfect
@@ -587,11 +608,11 @@ I should really stress that this is best used in <i>combination</i> with visuals
 nonsensical results&nbsp;otherwise:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">stats.pearsonr(x, y)
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">0.8165214368885029</span><span class="p">,</span> <span class="mf">0.002164602347197218</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">(0.8165214368885029, 0.002164602347197218)
+</code></pre></div></div>
 
 <p>
 So there&#8217;s a relationship, right? Well, maybe&nbsp;not:
@@ -603,9 +624,9 @@ So there&#8217;s a relationship, right? Well, maybe&nbsp;not:
 </div>
 </div>
 
-<div id="outline-container-org7a01e7d" class="outline-2">
-<h2 id="org7a01e7d">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org7a01e7d">
+<div id="outline-container-orgc8ca03f" class="outline-2">
+<h2 id="orgc8ca03f">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orgc8ca03f">
 <p>
 This provides a nice segue into my final point: it&#8217;s easy to overuse statistical tests or apply them
 in situations where their results are meaningless. These tests are best used to confirm whether a
@@ -613,8 +634,7 @@ result you already hypothesize is attributable to&nbsp;chance.
 </p>
 
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 This is a large part of why the morning show &#8220;coffee cures cancer&#8221; lines are so misleading. If you
 track what 500 people eat for a year, and then test every possible correlation of food with disease
@@ -659,13 +679,10 @@ science in action or to learn about visualizing your data in&nbsp;Python.
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/guide/" rel="tag">guide</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
-      </p>
-
-    
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/guide/" rel="tag">guide</a></li>
+            <li><a class="tag p-category" href="../../categories/math/" rel="tag">math</a></li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -687,23 +704,19 @@ science in action or to learn about visualizing your data in&nbsp;Python.
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

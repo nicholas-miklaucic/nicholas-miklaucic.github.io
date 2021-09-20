@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Using invariants for clever solutions to problems">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · Problem-Solving Techniques: Invariants </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>Problem-Solving Techniques: Invariants | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="next" href="../problem-solving-techniques-induction/" title="Problem Solving Techniques: Induction" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="Problem-Solving Techniques: Invariants">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/">
+<meta property="og:description" content="Using invariants for clever solutions to problems">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-07T12:26:06-05:00">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="math">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Problem-Solving Techniques:&nbsp;Invariants</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Problem-Solving Techniques:&nbsp;Invariants</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-07T12:26:06-05:00" itemprop="datePublished" title="2020-01-07 12:26">2020-01-07 12:26</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/problem-solving-techniques-invariants.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2020-01-07T12:26:06-05:00" itemprop="datePublished" title="2020-01-07 12:26">2020-01-07 12:26</time></span>
-        <meta name="description" itemprop="description" content="Using invariants for clever solutions to problems">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 There are a lot of clever proofs in mathematics and computer science. I&#8217;ve already talked about some
 of them, and I hope to do a lot more of it on this blog. There&#8217;s often a certain separation that I
@@ -81,11 +108,10 @@ such tool today:&nbsp;invariants.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org5b71574" class="outline-2">
-<h2 id="org5b71574">What is an&nbsp;Invariant?</h2>
-<div class="outline-text-2" id="text-org5b71574">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-orgdcdffd8" class="outline-2">
+<h2 id="orgdcdffd8">What is an&nbsp;Invariant?</h2>
+<div class="outline-text-2" id="text-orgdcdffd8">
+<span class="margin-note">
 <p>
 Angle, length, and volume are also all invariant under translation, reflection, and rotation. In
 fact, we might define <i>geometry</i>, at least the kind taught in high school, as the study of properties
@@ -101,9 +127,9 @@ shape is invariant under translation, rotation, or&nbsp;reflection.
 </div>
 </div>
 
-<div id="outline-container-orgb4c54fb" class="outline-2">
-<h2 id="orgb4c54fb">Why Do We&nbsp;Care?</h2>
-<div class="outline-text-2" id="text-orgb4c54fb">
+<div id="outline-container-orgbd249e3" class="outline-2">
+<h2 id="orgbd249e3">Why Do We&nbsp;Care?</h2>
+<div class="outline-text-2" id="text-orgbd249e3">
 <p>
 The idea that area is invariant under these types of transformations is probably something you
 already knew. Thinking about it like this, though, lets us easily use it in ways that aren&#8217;t
@@ -146,11 +172,10 @@ already. Let&#8217;s see how this sort of thinking can be applied to problems wi
 </div>
 </div>
 
-<div id="outline-container-org0250253" class="outline-2">
-<h2 id="org0250253">General&nbsp;Terminology</h2>
-<div class="outline-text-2" id="text-org0250253">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-org888c141" class="outline-2">
+<h2 id="org888c141">General&nbsp;Terminology</h2>
+<div class="outline-text-2" id="text-org888c141">
+<span class="margin-note">
 <p>
 Note that math has a lot of names for congruence, because we often want to talk about
 several kinds of transformations for the same object, and so it&#8217;s a bit of a pain to keep track
@@ -171,9 +196,9 @@ all have some specific value for an invariant an <i>equivalence class</i>.
 </div>
 </div>
 
-<div id="outline-container-org4e8be2e" class="outline-2">
-<h2 id="org4e8be2e">A Cooler&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org4e8be2e">
+<div id="outline-container-org5b177ca" class="outline-2">
+<h2 id="org5b177ca">A Cooler&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org5b177ca">
 <p>
 Imagine we have a grid and we can place 1x2 dominoes in that grid. There are all sorts of shapes we
 can make by placing these dominoes in different ways: we could make a 2x2 square, a 1x4 line, most
@@ -226,9 +251,9 @@ this tool. Now we know to try this method. The question is, how do we apply this
 </div>
 </div>
 
-<div id="outline-container-orgeb2c364" class="outline-2">
-<h2 id="orgeb2c364">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Invariants</h2>
-<div class="outline-text-2" id="text-orgeb2c364">
+<div id="outline-container-org68c434b" class="outline-2">
+<h2 id="org68c434b">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Invariants</h2>
+<div class="outline-text-2" id="text-org68c434b">
 <p>
 I&#8217;m going to break this up into a couple of distinct&nbsp;steps.
 </p>
@@ -275,8 +300,7 @@ I liked the parity idea, though: is there some way of using parity in a differen
 out, there&nbsp;is!
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 If you want a more rigorous definition of parity, something like this will do. <i>Parity</i> is some way of
 assigning &#8220;even&#8221; and &#8220;odd&#8221; to objects that can be combined in some way such that combining two even
@@ -314,9 +338,9 @@ between the&nbsp;shapes.
 </div>
 </div>
 
-<div id="outline-container-orgc326834" class="outline-2">
-<h2 id="orgc326834">Generalization</h2>
-<div class="outline-text-2" id="text-orgc326834">
+<div id="outline-container-org4c1d703" class="outline-2">
+<h2 id="org4c1d703">Generalization</h2>
+<div class="outline-text-2" id="text-org4c1d703">
 <p>
 Using invariance is especially fruitful because it suggests a number of other very interesting
 questions. Specifically, we know that our two invariants are <i>necessary</i> for a map to exist between
@@ -336,8 +360,7 @@ complicated than what I could reasonably introduce here.<a href="https://www.jst
 establishes such an invariant and shows an approach that can work for other types of&nbsp;tiling. 
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Thurston, W. (1990). Conway&#8217;s Tiling Groups. The American Mathematical Monthly, 97(8), 757-773. <a href="10.2307/2324578">10.2307/2324578</a>
 </p>
@@ -345,9 +368,9 @@ Thurston, W. (1990). Conway&#8217;s Tiling Groups. The American Mathematical Mon
 </div>
 </div>
 
-<div id="outline-container-org4b457ff" class="outline-2">
-<h2 id="org4b457ff">Gallery</h2>
-<div class="outline-text-2" id="text-org4b457ff">
+<div id="outline-container-orgfc43a90" class="outline-2">
+<h2 id="orgfc43a90">Gallery</h2>
+<div class="outline-text-2" id="text-orgfc43a90">
 <p>
 Now that we&#8217;ve developed one example in full, I want to quickly run through a bunch of other
 problems where invariants are useful as a way to aid the reader in recognizing possible invariants
@@ -356,9 +379,9 @@ interested reader to learn&nbsp;more.
 </p>
 </div>
 
-<div id="outline-container-org733caec" class="outline-3">
-<h3 id="org733caec">The 15&nbsp;puzzle</h3>
-<div class="outline-text-3" id="text-org733caec">
+<div id="outline-container-org151692a" class="outline-3">
+<h3 id="org151692a">The 15&nbsp;puzzle</h3>
+<div class="outline-text-3" id="text-org151692a">
 <p>
 There&#8217;s a famous sliding block <a href="https://en.wikipedia.org/wiki/15_puzzle">puzzle</a> that starts with a 4x4 grid tiled with numbers, with the last
 16 tile missing. The task is to switch the 14 and 15 tiles. There&#8217;s a parity invariant, a bit too
@@ -367,9 +390,9 @@ didn&#8217;t stop Sam Loyd, famed puzzle author, from offering $1,000 for doing 
 </p>
 </div>
 </div>
-<div id="outline-container-org4c48fb8" class="outline-3">
-<h3 id="org4c48fb8">Rubik&#8217;s&nbsp;Cube</h3>
-<div class="outline-text-3" id="text-org4c48fb8">
+<div id="outline-container-orgadc725c" class="outline-3">
+<h3 id="orgadc725c">Rubik&#8217;s&nbsp;Cube</h3>
+<div class="outline-text-3" id="text-orgadc725c">
 <p>
 There&#8217;s another parity invariant here that applies to the standard Rubik&#8217;s cube: it&#8217;s impossible to
 switch two adjacent edge pieces without doing anything else. (If you have any friends who solve
@@ -381,9 +404,9 @@ chance of being&nbsp;soluble.
 </p>
 </div>
 </div>
-<div id="outline-container-org7ab71c3" class="outline-3">
-<h3 id="org7ab71c3">Polygon&nbsp;Dissection</h3>
-<div class="outline-text-3" id="text-org7ab71c3">
+<div id="outline-container-orgbe57d92" class="outline-3">
+<h3 id="orgbe57d92">Polygon&nbsp;Dissection</h3>
+<div class="outline-text-3" id="text-orgbe57d92">
 <p>
 Given two polygons, can you cut one into pieces and reassemble them to get the other? The invariant
 that is most useful here is area. Satisfyingly, unlike our dominoes, this time area is both
@@ -392,9 +415,9 @@ congruence of shapes), a fact proved by the <a href="https://en.wikipedia.org/wi
 </p>
 </div>
 </div>
-<div id="outline-container-orgd5b63a2" class="outline-3">
-<h3 id="orgd5b63a2">Polyhedra&nbsp;Dissection</h3>
-<div class="outline-text-3" id="text-orgd5b63a2">
+<div id="outline-container-org289e162" class="outline-3">
+<h3 id="org289e162">Polyhedra&nbsp;Dissection</h3>
+<div class="outline-text-3" id="text-org289e162">
 <p>
 Extending the Wallace-Bolyai-Gerwien theorem to polyhedra was a famous problem, included on David
 Hilbert&#8217;s seminal list of problems presented in 1900 as important directions for future
@@ -406,9 +429,9 @@ show that two polyhedra can be dissected into each&nbsp;other.
 </p>
 </div>
 </div>
-<div id="outline-container-orga81f57c" class="outline-3">
-<h3 id="orga81f57c">Physical&nbsp;Systems</h3>
-<div class="outline-text-3" id="text-orga81f57c">
+<div id="outline-container-org995917b" class="outline-3">
+<h3 id="org995917b">Physical&nbsp;Systems</h3>
+<div class="outline-text-3" id="text-org995917b">
 <p>
 All sorts of invariants occur in physics problems, depending on the exact transformations being
 used: momentum, energy, the speed of light, etc. These are usually called <i>conservation laws</i>. Taking
@@ -418,9 +441,9 @@ connects invariants to symmetries called <a href="https://en.wikipedia.org/wiki/
 </p>
 </div>
 </div>
-<div id="outline-container-org03baa31" class="outline-3">
-<h3 id="org03baa31">Topology</h3>
-<div class="outline-text-3" id="text-org03baa31">
+<div id="outline-container-orgb68c822" class="outline-3">
+<h3 id="orgb68c822">Topology</h3>
+<div class="outline-text-3" id="text-orgb68c822">
 <p>
 I earlier mentioned that you can think of geometry as the study of invariants under translation,
 rotation, and reflection. What if we generalized this list to include any type of continuous
@@ -437,9 +460,9 @@ transform either into a torus (a donut shape) without tearing them because the t
 </p>
 </div>
 </div>
-<div id="outline-container-org24050ee" class="outline-3">
-<h3 id="org24050ee">Theorema&nbsp;Egregium</h3>
-<div class="outline-text-3" id="text-org24050ee">
+<div id="outline-container-org780d33e" class="outline-3">
+<h3 id="org780d33e">Theorema&nbsp;Egregium</h3>
+<div class="outline-text-3" id="text-org780d33e">
 <p>
 The <a href="https://en.wikipedia.org/wiki/Gaussian_curvature?oldformat=true">theorema egregium</a> (&#8220;remarkable theorem&#8221;), proved by Gauss, loosely states that the curvature of
 a 2D surface doesn&#8217;t change depending on how you bend it in 3D space. For example, you can&#8217;t bend an
@@ -459,9 +482,9 @@ flat. Or, put another way, folding pizza makes it more&nbsp;stable!
 </div>
 </div>
 
-<div id="outline-container-orgc0ba678" class="outline-2">
-<h2 id="orgc0ba678">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orgc0ba678">
+<div id="outline-container-orga1097bf" class="outline-2">
+<h2 id="orga1097bf">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-orga1097bf">
 <p>
 I have two hopes at this point: that you, the reader, are now a little better at solving math
 problems creatively, and that you&#8217;ve seen how powerful invariants are in mathematics and for
@@ -482,27 +505,15 @@ Thanks for reading! Stay tuned for&nbsp;more.
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                Previous post
-            </span>
-
-
-            <span class="next pagination-item newer">
-                <a href="../problem-solving-techniques-induction/" rel="next" title="Problem Solving Techniques: Induction">
-Next post
-              </a>
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/cs/" rel="tag">cs</a></li>
+            <li><a class="tag p-category" href="../../categories/math/" rel="tag">math</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="next">
+                <a href="../problem-solving-techniques-induction/" rel="next" title="Problem Solving Techniques: Induction">Next&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -524,23 +535,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

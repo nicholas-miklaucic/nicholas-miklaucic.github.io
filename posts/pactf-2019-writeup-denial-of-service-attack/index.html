@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Explaining the solution to Denial of Service Attack">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · PACTF 2019 Writeup: Denial of Service Attack </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>PACTF 2019 Writeup: Denial of Service Attack | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="next" href="../pactf-2019-writeup-howd-i-get-hacked/" title="PACTF 2019 Writeup: How'd I Get Hacked?" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="PACTF 2019 Writeup: Denial of Service Attack">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/">
+<meta property="og:description" content="Explaining the solution to Denial of Service Attack">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-05T21:39:25-05:00">
+<meta property="article:tag" content="pactf">
+<meta property="article:tag" content="programming">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url"><span class="caps">PACTF</span> 2019 Writeup: Denial of Service&nbsp;Attack</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url"><span class="caps">PACTF</span> 2019 Writeup: Denial of Service&nbsp;Attack</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-05T21:39:25-05:00" itemprop="datePublished" title="2020-01-05 21:39">2020-01-05 21:39</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/pactf-2019-writeup-denial-of-service-attack.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2020-01-05T21:39:25-05:00" itemprop="datePublished" title="2020-01-05 21:39">2020-01-05 21:39</time></span>
-        <meta name="description" itemprop="description" content="Explaining the solution to Denial of Service Attack">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 Last year, I led the team behind <a href="https://2019.pactf.com/"><span class="caps">PACTF</span> 2019</a>, a <span class="caps">CTF</span> competition where people, mostly high schoolers,
 solved problems based on computers and computer security. It was a really fun and rewarding
@@ -93,8 +120,7 @@ figure out which one takes the longest. This is how I imagine most teams solved 
 doing will instead try to analyze how regular expressions could fail and go from&nbsp;there.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 For the interested, <a href="https://regexr.com/">RegExr</a> provides an interactive regular expression sandbox and a fuller reference
 on how regular expressions work. The Holy Grail of regular expression references is <i>Mastering</i>
@@ -108,9 +134,9 @@ I&#8217;ll briefly introduce regular expressions so people can follow along: we&
 subset of the whole idea, so it&#8217;ll be quick to&nbsp;introduce.
 </p>
 
-<div id="outline-container-org032758a" class="outline-2">
-<h2 id="org032758a">What Are Regular Expressions? What&#8217;s So Regular About&nbsp;Them?</h2>
-<div class="outline-text-2" id="text-org032758a">
+<div id="outline-container-org922c0c5" class="outline-2">
+<h2 id="org922c0c5">What Are Regular Expressions? What&#8217;s So Regular About&nbsp;Them?</h2>
+<div class="outline-text-2" id="text-org922c0c5">
 <p>
 Regular expressions (<i>regexes</i> from here on out) are a way of representing <i>regular languages</i>, a
 theoretical computer science construct that I&#8217;m going to criminally oversimplify to &#8220;clearly defined
@@ -138,9 +164,9 @@ aren&#8217;t always that way. How can a regular expression match slowly? Let&#82
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3c666c" class="outline-2">
-<h2 id="orgc3c666c">Castastrophic&nbsp;Backtracking</h2>
-<div class="outline-text-2" id="text-orgc3c666c">
+<div id="outline-container-org8a5251b" class="outline-2">
+<h2 id="org8a5251b">Castastrophic&nbsp;Backtracking</h2>
+<div class="outline-text-2" id="text-org8a5251b">
 <p>
 I&#8217;m going to add a little new&nbsp;syntax: <code>/A+/</code> means &#8220;one or more&nbsp;of <code>A</code> concatenated together,&#8221; which is
 just a shorthand&nbsp;for <code>/AA+/</code>. Similarly, we use parentheses to group things&nbsp;together: <code>/ab+/</code> means&nbsp;&#8221;<code>a</code>
@@ -175,8 +201,7 @@ string, which we&#8217;ll&nbsp;call <code>n</code>, approaches infinity, the tot
 grows like \(\log&nbsp;n\).) 
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Trying to figure out exactly how many times this will try to match something, given an input of \(n\)
 copies&nbsp;of <code>a</code>, is nontrivial and left as an exercise for the edification of the&nbsp;reader. 
@@ -208,8 +233,7 @@ The regex that solves the problem is basically the same idea as above, but with 
 short-circuit and not fail on), it fails because the file doesn&#8217;t end with a newline: otherwise,
 it would match. (This is where some people ran into trouble, I&nbsp;think.)</li>
 </ul>
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 If you&#8217;re confused about the extra syntax, consult <a href="https://regexr.com/">RegExr</a>.
 </p>
@@ -224,9 +248,9 @@ but none of these attempts will ever match and stop the&nbsp;search.
 </div>
 </div>
 
-<div id="outline-container-org587f22a" class="outline-2">
-<h2 id="org587f22a">Takeaways</h2>
-<div class="outline-text-2" id="text-org587f22a">
+<div id="outline-container-orgb8722bb" class="outline-2">
+<h2 id="orgb8722bb">Takeaways</h2>
+<div class="outline-text-2" id="text-orgb8722bb">
 <p>
 Regular expressions can be crazy! If you want to try to match regular expressions that you can&#8217;t
 easily verify will actually stop, make sure you implement some sort of timeout. Otherwise, you&#8217;re
@@ -244,27 +268,15 @@ or thoughts on future contests, so stay tuned for&nbsp;those.
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/pactf/" rel="tag">pactf</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/programming/" rel="tag">programming</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                Previous post
-            </span>
-
-
-            <span class="next pagination-item newer">
-                <a href="../pactf-2019-writeup-howd-i-get-hacked/" rel="next" title="PACTF 2019 Writeup: How'd I Get Hacked?">
-Next post
-              </a>
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/pactf/" rel="tag">pactf</a></li>
+            <li><a class="tag p-category" href="../../categories/programming/" rel="tag">programming</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="next">
+                <a href="../pactf-2019-writeup-howd-i-get-hacked/" rel="next" title="PACTF 2019 Writeup: How'd I Get Hacked?">Next&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -286,23 +298,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

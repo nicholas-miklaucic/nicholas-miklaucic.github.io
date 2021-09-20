@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Solving problems by induction from smaller examples">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · Problem Solving Techniques: Induction </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>Problem Solving Techniques: Induction | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="prev" href="../problem-solving-techniques-invariants/" title="Problem-Solving Techniques: Invariants" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="Problem Solving Techniques: Induction">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/">
+<meta property="og:description" content="Solving problems by induction from smaller examples">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-16T13:53:20-05:00">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="math">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Problem Solving Techniques:&nbsp;Induction</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Problem Solving Techniques:&nbsp;Induction</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-16T13:53:20-05:00" itemprop="datePublished" title="2020-01-16 13:53">2020-01-16 13:53</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/problem-solving-techniques-induction.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2020-01-16T13:53:20-05:00" itemprop="datePublished" title="2020-01-16 13:53">2020-01-16 13:53</time></span>
-        <meta name="description" itemprop="description" content="Solving problems by induction from smaller examples">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 <i>This is the second in my series on problem-solving techniques: for the first, see <a href="https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/">this post on&nbsp;invariants.</a></i>
 </p>
@@ -80,8 +107,7 @@ hexagonal configuration on the inside. (The actual work of proving this was done
 Londsdale in&nbsp;1929.)
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 This story is a little dubious, and it certainly obscures the important study of resonance that
 actually makes the benzene structure work. (I&#8217;m not including an image of the actual structure
@@ -108,9 +134,9 @@ way, how does induction help us solve&nbsp;problems?
 Let&#8217;s introduce the concept with an example&nbsp;problem.
 </p>
 
-<div id="outline-container-org94ad098" class="outline-2">
-<h2 id="org94ad098">The Blue-Eyed&nbsp;Islanders</h2>
-<div class="outline-text-2" id="text-org94ad098">
+<div id="outline-container-org0b8441c" class="outline-2">
+<h2 id="org0b8441c">The Blue-Eyed&nbsp;Islanders</h2>
+<div class="outline-text-2" id="text-org0b8441c">
 <p>
 Here&#8217;s our example logic&nbsp;problem:
 </p>
@@ -152,9 +178,9 @@ of approaching this problem that doesn&#8217;t require anything of your&nbsp;sub
 </div>
 </div>
 
-<div id="outline-container-orgac56bbe" class="outline-2">
-<h2 id="orgac56bbe">The Principle of Mathematical&nbsp;Induction</h2>
-<div class="outline-text-2" id="text-orgac56bbe">
+<div id="outline-container-org7a34ef8" class="outline-2">
+<h2 id="org7a34ef8">The Principle of Mathematical&nbsp;Induction</h2>
+<div class="outline-text-2" id="text-org7a34ef8">
 <p>
 This is one of the fancier sounding concepts in math, but it&#8217;s very simple. It&#8217;s essentially the
 following logical&nbsp;deduction:
@@ -187,9 +213,9 @@ that case, and then try to work upwards from&nbsp;there.</i>
 </div>
 </div>
 
-<div id="outline-container-orgfcea3ea" class="outline-2">
-<h2 id="orgfcea3ea">Solving the Blue-Eyed Islander&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-orgfcea3ea">
+<div id="outline-container-org4f76446" class="outline-2">
+<h2 id="org4f76446">Solving the Blue-Eyed Islander&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org4f76446">
 <p>
 <span class="caps">OK</span>, so how can we apply this to solve our problem? It&#8217;s really hard to reason about 200 people at
 once: let&#8217;s start with the smallest cases we can, try to establish a pattern, and go from&nbsp;there.
@@ -254,9 +280,9 @@ of induction as a&nbsp;technique.
 </div>
 </div>
 
-<div id="outline-container-org0af4aa9" class="outline-2">
-<h2 id="org0af4aa9">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Induction</h2>
-<div class="outline-text-2" id="text-org0af4aa9">
+<div id="outline-container-org6cb5ed9" class="outline-2">
+<h2 id="org6cb5ed9">The Handy-Dandy Pollard&#8217;s Rho Guide to Using&nbsp;Induction</h2>
+<div class="outline-text-2" id="text-org6cb5ed9">
 <p>
 Just like the post on invariants, I want to give a &#8220;meta-solution&#8221; archetype for problems that can
 be applied when it&#8217;s useful to do so. This isn&#8217;t completely automatic, because of its generality,
@@ -293,9 +319,9 @@ down&nbsp;using.</li>
 </div>
 </div>
 
-<div id="outline-container-orgb8c0e1a" class="outline-2">
-<h2 id="orgb8c0e1a">A Harder&nbsp;Example</h2>
-<div class="outline-text-2" id="text-orgb8c0e1a">
+<div id="outline-container-org319ba69" class="outline-2">
+<h2 id="org319ba69">A Harder&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org319ba69">
 <p>
 There&#8217;s a bit of a problem for me as I write this. Induction is far more straightforward to apply to
 problems than the concept of invariance: it&#8217;s pretty paint-by-numbers. That means that harder
@@ -337,8 +363,7 @@ I&#8217;m going to instead present a more complicated example of induction where
 problem, not merely to write a&nbsp;proof. 
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 For examples of induction in proofs, check out a helpful list of problems by Alexandersson <a href="https://www.math.upenn.edu/~peal/files/Proof.by.Induction%5B2018%5D%5BEng%5D-ALEXANDERSSON.pdf">here.</a>
 Most of these are pretty rote (you&#8217;ll see Binet&#8217;s formula, for example), but there are some clever
@@ -363,9 +388,9 @@ iteration! I&#8217;ll go over the solution under the next&nbsp;header.
 </div>
 </div>
 
-<div id="outline-container-orgf676c37" class="outline-2">
-<h2 id="orgf676c37">A Tiling Problem That Can Be&nbsp;Done?</h2>
-<div class="outline-text-2" id="text-orgf676c37">
+<div id="outline-container-orga29e6d3" class="outline-2">
+<h2 id="orga29e6d3">A Tiling Problem That Can Be&nbsp;Done?</h2>
+<div class="outline-text-2" id="text-orga29e6d3">
 <p>
 <span class="caps">OK</span>, so let&#8217;s apply our little recipe of induction to this problem.
 The base case we&#8217;re going to use is \(n = 1\): \(n = 0\) sorta makes sense, but not really. A 2x2 square
@@ -403,9 +428,9 @@ constructing&nbsp;solutions.
 </div>
 </div>
 
-<div id="outline-container-org4e4cc65" class="outline-2">
-<h2 id="org4e4cc65">Other Examples of&nbsp;Induction</h2>
-<div class="outline-text-2" id="text-org4e4cc65">
+<div id="outline-container-orgcbdd2f3" class="outline-2">
+<h2 id="orgcbdd2f3">Other Examples of&nbsp;Induction</h2>
+<div class="outline-text-2" id="text-orgcbdd2f3">
 <p>
 Just like last time, I&#8217;ll try and very quickly go through some other common uses of induction in
 as many diverse fields as I can. This won&#8217;t be nearly as varied as the previous version of this for
@@ -414,9 +439,9 @@ of when induction might be applicable to a&nbsp;problem.
 </p>
 </div>
 
-<div id="outline-container-org8d191ff" class="outline-3">
-<h3 id="org8d191ff">Series and&nbsp;Sums</h3>
-<div class="outline-text-3" id="text-org8d191ff">
+<div id="outline-container-org48448fd" class="outline-3">
+<h3 id="org48448fd">Series and&nbsp;Sums</h3>
+<div class="outline-text-3" id="text-org48448fd">
 <p>
 Any series with some closed-form sum over the natural numbers or some closed-form solution for a
 recursive function can usually be proven with induction, although as I griped earlier it&#8217;s not so
@@ -426,9 +451,9 @@ induction to prove it rigorously. Some common examples are the sums of squares, 
 </p>
 </div>
 </div>
-<div id="outline-container-org76e1fba" class="outline-3">
-<h3 id="org76e1fba">Graph&nbsp;Theory</h3>
-<div class="outline-text-3" id="text-org76e1fba">
+<div id="outline-container-org5ead230" class="outline-3">
+<h3 id="org5ead230">Graph&nbsp;Theory</h3>
+<div class="outline-text-3" id="text-org5ead230">
 <p>
 <a href="https://www.wikiwand.com/en/Graph_theory">Graph theory</a> is a natural fit for induction: the number of vertices in a graph, the number of edges,
 and lots of other properties are all natural numbers. Induction on any one of these can be used to
@@ -438,9 +463,9 @@ earlier, or coloring&nbsp;theorems.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb944364" class="outline-3">
-<h3 id="orgb944364">Number&nbsp;Theory</h3>
-<div class="outline-text-3" id="text-orgb944364">
+<div id="outline-container-org92a762e" class="outline-3">
+<h3 id="org92a762e">Number&nbsp;Theory</h3>
+<div class="outline-text-3" id="text-org92a762e">
 <p>
 Number theory is usually slightly harder to make work with induction, because things like prime
 factorization change in incredibly complex ways when you add 1. But <i>strong induction</i>, where you
@@ -456,27 +481,15 @@ technique. Stay tuned for&nbsp;more!
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                <a href="../problem-solving-techniques-invariants/" rel="prev" title="Problem-Solving Techniques: Invariants">
-                Previous post
-                </a>
-            </span>
-
-
-            <span class="next pagination-item newer">
-Next post
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/cs/" rel="tag">cs</a></li>
+            <li><a class="tag p-category" href="../../categories/math/" rel="tag">math</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../problem-solving-techniques-invariants/" rel="prev" title="Problem-Solving Techniques: Invariants">Previous&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -498,23 +511,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="A guide to effective data visualization">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · Effective Data Visualization, Part 1: What Is Effective Data Visualization? </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>Effective Data Visualization, Part 1: What Is Effective Data Visualization? | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="prev" href="../a-painless-introduction-to-python-data-analysis-and-visualization/" title="A Painless Introduction to Python Data Analysis and Visualization" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="Effective Data Visualization, Part 1: What Is Effective Data Visualiza">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/">
+<meta property="og:description" content="A guide to effective data visualization">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-02-19T14:34:17-05:00">
+<meta property="article:tag" content="dataviz">
+<meta property="article:tag" content="guide">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Effective Data Visualization, Part 1: What Is Effective Data&nbsp;Visualization?</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">Effective Data Visualization, Part 1: What Is Effective Data&nbsp;Visualization?</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2021-02-19T14:34:17-05:00" itemprop="datePublished" title="2021-02-19 14:34">2021-02-19 14:34</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/effective-data-visualization-part-1-what-is-effective-data-visualization.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2021-02-19T14:34:17-05:00" itemprop="datePublished" title="2021-02-19 14:34">2021-02-19 14:34</time></span>
-        <meta name="description" itemprop="description" content="A guide to effective data visualization">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 <i>This series is the textual version of a presentation I gave to a class on
 effective</i> <i>data visualization. I&#8217;m reproducing it here both to add some
@@ -66,13 +93,13 @@ information that</i> <i>was cut from the presentation for time and to put it in 
 publicly available</i> <i>place.</i>
 </p>
 
-<div id="outline-container-org286fd4f" class="outline-2">
-<h2 id="org286fd4f">Intro</h2>
-<div class="outline-text-2" id="text-org286fd4f">
+<div id="outline-container-org79863e7" class="outline-2">
+<h2 id="org79863e7">Intro</h2>
+<div class="outline-text-2" id="text-org79863e7">
 </div>
-<div id="outline-container-org8e64dca" class="outline-3">
-<h3 id="org8e64dca">What This Guide Is&nbsp;For</h3>
-<div class="outline-text-3" id="text-org8e64dca">
+<div id="outline-container-orgda42420" class="outline-3">
+<h3 id="orgda42420">What This Guide Is&nbsp;For</h3>
+<div class="outline-text-3" id="text-orgda42420">
 <p>
 This series of posts is about how to make effective data visualization: exactly
 what I mean by that will become clear shortly. Much like one might critique
@@ -82,9 +109,9 @@ consumer of data visualization they encounter in their daily&nbsp;lives.
 </p>
 </div>
 </div>
-<div id="outline-container-org0a68252" class="outline-3">
-<h3 id="org0a68252">Who This Guide Is&nbsp;For</h3>
-<div class="outline-text-3" id="text-org0a68252">
+<div id="outline-container-org063f5e1" class="outline-3">
+<h3 id="org063f5e1">Who This Guide Is&nbsp;For</h3>
+<div class="outline-text-3" id="text-org063f5e1">
 <p>
 This guide is for anyone! Unlike my other work on this blog, this guide expects
 no knowledge of coding or any platform for visualizations: learning such a tool
@@ -101,9 +128,9 @@ Without further ado, let&#8217;s get&nbsp;started!
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc2fb1c" class="outline-2">
-<h2 id="orgdc2fb1c">What is Effective Data&nbsp;Visualization?</h2>
-<div class="outline-text-2" id="text-orgdc2fb1c">
+<div id="outline-container-orgcf6078a" class="outline-2">
+<h2 id="orgcf6078a">What is Effective Data&nbsp;Visualization?</h2>
+<div class="outline-text-2" id="text-orgcf6078a">
 <p>
 What do I mean by <i>effective</i> data visualization? Here, an effective data
 visualization is one that effectively helps the viewer process information. I
@@ -141,9 +168,9 @@ Why use data visualization at all? Why not use other tools, like spreadsheets or
 </div>
 </div>
 
-<div id="outline-container-org9674ab6" class="outline-2">
-<h2 id="org9674ab6">Why is Effective Data&nbsp;Visualization?</h2>
-<div class="outline-text-2" id="text-org9674ab6">
+<div id="outline-container-org00088c0" class="outline-2">
+<h2 id="org00088c0">Why is Effective Data&nbsp;Visualization?</h2>
+<div class="outline-text-2" id="text-org00088c0">
 <p>
 There&#8217;s a persistent myth that graphs are inherently less meaningful or useful
 than raw statistics. Statistics are very important, and I would certainly not
@@ -317,27 +344,15 @@ sophisticated data visualization should be. See you&nbsp;then!
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/guide/" rel="tag">guide</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                <a href="../a-painless-introduction-to-python-data-analysis-and-visualization/" rel="prev" title="A Painless Introduction to Python Data Analysis and Visualization">
-                Previous post
-                </a>
-            </span>
-
-
-            <span class="next pagination-item newer">
-Next post
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></li>
+            <li><a class="tag p-category" href="../../categories/guide/" rel="tag">guide</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../a-painless-introduction-to-python-data-analysis-and-visualization/" rel="prev" title="A Painless Introduction to Python Data Analysis and Visualization">Previous&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -359,23 +374,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

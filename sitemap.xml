@@ -7,226 +7,226 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://nicholas-miklaucic.github.io/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/2019/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/2020/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/2021/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/archive.html</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-20T03:13:00Z</lastmod>
  </url>
  <url>
-  <loc>https://nicholas-miklaucic.github.io/assets/demo-async.htm</loc>
-  <lastmod>2021-02-19T19:24:00Z</lastmod>
+  <loc>https://nicholas-miklaucic.github.io/assets/halfmoon/halfmoon-1.1.1/starter-template.html</loc>
+  <lastmod>2021-09-20T00:02:00Z</lastmod>
  </url>
  <url>
-  <loc>https://nicholas-miklaucic.github.io/assets/demo.htm</loc>
-  <lastmod>2021-02-19T19:24:00Z</lastmod>
+  <loc>https://nicholas-miklaucic.github.io/assets/halfmoon/starter-template.html</loc>
+  <lastmod>2021-09-20T01:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/algorithms/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_bayesian-fallacies/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_dataviz/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_intro-to-crypto/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_meta/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_pactf-writeups/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_problem-solving-techniques/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cat_stats/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/cs/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/dataviz/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/guide/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/math/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/meta/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/pactf/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/categories/programming/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/galleries/</loc>
-  <lastmod>2021-02-19T20:58:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/galleries/demo/</loc>
-  <lastmod>2021-02-19T20:58:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/index-1.html</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-20T03:13:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/listings/</loc>
-  <lastmod>2021-02-19T20:59:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/listings/hello.py.html</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-20T03:13:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/about-me/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/about-nikola/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/bootstrap-demo/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/charts/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/creating-a-theme/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/dr-nikolas-vendetta/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/extending/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/handbook/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/internals/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/listings-demo/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/path-handlers/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/quickref/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/quickstart/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/social_buttons/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/pages/theming/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/a-whirlwind-tour-of-statistical-tests/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-1-of-test-scores-ski-jumps-and-diseases/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/bayesian-fallacies-part-2-the-math-of-the-psat-math-section/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/effective-data-visualization-part-1-what-is-effective-data-visualization/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/hello-world/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-denial-of-service-attack/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/pactf-2019-writeup-howd-i-get-hacked/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-induction/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/problem-solving-techniques-invariants/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/</loc>
-  <lastmod>2021-02-19T21:02:00Z</lastmod>
+  <lastmod>2021-09-19T16:00:00Z</lastmod>
  </url>
 </urlset>

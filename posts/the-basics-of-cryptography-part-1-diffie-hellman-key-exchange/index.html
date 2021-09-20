@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="How to send secure messages through insecure channels">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="next" href="../the-basics-of-cryptography-part-2-intro-to-rsa/" title="The Basics of Cryptography, Part 2: Intro To RSA" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">
+<meta property="og:description" content="How to send secure messages through insecure channels">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-14T11:09:56-05:00">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="math">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">The Basics of Cryptography, Part 1: Diffie-Hellman Key&nbsp;Exchange</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 1: Diffie-Hellman Key&nbsp;Exchange</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-14T11:09:56-05:00" itemprop="datePublished" title="2020-01-14 11:09">2020-01-14 11:09</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2020-01-14T11:09:56-05:00" itemprop="datePublished" title="2020-01-14 11:09">2020-01-14 11:09</time></span>
-        <meta name="description" itemprop="description" content="How to send secure messages through insecure channels">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 How can we send secure messages through insecure&nbsp;channels?
 </p>
@@ -111,9 +138,9 @@ with historical developments and use that framework to see what computers bring 
 in this post, we&#8217;ll cover how the secret sauce that computers bring actually&nbsp;works.
 </p>
 
-<div id="outline-container-orge26e71f" class="outline-2">
-<h2 id="orge26e71f">Terminology</h2>
-<div class="outline-text-2" id="text-orge26e71f">
+<div id="outline-container-org3178e14" class="outline-2">
+<h2 id="org3178e14">Terminology</h2>
+<div class="outline-text-2" id="text-org3178e14">
 <p>
 I want to briefly introduce some terminology which will make the rest of this easier to explain. A
 prior secret way of sending information, of the kind that you might expect Alice and Bob to need, is
@@ -129,9 +156,9 @@ With that out of the way, let&#8217;s get started! So how did people send secret
 </div>
 </div>
 
-<div id="outline-container-org232d396" class="outline-2">
-<h2 id="org232d396">History</h2>
-<div class="outline-text-2" id="text-org232d396">
+<div id="outline-container-orgd213af6" class="outline-2">
+<h2 id="orgd213af6">History</h2>
+<div class="outline-text-2" id="text-orgd213af6">
 <p>
 Pre-modern efforts in cryptography were based around a different situation than the one I just
 described: there <i>is</i> a prior channel, but it&#8217;s temporary, and you want to send messages on an
@@ -152,15 +179,14 @@ the machines and those configurations needed to be distributed secretly, but the
 be sent in the field over public&nbsp;channels.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Credit to the Museo Scienza E Tecnologia Milano. Creative Commons&nbsp;license.
 </p>
 </span>
 
 
-<div class="figure">
+<div id="org84d8308" class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg" alt="Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg"></p>
 <p><span class="figure-number">Figure 1: </span>A model of the Enigma&nbsp;machine.</p>
 </div>
@@ -178,9 +204,9 @@ text are, roughly in order, <span class="caps">ETAOINSHRDLCU</span>, and compari
 </div>
 </div>
 
-<div id="outline-container-org0f1176e" class="outline-2">
-<h2 id="org0f1176e">Doing&nbsp;Better</h2>
-<div class="outline-text-2" id="text-org0f1176e">
+<div id="outline-container-orgba52b4d" class="outline-2">
+<h2 id="orgba52b4d">Doing&nbsp;Better</h2>
+<div class="outline-text-2" id="text-orgba52b4d">
 <p>
 To get from these codes—methods that require a <i>prior channel</i> and are still insecure—to methods that
 are (to our knowledge!) secure and don&#8217;t require this prior channel will require computers. Modern
@@ -197,9 +223,9 @@ completely different approach to the&nbsp;problem.)
 </div>
 </div>
 
-<div id="outline-container-org525818f" class="outline-2">
-<h2 id="org525818f">Peter and&nbsp;Natasha</h2>
-<div class="outline-text-2" id="text-org525818f">
+<div id="outline-container-orgb599f9c" class="outline-2">
+<h2 id="orgb599f9c">Peter and&nbsp;Natasha</h2>
+<div class="outline-text-2" id="text-orgb599f9c">
 <p>
 Secure key exchange over a public channel seems…really hard, if not impossible. Surely if someone
 can listen to everything you say, you can&#8217;t tell someone a secret without them hearing it? I find it
@@ -207,8 +233,7 @@ helpful to have analog analogies for these concepts, so let&#8217;s start with a
 about Alice and&nbsp;Bob:
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 The way this was told to me was with a stock Russian accent: feel free to add that to your own&nbsp;narration.
 </p>
@@ -252,9 +277,9 @@ look at is sending numerical&nbsp;information.)
 </div>
 </div>
 
-<div id="outline-container-org482e143" class="outline-2">
-<h2 id="org482e143">One-Way&nbsp;Functions</h2>
-<div class="outline-text-2" id="text-org482e143">
+<div id="outline-container-orgc43218e" class="outline-2">
+<h2 id="orgc43218e">One-Way&nbsp;Functions</h2>
+<div class="outline-text-2" id="text-orgc43218e">
 <p>
 What we&#8217;re describing is called a <i>one-way function</i>: some function \(f\) such that computing \(f(x)\) is
 easy, but finding the \(x\) for some \(y\) such that \(f(x) = y\) is hard. I&#8217;m not really going to worry
@@ -274,9 +299,9 @@ success in doing&#8221; and we&#8217;ll be&nbsp;good.
 </div>
 </div>
 
-<div id="outline-container-org2ad3752" class="outline-2">
-<h2 id="org2ad3752">The Discrete Logarithm&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-org2ad3752">
+<div id="outline-container-orgda02256" class="outline-2">
+<h2 id="orgda02256">The Discrete Logarithm&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-orgda02256">
 <p>
 The one-way function we&#8217;ll be looking at, because it&#8217;s commonly used and easy to understand compared
 to others, is the <i>discrete logarithm problem</i>, specifically the one about <i>modular exponentiation.</i>
@@ -306,8 +331,7 @@ modular arithmetic works, we don&#8217;t need to keep track of what the powers w
 can just multiply the last number in the sequence by our base and take the&nbsp;remainder.) 
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 If it ever got to \(0\), it would just stay there forever. Luckily, this won&#8217;t ever happen,
 because that would mean \(7\) evenly divides a power of \(3\). But \(7\) is prime, so it doesn&#8217;t divide
@@ -374,9 +398,9 @@ all we care about is that we share <i>some</i> secret, not any particular&nbsp;o
 </div>
 </div>
 
-<div id="outline-container-org60e2db7" class="outline-2">
-<h2 id="org60e2db7">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
-<div class="outline-text-2" id="text-org60e2db7">
+<div id="outline-container-org1141987" class="outline-2">
+<h2 id="org1141987">The Diffie-Hellman-Merkle Key Exchange&nbsp;Algorithm</h2>
+<div class="outline-text-2" id="text-org1141987">
 <p>
 This algorithm is usually just called <i>Diffie-Hellman key exchange</i>, but Ralph Merkle should really
 get more of the credit. Our setup is that Alice and Bob want to agree on a secret number over a
@@ -420,9 +444,9 @@ even with supercomputers trying to break it, this encryption method is&nbsp;secu
 </div>
 </div>
 
-<div id="outline-container-orgf0144da" class="outline-2">
-<h2 id="orgf0144da">Conclusion</h2>
-<div class="outline-text-2" id="text-orgf0144da">
+<div id="outline-container-org30e7209" class="outline-2">
+<h2 id="org30e7209">Conclusion</h2>
+<div class="outline-text-2" id="text-org30e7209">
 <p>
 Let&#8217;s zoom out for a second. Until around 1970, any encryption method was reliant on the secrecy of
 the method itself or some prior secret key, and most of those methods were breakable (and,
@@ -462,27 +486,15 @@ letting anyone encrypt messages that only a single person can decrypt. See you&n
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                Previous post
-            </span>
-
-
-            <span class="next pagination-item newer">
-                <a href="../the-basics-of-cryptography-part-2-intro-to-rsa/" rel="next" title="The Basics of Cryptography, Part 2: Intro To RSA">
-Next post
-              </a>
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/cs/" rel="tag">cs</a></li>
+            <li><a class="tag p-category" href="../../categories/math/" rel="tag">math</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="next">
+                <a href="../the-basics-of-cryptography-part-2-intro-to-rsa/" rel="next" title="The Basics of Cryptography, Part 2: Intro To RSA">Next&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -504,23 +516,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

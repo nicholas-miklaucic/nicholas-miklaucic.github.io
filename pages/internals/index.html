@@ -1,57 +1,71 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · Nikola Internals </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>Nikola Internals | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/pages/internals/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="The Nikola Team">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="The Nikola Team">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="Nikola Internals">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/pages/internals/">
+<meta property="og:description" content="When trying to guide someone into adding a feature in Nikola, it hit me that
+while the way it's structured makes sense to me it is far from obvious.
+So, this is a short document explaining what each p">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2012-03-30T23:00:00-03:00">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
-
-    <div class="content container" id="content">
-<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="post-title p-name"><a href="." class="u-url">Nikola&nbsp;Internals</a></h1>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Nikola&nbsp;Internals</a></h1>
 
         
     </header><div class="e-content entry-content" itemprop="articleBody text">
@@ -87,8 +101,7 @@ class. They take options and arguments and do whatever you want, so go&nbsp;wild
 because it&#8217;s the one that you use to build sites. So it deserves its own&nbsp;section.</p>
 </dd>
 </dl>
-<div class="section" id="the-build-command">
-<h2>The Build&nbsp;Command</h2>
+<section id="the-build-command"><h2>The Build&nbsp;Command</h2>
 <p>Nikola&#8217;s goal is similar, deep at heart, to a Makefile. Take sources, compile them
 into something, in this case a website. Instead of a Makefile, Nikola uses
 <a class="reference external" href="http://pydoit.org">doit</a></p>
@@ -112,12 +125,10 @@ option changes, redo it,&nbsp;etc.</p>
 <p>Each task is identified by either a name or a basename:name&nbsp;pair.</p>
 </dd>
 </dl>
-<div class="sidebar">
-<p class="sidebar-title">More about&nbsp;tasks</p>
+<aside class="sidebar"><p class="sidebar-title">More about&nbsp;tasks</p>
 <p>If you ever want to do your own tasks, you really should read the doit
 <a class="reference external" href="http://pydoit.org/tasks.html">documentation on&nbsp;tasks</a></p>
-</div>
-<p>So, what Nikola does, when you use the build command, is to read the&nbsp;configuration <code class="docutils literal">conf.py</code> from the current folder, instantiate&nbsp;the <code class="docutils literal">Nikola</code> class, and have it generate a whole list of tasks for doit
+</aside><p>So, what Nikola does, when you use the build command, is to read the&nbsp;configuration <code class="docutils literal">conf.py</code> from the current folder, instantiate&nbsp;the <code class="docutils literal">Nikola</code> class, and have it generate a whole list of tasks for doit
 to process. Then doit will decide which tasks need doing, and do them, in
 the right&nbsp;order.</p>
 <p>The place where the tasks are generated is&nbsp;in <code class="docutils literal">Nikola.gen_tasks</code>, which collects tasks
@@ -125,15 +136,11 @@ from all the plugins&nbsp;inheriting <code class="docutils literal">BaseTask</co
 to&nbsp;doit.</p>
 <p>So, if you want things to happen&nbsp;on <code class="docutils literal">build</code> you want to create a Task plugin, or extend
 one of the existing&nbsp;ones.</p>
-<div class="sidebar">
-<p class="sidebar-title">Tests</p>
+<aside class="sidebar"><p class="sidebar-title">Tests</p>
 <p>While Nikola is not a hardcore <span class="caps">TDD</span> project, we like tests. So, please add them if you can.
 You can write unit tests or integration tests. (Doctests are not supported
 anymore due to&nbsp;fragility.)</p>
-</div>
-</div>
-<div class="section" id="posts-and-pages">
-<h2>Posts and&nbsp;Pages</h2>
+</aside></section><section id="posts-and-pages"><h2>Posts and&nbsp;Pages</h2>
 <p>Nikola has a concept of posts and pages. Both are more or less the same thing, except
 posts are added into <span class="caps">RSS</span> feeds and pages are not. All of them are in a list called
 &#8220;the timeline&#8221; formed by objects of&nbsp;class <code class="docutils literal">Post</code>.</p>
@@ -141,12 +148,10 @@ posts are added into <span class="caps">RSS</span> feeds and pages are not. All 
 the <span class="caps">RSS</span> creation plugin) on task execution time, your plugin should&nbsp;call <code class="docutils literal">self.site.scan_posts()</code>
 in <code class="docutils literal">gen_tasks</code> to ensure the timeline is created and available&nbsp;in
 <code class="docutils literal">self.site.timeline</code>. You should not modify the timeline, because it will cause consistency&nbsp;issues.</p>
-<div class="sidebar">
-<p class="sidebar-title">scan_posts</p>
+<aside class="sidebar"><p class="sidebar-title">scan_posts</p>
 <p>The <code class="docutils literal">Nikola.scan_posts</code> function can be used in plugins to force the
 timeline creation, for example, while creating the&nbsp;tasks.</p>
-</div>
-<p>Your plugin can use the timeline to generate &#8220;stuff&#8221; (technical term). For example,
+</aside><p>Your plugin can use the timeline to generate &#8220;stuff&#8221; (technical term). For example,
 Nikola comes with plugins that use the timeline to create a website&nbsp;(surprised?).</p>
 <p>The workflow included with nikola is as follows&nbsp;(incomplete!):</p>
 <ol class="arabic simple">
@@ -180,31 +185,25 @@ you have to create&nbsp;a <code class="docutils literal">TemplateSystem</code> p
 </dd>
 </dl>
 <p>And of course, you can also replace or extend each of the existing&nbsp;plugins.</p>
-<div class="section" id="nikola-architecture">
-<h3>Nikola&nbsp;Architecture</h3>
+<section id="nikola-architecture"><h3>Nikola&nbsp;Architecture</h3>
 <a class="reference external image-reference" href="https://getnikola.com/images/architecture.png"><img alt="https://getnikola.com/images/architecture.thumbnail.png" src="https://getnikola.com/images/architecture.thumbnail.png"></a>
-</div>
-</div>
+</section></section>
 </div>
     </div>
     
-</article>
+</article></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

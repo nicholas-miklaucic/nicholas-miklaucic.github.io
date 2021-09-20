@@ -1,57 +1,85 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · A reStructuredText Primer </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>A reStructuredText Primer | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/pages/quickstart/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="A reStructuredText Primer">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/pages/quickstart/">
+<meta property="og:description" content="Author
+Richard Jones
+Version
+5801
+Copyright
+This document has been placed in the public domain.
+
+
+Contents
+
+Structure
+Text styles
+Lists
+Preformatting (code samples)
+Sections
+
+Document Title / Subtitle">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2012-03-30T23:00:00-03:00">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
-
-    <div class="content container" id="content">
-<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="post-title p-name"><a href="." class="u-url">A reStructuredText&nbsp;Primer</a></h1>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">A reStructuredText&nbsp;Primer</a></h1>
 
         
     </header><div class="e-content entry-content" itemprop="articleBody text">
@@ -91,8 +119,7 @@ quick reference</a>&nbsp;document.</p>
 reStructuredText.  The <a class="reference internal" href="#what-next">What Next?</a> section below has links to
 further resources, including a formal&nbsp;reference.</p>
 </div>
-<div class="section" id="structure">
-<h2><a class="toc-backref" href="#id16">Structure</a></h2>
+<section id="structure"><h2><a class="toc-backref" href="#id16">Structure</a></h2>
 <p>From the outset, let me say that &#8220;Structured Text&#8221; is probably a bit
 of a misnomer.  It&#8217;s more like &#8220;Relaxed Text&#8221; that uses certain
 consistent patterns.  These patterns are interpreted by a <span class="caps">HTML</span>
@@ -118,9 +145,7 @@ text, typically used for quoting other&nbsp;text.</p>
 </blockquote>
 <p>This is another&nbsp;one.</p>
 </blockquote>
-</div>
-<div class="section" id="text-styles">
-<h2><a class="toc-backref" href="#id17">Text&nbsp;styles</a></h2>
+</section><section id="text-styles"><h2><a class="toc-backref" href="#id17">Text&nbsp;styles</a></h2>
 <p>(<a class="reference external" href="../quickref/#inline-markup">quickref</a>)</p>
 <p>Inside paragraphs and other bodies of text, you may additionally mark
 text for <em>italics</em> with&nbsp;&#8221;<code class="docutils literal">*italics*</code>&#8221; or <strong>bold</strong> with&nbsp;&#8221;<code class="docutils literal">**bold**</code><span class="dquo">&#8220;</span>.  This is called &#8220;inline&nbsp;markup&#8221;.</p>
@@ -143,9 +168,7 @@ up.  Inline markup by itself (surrounded by whitespace) or in the
 middle of a word won&#8217;t be recognized.  See the <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#inline-markup">markup spec</a> for
 full&nbsp;details.</p>
 </div>
-</div>
-<div class="section" id="lists">
-<h2><a class="toc-backref" href="#id18">Lists</a></h2>
+</section><section id="lists"><h2><a class="toc-backref" href="#id18">Lists</a></h2>
 <p>Lists of items come in three main flavours: <strong>enumerated</strong>,
 <strong>bulleted</strong> and <strong>definitions</strong>.  In all list cases, you may have as
 many paragraphs, sublists, etc. as you want, as long as the left-hand
@@ -268,10 +291,7 @@ Blank lines are not allowed between term and&nbsp;definition.</p>
 </dd>
 </dl>
 </dd>
-</dl>
-</div>
-<div class="section" id="preformatting-code-samples">
-<h2><a class="toc-backref" href="#id19">Preformatting (code&nbsp;samples)</a></h2>
+</dl></section><section id="preformatting-code-samples"><h2><a class="toc-backref" href="#id19">Preformatting (code&nbsp;samples)</a></h2>
 <p>(<a class="reference external" href="../quickref/#literal-blocks">quickref</a>)</p>
 <p>To just include a chunk of preformatted, never-to-be-fiddled-with
 text, finish the prior paragraph with&nbsp;&#8221;<code class="docutils literal">::</code><span class="dquo">&#8220;</span>.  The preformatted
@@ -303,9 +323,7 @@ from the&nbsp;output:</p>
 <p>Results&nbsp;in:</p>
 <pre class="literal-block">This is preformatted text, and the
 last "::" paragraph is removed</pre>
-</div>
-<div class="section" id="sections">
-<h2><a class="toc-backref" href="#id20">Sections</a></h2>
+</section><section id="sections"><h2><a class="toc-backref" href="#id20">Sections</a></h2>
 <p>(<a class="reference external" href="../quickref/#section-structure">quickref</a>)</p>
 <p>To break longer text up into sections, you use <strong>section headers</strong>.
 These are a single line of text (one or more words) with adornment: an
@@ -355,8 +373,7 @@ source text and processed&nbsp;output.)</p>
 their name.  To link to the <a class="reference internal" href="#lists">Lists</a> heading, I write&nbsp;&#8221;<code class="docutils literal">Lists_</code><span class="dquo">&#8220;</span>.  If
 the heading has a space in it like <a class="reference internal" href="#text-styles">text styles</a>, we need to quote
 the heading&nbsp;&#8221;<code class="docutils literal">`text styles`_</code><span class="dquo">&#8220;</span>.</p>
-<div class="section" id="document-title-subtitle">
-<h3><a class="toc-backref" href="#id21">Document Title /&nbsp;Subtitle</a></h3>
+<section id="document-title-subtitle"><h3><a class="toc-backref" href="#id21">Document Title /&nbsp;Subtitle</a></h3>
 <p>The title of the whole document is distinct from section titles and
 may be formatted somewhat differently (e.g. the <span class="caps">HTML</span> writer by default
 shows it as a centered&nbsp;heading).</p>
@@ -378,10 +395,7 @@ Section Title
 signs, but are distinct and unrelated styles.  The text of
 overline-and-underlined titles (but not underlined-only) may be inset
 for&nbsp;aesthetics.</p>
-</div>
-</div>
-<div class="section" id="images">
-<h2><a class="toc-backref" href="#id22">Images</a></h2>
+</section></section><section id="images"><h2><a class="toc-backref" href="#id22">Images</a></h2>
 <p>(<a class="reference external" href="../quickref/#directives">quickref</a>)</p>
 <p>To include an image in your document, you use the&nbsp;the <code class="docutils literal">image</code> <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html">directive</a>.
 For&nbsp;example:</p>
@@ -397,9 +411,7 @@ you wish to supply additional information, you&nbsp;may:</p>
    :scale: 50
    :alt: alternate text</pre>
 <p>See the full <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html#images">image directive documentation</a> for more&nbsp;info.</p>
-</div>
-<div class="section" id="what-next">
-<h2><a class="toc-backref" href="#id23">What&nbsp;Next?</a></h2>
+</section><section id="what-next"><h2><a class="toc-backref" href="#id23">What&nbsp;Next?</a></h2>
 <p>This primer introduces the most common features of reStructuredText,
 but there are a lot more to explore.  The <a class="reference external" href="../quickref/">Quick reStructuredText</a>
 user reference is a good place to go next.  For complete details, the
@@ -412,28 +424,23 @@ reStructuredText should post a message to the <a class="reference external" href
 <p>If that relative link doesn&#8217;t work, try the master document:
 <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html">http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html</a>.</p>
 </dd>
-</dl>
-</div>
+</dl></section>
 </div>
     </div>
     
-</article>
+</article></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

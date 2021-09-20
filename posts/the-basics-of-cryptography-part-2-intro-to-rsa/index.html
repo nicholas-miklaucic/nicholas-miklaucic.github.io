@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Introduction to RSA">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · The Basics of Cryptography, Part 2: Intro To RSA </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>The Basics of Cryptography, Part 2: Intro To RSA | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="prev" href="../the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/" title="The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange" type="text/html">
 <link rel="next" href="../the-basics-of-cryptography-part-3-cryptographic-hashes/" title="The Basics of Cryptography, Part 3: Cryptographic Hashes" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="The Basics of Cryptography, Part 2: Intro To RSA">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/">
+<meta property="og:description" content="Introduction to RSA">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-21T15:14:55-05:00">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="math">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">The Basics of Cryptography, Part 2: Intro To&nbsp;<span class="caps">RSA</span></a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 2: Intro To&nbsp;<span class="caps">RSA</span></a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-21T15:14:55-05:00" itemprop="datePublished" title="2020-01-21 15:14">2020-01-21 15:14</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/the-basics-of-cryptography-part-2-rsa.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2020-01-21T15:14:55-05:00" itemprop="datePublished" title="2020-01-21 15:14">2020-01-21 15:14</time></span>
-        <meta name="description" itemprop="description" content="Introduction to RSA">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 This is part 2 of a series: to see the first post, go <a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">here.</a> If you&#8217;re not familiar with things like
 modular arithmetic, read that before reading&nbsp;this.
@@ -84,9 +111,9 @@ sending secure&nbsp;messages.
 
 <!-- TEASER_END -->
 
-<div id="outline-container-orgc42fc23" class="outline-2">
-<h2 id="orgc42fc23">A Brief Historical&nbsp;Prelude</h2>
-<div class="outline-text-2" id="text-orgc42fc23">
+<div id="outline-container-org24a9d04" class="outline-2">
+<h2 id="org24a9d04">A Brief Historical&nbsp;Prelude</h2>
+<div class="outline-text-2" id="text-org24a9d04">
 <p>
 <span class="caps">RSA</span> was first published by Rivest, Shamir, and Adleman (hence the name) in 1977. This came one year
 after Diffie-Hellman key exchange: we can essentially think of <span class="caps">RSA</span> as an answer to the question that
@@ -110,9 +137,9 @@ So, with that out of the way, what does <span class="caps">RSA</span> do and how
 </div>
 </div>
 
-<div id="outline-container-org5511549" class="outline-2">
-<h2 id="org5511549">Public-Key&nbsp;Encryption</h2>
-<div class="outline-text-2" id="text-org5511549">
+<div id="outline-container-org11fe991" class="outline-2">
+<h2 id="org11fe991">Public-Key&nbsp;Encryption</h2>
+<div class="outline-text-2" id="text-org11fe991">
 <p>
 <span class="caps">RSA</span> is a <i>public-key</i> cryptosystem. This means that, instead of a single password or code that can be
 used to encrypt and decrypt a message, like the Enigma machine we talked about last time, it&#8217;s
@@ -131,9 +158,9 @@ on the simplest example: I want to send Alice a message that only she can read. 
 </div>
 </div>
 
-<div id="outline-container-orgec84ba6" class="outline-2">
-<h2 id="orgec84ba6">What&#8217;s the&nbsp;Trick?</h2>
-<div class="outline-text-2" id="text-orgec84ba6">
+<div id="outline-container-org750fd58" class="outline-2">
+<h2 id="org750fd58">What&#8217;s the&nbsp;Trick?</h2>
+<div class="outline-text-2" id="text-org750fd58">
 <p>
 I think a very useful way of thinking about an algorithm is to try and deconstruct it into the
 essential component or &#8220;trick&#8221; that makes it work and the components that simply let the essential
@@ -158,9 +185,9 @@ that, as of writing, is one-way and likely to remain&nbsp;so.&#8221;)
 </div>
 </div>
 
-<div id="outline-container-org7b36b0c" class="outline-2">
-<h2 id="org7b36b0c">A Note on&nbsp;Presentation</h2>
-<div class="outline-text-2" id="text-org7b36b0c">
+<div id="outline-container-orgbf62203" class="outline-2">
+<h2 id="orgbf62203">A Note on&nbsp;Presentation</h2>
+<div class="outline-text-2" id="text-orgbf62203">
 <p>
 <span class="caps">RSA</span> is often presented dryly starting with exactly how you generate keys, decrypt messages, and
 encrypt them. I think this approach is a little confusing, because it doesn&#8217;t at all explain how
@@ -173,9 +200,9 @@ be explained at the&nbsp;end!
 </div>
 </div>
 
-<div id="outline-container-org3f3a12c" class="outline-2">
-<h2 id="org3f3a12c">The <span class="caps">RSA</span>&nbsp;Problem</h2>
-<div class="outline-text-2" id="text-org3f3a12c">
+<div id="outline-container-org8f3e864" class="outline-2">
+<h2 id="org8f3e864">The <span class="caps">RSA</span>&nbsp;Problem</h2>
+<div class="outline-text-2" id="text-org8f3e864">
 <p>
 Public-key cryptography is basically advertising a set of problems that only you know the solution
 to: anyone with your public key can encrypt a message using a problem in your set, and ideally only
@@ -198,9 +225,9 @@ doesn&#8217;t change with different values of \(m\), only for different values o
 </div>
 </div>
 
-<div id="outline-container-org5f38763" class="outline-2">
-<h2 id="org5f38763">An&nbsp;Example</h2>
-<div class="outline-text-2" id="text-org5f38763">
+<div id="outline-container-org0f00260" class="outline-2">
+<h2 id="org0f00260">An&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org0f00260">
 <p>
 You might very well ask, &#8220;Nicholas, how would we generate \(n, e\), and \(d\) to make this work? Why is
 \(n\) a <i>semiprime</i> (the product of two primes)?&#8221; I&#8217;ll get there later. For now, we&#8217;re just going to
@@ -226,9 +253,9 @@ seventh power modulo \(n\) results in the original message. So, to decrypt my me
 </div>
 </div>
 
-<div id="outline-container-org4df76ec" class="outline-2">
-<h2 id="org4df76ec">(Trying to) Break&nbsp;<span class="caps">RSA</span></h2>
-<div class="outline-text-2" id="text-org4df76ec">
+<div id="outline-container-org0729202" class="outline-2">
+<h2 id="org0729202">(Trying to) Break&nbsp;<span class="caps">RSA</span></h2>
+<div class="outline-text-2" id="text-org0729202">
 <p>
 How might an attacker, who we&#8217;ll call Eve, try to decrypt the message I sent for Alice without
 knowing&nbsp;\(d\)? 
@@ -264,9 +291,9 @@ message. As of yet no efficient way of breaking <span class="caps">RSA</span> li
 </div>
 </div>
 
-<div id="outline-container-org99b9ce7" class="outline-2">
-<h2 id="org99b9ce7">Generating&nbsp;Keys</h2>
-<div class="outline-text-2" id="text-org99b9ce7">
+<div id="outline-container-org444ff0e" class="outline-2">
+<h2 id="org444ff0e">Generating&nbsp;Keys</h2>
+<div class="outline-text-2" id="text-org444ff0e">
 <p>
 So how did Alice find \(d\), if doing it seems so difficult? \(n\), \(e\) and \(d\) have to be generated
 together: the whole point is that finding \(d\) if you only know \(n\) and \(e\) is really hard. We can
@@ -296,9 +323,9 @@ So how can we find some number \(x\) such that \(a^x \equiv 1 \pmod n\) for any 
 </div>
 </div>
 
-<div id="outline-container-orga2308bb" class="outline-2">
-<h2 id="orga2308bb">The Carmichael&nbsp;Function</h2>
-<div class="outline-text-2" id="text-orga2308bb">
+<div id="outline-container-orgd0f4427" class="outline-2">
+<h2 id="orgd0f4427">The Carmichael&nbsp;Function</h2>
+<div class="outline-text-2" id="text-orgd0f4427">
 <p>
 The function that takes in \(n\) and finds us the smallest \(x\) this works for is called the <i>Carmichael</i>
 <i>function</i>. It&#8217;s usually written as&nbsp;\(\lambda(n)\).
@@ -349,9 +376,9 @@ breaking <span class="caps">RSA</span>: if we know \(p\) and \(q\), we can easil
 </div>
 </div>
 
-<div id="outline-container-orga150b5a" class="outline-2">
-<h2 id="orga150b5a">Finding \(e\) and&nbsp;\(d\)</h2>
-<div class="outline-text-2" id="text-orga150b5a">
+<div id="outline-container-orgc4702fb" class="outline-2">
+<h2 id="orgc4702fb">Finding \(e\) and&nbsp;\(d\)</h2>
+<div class="outline-text-2" id="text-orgc4702fb">
 <p>
 So now we have some number \(\lambda(n)\) such that, for any positive integer \(k\), raising a number to the
 power \(k\lambda(n) + 1\) modulo \(n\) gets you your original number back. Now we just need to find two
@@ -390,9 +417,9 @@ make decryption faster: this has the unfortunate side effect that it&#8217;s eas
 </div>
 </div>
 
-<div id="outline-container-orgef16891" class="outline-2">
-<h2 id="orgef16891">Bringing It All Together: A More Complex&nbsp;Example</h2>
-<div class="outline-text-2" id="text-orgef16891">
+<div id="outline-container-org501451e" class="outline-2">
+<h2 id="org501451e">Bringing It All Together: A More Complex&nbsp;Example</h2>
+<div class="outline-text-2" id="text-org501451e">
 <p>
 Let&#8217;s do another example, with slightly bigger numbers. The twist is that now I&#8217;m the one generating
 a private key and Alice is the one sending a message. This will require all of the insight we&#8217;ve
@@ -422,9 +449,9 @@ basic version of&nbsp;<span class="caps">RSA</span>!
 </div>
 </div>
 
-<div id="outline-container-orge8ac560" class="outline-2">
-<h2 id="orge8ac560">A&nbsp;Warning</h2>
-<div class="outline-text-2" id="text-orge8ac560">
+<div id="outline-container-orgd084da0" class="outline-2">
+<h2 id="orgd084da0">A&nbsp;Warning</h2>
+<div class="outline-text-2" id="text-orgd084da0">
 <p>
 Just like last time, I want to stress something: <i>if you are writing this yourself to use in any
 real-world</i> <i>application, stop!</i> (Doing it yourself is a great way to learn, however.) Getting the gist
@@ -434,9 +461,9 @@ are lots of ways this textbook version of <span class="caps">RSA</span> isn&#821
 </div>
 </div>
 
-<div id="outline-container-org0a023de" class="outline-2">
-<h2 id="org0a023de">Wrapping&nbsp;Up</h2>
-<div class="outline-text-2" id="text-org0a023de">
+<div id="outline-container-org519c17c" class="outline-2">
+<h2 id="org519c17c">Wrapping&nbsp;Up</h2>
+<div class="outline-text-2" id="text-org519c17c">
 <p>
 So now we have another way of sending secure messages over insecure channels: something the world at
 large couldn&#8217;t do until 1977 at the very least. Again, this is a criminally underappreciated
@@ -471,29 +498,18 @@ The solution to this problem, as it appears in the modern world, requires a new 
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                <a href="../the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/" rel="prev" title="The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange">
-                Previous post
-                </a>
-            </span>
-
-
-            <span class="next pagination-item newer">
-                <a href="../the-basics-of-cryptography-part-3-cryptographic-hashes/" rel="next" title="The Basics of Cryptography, Part 3: Cryptographic Hashes">
-Next post
-              </a>
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/cs/" rel="tag">cs</a></li>
+            <li><a class="tag p-category" href="../../categories/math/" rel="tag">math</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/" rel="prev" title="The Basics of Cryptography, Part 1: Diffie-Hellman Key Exchange">Previous&nbsp;post</a>
+            </li>
+            <li class="next">
+                <a href="../the-basics-of-cryptography-part-3-cryptographic-hashes/" rel="next" title="The Basics of Cryptography, Part 3: Cryptographic Hashes">Next&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -515,23 +531,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

@@ -1,64 +1,91 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="What hash functions are and some of what you can do with them">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · The Basics of Cryptography, Part 3: Cryptographic Hashes </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>The Basics of Cryptography, Part 3: Cryptographic Hashes | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="prev" href="../the-basics-of-cryptography-part-2-intro-to-rsa/" title="The Basics of Cryptography, Part 2: Intro To RSA" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="The Basics of Cryptography, Part 3: Cryptographic Hashes">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-3-cryptographic-hashes/">
+<meta property="og:description" content="What hash functions are and some of what you can do with them">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-15T14:00:00-05:00">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="math">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">The Basics of Cryptography, Part 3: Cryptographic&nbsp;Hashes</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">The Basics of Cryptography, Part 3: Cryptographic&nbsp;Hashes</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-15T14:00:00-05:00" itemprop="datePublished" title="2020-04-15 14:00">2020-04-15 14:00</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/the-basics-of-cryptography-part-3-cryptographic-hashes.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2020-04-15T14:00:00-05:00" itemprop="datePublished" title="2020-04-15 14:00">2020-04-15 14:00</time></span>
-        <meta name="description" itemprop="description" content="What hash functions are and some of what you can do with them">
-<div class="e-content entry-content" itemprop="articleBody text">
+
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 <i>This is the third post in a series: for part 1, go <a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-1-diffie-hellman-key-exchange/">here</a>, and for part 2, go <a href="https://nicholas-miklaucic.github.io/posts/the-basics-of-cryptography-part-2-intro-to-rsa/">here</a>.</i>
 </p>
@@ -85,8 +112,7 @@ haven&#8217;t been&nbsp;modified?
 
 <!-- TEASER_END -->
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 <span class="caps">RSA</span> can be modified to work for identity verification, but not in the way we&#8217;ve discussed it. That&#8217;s
 why it&#8217;s sometimes called a <i>cryptosystem.</i>
@@ -108,9 +134,9 @@ seen &#8220;sharing a single secret&#8221; or &#8220;sending a message securely&
 add one&nbsp;more.
 </p>
 
-<div id="outline-container-orgcc0aa4f" class="outline-2">
-<h2 id="orgcc0aa4f">Cheating a&nbsp;Little</h2>
-<div class="outline-text-2" id="text-orgcc0aa4f">
+<div id="outline-container-orgd7c7b28" class="outline-2">
+<h2 id="orgd7c7b28">Cheating a&nbsp;Little</h2>
+<div class="outline-text-2" id="text-orgd7c7b28">
 <p>
 The actual math of hash functions isn&#8217;t very interesting, at least to me, and I don&#8217;t think it&#8217;s
 very illuminating to the student. The <i>application</i> of hash functions, however, is fascinating, and
@@ -127,17 +153,17 @@ this let it gain administrator privileges on Windows without the user&#8217;s&nb
 </p>
 </div>
 </div>
-<div id="outline-container-org7245cc2" class="outline-2">
-<h2 id="org7245cc2">What Properties Do Hash Functions&nbsp;Have?</h2>
-<div class="outline-text-2" id="text-org7245cc2">
+<div id="outline-container-org346cfe9" class="outline-2">
+<h2 id="org346cfe9">What Properties Do Hash Functions&nbsp;Have?</h2>
+<div class="outline-text-2" id="text-org346cfe9">
 <p>
 Most cryptographic hash functions take in input of any size and output a fixed number of bits. A
 function \(f\) is a <i>cryptographic hash function</i> if it satisfies the&nbsp;following:
 </p>
 </div>
-<div id="outline-container-org3f0897b" class="outline-3">
-<h3 id="org3f0897b">Determinism</h3>
-<div class="outline-text-3" id="text-org3f0897b">
+<div id="outline-container-org6e558a7" class="outline-3">
+<h3 id="org6e558a7">Determinism</h3>
+<div class="outline-text-3" id="text-org6e558a7">
 <p>
 \(f\) is a function in the mathematical sense: it always produces the same output for the same
 input. Note that the reverse is always false: because hash functions can take in input of any size
@@ -145,9 +171,9 @@ but have limited possible outputs, there are always some inputs that have the sa
 </p>
 </div>
 </div>
-<div id="outline-container-orgb323dfb" class="outline-3">
-<h3 id="orgb323dfb">Irreversibility</h3>
-<div class="outline-text-3" id="text-orgb323dfb">
+<div id="outline-container-org33a02b4" class="outline-3">
+<h3 id="org33a02b4">Irreversibility</h3>
+<div class="outline-text-3" id="text-org33a02b4">
 <p>
 Given an output \(y\), it is computationally infeasible to find any input \(x\) such
 that \(f(x) = y\). (In practice, this translates to &#8220;no strategy significantly
@@ -155,9 +181,9 @@ better than random guessing&nbsp;exists.&#8221;)
 </p>
 </div>
 </div>
-<div id="outline-container-org0737316" class="outline-3">
-<h3 id="org0737316">Collision&nbsp;Resistance</h3>
-<div class="outline-text-3" id="text-org0737316">
+<div id="outline-container-org184cce9" class="outline-3">
+<h3 id="org184cce9">Collision&nbsp;Resistance</h3>
+<div class="outline-text-3" id="text-org184cce9">
 <p>
 Not only can the function not be easily inverted, but it is infeasible to find <i>any</i> two inputs that
 map to any output: any \(x_1, x_2\), and \(y\) such that \(f(x_1) = f(x_2) = y\). Such a pair of inputs
@@ -171,9 +197,9 @@ required. It doesn&#8217;t have an easy name, but I&#8217;ll&nbsp;try:
 </p>
 </div>
 </div>
-<div id="outline-container-org7287414" class="outline-3">
-<h3 id="org7287414">Maximal&nbsp;Entropy</h3>
-<div class="outline-text-3" id="text-org7287414">
+<div id="outline-container-orgf93c447" class="outline-3">
+<h3 id="orgf93c447">Maximal&nbsp;Entropy</h3>
+<div class="outline-text-3" id="text-orgf93c447">
 <p>
 \(f\) should reveal as little information as possible, known in information theory has having maximal
 entropy. Hash functions should look random: learning <i>anything</i> about an input given its hash should
@@ -189,20 +215,20 @@ independent of each&nbsp;other.
 </div>
 </div>
 
-<div id="outline-container-orged94264" class="outline-2">
-<h2 id="orged94264">An&nbsp;Example: <code>SHA256</code>
+<div id="outline-container-orge717e35" class="outline-2">
+<h2 id="orge717e35">An&nbsp;Example: <code>SHA256</code>
 </h2>
-<div class="outline-text-2" id="text-orged94264">
+<div class="outline-text-2" id="text-orge717e35">
 <p>
 This is what the hashes of the letters A through D (represented as <span class="caps">ASCII</span> characters) look like when
 hashed&nbsp;with <code>SHA256</code> and then converted to&nbsp;hexadecimal:
 </p>
 
-<div class="highlight"><pre><span></span>06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0
+<div class="code-container"><div class="code-block"><pre><code class="sh">06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0
 c0cde77fa8fef97d476c10aad3d2d54fcc2f336140d073651c2dcccf1e379fd6
 12f37a8a84034d3e623d726fe10e5031f4df997ac13f4d5571b5a90c41fb84fe
 7c447aa2524264a3e24df73a6fddd8db360840f895bcb5e54d643c18de26a8ae
-</pre></div>
+</code></pre></div></div>
 
 <p>
 Even though this is just counting up in binary, each output looks completely different. This is a
@@ -216,9 +242,9 @@ Alright, so let&#8217;s say we have a hash function. What can we do with&nbsp;it
 </div>
 </div>
 
-<div id="outline-container-org49b86d5" class="outline-2">
-<h2 id="org49b86d5">Application 1: Message&nbsp;Integrity</h2>
-<div class="outline-text-2" id="text-org49b86d5">
+<div id="outline-container-org5996d02" class="outline-2">
+<h2 id="org5996d02">Application 1: Message&nbsp;Integrity</h2>
+<div class="outline-text-2" id="text-org5996d02">
 <p>
 Our opening problem about Alice and Bob meeting up despite Malcolm&#8217;s interference is actually
 several separate problems. The one I want to focus on is preventing tampering. In plain <span class="caps">RSA</span>, for
@@ -271,9 +297,9 @@ which is prohibitively&nbsp;difficult.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfdfe222" class="outline-2">
-<h2 id="orgfdfe222">Application 2: Proof of&nbsp;Work</h2>
-<div class="outline-text-2" id="text-orgfdfe222">
+<div id="outline-container-orgb356d8b" class="outline-2">
+<h2 id="orgb356d8b">Application 2: Proof of&nbsp;Work</h2>
+<div class="outline-text-2" id="text-orgb356d8b">
 <p>
 Speaking of Bitcoin, it uses hashing for a completely separate application as well. Let&#8217;s say you
 want to make adding a transaction to the global ledger (i.e., recording that you paid me fifty
@@ -309,9 +335,9 @@ combining their hashes, there&#8217;s no effective way of &#8220;getting&nbsp;ah
 </div>
 </div>
 
-<div id="outline-container-org45cc094" class="outline-2">
-<h2 id="org45cc094">Application 3: Password&nbsp;Verification</h2>
-<div class="outline-text-2" id="text-org45cc094">
+<div id="outline-container-org0b6d1ef" class="outline-2">
+<h2 id="org0b6d1ef">Application 3: Password&nbsp;Verification</h2>
+<div class="outline-text-2" id="text-org0b6d1ef">
 <p>
 I&#8217;m pretty sure that you have used a password before. Passwords provide a useful way of verifying
 your identity. However, there&#8217;s a significant problem with basic passwords: if I tell you my
@@ -353,8 +379,7 @@ reverse-engineer their hashes, and so the only way to reset a password is to pic
 overwrite the old hash with the new&nbsp;one.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 This is why I&#8217;m so infuriated by maximum-length requirements on passwords! All outputs of a hash
 have the same size, so it&#8217;s not for any technical reason: it would be trivial in a well-designed
@@ -365,17 +390,17 @@ passwords, but having predictable long passwords is way more secure than very un
 </div>
 </div>
 
-<div id="outline-container-org1b97dea" class="outline-2">
-<h2 id="org1b97dea">A Brief Non-Cryptographic&nbsp;Postlude</h2>
-<div class="outline-text-2" id="text-org1b97dea">
+<div id="outline-container-org43521f0" class="outline-2">
+<h2 id="org43521f0">A Brief Non-Cryptographic&nbsp;Postlude</h2>
+<div class="outline-text-2" id="text-org43521f0">
 <p>
 Hashes are useful in all kinds of ways, not just cryptography, and I would be remiss to not at least
 briefly go over some of the interesting ways they can be&nbsp;used.
 </p>
 </div>
-<div id="outline-container-org9f1fcee" class="outline-3">
-<h3 id="org9f1fcee">Hashmaps</h3>
-<div class="outline-text-3" id="text-org9f1fcee">
+<div id="outline-container-org3b1bb80" class="outline-3">
+<h3 id="org3b1bb80">Hashmaps</h3>
+<div class="outline-text-3" id="text-org3b1bb80">
 <p>
 Let&#8217;s say you want to store a mapping from a person&#8217;s username to their password hash like I
 described above. What&#8217;s the best way to do that? One solution is to have, for example, 256 &#8220;buckets&#8221;
@@ -393,9 +418,9 @@ of key-value pairs, because getting a value from a key doesn&#8217;t require sea
 </p>
 </div>
 </div>
-<div id="outline-container-org5784a29" class="outline-3">
-<h3 id="org5784a29">Equality</h3>
-<div class="outline-text-3" id="text-org5784a29">
+<div id="outline-container-orgb348269" class="outline-3">
+<h3 id="orgb348269">Equality</h3>
+<div class="outline-text-3" id="text-orgb348269">
 <p>
 We discussed earlier using checksums as a way of quickly checking that two big pieces of data are
 equal. This can be used to prevent tampering, but it&#8217;s also useful in applications that require
@@ -426,9 +451,9 @@ equivalent to a different one and played the wrong&nbsp;move.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb97567b" class="outline-3">
-<h3 id="orgb97567b">Bloom&nbsp;Filters</h3>
-<div class="outline-text-3" id="text-orgb97567b">
+<div id="outline-container-orgfc728f2" class="outline-3">
+<h3 id="orgfc728f2">Bloom&nbsp;Filters</h3>
+<div class="outline-text-3" id="text-orgfc728f2">
 <p>
 This sort of probabilistic tradeoff, where you accept the risk of an occasional error for speed,
 comes up a lot with hash functions. One cool data structure that uses this is called a <i>Bloom
@@ -464,9 +489,9 @@ isn&#8217;t an ad, but that&#8217;s an acceptable tradeoff for space and&nbsp;sp
 </div>
 </div>
 
-<div id="outline-container-org213c2f2" class="outline-2">
-<h2 id="org213c2f2">Conclusion</h2>
-<div class="outline-text-2" id="text-org213c2f2">
+<div id="outline-container-orgaa965a6" class="outline-2">
+<h2 id="orgaa965a6">Conclusion</h2>
+<div class="outline-text-2" id="text-orgaa965a6">
 <p>
 Whew, where was I? Like you might be starting to surmise, hash functions are used everywhere in
 computer science and cryptography. They&#8217;re an extraordinarily useful tool in all sorts of
@@ -493,27 +518,15 @@ environment that surrounds us. Thanks for reading, and see you next&nbsp;time!
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/cs/" rel="tag">cs</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/math/" rel="tag">math</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                <a href="../the-basics-of-cryptography-part-2-intro-to-rsa/" rel="prev" title="The Basics of Cryptography, Part 2: Intro To RSA">
-                Previous post
-                </a>
-            </span>
-
-
-            <span class="next pagination-item newer">
-Next post
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/cs/" rel="tag">cs</a></li>
+            <li><a class="tag p-category" href="../../categories/math/" rel="tag">math</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../the-basics-of-cryptography-part-2-intro-to-rsa/" rel="prev" title="The Basics of Cryptography, Part 2: Intro To RSA">Previous&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -535,23 +548,19 @@ Next post
 
         </section><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </script></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>

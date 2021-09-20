@@ -1,66 +1,92 @@
 <!DOCTYPE html>
 <html prefix="
-" lang="en">
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollard's Rho · A Painless Introduction to Python Data Analysis and Visualization </title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-164231105-1"></script><script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', 'UA-164231105-1');
-    </script><meta content="#5670d4" name="theme-color">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<meta name="viewport" content="width=device-width">
+<title>A Painless Introduction to Python Data Analysis and Visualization | Pollard's Rho</title>
+<link rel="stylesheet" href="https://use.typekit.net/fne7jql.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-variables.min.css">
+<link rel="stylesheet" href="../../assets/halfmoon/css/halfmoon-highlight-js-theme.css">
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/etica.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
 <link rel="canonical" href="https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Nicholas Miklaucic">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="https://css.gg/yinyang.css" rel="stylesheet">
+<link href="https://css.gg/copy.css" rel="stylesheet">
+<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script><meta name="author" content="Nicholas Miklaucic">
 <link rel="next" href="../effective-data-visualization-part-1-what-is-effective-data-visualization/" title="Effective Data Visualization, Part 1: What Is Effective Data Visualization?" type="text/html">
+<meta property="og:site_name" content="Pollard's Rho">
+<meta property="og:title" content="A Painless Introduction to Python Data Analysis and Visualization">
+<meta property="og:url" content="https://nicholas-miklaucic.github.io/posts/a-painless-introduction-to-python-data-analysis-and-visualization/">
+<meta property="og:description" content="Data visualization and data science is a hot topic right now, and there's lots of people I know who
+want to develop this skill set. A common hurdle, in my experience, is that a lot of tutorials are
+ei">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-10-29T15:07:24-04:00">
+<meta property="article:tag" content="dataviz">
+<meta property="article:tag" content="guide">
 </head>
-<body class="">
+<body data-set-preferred-mode-onload="true">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div class="page-wrapper with-navbar">
+            <nav class="navbar justify-content-center"><div class="navbar-content">
+                <a class="nav-link" id="brand" href="../../" title="Pollard's Rho" rel="home">
 
-    <div class="hsidebar">
-        <div class="container sidebar-sticky">
-            <div class="sidebar-about">
-              <h1>
-                <a href="https://nicholas-miklaucic.github.io/">
-                      <h1 id="brand"><a class="no-tufte-underline" href="https://nicholas-miklaucic.github.io/" title="Pollard's Rho" rel="home">
+            <span id="blog-title" class="navbar-brand">Pollard&#8217;s Rho</span>
+    </a>
 
-        <span id="blog-title">Pollard&#8217;s&nbsp;Rho</span>
-    </a></h1>
-
-                </a>
-              </h1>
-                <p class="lead">Thoughts on math, computing, and&nbsp;data</p>
-
-            </div>
-                <nav id="menu" role="navigation" class="sidebar-nav"><a class="no-tufte-underline sidebar-nav-item" href="../../pages/about-me/">About Me</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../archive.html">Archive</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../categories/">Tags</a>
-        <a class="no-tufte-underline sidebar-nav-item" href="../../rss.xml"><span class="caps">RSS</span> feed</a>
-    
-    
-    </nav><footer id="footer"><span class="copyright">
-              Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            </span>
+        </div>
+        <div class="navbar-content">
             
-            
-        </footer>
+        </div>
+        <div class="navbar-content">
+                <ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="../../pages/about-me/">About&nbsp;Me</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../archive.html">Archive</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../categories/">Tags</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../rss.xml"><span class="caps">RSS</span>&nbsp;feed</a></li>
+
+        
+        
+        
+    </ul>
 </div>
-    </div>
+        <div class="navbar-content">
+            <button class="btn" type="button" onclick="halfmoon.toggleDarkMode()"><i class="gg-yinyang"></i></button>
+        </div>
+    </nav><div class="sticky-alerts"></div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <main id="content" class="content"><article class="content post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">A Painless Introduction to Python Data Analysis and&nbsp;Visualization</a></h1>
 
-    <div class="content container" id="content">
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><h1 class="post-title p-name"><a href="." class="u-url">A Painless Introduction to Python Data Analysis and&nbsp;Visualization</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Nicholas&nbsp;Miklaucic
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2019-10-29T15:07:24-04:00" itemprop="datePublished" title="2019-10-29 15:07">2019-10-29 15:07</time></a>
+            </p>
+                <p class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/a-painless-introduction-to-python-data-analysis-and-visualization.html">Comments</a>
 
-    <span class="post-date">
-      <time class="published dt-published" datetime="2019-10-29T15:07:24-04:00" itemprop="datePublished" title="2019-10-29 15:07">2019-10-29 15:07</time></span>
 
-    
-    
+                    </p>
+<p class="sourceline"><a href="index.org" class="sourcelink">Source</a></p>
 
-    <div class="e-content entry-content" itemprop="articleBody text">
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
 Data visualization and data science is a hot topic right now, and there&#8217;s lots of people I know who
 want to develop this skill set. A common hurdle, in my experience, is that a lot of tutorials are
@@ -91,9 +117,9 @@ If any of these describe you, you&#8217;ve come to the right&nbsp;place!
 
 <!-- TEASER_END -->
 
-<div id="outline-container-org354dd84" class="outline-2">
-<h2 id="org354dd84">Structure</h2>
-<div class="outline-text-2" id="text-org354dd84">
+<div id="outline-container-org3edb4de" class="outline-2">
+<h2 id="org3edb4de">Structure</h2>
+<div class="outline-text-2" id="text-org3edb4de">
 <p>
 We&#8217;re going to be using data from the World Bank: specifically, data with birth rates by year for
 each country. The data I&#8217;m using is <a href="https://gist.github.com/nicholas-miklaucic/af822d547b8796753b8d160ca76e0172">here.</a> Our goal will be <b>to learn something interesting from this</b>
@@ -131,11 +157,10 @@ Sound good? Let&#8217;s do&nbsp;this!
 </div>
 </div>
 
-<div id="outline-container-orgb2c2448" class="outline-2">
-<h2 id="orgb2c2448">Tools of the&nbsp;Trade</h2>
-<div class="outline-text-2" id="text-orgb2c2448">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-orgb684699" class="outline-2">
+<h2 id="orgb684699">Tools of the&nbsp;Trade</h2>
+<div class="outline-text-2" id="text-orgb684699">
+<span class="margin-note">
 <p>
 Jupyter notebooks, despite the suggestive spelling, are not only for Python nowadays: R and other
 scientific languages are now compatible with&nbsp;Jupyter.
@@ -166,20 +191,20 @@ Jupyter. (Just don&#8217;t be worried if you get slightly different results betw
 </p>
 </div>
 </div>
-<div id="outline-container-orge669e2e" class="outline-2">
-<h2 id="orge669e2e">Getting&nbsp;Started</h2>
-<div class="outline-text-2" id="text-orge669e2e">
+<div id="outline-container-orga27e208" class="outline-2">
+<h2 id="orga27e208">Getting&nbsp;Started</h2>
+<div class="outline-text-2" id="text-orga27e208">
 <p>
 First things first: we need to import the libraries we&#8217;ll be using to work with the data. There are
 four we&#8217;re&nbsp;using: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>,&nbsp;and <code>seaborn</code>. This can more or less be copy-pasted at
 the start of every notebook you&nbsp;use:
 </p>
 
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+</code></pre></div></div>
 <p>
 A quick primer as to what each of these&nbsp;are:
 </p>
@@ -199,8 +224,7 @@ be using a&nbsp;lot.</li>
 towards scientific visualization, which is exactly what we&#8217;re doing today: trying to quickly make
 inferences and learn about&nbsp;information.</li>
 </ul>
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Note that the Jupyter notebook has some styling code after this part so that the visuals we
 make match the &#8220;house style&#8221; I have for this blog. They aren&#8217;t really the point of what we&#8217;re doing,
@@ -215,9 +239,9 @@ little-known feature&nbsp;of <code>pandas</code> (at least, little-known among t
 that it can also take in URLs! That&#8217;s what we&#8217;ll do&nbsp;here:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># I'm using a shortened URL for visual reasons</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"https://git.io/Jeuhu"</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># I'm using a shortened URL for visual reasons
+data = pd.read_csv("https://git.io/Jeuhu")
+</code></pre></div></div>
 
 <p>
 This reads in the data into a <i>DataFrame</i>, which is basically a super fancy&nbsp;table.
@@ -227,8 +251,8 @@ This reads in the data into a <i>DataFrame</i>, which is basically a super fancy
 I&#8217;m pretty paranoid, so I like to check if this actually worked. The easiest way to just get a look
 at the beginning of the data. You can do this with&nbsp;the <code>head</code> command:
 </p>
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data.head()
+</code></pre></div></div>
 
 <p>
 This outputs text which Jupyter notebooks convert into more aesthetically pleasing <span class="caps">HTML</span> tables. I&#8217;ll
@@ -276,8 +300,7 @@ different when you do&nbsp;it.
     </tr>
 </tbody>
 </table>
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 This really goes for anything I&#8217;m doing: if you&#8217;re curious, look it up! There&#8217;s excellent
 documentation on almost all of this stuff. Inside Jupyter notebooks, press Shift+Tab inside a
@@ -293,15 +316,14 @@ information&nbsp;in.
 </div>
 </div>
 
-<div id="outline-container-orge5d5aa0" class="outline-2">
-<h2 id="orge5d5aa0">What Are We Looking&nbsp;At?</h2>
-<div class="outline-text-2" id="text-orge5d5aa0">
+<div id="outline-container-org45ee3db" class="outline-2">
+<h2 id="org45ee3db">What Are We Looking&nbsp;At?</h2>
+<div class="outline-text-2" id="text-org45ee3db">
 <p>
 <span class="caps">OK</span>, so what <i>is</i> a DataFrame? Let&#8217;s look at this sneak preview&nbsp;of <code>data</code> and talk about the general&nbsp;structure.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Specifically, indexes have to be <i>hashable</i>: they can&#8217;t be objects that can be mutated, like lists. In
 practice this is not a big&nbsp;issue.
@@ -319,28 +341,27 @@ DataFrames also have some number of <i>columns</i>: named lists of data with a v
 three columns here. We can get a specific column and it&#8217;ll return a 1D list (called a <i>series</i>) for&nbsp;us:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># just getting the first 5</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()[</span><span class="s1">'Country Name'</span><span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># just getting the first 5
+data.head()['Country Name']
+</code></pre></div></div>
 
 <p>
 This is what a Series looks like if you print it out, and so it&#8217;s what the above code&nbsp;returns:
 </p>
 
-<div class="highlight"><pre><span></span><span class="mi">0</span>       <span class="n">Afghanistan</span>
-<span class="mi">1</span>           <span class="n">Albania</span>
-<span class="mi">2</span>           <span class="n">Algeria</span>
-<span class="mi">3</span>    <span class="n">American</span> <span class="n">Samoa</span>
-<span class="mi">4</span>           <span class="n">Andorra</span>
-<span class="n">Name</span><span class="p">:</span> <span class="n">Country</span> <span class="n">Name</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="nb">object</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">0       Afghanistan
+1           Albania
+2           Algeria
+3    American Samoa
+4           Andorra
+Name: Country Name, dtype: object
+</code></pre></div></div>
 
 <p>
 Series keep the name and the index. Also note&nbsp;this <code>dtype</code> field. What&#8217;s its&nbsp;deal?
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Those well-versed in Python will know that this isn&#8217;t technically true: it&#8217;s closer to&nbsp;&#8221;<code>numpy</code> will
 actively throw an error if there&#8217;s a mismatch and vanilla Python won&#8217;t&#8221;, but it doesn&#8217;t really have
@@ -356,27 +377,27 @@ types include integers, decimals, dates, and lists&nbsp;themselves.
 </div>
 </div>
 
-<div id="outline-container-orgba7e821" class="outline-2">
-<h2 id="orgba7e821">Tidying&nbsp;Up</h2>
-<div class="outline-text-2" id="text-orgba7e821">
+<div id="outline-container-org53f349b" class="outline-2">
+<h2 id="org53f349b">Tidying&nbsp;Up</h2>
+<div class="outline-text-2" id="text-org53f349b">
 <p>
 There are some columns that we don&#8217;t really need, and a lot of the names are a bit long-winded. I
 also want the column names that are years to be typed as numbers so we can do things like compare
 them. We&#8217;ll achieve all of that with the following piece of&nbsp;code:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Country Code"</span><span class="p">,</span> <span class="s2">"Series Name"</span><span class="p">,</span> <span class="s2">"Series Code"</span><span class="p">],</span> 
-    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">trim_years</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">']'</span><span class="p">):</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-	<span class="k">return</span> <span class="n">col</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">trim_years</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Country Name'</span><span class="p">:</span> <span class="s1">'country'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data.drop(
+    columns=["Country Code", "Series Name", "Series Code"], 
+    inplace=True
+)
+def trim_years(col):
+    if col.endswith(']'):
+	return int(col.split(' ')[0])
+    else:
+	return col
+data.rename(columns=trim_years, inplace=True)
+data.rename(columns={'Country Name': 'country'}, inplace=True)
+</code></pre></div></div>
 
 <p>
 (I promise&nbsp;that <code>trim_years</code> function is the most pure Python you&#8217;ll get in this&nbsp;post!)
@@ -404,28 +425,28 @@ axis labels later, but you can&#8217;t fix your fingers with a function call. St
 We can get the list of columns in our DataFrame and see what that code did like&nbsp;so:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># only get the first 10</span>
-<span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># only get the first 10
+data.columns[:5]
+</code></pre></div></div>
 
 <p>
 This outputs the&nbsp;following:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">Index</span><span class="p">([</span><span class="s1">'country'</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1961</span><span class="p">,</span> <span class="mi">1962</span><span class="p">,</span> <span class="mi">1963</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'object'</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">Index(['country', 1960, 1961, 1962, 1963], dtype='object')
+</code></pre></div></div>
 </div>
 </div>
 
-<div id="outline-container-org6d181e3" class="outline-2">
-<h2 id="org6d181e3">..&nbsp;Problems</h2>
-<div class="outline-text-2" id="text-org6d181e3">
+<div id="outline-container-orgb022655" class="outline-2">
+<h2 id="orgb022655">..&nbsp;Problems</h2>
+<div class="outline-text-2" id="text-orgb022655">
 <p>
 Let me reprint some of the&nbsp;data:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()[</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data.head()[data.columns()[:5]]
+</code></pre></div></div>
 
 <p>
 As you can see, we don&#8217;t have to index with a single column: we can use a list of columns and we&#8217;ll
@@ -496,8 +517,8 @@ actually null, not this&nbsp;weird <code>".."</code> string. To fix that, we&#82
 some function to every piece of data in the&nbsp;dataframe:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">'..'</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data = data.applymap(lambda x: x if x != '..' else np.nan)
+</code></pre></div></div>
 
 <p>
 Now our data has real null values, so we can use the&nbsp;tools <code>pandas</code> has for working with this
@@ -510,24 +531,23 @@ Internally, this type of <i>Boolean</i> data is represented&nbsp;as <code>0</cod
 can sum the individual rows to figure out which countries are&nbsp;problematic:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">pd.isnull(data).sum(axis=1).head()
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="mi">1</span>
-<span class="mi">1</span>     <span class="mi">1</span>
-<span class="mi">2</span>     <span class="mi">1</span>
-<span class="mi">3</span>    <span class="mi">59</span>
-<span class="mi">4</span>    <span class="mi">54</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">0     1
+1     1
+2     1
+3    59
+4    54
+dtype: int64
+</code></pre></div></div>
 
 <p>
 (<code>axis=1</code> means &#8220;sum across the rows&#8221;,&nbsp;and <code>axis=0</code> would sum across the columns. With no arguments, it
 sums by both, and returns a single&nbsp;thing.)
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 There&#8217;s one big exception: Boolean algebra operations&nbsp;like <code>and</code> and <code>not</code>. To do those, you use the
 Python operations that are normally used for the <i>bitwise</i> version of these&nbsp;operations. <code>&amp;</code> is <code>and</code>, <code>~</code> is
@@ -549,16 +569,16 @@ One very cool thing&nbsp;about <code>numpy</code> and <code>pandas</code> is tha
 operating on the series itself. For example, we can do an elementwise&nbsp;comparison:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">pd.isnull(data).sum(axis=1).head() == 1
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="kc">True</span>
-<span class="mi">1</span>     <span class="kc">True</span>
-<span class="mi">2</span>     <span class="kc">True</span>
-<span class="mi">3</span>    <span class="kc">False</span>
-<span class="mi">4</span>    <span class="kc">False</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">0     True
+1     True
+2     True
+3    False
+4    False
+dtype: bool
+</code></pre></div></div>
 
 <p>
 This isn&#8217;t just for comparisons: we can do all sorts of math elementwise (we could have multiplied
@@ -573,11 +593,10 @@ detour to look at one of the most important parts of&nbsp;understanding <code>pa
 </div>
 </div>
 
-<div id="outline-container-org27b44e8" class="outline-2">
-<h2 id="org27b44e8">Indexing Like a&nbsp;Boss</h2>
-<div class="outline-text-2" id="text-org27b44e8">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-orgcc41df2" class="outline-2">
+<h2 id="orgcc41df2">Indexing Like a&nbsp;Boss</h2>
+<div class="outline-text-2" id="text-orgcc41df2">
+<span class="margin-note">
 <p>
 I <i>may</i> be speaking from experience about not just fiddling with things until it works.&nbsp;Maybe.
 </p>
@@ -612,8 +631,7 @@ will have two elements: you can just subtract the end index from the start index
 slice&nbsp;is.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 You can even use negative&nbsp;steps: <code>l[::-1]</code> is the reverse of the original list,&nbsp;and <code>l[-2:1:-1]</code> means
 &#8220;start from the element second to the back, count backwards by 1s until you hit before the second
@@ -634,33 +652,33 @@ the sixth&nbsp;element.&#8221;
 This is a lot to take in at once: let&#8217;s show some examples which should clear things&nbsp;up.
 </p>
 
-<div class="highlight"><pre><span></span><span class="s2">"python"</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># returns 'y'</span>
+<div class="code-container"><div class="code-block"><pre><code class="python">"python"[1]
+# returns 'y'
 
-<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># returns 2</span>
+[4, 15, 2][-1]
+# returns 2
 
-<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
-<span class="c1"># returns [2]</span>
+[4, 15, 2][-1:]
+# returns [2]
 
-<span class="s2">"python"</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># returns "yh"</span>
+"python"[1:4:2]
+# returns "yh"
 
-<span class="s2">"hello"</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="c1"># returns "ell"</span>
+"hello"[1:4]
+# returns "ell"
 
-<span class="s2">"hello"</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># same as above</span>
+"hello"[1:4:1]
+# same as above
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">:]</span>
-<span class="c1"># returns []</span>
+[1, 2, 3][4:]
+# returns []
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># returns [1, 2]</span>
+[1, 2, 3][:2]
+# returns [1, 2]
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
-<span class="c1"># returns [2, 3]</span>
-</pre></div>
+[1, 2, 3][-2:]
+# returns [2, 3]
+</code></pre></div></div>
 
 <p>
 <span class="caps">OK</span>, so now how does this work&nbsp;with <code>pandas</code>?
@@ -697,8 +715,8 @@ some columns. We do this by using&nbsp;the <code>.loc</code> member&nbsp;of <cod
 and then the columns we&nbsp;want:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">'country'</span><span class="p">,</span> <span class="mi">1960</span><span class="p">]]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data.loc[[4, 8, 2], ['country', 1960]]
+</code></pre></div></div>
 
 <table border="1" class="dataframe">
 <thead><tr style="text-align: right;">
@@ -750,21 +768,21 @@ or DataFrame filled&nbsp;with <code>True</code> and <code>False</code>. Indexing
 let&#8217;s look at the columns that are problematic. Let&#8217;s first get the number of null values per&nbsp;column:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">null_cols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">null_cols</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">null_cols = pd.isnull(data).sum(axis=0)
+null_cols.head()
+</code></pre></div></div>
 
 <p>
 This outputs the&nbsp;following:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">country</span>     <span class="mi">3</span>
-<span class="mi">1960</span>       <span class="mi">33</span>
-<span class="mi">1961</span>       <span class="mi">32</span>
-<span class="mi">1962</span>       <span class="mi">33</span>
-<span class="mi">1963</span>       <span class="mi">34</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">country     3
+1960       33
+1961       32
+1962       33
+1963       34
+dtype: int64
+</code></pre></div></div>
 
 <p>
 Let&#8217;s get just the columns that have a lot of null values. We can do this by first&nbsp;doing <code>null_cols &gt;
@@ -773,15 +791,14 @@ number in each place. We want to only select the columns&nbsp;with <code>True</c
 indexing lets us do&nbsp;this:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">null_cols</span><span class="p">[</span><span class="n">null_cols</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">null_cols[null_cols &gt; 50]
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="mi">2018</span>    <span class="mi">269</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">2018    269
+dtype: int64
+</code></pre></div></div>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Make sure you understand why this&nbsp;works!
 </p>
@@ -793,17 +810,17 @@ those&nbsp;pesky <code>1</code> values in the null counts by row. Let&#8217;s re
 counts look like after&nbsp;that:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">null_cols</span> <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">]</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data = data.loc[:, null_cols &lt;= 50]
+pd.isnull(data).sum(axis=1).head()
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="mi">0</span>
-<span class="mi">1</span>     <span class="mi">0</span>
-<span class="mi">2</span>     <span class="mi">0</span>
-<span class="mi">3</span>    <span class="mi">58</span>
-<span class="mi">4</span>    <span class="mi">53</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">0     0
+1     0
+2     0
+3    58
+4    53
+dtype: int64
+</code></pre></div></div>
 
 <p>
 We&nbsp;use <code>loc</code> here because otherwise Python thinks we&#8217;re trying to index the rows. Now we have&nbsp;more <code>0</code>
@@ -813,9 +830,9 @@ missing&nbsp;data.
 </div>
 </div>
 
-<div id="outline-container-org48c2d7a" class="outline-2">
-<h2 id="org48c2d7a">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
-<div class="outline-text-2" id="text-org48c2d7a">
+<div id="outline-container-org747ee2a" class="outline-2">
+<h2 id="org747ee2a">I Used to Have 99 Problems, and Now I Have&nbsp;NaN</h2>
+<div class="outline-text-2" id="text-org747ee2a">
 <p>
 What should we do with these problematic rows? This question can be very complicated depending on
 the analysis you&#8217;re doing. A couple distinct approaches&nbsp;exist:
@@ -834,9 +851,8 @@ little actual data, and we have plenty to work with even if we remove a bit. (My
 my Andorran&nbsp;readership.)
 </p>
 
-<span class="marginnote"><p>
+<span class="margin-note">
 
-</p>
 <p>
 I want to show more Boolean indexing, but there&#8217;s a function that can do what we&#8217;re doing here more
 easily and with more features. The code to the left can be replaced&nbsp;by <code>df.dropna(axis=0,
@@ -849,8 +865,8 @@ inplace=True)</code>.
 We can use Boolean indexing to throw out all of the rows we don&#8217;t&nbsp;want:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data = data[pd.isnull(data).sum(axis=1) == 0]
+</code></pre></div></div>
 
 <p>
 Now <code>data</code> has no null values. Let&#8217;s move&nbsp;on!
@@ -858,9 +874,9 @@ Now <code>data</code> has no null values. Let&#8217;s move&nbsp;on!
 </div>
 </div>
 
-<div id="outline-container-orgf045443" class="outline-2">
-<h2 id="orgf045443">Reshaping&nbsp;Data</h2>
-<div class="outline-text-2" id="text-orgf045443">
+<div id="outline-container-org14c3a73" class="outline-2">
+<h2 id="org14c3a73">Reshaping&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org14c3a73">
 <p>
 Most libraries Python uses for data analysis don&#8217;t like data in <i>wide form</i> like we have here, where
 each row is a grouping of measurements and each column is a measurement type. Instead, they prefer
@@ -918,15 +934,14 @@ cinch. There are a couple major operations we can combine to achieve any reshapi
 The operation we&#8217;re doing&nbsp;is <code>melt</code>: the metaphor for the name escapes me, but it&#8217;s exactly what we&nbsp;need:
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 This image comes from the pandas docs linked&nbsp;above.
 </p>
 </span>
 
 
-<div class="figure">
+<div id="org58c4004" class="figure">
 <p><img src="https://pandas.pydata.org/pandas-docs/stable/_images/reshaping_melt.png" alt="reshaping_melt.png"></p>
 </div>
 
@@ -935,13 +950,13 @@ We&nbsp;give <code>melt</code> the names of the columns we&#8217;re making and t
 separately. Let&#8217;s see this in&nbsp;action:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span>
-    <span class="n">id_vars</span><span class="o">=</span><span class="s1">'country'</span><span class="p">,</span> 
-    <span class="n">var_name</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span> 
-    <span class="n">value_name</span><span class="o">=</span><span class="s1">'fertility'</span>
-<span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data = data.melt(
+    id_vars='country', 
+    var_name='year', 
+    value_name='fertility'
+)
+data.head()
+</code></pre></div></div>
 
 <table border="1" class="dataframe">
 <thead><tr style="text-align: right;">
@@ -991,9 +1006,9 @@ does what you want for&nbsp;you.
 </div>
 </div>
 
-<div id="outline-container-orgbdcf4ea" class="outline-2">
-<h2 id="orgbdcf4ea">Revenge of the&nbsp;Types</h2>
-<div class="outline-text-2" id="text-orgbdcf4ea">
+<div id="outline-container-orgff548cb" class="outline-2">
+<h2 id="orgff548cb">Revenge of the&nbsp;Types</h2>
+<div class="outline-text-2" id="text-orgff548cb">
 <p>
 One last&nbsp;thing:
 </p>
@@ -1003,15 +1018,15 @@ Due to the&nbsp;way <code>..</code> was used, these columns don&#8217;t have the
 later, so we can fix that&nbsp;now:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">'fertility'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'fertility'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data['fertility'] = data['fertility'].astype(np.float64)
+data['year'] = data['year'].astype(int)
+</code></pre></div></div>
 </div>
 </div>
 
-<div id="outline-container-orgeb5b2df" class="outline-2">
-<h2 id="orgeb5b2df">Intermission</h2>
-<div class="outline-text-2" id="text-orgeb5b2df">
+<div id="outline-container-org9a01e47" class="outline-2">
+<h2 id="org9a01e47">Intermission</h2>
+<div class="outline-text-2" id="text-org9a01e47">
 <p>
 <span class="caps">OK</span>, we&#8217;ve done a lot so far! We&#8217;ve taken in data off of the Internet, dealt with messy null values,
 and reshaped it so it&#8217;s exactly how we want it. Along the way we learned a lot of stuff about how
@@ -1025,9 +1040,9 @@ whatever you need to clear your head and focus on the fun part coming next. Read
 </div>
 </div>
 
-<div id="outline-container-orgd18b696" class="outline-2">
-<h2 id="orgd18b696">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
-<div class="outline-text-2" id="text-orgd18b696">
+<div id="outline-container-orgdd206ac" class="outline-2">
+<h2 id="orgdd206ac">Categorical Data Visualization: Birth Rate By&nbsp;Decade</h2>
+<div class="outline-text-2" id="text-orgdd206ac">
 <p>
 A very common task in data analysis and visualization is to look at <i>categorical data</i>: data that
 comes in a set of limited options. Things like race, gender, class, age group, clinical trial group,
@@ -1046,9 +1061,9 @@ How do you add columns to a DataFrame? It&#8217;s easy: we just pretend it alrea
 ourselves. The following code adds&nbsp;a <code>decade</code> column with the decade of each&nbsp;measurement:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data['decade'] = np.floor(data['year'] / 10) * 10
+data['decade'] = data['decade'].astype(int)
+</code></pre></div></div>
 
 <p>
 You can see how convenient it is that we can divide and multiply entire columns&nbsp;elementwise.
@@ -1065,8 +1080,7 @@ an input DataFrame like the one we have, a column name to use for the x-axis, a 
 for the y-axis, and a ton of other arguments that control what&nbsp;happens.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 These two things aren&#8217;t technically equivalent, but they are for our purposes. You can consult seaborn&#8217;s
 documentation to learn&nbsp;more.
@@ -1079,21 +1093,21 @@ specifically for each of these,&nbsp;so <code>kind='bar'</code> is the same as&n
 </p>
 </div>
 
-<div id="outline-container-org849c4f4" class="outline-3">
-<h3 id="org849c4f4">Summary&nbsp;Plots</h3>
-<div class="outline-text-3" id="text-org849c4f4">
+<div id="outline-container-org73eee04" class="outline-3">
+<h3 id="org73eee04">Summary&nbsp;Plots</h3>
+<div class="outline-text-3" id="text-org73eee04">
 <p>
 Speaking of bar plots, some types of graphs are useful for summarizing data: they don&#8217;t show
 individual elements. An example of this is the bar plot we mentioned&nbsp;above:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='bar'
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/bar.png" alt="nil"></p>
@@ -1104,8 +1118,7 @@ confidence interval created by randomly selecting subsets of the data and seeing
 occurs: they&#8217;re a very useful way of making sure you aren&#8217;t drawing conclusions from random&nbsp;noise.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Color choice in data visualization is one of my favorite subjects, and I&#8217;m only avoiding talking
 more about it now because I know I won&#8217;t stop and I&#8217;m sure you have better things to do with your
@@ -1122,14 +1135,14 @@ switch out the color palette I&#8217;m using to reflect that color scheme. We ca
 another argument&nbsp;to <code>catplot</code>:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='bar',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/bar-autumn.png" alt="nil"></p>
@@ -1146,14 +1159,14 @@ information, and because they take up a lot of space they&#8217;re not my first&
 to instantly switch this out for a more informative version, the box&nbsp;plot:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'box'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='box',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/box.png" alt="nil"></p>
@@ -1164,14 +1177,14 @@ data. We can extend this to the <i>deciles</i> of the data and get more boxes in
 <i>boxenplot</i>:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'boxen'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='boxen',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/boxen.png" alt="nil"></p>
@@ -1180,14 +1193,14 @@ data. We can extend this to the <i>deciles</i> of the data and get more boxes in
 Taking this concept to its logical conclusions, we get the continuous <i>violin plot</i>:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'violin'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='violin',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/violin-squished.png" alt="nil"></p>
@@ -1196,15 +1209,15 @@ Taking this concept to its logical conclusions, we get the continuous <i>violin 
 There&#8217;s a problem: this is hard to look at because it&#8217;s squished horizontally.&nbsp;The <code>aspect</code> argument&nbsp;of <code>catplot</code> changes the width/height ratio: by setting it&nbsp;to <code>2</code>, we can widen our&nbsp;plot:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'violin'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-    <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='violin',
+    palette='autumn',
+    aspect=2
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/violin.png" alt="nil"></p>
@@ -1221,14 +1234,14 @@ Another approach to making barplots better, instead of showing more information,
 visual space. This gives us the final summary plot, the <i>point plot</i>:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'point'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data, 
+    x='decade', 
+    y='fertility', 
+    kind='point',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/point.png" alt="nil"></p>
@@ -1245,14 +1258,14 @@ and use those for the next plots. First, the <i>swarmplot</i>, which tries to gr
 overlapping&nbsp;them:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="mi">100</span><span class="p">],</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'swarm'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data.loc[::100], 
+    x='decade', 
+    y='fertility', 
+    kind='swarm',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/swarm.png" alt="nil"></p>
@@ -1262,14 +1275,14 @@ Another approach is to avoid moving the y-values of points and spread them out o
 is called a <i>strip plot</i>:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[::</span><span class="mi">100</span><span class="p">],</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'strip'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data.loc[::100], 
+    x='decade', 
+    y='fertility', 
+    kind='strip',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/strip.png" alt="nil"></p>
@@ -1279,14 +1292,14 @@ The last type of plot, somewhat of an anomaly, is the <i>count plot</i>: this ju
 observations. This only uses one categorical&nbsp;variable:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span> 
-<span class="c1"># no y for these plots</span>
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'count'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'autumn'</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data.loc, 
+    x='decade', 
+# no y for these plots
+    kind='count',
+    palette='autumn',
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-catplots/count.png" alt="nil"></p>
@@ -1301,16 +1314,16 @@ an art&nbsp;project.
 </div>
 </div>
 
-<div id="outline-container-orgdd9fab3" class="outline-2">
-<h2 id="orgdd9fab3">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
-<div class="outline-text-2" id="text-orgdd9fab3">
+<div id="outline-container-org99e3a19" class="outline-2">
+<h2 id="org99e3a19">Advanced Data Manipulation: Birth Rate&nbsp;Spikes</h2>
+<div class="outline-text-2" id="text-org99e3a19">
 <p>
 <span class="caps">OK</span>, now we&#8217;re moving on from categorical plots. Let&#8217;s remove&nbsp;the <code>decade</code> field because we won&#8217;t need
 it any&nbsp;more:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data.drop(columns=['decade'], inplace=True)
+</code></pre></div></div>
 
 <p>
 There are lot of ways we could look at this data and try to learn something about it. I&#8217;m going to
@@ -1326,7 +1339,7 @@ let&#8217;s pivot back to wide form by&nbsp;using <code>df.pivot()</code>:
 </p>
 
 
-<div class="figure">
+<div id="org3859e40" class="figure">
 <p><img src="https://pandas.pydata.org/pandas-docs/stable/_images/reshaping_pivot.png" alt="reshaping_pivot.png"></p>
 </div>
 
@@ -1340,8 +1353,8 @@ works best with long-form data because all of these need to be&nbsp;columns.)
 First a refresher on how our data looks&nbsp;now:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">data.head()
+</code></pre></div></div>
 
 <table border="1" class="dataframe">
 <thead><tr style="text-align: right;">
@@ -1387,14 +1400,14 @@ First a refresher on how our data looks&nbsp;now:
 Now let&#8217;s&nbsp;pivot!
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">pivoted</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span>
-    <span class="n">columns</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span> 
-    <span class="n">index</span><span class="o">=</span><span class="s1">'country'</span><span class="p">,</span> 
-    <span class="n">values</span><span class="o">=</span><span class="s1">'fertility'</span>
-<span class="p">)</span>
+<div class="code-container"><div class="code-block"><pre><code class="python">pivoted = data.pivot(
+    columns='year', 
+    index='country', 
+    values='fertility'
+)
 
-<span class="n">pivoted</span><span class="o">.</span><span class="n">head</span><span class="p">()[</span><span class="mi">1960</span><span class="p">:</span><span class="mi">1965</span><span class="p">]</span>
-</pre></div>
+pivoted.head()[1960:1965]
+</code></pre></div></div>
 
 <table border="1" class="dataframe">
 <thead>
@@ -1465,10 +1478,10 @@ decreases the number of points we have by 1 in each row: we can&#8217;t get the 
 and 1959 because we don&#8217;t have 1959 data. We solve this by dropping the 1960&nbsp;column:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># axis=0 would be columns</span>
-<span class="n">diffs</span> <span class="o">=</span> <span class="n">pivoted</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">1960</span><span class="p">])</span>
-<span class="n">diffs</span><span class="o">.</span><span class="n">head</span><span class="p">()[[</span><span class="mi">1961</span><span class="p">,</span> <span class="mi">1962</span><span class="p">,</span> <span class="mi">1963</span><span class="p">,</span> <span class="mi">1964</span><span class="p">,</span> <span class="mi">1965</span><span class="p">]]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># axis=0 would be columns
+diffs = pivoted.diff(axis=1).drop(columns=[1960])
+diffs.head()[[1961, 1962, 1963, 1964, 1965]]
+</code></pre></div></div>
 
 <table border="1" class="dataframe">
 <thead>
@@ -1532,8 +1545,7 @@ and 1959 because we don&#8217;t have 1959 data. We solve this by dropping the 19
     </tr>
 </tbody>
 </table>
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 <code>distplot</code> is more general than the other function&#8217;s we&#8217;ve been using: it&#8217;ll accept basically any 1D
 list of&nbsp;data.
@@ -1553,9 +1565,9 @@ Because we have 2D data we need to <i>flatten</i> it first. Because we only care
 can do this by getting the values as a matrix and then&nbsp;calling <code>.flatten()</code>:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">flat</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">flat = diffs.values.flatten()
+sns.distplot(flat)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-relplots/dist1.png" alt="nil"></p>
@@ -1566,8 +1578,8 @@ visible because there are so many other data points. We can use a <i>rugplot</i>
 show these outliers more&nbsp;directly:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">flat</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.distplot(flat, rug=True)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-relplots/dist2.png" alt="nil"></p>
@@ -1584,9 +1596,9 @@ What&#8217;s the story here? Which countries and years have such anomalous data?
 </div>
 </div>
 
-<div id="outline-container-org51e85e8" class="outline-2">
-<h2 id="org51e85e8">Selecting Countries With Outlier&nbsp;Data</h2>
-<div class="outline-text-2" id="text-org51e85e8">
+<div id="outline-container-org8ce6d10" class="outline-2">
+<h2 id="org8ce6d10">Selecting Countries With Outlier&nbsp;Data</h2>
+<div class="outline-text-2" id="text-org8ce6d10">
 <p>
 In many programs, doing something like this—selecting rows that match a fairly complicated
 criterion—would be a fairly difficult task. Not so in Python: the tools we already have can combine
@@ -1603,18 +1615,18 @@ by the highest single-year difference (positive or negative) in birth&nbsp;rate.
 We&#8217;ll first take the diffs and get their absolute value. We&#8217;ll then take the maximum by&nbsp;row:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">max_diffs</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">max_diffs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">max_diffs = diffs.abs().max(axis=1)
+max_diffs.head()
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="n">country</span>
-<span class="n">Afghanistan</span>            <span class="mf">0.208</span>
-<span class="n">Albania</span>                <span class="mf">0.192</span>
-<span class="n">Algeria</span>                <span class="mf">0.261</span>
-<span class="n">Angola</span>                 <span class="mf">0.090</span>
-<span class="n">Antigua</span> <span class="ow">and</span> <span class="n">Barbuda</span>    <span class="mf">0.212</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">country
+Afghanistan            0.208
+Albania                0.192
+Algeria                0.261
+Angola                 0.090
+Antigua and Barbuda    0.212
+dtype: float64
+</code></pre></div></div>
 
 <p>
 Now we want to sort this data. This is a cornerstone of a lot of common operations on data, so it&#8217;s
@@ -1623,18 +1635,18 @@ takes in a column or list of columns to sort by and a couple other optional argu
 only have one column, all we need to do is tell Python to sort in descending&nbsp;order:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">max_diffs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">max_diffs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">max_diffs.sort_values(ascending=False, inplace=True)
+max_diffs.head()
+</code></pre></div></div>
 
-<div class="highlight"><pre><span></span><span class="n">country</span>
-<span class="n">Romania</span>                  <span class="mf">1.760</span>
-<span class="n">Malta</span>                    <span class="mf">0.630</span>
-<span class="n">Japan</span>                    <span class="mf">0.559</span>
-<span class="n">Singapore</span>                <span class="mf">0.550</span>
-<span class="n">Virgin</span> <span class="n">Islands</span> <span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">S</span><span class="o">.</span><span class="p">)</span>    <span class="mf">0.480</span>
-<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">country
+Romania                  1.760
+Malta                    0.630
+Japan                    0.559
+Singapore                0.550
+Virgin Islands (U.S.)    0.480
+dtype: float64
+</code></pre></div></div>
 
 <p>
 We now have the countries ordered by their maximum difference. Now all we need to do is use the
@@ -1647,9 +1659,9 @@ I&#8217;m going to use the 12 most unusual countries, mainly because when you&#8
 break 12 up in lots of ways. You can easily replace this and see what changes. Let&#8217;s get the data we&nbsp;want:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">high_diff_countries</span> <span class="o">=</span> <span class="n">max_diffs</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">12</span><span class="p">]</span>
-<span class="n">high_diff_diffs</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">high_diff_countries</span><span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">high_diff_countries = max_diffs.index[:12]
+high_diff_diffs = diffs.loc[high_diff_countries]
+</code></pre></div></div>
 
 <p>
 We&nbsp;use <code>.loc</code> because&nbsp;otherwise <code>pandas</code> thinks we&#8217;re indexing&nbsp;columns.
@@ -1660,9 +1672,9 @@ Now we need to do the same thing with our original dataset. One difference is th
 based on a column&nbsp;(<code>country</code>), not the index. We can do that using Boolean indexing like&nbsp;this:
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># HDC: High-Diff Country</span>
-<span class="n">hdcs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">'country'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">high_diff_countries</span><span class="p">)]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># HDC: High-Diff Country
+hdcs = data[data['country'].isin(high_diff_countries)]
+</code></pre></div></div>
 
 <p>
 The <code>isin</code> method allows us to create a Boolean index and use that. See how individually our tools are
@@ -1678,8 +1690,8 @@ need to be prefixed&nbsp;with <code>@</code>. This allows us to use simpler expr
 readable. Here&#8217;s the alternative version of the above&nbsp;code:
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">hdcs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">'country in @high_diff_countries'</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">hdcs = data.query('country in @high_diff_countries')
+</code></pre></div></div>
 
 <p>
 Pretty neat,&nbsp;huh?
@@ -1687,11 +1699,10 @@ Pretty neat,&nbsp;huh?
 </div>
 </div>
 
-<div id="outline-container-org621c62b" class="outline-2">
-<h2 id="org621c62b">Bringing the&nbsp;Heat</h2>
-<div class="outline-text-2" id="text-org621c62b">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-org1058275" class="outline-2">
+<h2 id="org1058275">Bringing the&nbsp;Heat</h2>
+<div class="outline-text-2" id="text-org1058275">
+<span class="margin-note">
 <p>
 One interesting version of a heatmap is a <i>clustermap</i>: a heatmap that groups columns so similar rows
 are visually together. This can be combined&nbsp;with <code>df.corr()</code>, which produces pairwise correlations of
@@ -1714,10 +1725,10 @@ outliers mess with your colors. We want to see the outliers, so we won&#8217;t b
 set the center to 0 so our visuals aren&#8217;t&nbsp;misleading.
 </p>
 
-<div class="highlight"><pre><span></span><span class="c1"># Read the cmap as "red-&gt;blue reversed"</span>
-<span class="c1"># this makes high values "hot" and low values "cold"</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">high_diff_diffs</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"RdBu_r"</span><span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python"># Read the cmap as "red-&gt;blue reversed"
+# this makes high values "hot" and low values "cold"
+sns.heatmap(high_diff_diffs, center=0, cmap="RdBu_r")
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-relplots/heatmap.png" alt="nil"></p>
@@ -1737,17 +1748,16 @@ for visualization: <i>facet&nbsp;grids.</i>
 </p>
 </div>
 </div>
-<div id="outline-container-org3b12876" class="outline-2">
-<h2 id="org3b12876">Looking Like Andy&nbsp;Warhol</h2>
-<div class="outline-text-2" id="text-org3b12876">
-<span class="marginnote"><p>
-</p>
+<div id="outline-container-org528da36" class="outline-2">
+<h2 id="org528da36">Looking Like Andy&nbsp;Warhol</h2>
+<div class="outline-text-2" id="text-org528da36">
+<span class="margin-note">
 <p>
 Andy Warhol, <i>Marilyn Diptych</i>. 1962, Tate&nbsp;Gallery.
 </p>
 </span>
 
-<div class="figure">
+<div id="org12d6de8" class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/en/8/87/Marilyndiptych.jpg" alt="Marilyndiptych.jpg"></p>
 <p><span class="figure-number">Figure 3: </span>Our muse for the next&nbsp;plot.</p>
 </div>
@@ -1762,15 +1772,14 @@ you select data makes it hard to compare between different choices because you c
 screen at the same time, and adding too many dimensions on one plot visually clutters&nbsp;it.
 </p>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Picture credit to&nbsp;ProximityOne.
 </p>
 </span>
 
 
-<div class="figure">
+<div id="orgce9acb8" class="figure">
 <p><img src="http://proximityone.com/hpi/hpi2017zip1.gif" alt="hpi2017zip1.gif"></p>
 <p><span class="figure-number">Figure 4: </span>This is what we&#8217;re trying to&nbsp;avoid.</p>
 </div>
@@ -1784,49 +1793,47 @@ these libraries: we can generate insanely complicated graphs in a single functio
 pretty&nbsp;intuitive.)
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">world_areas</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">'North America'</span><span class="p">,</span>
-    <span class="s1">'Sub-Saharan Africa'</span><span class="p">,</span>
-    <span class="s1">'South Asia'</span><span class="p">,</span>
-    <span class="s1">'Middle East &amp; North Africa'</span><span class="p">,</span>
-    <span class="s1">'Latin America &amp; Carribbean'</span>
-<span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">'country in @world_areas'</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">'decade'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="c1"># don't worry about this code</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">'half'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"'00-'04"</span> 
-   <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span> 
-   <span class="k">else</span> <span class="s2">"'05-'09"</span> 
-   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span>
-<span class="p">]</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">world_areas = [
+    'North America',
+    'Sub-Saharan Africa',
+    'South Asia',
+    'Middle East &amp; North Africa',
+    'Latin America &amp; Carribbean'
+]
+data = data.query('country in @world_areas')
+data['decade'] = (np.floor(data['year'] / 10) * 10).astype(int)
+# don't worry about this code
+data['half'] = ["'00-'04" 
+   if (x % 10) &lt; 5 
+   else "'05-'09" 
+   for x in data['year']
+]
+</code></pre></div></div>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 I won&#8217;t be explaining these arguments here. The only point is just to have some data to do
 a facet plot with. Consult the documentation if you&#8217;re&nbsp;interested.  
 </p>
 </span>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s1">'half'</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span>
-    <span class="n">row</span><span class="o">=</span><span class="s1">'country'</span><span class="p">,</span>
-    <span class="n">col</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span>
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span>
-    <span class="n">hue</span><span class="o">=</span><span class="s1">'decade'</span><span class="p">,</span>
-    <span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.catplot(
+    data=data,
+    x='half',
+    y='fertility',
+    row='country',
+    col='decade',
+    palette='viridis',
+    kind='bar',
+    hue='decade',
+    dodge=False,
+    ci=None,
+    aspect=1,
+    height=6,
+)
+</code></pre></div></div>
 
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 You might want to open this image in a new tab: it&#8217;s a bit hard to read the text when condensed to
 fit the website&#8217;s&nbsp;layout.
@@ -1860,9 +1867,9 @@ probably be even more unreadable than it is&nbsp;now.
 </div>
 </div>
 
-<div id="outline-container-org7e21be0" class="outline-2">
-<h2 id="org7e21be0">The&nbsp;Finale</h2>
-<div class="outline-text-2" id="text-org7e21be0">
+<div id="outline-container-org38d5648" class="outline-2">
+<h2 id="org38d5648">The&nbsp;Finale</h2>
+<div class="outline-text-2" id="text-org38d5648">
 <p>
 <span class="caps">OK</span>, now we&#8217;re <i>finally</i> ready to do the last plot. We&#8217;re going to be graphing a continuous variable
 against a continuous variable, so instead&nbsp;of <code>catplot</code> we&#8217;re&nbsp;using <code>relplot</code>. There are fewer kinds of
@@ -1871,20 +1878,20 @@ you connect each dot. This last one is what we&#8217;re doing. Other than that, 
 identically&nbsp;to <code>catplot</code> in terms of the arguments it takes. Here we&nbsp;go!
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">hdcs</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s1">'year'</span><span class="p">,</span> 
-    <span class="n">y</span><span class="o">=</span><span class="s1">'fertility'</span><span class="p">,</span> 
-    <span class="n">col</span><span class="o">=</span><span class="s1">'country'</span><span class="p">,</span> 
-    <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
-    <span class="n">hue</span><span class="o">=</span><span class="s1">'country'</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="s1">'plasma'</span><span class="p">,</span>
-    <span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span>
-    <span class="n">col_order</span><span class="o">=</span><span class="n">high_diff_countries</span><span class="p">,</span> 
-    <span class="n">hue_order</span><span class="o">=</span><span class="n">high_diff_countries</span><span class="p">,</span>
-    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
-</pre></div>
+<div class="code-container"><div class="code-block"><pre><code class="python">sns.relplot(
+    data=hdcs, 
+    x='year', 
+    y='fertility', 
+    col='country', 
+    col_wrap=4, 
+    hue='country',
+    palette='plasma',
+    kind='line',
+    col_order=high_diff_countries, 
+    hue_order=high_diff_countries,
+    legend=False
+)
+</code></pre></div></div>
 
 <p>
 <img src="../../images/sns-relplots/finale.png" alt="nil"></p>
@@ -1937,9 +1944,9 @@ With that said: what <i>can</i> we actually learn from this&nbsp;plot?
 </div>
 </div>
 
-<div id="outline-container-org2e7450f" class="outline-2">
-<h2 id="org2e7450f">Epilogue: What Have We&nbsp;Learned?</h2>
-<div class="outline-text-2" id="text-org2e7450f">
+<div id="outline-container-org8f2401b" class="outline-2">
+<h2 id="org8f2401b">Epilogue: What Have We&nbsp;Learned?</h2>
+<div class="outline-text-2" id="text-org8f2401b">
 <p>
 <img src="../../images/sns-relplots/finale.png" alt="nil"></p>
 
@@ -1966,8 +1973,7 @@ Romania is a bit different: it has a sharp upward spike followed by a slow downw
 Japan? It seems unlikely to be statistical noise: the distribution plot we had earlier made it
 pretty clear that these are very extreme&nbsp;outliers.</li>
 </ul>
-<span class="marginnote"><p>
-</p>
+<span class="margin-note">
 <p>
 Food for thought: are there any common statistical techniques (at least, the kind you&#8217;d do when
 you&#8217;re exploring for interesting stuff without knowing exactly what that&#8217;ll be) that would pick up
@@ -2022,9 +2028,9 @@ abortions that lasted until the year was&nbsp;over.</li>
 </div>
 </div>
 
-<div id="outline-container-org1004cc6" class="outline-2">
-<h2 id="org1004cc6">Thanks for&nbsp;Reading!</h2>
-<div class="outline-text-2" id="text-org1004cc6">
+<div id="outline-container-org4ab872c" class="outline-2">
+<h2 id="org4ab872c">Thanks for&nbsp;Reading!</h2>
+<div class="outline-text-2" id="text-org4ab872c">
 <p>
 That was a lot: if you made it here, you&#8217;re officially introduced to Python data analysis! If you
 want to see more examples of Python data science in action, feel free to browse the rest of this
@@ -2033,27 +2039,15 @@ blog. If you have any questions or have anything to correct, let me&nbsp;know!
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav><p itemprop="keywords" class="tags">
-            <span class="tag"><a class="p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></span>
-            <span class="tag"><a class="p-category" href="../../categories/guide/" rel="tag">guide</a></span>
-      </p>
-
-            <div class="pager hidden-print pagination">
-
-            <span class="previous pagination-item older">
-                Previous post
-            </span>
-
-
-            <span class="next pagination-item newer">
-                <a href="../effective-data-visualization-part-1-what-is-effective-data-visualization/" rel="next" title="Effective Data Visualization, Part 1: What Is Effective Data Visualization?">
-Next post
-              </a>
-            </span>
-
-        </div>
-
-    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/dataviz/" rel="tag">dataviz</a></li>
+            <li><a class="tag p-category" href="../../categories/guide/" rel="tag">guide</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="next">
+                <a href="../effective-data-visualization-part-1-what-is-effective-data-visualization/" rel="next" title="Effective Data Visualization, Part 1: What Is Effective Data Visualization?">Next&nbsp;post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="nicholas-miklaucic-github-io",
@@ -2073,23 +2067,19 @@ Next post
     <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-        </section></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </section></article><script>var disqus_shortname="nicholas-miklaucic-github-io";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
 </div>
-            <script src="../../assets/js/all-nocdn.js"></script><script>
-    baguetteBox.run('div#content', {
-        ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-    </script><script type="text/javascript">
-    var MTIProjectId='a0c6a264-432e-4405-ab1a-8b212bb5c7c7';
-    (function() {
-    var mtiTracking = document.createElement('script');
-    mtiTracking.type='text/javascript';
-    mtiTracking.async='true';
-    mtiTracking.src='mtiFontTrackingCode.js';
-    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
-    })();
+                </div>
+            </div>
+        </div>
+                <footer id="footer"><p>Contents © 2021         <a href="mailto:nicholas.miklaucic@gmail.com">Nicholas Miklaucic</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+                <script src="../../assets/js/baguetteBox.min.js"></script><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../../assets/halfmoon/js/halfmoon.min.js"></script><script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script><script src="../../assets/js/add_styles.js"></script><script src="../../assets/js/etica.js"></script><script>
+     baguetteBox.run('div#content', {
+         ignoreClass: 'islink',
+         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>
