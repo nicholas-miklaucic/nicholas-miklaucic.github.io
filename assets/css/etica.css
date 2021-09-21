@@ -87,3 +87,8 @@ div.code-block button {
   top: 0;
   right: 0;
 }
+
+#logo {
+  max-width: calc(1 * var(--button-height));
+  max-height: calc(1 * var(--button-height));
+}
