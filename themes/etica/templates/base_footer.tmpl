@@ -1,0 +1,10 @@
+{#  -*- coding: utf-8 -*- #}
+
+{% macro html_footer() %}
+    {% if content_footer %}
+        <nav id="footer" class="navbar navbar-fixed-bottom justify-content-center">
+            <p class="nav-item">{{ content_footer }}</p>
+            {{ template_hooks['page_footer']() }}
+        </nav>
+    {% endif %}
+{% endmacro %}

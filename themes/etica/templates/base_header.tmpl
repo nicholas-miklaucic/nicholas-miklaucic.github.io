@@ -9,8 +9,16 @@
         <div class="navbar-content">
             {{ html_translation_header() }}
         </div>
-        <div class="navbar-content">
+        <div class="navbar-content d-md-flex d-none">
             {{ html_navigation_links() }}
+            {% if search_form %}
+                <div class="searchform" role="search">
+                    {{ search_form }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="navbar-content d-md-none">
+            {{ html_navigation_links_dropdown() }}
             {% if search_form %}
                 <div class="searchform" role="search">
                     {{ search_form }}
@@ -38,11 +46,18 @@
 
 {% macro html_navigation_links() %}
     <ul class="navbar-nav">
-        {{ html_navigation_links_entries(navigation_links) }}
-        {{ html_navigation_links_entries(navigation_alt_links) }}
-        {{ template_hooks['menu']() }}
+    {{ html_navigation_links_entries(navigation_links) }}
+    {{ html_navigation_links_entries(navigation_alt_links) }}
+    {{ template_hooks['menu']() }}
         {{ template_hooks['menu_alt']() }}
     </ul>
+{% endmacro %}
+
+{% macro html_navigation_links_dropdown() %}
+    {{ html_navigation_links_entries_dropdown(navigation_links) }}
+    {{ html_navigation_links_entries_dropdown(navigation_alt_links) }}
+    {{ template_hooks['menu']() }}
+    {{ template_hooks['menu_alt']() }}
 {% endmacro %}
 
 {% macro html_navigation_links_entries(navigation_links_source) %}
@@ -67,6 +82,37 @@
             {% endif %}
         {% endif %}
     {% endfor %}
+{% endmacro %}
+
+{% macro html_navigation_links_entries_dropdown(navigation_links_source) %}
+    {% if navigation_links_source[lang]|length > 1 %}
+    <div class="dropdown toggle-on-hover with-arrow">
+        <button class="btn" data-toggle="dropdown" type="button">
+            <i class="gg-menu" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown-menu">
+            {% for url, text in navigation_links_source[lang] %}
+                {% if isinstance(url, tuple) %}
+                    <div class="dropdown-divider"></div>
+                    {{ text }}
+                    {% for suburl, text in url %}
+                        {% if rel_link(permalink, suburl) == "#" %}
+                            <div class="dropdown-item active"><a class="nav-link" href="{{ permalink }}">{{ text }}<span class="sr-only"> {{ messages("(active)", lang) }}</span></a></div>
+                        {% else %}
+                            <div class="dropdown-item"><a class="nav-link" href="{{ suburl }}">{{ text }}</a></div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% if rel_link(permalink, url) == "#" %}
+                        <div class="dropdown-item active"><a class="nav-link" href="{{ permalink }}">{{ text }}<span class="sr-only"> {{ messages("(active)", lang) }}</span></a></div>
+                    {% else %}
+                        <div class="dropdown-item"><a class="nav-link" href="{{ url }}">{{ text }}</a></div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 {% endmacro %}
 
 {% macro html_translation_header() %}
